@@ -23,6 +23,9 @@
 		8C85A7A51F891F7500D185D0 /* DFUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7A41F891F7500D185D0 /* DFUViewController.swift */; };
 		8C85A7A71F891F7D00D185D0 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7A61F891F7D00D185D0 /* RegistrationViewController.swift */; };
 		8C85A7A91F89221C00D185D0 /* GlobalSettingsViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7A81F89221C00D185D0 /* GlobalSettingsViewController+TableView.swift */; };
+		8C85A7AB1F892AE400D185D0 /* UIDViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AA1F892AE400D185D0 /* UIDViewController+TableView.swift */; };
+		8C85A7AD1F892C8A00D185D0 /* UIDViewController+PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AC1F892C8A00D185D0 /* UIDViewController+PickerView.swift */; };
+		8C85A7AF1F89315400D185D0 /* RegistrationViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AE1F89315400D185D0 /* RegistrationViewController+TableView.swift */; };
 		D58E3C424C30575BEC3671C5 /* Pods_ParabitTechnicianApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DF9117B55B3B48863A8BA6 /* Pods_ParabitTechnicianApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +49,9 @@
 		8C85A7A41F891F7500D185D0 /* DFUViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFUViewController.swift; sourceTree = "<group>"; };
 		8C85A7A61F891F7D00D185D0 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		8C85A7A81F89221C00D185D0 /* GlobalSettingsViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GlobalSettingsViewController+TableView.swift"; sourceTree = "<group>"; };
+		8C85A7AA1F892AE400D185D0 /* UIDViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDViewController+TableView.swift"; sourceTree = "<group>"; };
+		8C85A7AC1F892C8A00D185D0 /* UIDViewController+PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDViewController+PickerView.swift"; sourceTree = "<group>"; };
+		8C85A7AE1F89315400D185D0 /* RegistrationViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RegistrationViewController+TableView.swift"; sourceTree = "<group>"; };
 		9C9D1D3944089DBCB06FBCEE /* Pods-ParabitTechnicianApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParabitTechnicianApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParabitTechnicianApp/Pods-ParabitTechnicianApp.release.xcconfig"; sourceTree = "<group>"; };
 		E3DF9117B55B3B48863A8BA6 /* Pods_ParabitTechnicianApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParabitTechnicianApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -147,8 +153,11 @@
 				8C85A7A01F891F3300D185D0 /* GlobalSettingsViewController.swift */,
 				8C85A7A81F89221C00D185D0 /* GlobalSettingsViewController+TableView.swift */,
 				8C85A7A21F891F6D00D185D0 /* UIDViewController.swift */,
+				8C85A7AA1F892AE400D185D0 /* UIDViewController+TableView.swift */,
+				8C85A7AC1F892C8A00D185D0 /* UIDViewController+PickerView.swift */,
 				8C85A7A41F891F7500D185D0 /* DFUViewController.swift */,
 				8C85A7A61F891F7D00D185D0 /* RegistrationViewController.swift */,
+				8C85A7AE1F89315400D185D0 /* RegistrationViewController+TableView.swift */,
 			);
 			path = BeaconDetails;
 			sourceTree = "<group>";
@@ -299,12 +308,15 @@
 				8C85A79B1F88FB7C00D185D0 /* Parabeacon.swift in Sources */,
 				8C85A7A31F891F6D00D185D0 /* UIDViewController.swift in Sources */,
 				8C85A7A71F891F7D00D185D0 /* RegistrationViewController.swift in Sources */,
+				8C85A7AD1F892C8A00D185D0 /* UIDViewController+PickerView.swift in Sources */,
 				8C5E0C8A1F86CC3400F09225 /* BeaconFinderViewController+TableView.swift in Sources */,
 				8C85A7A11F891F3300D185D0 /* GlobalSettingsViewController.swift in Sources */,
 				8C5E0C701F86681D00F09225 /* AppDelegate.swift in Sources */,
 				8C85A7A51F891F7500D185D0 /* DFUViewController.swift in Sources */,
 				8C85A7A91F89221C00D185D0 /* GlobalSettingsViewController+TableView.swift in Sources */,
+				8C85A7AF1F89315400D185D0 /* RegistrationViewController+TableView.swift in Sources */,
 				8C85A79F1F890B0000D185D0 /* BeaconTabBarController.swift in Sources */,
+				8C85A7AB1F892AE400D185D0 /* UIDViewController+TableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,10 @@ import UIKit
 
 class UIDViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var pickerView: UIPickerView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

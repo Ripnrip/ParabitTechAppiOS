@@ -16,8 +16,13 @@ class BeaconFinderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.separatorColor = UIColor.clear
         self.title = "Parabit Beacon Config"
+        //self.navigationController?.title.col
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.barTintColor = UIColor.orange
         loadBeacons()
         
     }

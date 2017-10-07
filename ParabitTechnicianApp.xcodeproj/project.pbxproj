@@ -16,9 +16,17 @@
 		8C5E0C881F86CB6200F09225 /* BeaconFinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5E0C871F86CB6200F09225 /* BeaconFinderViewController.swift */; };
 		8C5E0C8A1F86CC3400F09225 /* BeaconFinderViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5E0C891F86CC3400F09225 /* BeaconFinderViewController+TableView.swift */; };
 		8C5E0C8D1F86CDEC00F09225 /* ParaBeaconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5E0C8C1F86CDEC00F09225 /* ParaBeaconTableViewCell.swift */; };
+		8C85A79B1F88FB7C00D185D0 /* Parabeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A79A1F88FB7C00D185D0 /* Parabeacon.swift */; };
+		8C85A79F1F890B0000D185D0 /* BeaconTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A79E1F890B0000D185D0 /* BeaconTabBarController.swift */; };
+		8C85A7A11F891F3300D185D0 /* GlobalSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7A01F891F3300D185D0 /* GlobalSettingsViewController.swift */; };
+		8C85A7A31F891F6D00D185D0 /* UIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7A21F891F6D00D185D0 /* UIDViewController.swift */; };
+		8C85A7A51F891F7500D185D0 /* DFUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7A41F891F7500D185D0 /* DFUViewController.swift */; };
+		8C85A7A71F891F7D00D185D0 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7A61F891F7D00D185D0 /* RegistrationViewController.swift */; };
+		D58E3C424C30575BEC3671C5 /* Pods_ParabitTechnicianApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DF9117B55B3B48863A8BA6 /* Pods_ParabitTechnicianApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C5EB26023B5A42CDA2DD7A3 /* Pods-ParabitTechnicianApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParabitTechnicianApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParabitTechnicianApp/Pods-ParabitTechnicianApp.debug.xcconfig"; sourceTree = "<group>"; };
 		8C5E0C6C1F86681D00F09225 /* ParabitTechnicianApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParabitTechnicianApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C5E0C6F1F86681D00F09225 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C5E0C711F86681D00F09225 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -30,6 +38,14 @@
 		8C5E0C871F86CB6200F09225 /* BeaconFinderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconFinderViewController.swift; sourceTree = "<group>"; };
 		8C5E0C891F86CC3400F09225 /* BeaconFinderViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeaconFinderViewController+TableView.swift"; sourceTree = "<group>"; };
 		8C5E0C8C1F86CDEC00F09225 /* ParaBeaconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParaBeaconTableViewCell.swift; sourceTree = "<group>"; };
+		8C85A79A1F88FB7C00D185D0 /* Parabeacon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parabeacon.swift; sourceTree = "<group>"; };
+		8C85A79E1F890B0000D185D0 /* BeaconTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconTabBarController.swift; sourceTree = "<group>"; };
+		8C85A7A01F891F3300D185D0 /* GlobalSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSettingsViewController.swift; sourceTree = "<group>"; };
+		8C85A7A21F891F6D00D185D0 /* UIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDViewController.swift; sourceTree = "<group>"; };
+		8C85A7A41F891F7500D185D0 /* DFUViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFUViewController.swift; sourceTree = "<group>"; };
+		8C85A7A61F891F7D00D185D0 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		9C9D1D3944089DBCB06FBCEE /* Pods-ParabitTechnicianApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParabitTechnicianApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParabitTechnicianApp/Pods-ParabitTechnicianApp.release.xcconfig"; sourceTree = "<group>"; };
+		E3DF9117B55B3B48863A8BA6 /* Pods_ParabitTechnicianApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParabitTechnicianApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,17 +53,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D58E3C424C30575BEC3671C5 /* Pods_ParabitTechnicianApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6BFFC0177C6F6569889809E0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5C5EB26023B5A42CDA2DD7A3 /* Pods-ParabitTechnicianApp.debug.xcconfig */,
+				9C9D1D3944089DBCB06FBCEE /* Pods-ParabitTechnicianApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8C5E0C631F86681D00F09225 = {
 			isa = PBXGroup;
 			children = (
 				8C5E0C6E1F86681D00F09225 /* ParabitTechnicianApp */,
 				8C5E0C6D1F86681D00F09225 /* Products */,
+				6BFFC0177C6F6569889809E0 /* Pods */,
+				C2E2BC4AAF9E1B0FDDD84A9A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,11 +90,13 @@
 		8C5E0C6E1F86681D00F09225 /* ParabitTechnicianApp */ = {
 			isa = PBXGroup;
 			children = (
+				8C85A79D1F8909F200D185D0 /* BeaconDetails */,
+				8C85A7991F88FB6100D185D0 /* Models */,
 				8C5E0C8B1F86CDD900F09225 /* Cells */,
 				8C5E0C821F86C9A300F09225 /* Login */,
 				8C5E0C861F86CB4E00F09225 /* BeaconFinder */,
-				8C5E0C6F1F86681D00F09225 /* AppDelegate.swift */,
 				8C5E0C711F86681D00F09225 /* ViewController.swift */,
+				8C5E0C6F1F86681D00F09225 /* AppDelegate.swift */,
 				8C5E0C731F86681D00F09225 /* Main.storyboard */,
 				8C5E0C761F86681D00F09225 /* Assets.xcassets */,
 				8C5E0C781F86681D00F09225 /* LaunchScreen.storyboard */,
@@ -100,6 +130,34 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		8C85A7991F88FB6100D185D0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8C85A79A1F88FB7C00D185D0 /* Parabeacon.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		8C85A79D1F8909F200D185D0 /* BeaconDetails */ = {
+			isa = PBXGroup;
+			children = (
+				8C85A79E1F890B0000D185D0 /* BeaconTabBarController.swift */,
+				8C85A7A01F891F3300D185D0 /* GlobalSettingsViewController.swift */,
+				8C85A7A21F891F6D00D185D0 /* UIDViewController.swift */,
+				8C85A7A41F891F7500D185D0 /* DFUViewController.swift */,
+				8C85A7A61F891F7D00D185D0 /* RegistrationViewController.swift */,
+			);
+			path = BeaconDetails;
+			sourceTree = "<group>";
+		};
+		C2E2BC4AAF9E1B0FDDD84A9A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E3DF9117B55B3B48863A8BA6 /* Pods_ParabitTechnicianApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -107,9 +165,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C5E0C7E1F86681D00F09225 /* Build configuration list for PBXNativeTarget "ParabitTechnicianApp" */;
 			buildPhases = (
+				E1C93F6A58209AB43288209C /* [CP] Check Pods Manifest.lock */,
 				8C5E0C681F86681D00F09225 /* Sources */,
 				8C5E0C691F86681D00F09225 /* Frameworks */,
 				8C5E0C6A1F86681D00F09225 /* Resources */,
+				5D5FA09F8BFD1034A83BBCB0 /* [CP] Embed Pods Frameworks */,
+				C477D7F485F9C5F08E9C4620 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,6 +228,62 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5D5FA09F8BFD1034A83BBCB0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ParabitTechnicianApp/Pods-ParabitTechnicianApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BPStatusBarAlert/BPStatusBarAlert.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftSpinner/SwiftSpinner.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BPStatusBarAlert.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSpinner.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ParabitTechnicianApp/Pods-ParabitTechnicianApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C477D7F485F9C5F08E9C4620 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ParabitTechnicianApp/Pods-ParabitTechnicianApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1C93F6A58209AB43288209C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ParabitTechnicianApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8C5E0C681F86681D00F09225 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -176,8 +293,14 @@
 				8C5E0C851F86C9C000F09225 /* LoginViewController.swift in Sources */,
 				8C5E0C721F86681D00F09225 /* ViewController.swift in Sources */,
 				8C5E0C8D1F86CDEC00F09225 /* ParaBeaconTableViewCell.swift in Sources */,
+				8C85A79B1F88FB7C00D185D0 /* Parabeacon.swift in Sources */,
+				8C85A7A31F891F6D00D185D0 /* UIDViewController.swift in Sources */,
+				8C85A7A71F891F7D00D185D0 /* RegistrationViewController.swift in Sources */,
 				8C5E0C8A1F86CC3400F09225 /* BeaconFinderViewController+TableView.swift in Sources */,
+				8C85A7A11F891F3300D185D0 /* GlobalSettingsViewController.swift in Sources */,
 				8C5E0C701F86681D00F09225 /* AppDelegate.swift in Sources */,
+				8C85A7A51F891F7500D185D0 /* DFUViewController.swift in Sources */,
+				8C85A79F1F890B0000D185D0 /* BeaconTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +435,7 @@
 		};
 		8C5E0C7F1F86681D00F09225 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C5EB26023B5A42CDA2DD7A3 /* Pods-ParabitTechnicianApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -328,6 +452,7 @@
 		};
 		8C5E0C801F86681D00F09225 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C9D1D3944089DBCB06FBCEE /* Pods-ParabitTechnicianApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

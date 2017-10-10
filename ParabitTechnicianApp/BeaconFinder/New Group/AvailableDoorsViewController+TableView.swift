@@ -29,7 +29,7 @@ extension AvailableDoorsViewController : UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sensor = availableDoors[indexPath.row].sensorTag
+        guard let sensor = availableDoors[indexPath.row].sensorTag else {return}
         centralManager.connect(sensor, options: nil)
         tableView.deselectRow(at: indexPath, animated: true)
     }

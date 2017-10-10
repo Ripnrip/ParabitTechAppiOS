@@ -13,5 +13,5 @@ struct Peripheral {
     let name: String
     let UUID: String
     let isConnectable:Bool
-    let sensorTag:CBPeripheral
+    let sensorTag:CBPeripheral?
 }

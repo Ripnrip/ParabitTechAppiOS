@@ -67,17 +67,31 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 keepScanning = false
                 pauseScan()
                 
+                //determine if beacon is connectablee
+                guard let isConnectable = advertisementData["kCBAdvDataIsConnectable"] as? Bool else {return}
+                print("the Parabeacon's configuration state is \(isConnectable)")
+                
+                if Bool(isConnectable) {
+
                 // save a reference to the sensor tag
                 sensorTag = peripheral
                 sensorTag.delegate = self
+                
                 
                 //add peripheral to available doors tableview
                 let paraDoor = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: true, sensorTag: sensorTag)
                 availableDoors.append(paraDoor)
                 tableView.reloadData()
                 
-                //connect
-                centralManager.connect(sensorTag, options: nil)
+                //connect -- Moved to the Didselect tableview method
+                //centralManager.connect(sensorTag, options: nil)
+                    
+                }else{
+                //add peripheral to available doors tableview, but don't add the sensor, and set nil for sensortag
+                let paraDoor = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: false, sensorTag: nil)
+                availableDoors.append(paraDoor)
+                tableView.reloadData()
+                }
             }
         }
     }
@@ -89,14 +103,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
      You typically implement this method to set the peripheral’s delegate and to discover its services.
      */
     
-    func centralManager(
-        central: CBCentralManager,
-        didConnectPeripheral peripheral: CBPeripheral) {
-        print("did connect to device")
-        
-        peripheral.discoverServices(nil)
-    }
-    
+
     // Discover services of the peripheral
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -157,7 +164,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         if error != nil {
             print("there was an error discovering the characteristics \(characteristic) from \(sensorTag)")
         }
-        print("the updated values for characteristic \(characteristic)")
+        //print("the updated values for characteristic \(characteristic)")
         if characteristic.uuid == CharacteristicID.lockState.UUID {
             print("****PARSE LOCK STATE VALUE****")
             parseLockStateValue()

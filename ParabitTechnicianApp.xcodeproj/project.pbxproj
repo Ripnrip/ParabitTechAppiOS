@@ -26,6 +26,13 @@
 		8C85A7AB1F892AE400D185D0 /* UIDViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AA1F892AE400D185D0 /* UIDViewController+TableView.swift */; };
 		8C85A7AD1F892C8A00D185D0 /* UIDViewController+PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AC1F892C8A00D185D0 /* UIDViewController+PickerView.swift */; };
 		8C85A7AF1F89315400D185D0 /* RegistrationViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AE1F89315400D185D0 /* RegistrationViewController+TableView.swift */; };
+		8CB4D7961F8D391200B26563 /* AvailableDoorsViewController+BlueTooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D7931F8D391200B26563 /* AvailableDoorsViewController+BlueTooth.swift */; };
+		8CB4D7971F8D391200B26563 /* AvailableDoorsViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D7941F8D391200B26563 /* AvailableDoorsViewController+TableView.swift */; };
+		8CB4D7981F8D391200B26563 /* AvailableDoorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D7951F8D391200B26563 /* AvailableDoorsViewController.swift */; };
+		8CB4D79A1F8D394200B26563 /* Peripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D7991F8D394200B26563 /* Peripheral.swift */; };
+		8CB4D79C1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D79B1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift */; };
+		8CB4D79F1F8D4F8000B26563 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D79E1F8D4F8000B26563 /* Constants.swift */; };
+		8CB4D7A11F8D51FC00B26563 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D7A01F8D51FC00B26563 /* StringUtils.swift */; };
 		D58E3C424C30575BEC3671C5 /* Pods_ParabitTechnicianApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DF9117B55B3B48863A8BA6 /* Pods_ParabitTechnicianApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +59,14 @@
 		8C85A7AA1F892AE400D185D0 /* UIDViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDViewController+TableView.swift"; sourceTree = "<group>"; };
 		8C85A7AC1F892C8A00D185D0 /* UIDViewController+PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDViewController+PickerView.swift"; sourceTree = "<group>"; };
 		8C85A7AE1F89315400D185D0 /* RegistrationViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RegistrationViewController+TableView.swift"; sourceTree = "<group>"; };
+		8CB4D7931F8D391200B26563 /* AvailableDoorsViewController+BlueTooth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AvailableDoorsViewController+BlueTooth.swift"; sourceTree = "<group>"; };
+		8CB4D7941F8D391200B26563 /* AvailableDoorsViewController+TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AvailableDoorsViewController+TableView.swift"; sourceTree = "<group>"; };
+		8CB4D7951F8D391200B26563 /* AvailableDoorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableDoorsViewController.swift; sourceTree = "<group>"; };
+		8CB4D7991F8D394200B26563 /* Peripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Peripheral.swift; sourceTree = "<group>"; };
+		8CB4D79B1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeaconFinderViewController+BlueTooth.swift"; sourceTree = "<group>"; };
+		8CB4D79E1F8D4F8000B26563 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8CB4D7A01F8D51FC00B26563 /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
+		8CB4D7A21F8D533300B26563 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		9C9D1D3944089DBCB06FBCEE /* Pods-ParabitTechnicianApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParabitTechnicianApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParabitTechnicianApp/Pods-ParabitTechnicianApp.release.xcconfig"; sourceTree = "<group>"; };
 		E3DF9117B55B3B48863A8BA6 /* Pods_ParabitTechnicianApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParabitTechnicianApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -109,6 +124,7 @@
 				8C5E0C761F86681D00F09225 /* Assets.xcassets */,
 				8C5E0C781F86681D00F09225 /* LaunchScreen.storyboard */,
 				8C5E0C7B1F86681D00F09225 /* Info.plist */,
+				8CB4D7A21F8D533300B26563 /* BridgingHeader.h */,
 			);
 			path = ParabitTechnicianApp;
 			sourceTree = "<group>";
@@ -124,7 +140,10 @@
 		8C5E0C861F86CB4E00F09225 /* BeaconFinder */ = {
 			isa = PBXGroup;
 			children = (
+				8CB4D79D1F8D4F7500B26563 /* Helpers */,
+				8CB4D7921F8D38E800B26563 /* AvailableDoors */,
 				8C5E0C871F86CB6200F09225 /* BeaconFinderViewController.swift */,
+				8CB4D79B1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift */,
 				8C5E0C891F86CC3400F09225 /* BeaconFinderViewController+TableView.swift */,
 			);
 			path = BeaconFinder;
@@ -142,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				8C85A79A1F88FB7C00D185D0 /* Parabeacon.swift */,
+				8CB4D7991F8D394200B26563 /* Peripheral.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -160,6 +180,26 @@
 				8C85A7AE1F89315400D185D0 /* RegistrationViewController+TableView.swift */,
 			);
 			path = BeaconDetails;
+			sourceTree = "<group>";
+		};
+		8CB4D7921F8D38E800B26563 /* AvailableDoors */ = {
+			isa = PBXGroup;
+			children = (
+				8CB4D7951F8D391200B26563 /* AvailableDoorsViewController.swift */,
+				8CB4D7931F8D391200B26563 /* AvailableDoorsViewController+BlueTooth.swift */,
+				8CB4D7941F8D391200B26563 /* AvailableDoorsViewController+TableView.swift */,
+			);
+			name = AvailableDoors;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		8CB4D79D1F8D4F7500B26563 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8CB4D7A01F8D51FC00B26563 /* StringUtils.swift */,
+				8CB4D79E1F8D4F8000B26563 /* Constants.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		C2E2BC4AAF9E1B0FDDD84A9A /* Frameworks */ = {
@@ -301,18 +341,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CB4D7971F8D391200B26563 /* AvailableDoorsViewController+TableView.swift in Sources */,
+				8CB4D79F1F8D4F8000B26563 /* Constants.swift in Sources */,
+				8CB4D79C1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift in Sources */,
 				8C5E0C881F86CB6200F09225 /* BeaconFinderViewController.swift in Sources */,
 				8C5E0C851F86C9C000F09225 /* LoginViewController.swift in Sources */,
 				8C5E0C721F86681D00F09225 /* ViewController.swift in Sources */,
 				8C5E0C8D1F86CDEC00F09225 /* ParaBeaconTableViewCell.swift in Sources */,
 				8C85A79B1F88FB7C00D185D0 /* Parabeacon.swift in Sources */,
 				8C85A7A31F891F6D00D185D0 /* UIDViewController.swift in Sources */,
+				8CB4D7A11F8D51FC00B26563 /* StringUtils.swift in Sources */,
 				8C85A7A71F891F7D00D185D0 /* RegistrationViewController.swift in Sources */,
 				8C85A7AD1F892C8A00D185D0 /* UIDViewController+PickerView.swift in Sources */,
 				8C5E0C8A1F86CC3400F09225 /* BeaconFinderViewController+TableView.swift in Sources */,
+				8CB4D7981F8D391200B26563 /* AvailableDoorsViewController.swift in Sources */,
 				8C85A7A11F891F3300D185D0 /* GlobalSettingsViewController.swift in Sources */,
+				8CB4D7961F8D391200B26563 /* AvailableDoorsViewController+BlueTooth.swift in Sources */,
 				8C5E0C701F86681D00F09225 /* AppDelegate.swift in Sources */,
 				8C85A7A51F891F7500D185D0 /* DFUViewController.swift in Sources */,
+				8CB4D79A1F8D394200B26563 /* Peripheral.swift in Sources */,
 				8C85A7A91F89221C00D185D0 /* GlobalSettingsViewController+TableView.swift in Sources */,
 				8C85A7AF1F89315400D185D0 /* RegistrationViewController+TableView.swift in Sources */,
 				8C85A79F1F890B0000D185D0 /* BeaconTabBarController.swift in Sources */,
@@ -461,6 +508,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Parabit.ParabitTechnicianApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = ParabitTechnicianApp/BridgingHeader.h;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -478,6 +526,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Parabit.ParabitTechnicianApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = ParabitTechnicianApp/BridgingHeader.h;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

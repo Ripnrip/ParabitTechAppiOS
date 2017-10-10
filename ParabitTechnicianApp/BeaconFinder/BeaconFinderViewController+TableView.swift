@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import BPStatusBarAlert
+import SwiftSpinner
 
 extension BeaconFinderViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -17,14 +18,22 @@ extension BeaconFinderViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return beacons.count
+        return availableDoors.count
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110
+        return 65
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //connect
+        SwiftSpinner.show(duration: 1.0, title: "Connecting", animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+            let sensor = self.availableDoors[indexPath.row].sensorTag
+            tableView.deselectRow(at: indexPath, animated: true)
+        })
+
+        return
         
         tableView.deselectRow(at: indexPath, animated: true)
         if beacons[indexPath.row].isConfigurable == true {
@@ -35,20 +44,20 @@ extension BeaconFinderViewController: UITableViewDataSource, UITableViewDelegate
             
         }else{
             BPStatusBarAlert(duration: 0.5, delay: 0.5, position: .statusBar) // customize duration, delay and position
-                .message(message: "Beacon not configurable")         // customize message
-                .messageColor(color: .white)                                // customize message color
-                .bgColor(color: .red)                                      // customize view's background color
+                .message(message: "Beacon not configurable")
+                .messageColor(color: .white)
+                .bgColor(color: .red)
                 .completion { print("")}
-                .show()                                                     // Animation start
+                .show()
         }
         
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "beaconCell") as? ParaBeaconTableViewCell else {return UITableViewCell()}
         let currentBeacon = beacons[indexPath.row]
-        cell.addressLabel.text = currentBeacon.address
-        cell.nameSpaceLabel.text = currentBeacon.nameSpace
-        cell.instanceLabel.text = currentBeacon.instance
+        //cell.addressLabel.text = currentBeacon.address
+        //cell.nameSpaceLabel.text = currentBeacon.nameSpace
+        //cell.instanceLabel.text = currentBeacon.instance
         
         if currentBeacon.isConfigurable == true {cell.configurableStatusLabel.isHidden = false}
         else {cell.configurableStatusLabel.isHidden = true}

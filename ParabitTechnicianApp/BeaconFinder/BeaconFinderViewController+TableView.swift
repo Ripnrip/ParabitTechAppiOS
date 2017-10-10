@@ -60,7 +60,7 @@ extension BeaconFinderViewController: UITableViewDataSource, UITableViewDelegate
         
         if currentBeacon.isConnectable == true {
             cell.configurableStatusLabel.isHidden = false
-            cell.statusBubbleImageView.backgroundColor = UIColor.orange
+            cell.statusBubbleImageView.backgroundColor = UIColor.green
         }
         else {
             cell.configurableStatusLabel.isHidden = true

@@ -268,8 +268,6 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
     }
     
     
-    
-    
     // MARK: - Bluetooth scanning
     
     @objc func pauseScan() {

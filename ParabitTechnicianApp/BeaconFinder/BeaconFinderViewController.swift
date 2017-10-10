@@ -10,7 +10,7 @@ import UIKit
 import SwiftSpinner
 import BPStatusBarAlert
 import CoreBluetooth
-
+ 
 class BeaconFinderViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     

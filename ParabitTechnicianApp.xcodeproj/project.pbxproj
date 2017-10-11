@@ -26,9 +26,6 @@
 		8C85A7AB1F892AE400D185D0 /* UIDViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AA1F892AE400D185D0 /* UIDViewController+TableView.swift */; };
 		8C85A7AD1F892C8A00D185D0 /* UIDViewController+PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AC1F892C8A00D185D0 /* UIDViewController+PickerView.swift */; };
 		8C85A7AF1F89315400D185D0 /* RegistrationViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AE1F89315400D185D0 /* RegistrationViewController+TableView.swift */; };
-		8CB4D7961F8D391200B26563 /* AvailableDoorsViewController+BlueTooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D7931F8D391200B26563 /* AvailableDoorsViewController+BlueTooth.swift */; };
-		8CB4D7971F8D391200B26563 /* AvailableDoorsViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D7941F8D391200B26563 /* AvailableDoorsViewController+TableView.swift */; };
-		8CB4D7981F8D391200B26563 /* AvailableDoorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D7951F8D391200B26563 /* AvailableDoorsViewController.swift */; };
 		8CB4D79A1F8D394200B26563 /* Peripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D7991F8D394200B26563 /* Peripheral.swift */; };
 		8CB4D79C1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D79B1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift */; };
 		8CB4D79F1F8D4F8000B26563 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D79E1F8D4F8000B26563 /* Constants.swift */; };
@@ -59,9 +56,6 @@
 		8C85A7AA1F892AE400D185D0 /* UIDViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDViewController+TableView.swift"; sourceTree = "<group>"; };
 		8C85A7AC1F892C8A00D185D0 /* UIDViewController+PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDViewController+PickerView.swift"; sourceTree = "<group>"; };
 		8C85A7AE1F89315400D185D0 /* RegistrationViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RegistrationViewController+TableView.swift"; sourceTree = "<group>"; };
-		8CB4D7931F8D391200B26563 /* AvailableDoorsViewController+BlueTooth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AvailableDoorsViewController+BlueTooth.swift"; sourceTree = "<group>"; };
-		8CB4D7941F8D391200B26563 /* AvailableDoorsViewController+TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AvailableDoorsViewController+TableView.swift"; sourceTree = "<group>"; };
-		8CB4D7951F8D391200B26563 /* AvailableDoorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableDoorsViewController.swift; sourceTree = "<group>"; };
 		8CB4D7991F8D394200B26563 /* Peripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Peripheral.swift; sourceTree = "<group>"; };
 		8CB4D79B1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeaconFinderViewController+BlueTooth.swift"; sourceTree = "<group>"; };
 		8CB4D79E1F8D4F8000B26563 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -113,7 +107,6 @@
 		8C5E0C6E1F86681D00F09225 /* ParabitTechnicianApp */ = {
 			isa = PBXGroup;
 			children = (
-				8C85A79D1F8909F200D185D0 /* BeaconDetails */,
 				8C85A7991F88FB6100D185D0 /* Models */,
 				8C5E0C8B1F86CDD900F09225 /* Cells */,
 				8C5E0C821F86C9A300F09225 /* Login */,
@@ -142,9 +135,7 @@
 			children = (
 				8CB4D79D1F8D4F7500B26563 /* Helpers */,
 				8CB4D7921F8D38E800B26563 /* AvailableDoors */,
-				8C5E0C871F86CB6200F09225 /* BeaconFinderViewController.swift */,
-				8CB4D79B1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift */,
-				8C5E0C891F86CC3400F09225 /* BeaconFinderViewController+TableView.swift */,
+				8C85A79D1F8909F200D185D0 /* BeaconDetails */,
 			);
 			path = BeaconFinder;
 			sourceTree = "<group>";
@@ -185,9 +176,9 @@
 		8CB4D7921F8D38E800B26563 /* AvailableDoors */ = {
 			isa = PBXGroup;
 			children = (
-				8CB4D7951F8D391200B26563 /* AvailableDoorsViewController.swift */,
-				8CB4D7931F8D391200B26563 /* AvailableDoorsViewController+BlueTooth.swift */,
-				8CB4D7941F8D391200B26563 /* AvailableDoorsViewController+TableView.swift */,
+				8C5E0C871F86CB6200F09225 /* BeaconFinderViewController.swift */,
+				8CB4D79B1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift */,
+				8C5E0C891F86CC3400F09225 /* BeaconFinderViewController+TableView.swift */,
 			);
 			name = AvailableDoors;
 			path = "New Group";
@@ -341,7 +332,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CB4D7971F8D391200B26563 /* AvailableDoorsViewController+TableView.swift in Sources */,
 				8CB4D79F1F8D4F8000B26563 /* Constants.swift in Sources */,
 				8CB4D79C1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift in Sources */,
 				8C5E0C881F86CB6200F09225 /* BeaconFinderViewController.swift in Sources */,
@@ -354,9 +344,7 @@
 				8C85A7A71F891F7D00D185D0 /* RegistrationViewController.swift in Sources */,
 				8C85A7AD1F892C8A00D185D0 /* UIDViewController+PickerView.swift in Sources */,
 				8C5E0C8A1F86CC3400F09225 /* BeaconFinderViewController+TableView.swift in Sources */,
-				8CB4D7981F8D391200B26563 /* AvailableDoorsViewController.swift in Sources */,
 				8C85A7A11F891F3300D185D0 /* GlobalSettingsViewController.swift in Sources */,
-				8CB4D7961F8D391200B26563 /* AvailableDoorsViewController+BlueTooth.swift in Sources */,
 				8C5E0C701F86681D00F09225 /* AppDelegate.swift in Sources */,
 				8C85A7A51F891F7500D185D0 /* DFUViewController.swift in Sources */,
 				8CB4D79A1F8D394200B26563 /* Peripheral.swift in Sources */,

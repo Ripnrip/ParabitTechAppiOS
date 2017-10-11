@@ -15,6 +15,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
     
     // MARK: - CBCentralManagerDelegate methods
     
+    // MARK: - Update status methods
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .poweredOn:
@@ -41,26 +42,10 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 .bgColor(color: .red)
                 .completion { print("")}
                 .show()
-            
         }
     }
     
-    /*
-     Invoked when the central manager discovers a peripheral while scanning.
-     
-     The advertisement data can be accessed through the keys listed in Advertisement Data Retrieval Keys.
-     You must retain a local copy of the peripheral if any command is to be performed on it.
-     In use cases where it makes sense for your app to automatically connect to a peripheral that is
-     located within a certain range, you can use RSSI data to determine the proximity of a discovered
-     peripheral device.
-     
-     central - The central manager providing the update.
-     peripheral - The discovered peripheral.
-     advertisementData - A dictionary containing any advertisement data.
-     RSSI - The current received signal strength indicator (RSSI) of the peripheral, in decibels.
-     */
-    
-    
+    // MARK: - Did discover peripherals
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print("centralManager didDiscoverPeripheral - CBAdvertisementDataLocalNameKey is \"\(CBAdvertisementDataLocalNameKey) and UUID is \(peripheral.identifier.uuidString)\"")
         // Retrieve the peripheral name from the advertisement data using the "kCBAdvDataLocalName" key
@@ -79,22 +64,17 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 print("the Parabeacon's configuration state is \(isConnectable)")
                 
                 if Bool(isConnectable) {
-
                 // save a reference to the sensor tag
                 sensorTag = peripheral
                 sensorTag.delegate = self
-                
                 
                 //add peripheral to available doors tableview
                 let paraDoor = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: true, sensorTag: sensorTag)
                 availableDoors.append(paraDoor)
                 tableView.reloadData()
-                
-                //connect -- Moved to the Didselect tableview method
-                //centralManager.connect(sensorTag, options: nil)
-                    
+
                 }else{
-                //add peripheral to available doors tableview, but don't add the sensor, and set nil for sensortag
+                //add peripheral to available doors tableview, but don't add the sensor, and set nil for sensortag, and false for isConnectable
                 let paraDoor = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: false, sensorTag: nil)
                 availableDoors.append(paraDoor)
                 tableView.reloadData()
@@ -103,16 +83,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         }
     }
     
-    /*
-     Invoked when a connection is successfully created with a peripheral.
-     
-     This method is invoked when a call to connectPeripheral:options: is successful.
-     You typically implement this method to set the peripheral’s delegate and to discover its services.
-     */
-    
-
-    // Discover services of the peripheral
-    
+    //MARK: Did connect to peripheral
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("**** SUCCESSFULLY CONNECTED TO SENSOR TAG!!!")
         
@@ -132,20 +103,12 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
     
     
     
-    /*
-     Invoked when the central manager fails to create a connection with a peripheral.
-     This method is invoked when a connection initiated via the connectPeripheral:options: method fails to complete.
-     Because connection attempts do not time out, a failed connection usually indicates a transient issue,
-     in which case you may attempt to connect to the peripheral again.
-     */
-    
+    // MARK: - Did fail to connect
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         print("**** CONNECTION TO SENSOR TAG FAILED!!!")
     }
-    
-    /*
-     Invoked after connecting to a peripheral; didDiscoverServices lists the services
-     */
+
+    // MARK: - Did discover services of a peripheral
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         if error != nil {
             print("there was an error discovering the services after connecting \(String(describing: error))")
@@ -156,6 +119,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         
     }
     
+    // MARK: - Did discover charachteristics of a service
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         if error != nil {
             print("there was an error discovering characteristics for a service")
@@ -167,6 +131,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         }
     }
     
+    // MARK: - Did update value for a characteristic
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         if error != nil {
             print("there was an error discovering the characteristics \(characteristic) from \(sensorTag)")
@@ -181,6 +146,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         }
     }
     
+    // MARK: - Unlocking Beacon
     func parseLockStateValue() {
         if let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.lockState.UUID),
             let value = characteristic.value {
@@ -190,10 +156,8 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 }
                 if lockState == LockState.Locked.rawValue {
                     NSLog("The beacon is locked :( .")
-                    
                 } else {
                     NSLog("The beacon is unlocked!")
-                    
                 }
             }
         }
@@ -211,7 +175,6 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                                             for: characteristic,
                                             type: CBCharacteristicWriteType.withResponse)
         }
-        
     }
     
     func AESEncrypt(data: NSData, key: String?) -> NSData? {
@@ -239,12 +202,10 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 return cryptData as NSData
             } else {
                 NSLog("Error: \(cryptStatus)")
-                
             }
         }
         return nil
     }
-    
     
     func findCharacteristicByID(characteristicID: CBUUID) -> CBCharacteristic? {
         if let services = sensorTag.services {
@@ -259,16 +220,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         return nil
     }
     
-    
-    /*
-     Invoked when an existing connection with a peripheral is torn down.
-     
-     This method is invoked when a peripheral connected via the connectPeripheral:options: method is disconnected.
-     If the disconnection was not initiated by cancelPeripheralConnection:, the cause is detailed in error.
-     After this method is called, no more methods are invoked on the peripheral device’s CBPeripheralDelegate object.
-     
-     Note that when a peripheral is disconnected, all of its services, characteristics, and characteristic descriptors are invalidated.
-     */
+    // MARK: - Did disconnect to a peripheral
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("**** DISCONNECTED FROM SENSOR TAG!!!")
         
@@ -278,12 +230,9 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         sensorTag = nil
         availableDoors = availableDoors.filter {$0.sensorTag != sensorTag}
         tableView.reloadData()
-        
     }
     
-    
     // MARK: - Bluetooth scanning
-    
     @objc func pauseScan() {
         // Scanning uses up battery on phone, so pause the scan process for the designated interval.
         print("*** PAUSING SCAN...")

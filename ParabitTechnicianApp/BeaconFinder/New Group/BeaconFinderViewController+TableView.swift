@@ -30,6 +30,7 @@ extension BeaconFinderViewController: UITableViewDataSource, UITableViewDelegate
         let currentBeacon = availableDoors[indexPath.row]
         if currentBeacon.isConnectable == true {
             //connect
+            centralManager.connect(currentBeacon.sensorTag!, options: nil)
             SwiftSpinner.show(duration: 1.0, title: "Connecting", animated: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
                 let sensor = self.availableDoors[indexPath.row].sensorTag
@@ -53,10 +54,7 @@ extension BeaconFinderViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "beaconCell") as? ParaBeaconTableViewCell else {return UITableViewCell()}
         let currentBeacon = availableDoors[indexPath.row]
-        //cell.addressLabel.text = currentBeacon.address
-        //cell.nameSpaceLabel.text = currentBeacon.nameSpace
-        //cell.instanceLabel.text = currentBeacon.instance
-        
+
         if currentBeacon.isConnectable == true {
             cell.configurableStatusLabel.isHidden = false
             cell.statusBubbleImageView.backgroundColor = UIColor.green
@@ -65,7 +63,6 @@ extension BeaconFinderViewController: UITableViewDataSource, UITableViewDelegate
             cell.configurableStatusLabel.isHidden = true
         }
 
-        
         cell.statusBubbleImageView.layer.cornerRadius = cell.statusBubbleImageView.frame.height/2
         cell.statusBubbleImageView.clipsToBounds = true
         return cell

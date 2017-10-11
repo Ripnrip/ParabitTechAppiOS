@@ -14,10 +14,11 @@ class BeaconTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
-        }
+
+//        Buggy but good to have on ios11+
+//        if #available(iOS 11.0, *) {
+//            self.navigationController?.navigationBar.prefersLargeTitles = true
+//        }
         
         
         

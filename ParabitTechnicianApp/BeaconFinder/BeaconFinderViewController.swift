@@ -55,17 +55,8 @@ class BeaconFinderViewController: UIViewController {
         
         let when = DispatchTime.now() + 2 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
-            // Your code with delay
-            BPStatusBarAlert(duration: 0.5, delay: 0.5, position: .statusBar) // customize duration, delay and position
-                .message(message: "Found 1 beacon")         // customize message
-                .messageColor(color: .white)                                // customize message color
-                .bgColor(color: .blue)                                      // customize view's background color
-                .completion { print("completion closure will called")}
-                .show()                                                     // Animation start
-            
-                self.beacons.forEach { (beacon) in
-                    beacon.isConfigurable = true
-                }
+                self.availableDoors = []
+                self.centralManager.scanForPeripherals(withServices: nil, options: nil)
                 self.tableView.reloadData()
         }
 

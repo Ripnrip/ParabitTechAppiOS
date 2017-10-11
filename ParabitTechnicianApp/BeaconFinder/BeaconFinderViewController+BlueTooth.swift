@@ -35,6 +35,13 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             print("Bluetooth is unauthorized")
         case .poweredOff:
             print("Bluetooth is powered off")
+            BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar) // customize duration, delay and position
+                .message(message: "Bluetooth is turned off, please turn it on for the app")
+                .messageColor(color: .white)
+                .bgColor(color: .red)
+                .completion { print("")}
+                .show()
+            
         }
     }
     

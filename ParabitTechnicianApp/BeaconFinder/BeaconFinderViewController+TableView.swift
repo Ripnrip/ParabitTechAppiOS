@@ -40,7 +40,6 @@ extension BeaconFinderViewController: UITableViewDataSource, UITableViewDelegate
             })
         }else{
             //if non-connectable, alert user
-            
             BPStatusBarAlert(duration: 0.5, delay: 0.5, position: .statusBar) // customize duration, delay and position
                 .message(message: "Beacon not configurable")
                 .messageColor(color: .white)

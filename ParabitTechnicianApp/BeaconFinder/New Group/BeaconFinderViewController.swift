@@ -24,6 +24,8 @@ class BeaconFinderViewController: UIViewController {
     
     var availableDoors = [Peripheral]()
     
+    var peripheralName = "Parabeacon"
+    
     var userPasskey: String? = "BD3690EC52B779A30344A52A84D00AD9"
     var didAttemptUnlocking = false
     

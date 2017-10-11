@@ -53,7 +53,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             print("NEXT PERIPHERAL NAME: \(peripheralName)")
             print("NEXT PERIPHERAL UUID: \(peripheral.identifier.uuidString)")
             print("NEXT PERIPHERAL STATE: \(peripheral.state.rawValue)")
-            if peripheralName == AvailableDoorsViewController.sensorTagName {
+            if peripheralName == peripheralName {
                 print("SENSOR TAG FOUND! ADDING NOW!!!")
                 // to save power, stop scanning for other devices
                 keepScanning = false

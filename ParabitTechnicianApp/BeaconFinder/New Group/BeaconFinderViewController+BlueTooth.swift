@@ -115,6 +115,13 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         }
         guard let services = peripheral.services else {return}
         print("The discovered services are \(services))")
+        
+        services.forEach { (service) in
+            if service.uuid.uuidString == eddystoneConfigurationServiceUUID {
+                eddystoneService = service
+            }
+        }
+        
         peripheral.discoverCharacteristics(nil, for: peripheral.services![0])
         
     }
@@ -126,7 +133,20 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         }
         guard let characteristics = service.characteristics else {return}
         print("The discovered characteristics are \(characteristics))")
+        
+
         characteristics.forEach { (characteristic) in
+            switch characteristic.uuid.uuidString {
+            case deviceInformationServiceUUID:
+                deviceInformationCharacteristic = characteristic
+            case advertisingInterval:
+                advertisingIntervalCharacteristic = characteristic
+            case radioTxPower:
+                radioTxPowerCharacteristic = characteristic
+            default:
+                break
+            }
+            
             peripheral.readValue(for: characteristic)
         }
     }

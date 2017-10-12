@@ -24,7 +24,17 @@ class BeaconFinderViewController: UIViewController {
     
     var availableDoors = [Peripheral]()
     
-    var peripheralName = "Parabeacon"
+    let peripheralName = "Parabeacon"
+    let eddystoneConfigurationServiceUUID = "A3C87500-8ED3-4BDF-8A39-A01BEBEDE295"
+    let deviceInformationServiceUUID = "0000180a-0000-1000-8000-00805f9b34fb"
+    let advertisingInterval = "A3C87503-8ED3-4BDF-8A39-A01BEBEDE295"
+    let radioTxPower = "A3C87504-8ED3-4BDF-8A39-A01BEBEDE295"
+    
+    var eddystoneService: CBService?
+    var deviceInformationCharacteristic: CBCharacteristic?
+    var advertisingIntervalCharacteristic: CBCharacteristic?
+    var radioTxPowerCharacteristic: CBCharacteristic?
+    
     
     var userPasskey: String? = "BD3690EC52B779A30344A52A84D00AD9"
     var didAttemptUnlocking = false

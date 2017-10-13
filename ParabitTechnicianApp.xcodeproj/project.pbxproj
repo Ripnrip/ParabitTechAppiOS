@@ -31,6 +31,8 @@
 		8CB4D79F1F8D4F8000B26563 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D79E1F8D4F8000B26563 /* Constants.swift */; };
 		8CB4D7A11F8D51FC00B26563 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D7A01F8D51FC00B26563 /* StringUtils.swift */; };
 		8CE5DD7C1F9036E900B6A2DA /* BeaconHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5DD7B1F9036E900B6A2DA /* BeaconHelper.swift */; };
+		8CE5DD7E1F91009500B6A2DA /* BeaconTabBarController+BlueTooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5DD7D1F91009500B6A2DA /* BeaconTabBarController+BlueTooth.swift */; };
+		8CE5DD801F9112DC00B6A2DA /* GATTOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5DD7F1F9112DC00B6A2DA /* GATTOperations.swift */; };
 		D58E3C424C30575BEC3671C5 /* Pods_ParabitTechnicianApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DF9117B55B3B48863A8BA6 /* Pods_ParabitTechnicianApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +65,8 @@
 		8CB4D7A01F8D51FC00B26563 /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
 		8CB4D7A21F8D533300B26563 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		8CE5DD7B1F9036E900B6A2DA /* BeaconHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconHelper.swift; sourceTree = "<group>"; };
+		8CE5DD7D1F91009500B6A2DA /* BeaconTabBarController+BlueTooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeaconTabBarController+BlueTooth.swift"; sourceTree = "<group>"; };
+		8CE5DD7F1F9112DC00B6A2DA /* GATTOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GATTOperations.swift; sourceTree = "<group>"; };
 		9C9D1D3944089DBCB06FBCEE /* Pods-ParabitTechnicianApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParabitTechnicianApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParabitTechnicianApp/Pods-ParabitTechnicianApp.release.xcconfig"; sourceTree = "<group>"; };
 		E3DF9117B55B3B48863A8BA6 /* Pods_ParabitTechnicianApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParabitTechnicianApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -163,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				8C85A79E1F890B0000D185D0 /* BeaconTabBarController.swift */,
+				8CE5DD7D1F91009500B6A2DA /* BeaconTabBarController+BlueTooth.swift */,
 				8C85A7A01F891F3300D185D0 /* GlobalSettingsViewController.swift */,
 				8C85A7A81F89221C00D185D0 /* GlobalSettingsViewController+TableView.swift */,
 				8C85A7A21F891F6D00D185D0 /* UIDViewController.swift */,
@@ -189,6 +194,7 @@
 		8CB4D79D1F8D4F7500B26563 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				8CE5DD7F1F9112DC00B6A2DA /* GATTOperations.swift */,
 				8CB4D7A01F8D51FC00B26563 /* StringUtils.swift */,
 				8CB4D79E1F8D4F8000B26563 /* Constants.swift */,
 				8CE5DD7B1F9036E900B6A2DA /* BeaconHelper.swift */,
@@ -355,6 +361,8 @@
 				8C85A7AF1F89315400D185D0 /* RegistrationViewController+TableView.swift in Sources */,
 				8CE5DD7C1F9036E900B6A2DA /* BeaconHelper.swift in Sources */,
 				8C85A79F1F890B0000D185D0 /* BeaconTabBarController.swift in Sources */,
+				8CE5DD7E1F91009500B6A2DA /* BeaconTabBarController+BlueTooth.swift in Sources */,
+				8CE5DD801F9112DC00B6A2DA /* GATTOperations.swift in Sources */,
 				8C85A7AB1F892AE400D185D0 /* UIDViewController+TableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,6 +15,7 @@ class BeaconFinderViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var beacons = [Parabeacon]()
+    var currentBeacon:Peripheral?
     var centralManager:CBCentralManager!
     var sensorTag:CBPeripheral!
     var keepScanning:Bool = true
@@ -38,6 +39,8 @@ class BeaconFinderViewController: UIViewController {
     
     var userPasskey: String? = "BD3690EC52B779A30344A52A84D00AD9"
     var didAttemptUnlocking = false
+    var beaconGATTOperations: GATTOperations?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,9 +66,9 @@ class BeaconFinderViewController: UIViewController {
     }
 
     @IBAction func refresh(_ sender: Any) {
-        SwiftSpinner.show(duration: 1.5, title: "Scanning", animated: true)
-        
-        let when = DispatchTime.now() + 2 // change 2 to desired number of seconds
+        SwiftSpinner.show("Scanning")
+
+        let when = DispatchTime.now() + 0 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
                 self.availableDoors = []
                 self.centralManager.scanForPeripherals(withServices: nil, options: nil)

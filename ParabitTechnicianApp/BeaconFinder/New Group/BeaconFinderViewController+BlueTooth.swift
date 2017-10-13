@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreBluetooth
 import BPStatusBarAlert
+import SwiftSpinner
 
 extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDelegate {
     
@@ -23,9 +24,12 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             // 1
             keepScanning = true
             // 2
-            _ = Timer(timeInterval: timerScanInterval, target: self, selector: #selector(pauseScan), userInfo: nil, repeats: false)
+           // _ = Timer(timeInterval: timerScanInterval, target: self, selector: #selector(pauseScan), userInfo: nil, repeats: false)
             // 3
             centralManager.scanForPeripherals(withServices: nil, options: nil)
+            
+            // 4
+            SwiftSpinner.show("Scanning")
         case .unknown:
             print("Bluetooth is unknown")
         case .resetting:
@@ -70,14 +74,21 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 
                 //add peripheral to available doors tableview
                 let paraDoor = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: true, sensorTag: sensorTag)
+                currentBeacon = paraDoor
                 availableDoors.append(paraDoor)
                 tableView.reloadData()
+                
+                centralManager.connect(sensorTag, options: nil)
+
 
                 }else{
                 //add peripheral to available doors tableview, but don't add the sensor, and set nil for sensortag, and false for isConnectable
                 let paraDoor = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: false, sensorTag: nil)
+                currentBeacon = paraDoor
                 availableDoors.append(paraDoor)
                 tableView.reloadData()
+                SwiftSpinner.hide()
+                    
                 }
             }
         }
@@ -156,34 +167,36 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         if error != nil {
             print("there was an error discovering the characteristics \(characteristic) from \(sensorTag)")
         }
-        print("the updated values for characteristic is \(characteristic)")
+        print("the updated values for characteristic is \(characteristic.value)")
+        
+        if characteristic.uuid == CharacteristicID.unlock.UUID {
+            if let callback = lockStateCallback {
+                checkLockState(passkey: nil, lockStateCallback: callback)
+            }
+        } else if characteristic.uuid == CharacteristicID.lockState.UUID {
+            if let callback = updateLockStateCallback {
+                lockStateCallback = callback
+                getUnlockChallenge()
+            }
+        } else if characteristic.uuid == CharacteristicID.factoryReset.UUID {
+            if let callback = factoryResetCallback {
+                callback()
+            }
+        } else if characteristic.uuid == CharacteristicID.remainConnectable.UUID {
+            if let callback = remainConnectableCallback {
+                callback()
+            }
+        }
         
         if characteristic.uuid == CharacteristicID.lockState.UUID {
             print("****PARSE LOCK STATE VALUE****")
             parseLockStateValue()
         } else if characteristic.uuid == CharacteristicID.unlock.UUID {
             print("****UNLOCK BEACON****")
-            unlockBeaconWithCharacteristic(characteristic: characteristic)
+            unlockBeacon()
         }
     }
-    
-//    //MARK : Read characteristic
-//    func readCharacteristic(characteristic:CBCharacteristic){
-//        //read a value from the characteristic
-//        let readFuture = characteristic.read(timeout: 5)
-//        readFuture?.onSuccess { (_) in
-//            //the value is in the dataValue property
-//            let s = String(data:(self.dataCharacteristic?.dataValue)!, encoding: .utf8)
-//            DispatchQueue.main.async {
-//                //self.valueLabel.text = "Read value is \(s)"
-//                print(s)
-//            }
-//        }
-//        readFuture?.onFailure { (_) in
-//            self.valueLabel.text = "read error"
-//            print("read error of characterisic")
-//        }
-//    }
+
     
     // MARK: - Unlocking Beacon
     func parseLockStateValue() {
@@ -194,13 +207,37 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                     ptr.pointee
                 }
                 if lockState == LockState.Locked.rawValue {
-                    NSLog("The beacon is locked :( .")
+                    print("The beacon is locked :( .")
+                    didUpdateLockState(lockState: LockState.Locked)
                 } else {
-                    NSLog("The beacon is unlocked!")
+                    print("The beacon is unlocked!")
+                    didUpdateLockState(lockState: LockState.Unlocked)
                 }
             }
         }
     }
+    
+    func didUpdateLockState(lockState: LockState) {
+        if let callback = lockStateCallback {
+            switch lockState {
+            case LockState.Locked:
+                if userPasskey != nil {
+                    if didAttemptUnlocking {
+                        callback(LockState.Locked)
+                    } else {
+                        getUnlockChallenge()
+                    }
+                } else {
+                    callback(LockState.Locked)
+                }
+            case LockState.Unlocked:
+                callback(LockState.Unlocked)
+            default:
+                callback(LockState.Unknown)
+            }
+        }
+    }
+
     
     func unlockBeaconWithCharacteristic(characteristic:CBCharacteristic) {
         print("the value of the characteristic is \(characteristic)")
@@ -213,6 +250,47 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             sensorTag.writeValue(unlockToken as Data,
                                             for: characteristic,
                                             type: CBCharacteristicWriteType.withResponse)
+            
+            print("hello1")
+        }
+        parseLockStateValue()
+        print("hello2")
+    }
+    
+    func unlockBeacon() {
+        if let
+            passKey = userPasskey,
+            let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.unlock.UUID),
+            let unlockChallenge = characteristic.value {
+            let token: NSData? = AESEncrypt(data: unlockChallenge as NSData, key: passKey)
+            // erase old password
+            userPasskey = nil
+            didAttemptUnlocking = true
+            if let unlockToken = token {
+                sensorTag.writeValue(unlockToken as Data,
+                                      for: characteristic,
+                                      type: CBCharacteristicWriteType.withResponse)
+            }
+        }
+    }
+    func unlockBeacon(passkey: String) {
+        if let
+            beaconOperations = beaconGATTOperations {
+            beaconOperations.beginUnlockingBeacon(passKey: passkey) { lockState in
+                DispatchQueue.main.async {
+                    if lockState == LockState.Locked {
+                        /// User inserted a wrong password.
+                        self.showAlert(title: "Password",
+                                       description: "The password is incorrect.",
+                                       buttonText: "Dismiss")
+                    } else if lockState == LockState.Unlocked {
+                        /// The beacon is now unlocked!
+                        self.beaconPasskey = passkey
+                        self.displayThrobber(message: "Reading slot data...")
+                        self.investigateBeacon()
+                    }
+                }
+            }
         }
     }
     
@@ -238,12 +316,24 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             
             if Int(cryptStatus) == Int(kCCSuccess) {
                 cryptData.length = Int(numBytesEncrypted)
+                SwiftSpinner.hide()
                 return cryptData as NSData
             } else {
                 NSLog("Error: \(cryptStatus)")
             }
         }
         return nil
+    }
+    
+    func checkLockState(passkey: String?,
+                        lockStateCallback: @escaping (_ lockState: LockState) -> Void) {
+        self.lockStateCallback = lockStateCallback
+        if passkey != nil {
+            userPasskey = passkey
+        }
+        if let lockStateCharacteristic = findCharacteristicByID(characteristicID: CharacteristicID.lockState.UUID) {
+            sensorTag.readValue(for: lockStateCharacteristic)
+        }
     }
     
     func findCharacteristicByID(characteristicID: CBUUID) -> CBCharacteristic? {
@@ -258,6 +348,20 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         }
         return nil
     }
+    
+    func beginUnlockingBeacon(passKey: String,
+                              lockStateCallback: @escaping (_ lockState: LockState) -> Void) {
+        didAttemptUnlocking = false
+        checkLockState(passkey: passKey, lockStateCallback: lockStateCallback)
+        
+    }
+    
+    func getUnlockChallenge() {
+        if let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.unlock.UUID) {
+            sensorTag.readValue(for: characteristic)
+        }
+    }
+    
     
     // MARK: - Did disconnect to a peripheral
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {

@@ -12,18 +12,15 @@ import CoreBluetooth
 class BeaconTabBarController: UITabBarController {
     
     var currentBeacon:Peripheral?
+    var eddystoneService: CBService?
+    var deviceInformationCharacteristic: CBCharacteristic?
+    var advertisingIntervalCharacteristic: CBCharacteristic?
+    var radioTxPowerCharacteristic: CBCharacteristic?
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        Buggy but good to have on ios11+
-//        if #available(iOS 11.0, *) {
-//            self.navigationController?.navigationBar.prefersLargeTitles = true
-//        }
-        
-        
-        
         let btn1 = UIButton(type: .custom)
         btn1.setImage(UIImage(named: "more"), for: .normal)
         btn1.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
@@ -37,6 +34,12 @@ class BeaconTabBarController: UITabBarController {
         let item2 = UIBarButtonItem(customView: btn2)
         
         self.navigationItem.setRightBarButtonItems([item1,item2], animated: true)
+        
+        guard let beacon = currentBeacon else { return }
+        
+        guard let advertisingCharacteristic = advertisingIntervalCharacteristic else { return }
+        beacon.sensorTag?.readValue(for: advertisingCharacteristic)
+        beacon.sensorTag?.readValue(for: radioTxPowerCharacteristic!)
         
     }
 

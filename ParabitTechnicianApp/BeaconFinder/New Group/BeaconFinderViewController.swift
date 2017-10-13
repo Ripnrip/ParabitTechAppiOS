@@ -24,7 +24,10 @@ class BeaconFinderViewController: UIViewController {
     let timerScanInterval:TimeInterval = 2.0
     
     var availableDoors = [Peripheral]()
-    
+    var slotData: Dictionary <NSNumber, Dictionary <String, NSData>> = [:]
+    var slotUpdateData: Dictionary <NSNumber, Dictionary <String, NSData>> = [:]
+    var beaconCapabilities: NSDictionary = [:]
+
     let peripheralName = "Parabeacon"
     let eddystoneConfigurationServiceUUID = "A3C87500-8ED3-4BDF-8A39-A01BEBEDE295"
     let deviceInformationServiceUUID = "0000180a-0000-1000-8000-00805f9b34fb"
@@ -36,11 +39,16 @@ class BeaconFinderViewController: UIViewController {
     var advertisingIntervalCharacteristic: CBCharacteristic?
     var radioTxPowerCharacteristic: CBCharacteristic?
     
-    
+    var beaconPasskey: String?
+    var beaconInvestigation: BeaconInvestigation?
     var userPasskey: String? = "BD3690EC52B779A30344A52A84D00AD9"
     var didAttemptUnlocking = false
     var beaconGATTOperations: GATTOperations?
-
+    var beaconOperationsCallback: ((_ operationState: OperationState) -> Void)?
+    var lockStateCallback: ((_ lockState: LockState) -> Void)?
+    var updateLockStateCallback: ((_ lockState: LockState) -> Void)?
+    var remainConnectableCallback: (() -> Void)?
+    var factoryResetCallback: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,9 +82,29 @@ class BeaconFinderViewController: UIViewController {
                 self.centralManager.scanForPeripherals(withServices: nil, options: nil)
                 self.tableView.reloadData()
         }
-
-
-        
         
     }
+    
+    func investigateBeacon() {
+        if let connectedBeacon = sensorTag {
+            self.beaconInvestigation = BeaconInvestigation(peripheral: connectedBeacon)
+            if let investigation = self.beaconInvestigation {
+                investigation.finishedUnlockingBeacon() { beaconCapabilities, slotData in
+                    /// Creates the buttons and the pages for them and populate them with the information.
+                    DispatchQueue.main.async {
+                        //self.beaconConnectionView.isHidden = true
+                        //self.dismiss(animated: false, completion: nil)
+                        self.slotData = slotData
+                        self.beaconCapabilities = beaconCapabilities
+                        if let beaconDataSlotsCount = beaconCapabilities[maxSupportedSlotsKey] as? NSNumber {
+                           // self.createContentViews(beaconDataSlotsCount: beaconDataSlotsCount as Int)
+                            //self.displayScrollBar(beaconSlotDataCount: beaconDataSlotsCount as Int)
+                            //self.saveButton.isEnabled = true
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
 }

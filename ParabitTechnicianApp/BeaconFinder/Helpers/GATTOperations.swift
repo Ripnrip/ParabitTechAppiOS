@@ -160,27 +160,14 @@ class GATTOperations: NSObject, CBPeripheralDelegate {
                                                  error: NSError?) {
 
     print("did write value for characteristic \(characteristic.uuid)")
-    if error != nil {
-      print("there was an error while writing to the characteristis \(characteristic)")
-    }
-    if characteristic.uuid == CharacteristicID.unlock.UUID {
-      if let callback = lockStateCallback {
-        checkLockState(passkey: nil, lockStateCallback: callback)
-      }
-    } else if characteristic.uuid == CharacteristicID.lockState.UUID {
-      if let callback = updateLockStateCallback {
-        lockStateCallback = callback
-        getUnlockChallenge()
-      }
-    } else if characteristic.uuid == CharacteristicID.factoryReset.UUID {
-      if let callback = factoryResetCallback {
-        callback()
-      }
-    } else if characteristic.uuid == CharacteristicID.remainConnectable.UUID {
-      if let callback = remainConnectableCallback {
-        callback()
-      }
-    }
+    
+//    if characteristic.uuid == CharacteristicID.activeSlot.UUID {
+//        if error != nil {
+//            didUpdateInvestigationState(investigationState: InvestigationState.ErrorSettingActiveSlot)
+//        } else {
+//            didUpdateInvestigationState(investigationState: InvestigationState.DidSetActiveSlot)
+//        }
+//    }
   }
 
   func peripheral(peripheral: CBPeripheral,
@@ -208,6 +195,22 @@ class GATTOperations: NSObject, CBPeripheralDelegate {
             if lockState == LockState.Locked.rawValue {
               NSLog("The beacon is locked :( .")
                 didUpdateLockState(lockState: LockState.Locked)
+
+//                    beaconOperations.beginUnlockingBeacon(passKey: passkey) { lockState in
+//                        DispatchQueue.main.async {
+//                            if lockState == LockState.Locked {
+//                                /// User inserted a wrong password.
+//                                self.showAlert(title: "Password",
+//                                               description: "The password is incorrect.",
+//                                               buttonText: "Dismiss")
+//                            } else if lockState == LockState.Unlocked {
+//                                /// The beacon is now unlocked!
+//                                self.beaconPasskey = passkey
+//                                self.displayThrobber(message: "Reading slot data...")
+//                                self.investigateBeacon()
+//                            }
+//                        }
+//                    }
             } else {
               NSLog("The beacon is unlocked!")
                 didUpdateLockState(lockState: LockState.Unlocked)

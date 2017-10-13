@@ -154,6 +154,8 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 advertisingIntervalCharacteristic = characteristic
             case radioTxPower:
                 radioTxPowerCharacteristic = characteristic
+            case "A3C87507-8ED3-4BDF-8A39-A01BEBEDE295":
+                print("the unlock value is \(characteristic.value)")
             default:
                 break
             }
@@ -167,38 +169,47 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         if error != nil {
             print("there was an error discovering the characteristics \(characteristic) from \(sensorTag)")
         }
-        print("the updated values for characteristic is \(characteristic.value)")
-        
-        if characteristic.uuid == CharacteristicID.unlock.UUID {
-            if let callback = lockStateCallback {
-                checkLockState(passkey: nil, lockStateCallback: callback)
-            }
-        } else if characteristic.uuid == CharacteristicID.lockState.UUID {
-            if let callback = updateLockStateCallback {
-                lockStateCallback = callback
-                getUnlockChallenge()
-            }
-        } else if characteristic.uuid == CharacteristicID.factoryReset.UUID {
-            if let callback = factoryResetCallback {
-                callback()
-            }
-        } else if characteristic.uuid == CharacteristicID.remainConnectable.UUID {
-            if let callback = remainConnectableCallback {
-                callback()
-            }
-        }
-        
+        print("the updated values for characteristic is \(characteristic.uuid) with value \(characteristic.value)")
         if characteristic.uuid == CharacteristicID.lockState.UUID {
             print("****PARSE LOCK STATE VALUE****")
             parseLockStateValue()
         } else if characteristic.uuid == CharacteristicID.unlock.UUID {
             print("****UNLOCK BEACON****")
             unlockBeacon()
+            //unlockBeaconWithCharacteristic(characteristic: characteristic)
         }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+            print("did write value for characteristic \(characteristic.uuid) with value \(characteristic.value)")
+            if error != nil {
+                print("there was an error while writing to the characteristis \(characteristic)")
+            }
+            sensorTag.readValue(for: characteristic)
+            if characteristic.uuid == CharacteristicID.unlock.UUID {
+                if let callback = lockStateCallback {
+                    checkLockState(passkey: nil, lockStateCallback: callback)
+                }
+            } else if characteristic.uuid == CharacteristicID.lockState.UUID {
+                if let callback = updateLockStateCallback {
+                    lockStateCallback = callback
+                    getUnlockChallenge()
+                }
+            } else if characteristic.uuid == CharacteristicID.factoryReset.UUID {
+                if let callback = factoryResetCallback {
+                    callback()
+                }
+            } else if characteristic.uuid == CharacteristicID.remainConnectable.UUID {
+                if let callback = remainConnectableCallback {
+                    callback()
+                }
+            }
+        
     }
 
     
     // MARK: - Unlocking Beacon
+
     func parseLockStateValue() {
         if let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.lockState.UUID),
             let value = characteristic.value {
@@ -207,10 +218,28 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                     ptr.pointee
                 }
                 if lockState == LockState.Locked.rawValue {
-                    print("The beacon is locked :( .")
+                    NSLog("The beacon is locked :( .")
                     didUpdateLockState(lockState: LockState.Locked)
+                    unlockBeacon()
+                    
+//                    beginUnlockingBeacon(passKey: userPasskey!) { lockState in
+//                        DispatchQueue.main.async {
+//                            if lockState == LockState.Locked {
+//                                /// User inserted a wrong password.
+//                                print("wrong password")
+//
+//                            } else if lockState == LockState.Unlocked {
+//                                /// The beacon is now unlocked!
+//                                print("unlocked BEACON")
+//                                //self.beaconPasskey = passkey
+//                               // self.displayThrobber(message: "Reading slot data...")
+//                                self.investigateBeacon()
+//                            }
+//                        }
+//                    }
+                    
                 } else {
-                    print("The beacon is unlocked!")
+                    NSLog("The beacon is unlocked!")
                     didUpdateLockState(lockState: LockState.Unlocked)
                 }
             }
@@ -236,93 +265,6 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 callback(LockState.Unknown)
             }
         }
-    }
-
-    
-    func unlockBeaconWithCharacteristic(characteristic:CBCharacteristic) {
-        print("the value of the characteristic is \(characteristic)")
-        guard let unlockChallenge = characteristic.value else {return}
-        let token: NSData? = AESEncrypt(data: unlockChallenge as NSData, key: userPasskey)
-        // erase old password
-        userPasskey = nil
-        didAttemptUnlocking = true
-        if let unlockToken = token {
-            sensorTag.writeValue(unlockToken as Data,
-                                            for: characteristic,
-                                            type: CBCharacteristicWriteType.withResponse)
-            
-            print("hello1")
-        }
-        parseLockStateValue()
-        print("hello2")
-    }
-    
-    func unlockBeacon() {
-        if let
-            passKey = userPasskey,
-            let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.unlock.UUID),
-            let unlockChallenge = characteristic.value {
-            let token: NSData? = AESEncrypt(data: unlockChallenge as NSData, key: passKey)
-            // erase old password
-            userPasskey = nil
-            didAttemptUnlocking = true
-            if let unlockToken = token {
-                sensorTag.writeValue(unlockToken as Data,
-                                      for: characteristic,
-                                      type: CBCharacteristicWriteType.withResponse)
-            }
-        }
-    }
-    func unlockBeacon(passkey: String) {
-        if let
-            beaconOperations = beaconGATTOperations {
-            beaconOperations.beginUnlockingBeacon(passKey: passkey) { lockState in
-                DispatchQueue.main.async {
-                    if lockState == LockState.Locked {
-                        /// User inserted a wrong password.
-                        self.showAlert(title: "Password",
-                                       description: "The password is incorrect.",
-                                       buttonText: "Dismiss")
-                    } else if lockState == LockState.Unlocked {
-                        /// The beacon is now unlocked!
-                        self.beaconPasskey = passkey
-                        self.displayThrobber(message: "Reading slot data...")
-                        self.investigateBeacon()
-                    }
-                }
-            }
-        }
-    }
-    
-    func AESEncrypt(data: NSData, key: String?) -> NSData? {
-        if let passKey = key {
-            let keyBytes = StringUtils.transformStringToByteArray(string: passKey)
-            let cryptData = NSMutableData(length: Int(data.length) + kCCBlockSizeAES128)!
-            let operation: CCOperation = UInt32(kCCEncrypt)
-            let algoritm:  CCAlgorithm = UInt32(kCCAlgorithmAES128)
-            let options:   CCOptions   = UInt32(kCCOptionECBMode)
-            var numBytesEncrypted :size_t = 0
-            let cryptStatus = CCCrypt(operation,
-                                      algoritm,
-                                      options,
-                                      keyBytes,
-                                      keyBytes.count,
-                                      nil,
-                                      data.bytes,
-                                      data.length,
-                                      cryptData.mutableBytes,
-                                      cryptData.length,
-                                      &numBytesEncrypted)
-            
-            if Int(cryptStatus) == Int(kCCSuccess) {
-                cryptData.length = Int(numBytesEncrypted)
-                SwiftSpinner.hide()
-                return cryptData as NSData
-            } else {
-                NSLog("Error: \(cryptStatus)")
-            }
-        }
-        return nil
     }
     
     func checkLockState(passkey: String?,
@@ -362,6 +304,96 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         }
     }
     
+    func unlockBeacon() {
+        if let
+            passKey = userPasskey,
+            let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.unlock.UUID),
+            let unlockChallenge = characteristic.value {
+            let token: NSData? = AESEncrypt(data: unlockChallenge as NSData, key: passKey)
+            // erase old password
+            userPasskey = nil
+            didAttemptUnlocking = true
+            if let unlockToken = token {
+                sensorTag.writeValue(unlockToken as Data,
+                                      for: characteristic,
+                                      type: CBCharacteristicWriteType.withResponse)
+            }
+        }
+    }
+    
+    func AESEncrypt(data: NSData, key: String?) -> NSData? {
+        if let passKey = key {
+            let keyBytes = StringUtils.transformStringToByteArray(string: passKey)
+            let cryptData = NSMutableData(length: Int(data.length) + kCCBlockSizeAES128)!
+            let operation: CCOperation = UInt32(kCCEncrypt)
+            let algoritm:  CCAlgorithm = UInt32(kCCAlgorithmAES128)
+            let options:   CCOptions   = UInt32(kCCOptionECBMode)
+            var numBytesEncrypted :size_t = 0
+            let cryptStatus = CCCrypt(operation,
+                                      algoritm,
+                                      options,
+                                      keyBytes,
+                                      keyBytes.count,
+                                      nil,
+                                      data.bytes,
+                                      data.length,
+                                      cryptData.mutableBytes,
+                                      cryptData.length,
+                                      &numBytesEncrypted)
+            
+            if UInt32(cryptStatus) == UInt32(kCCSuccess) {
+                cryptData.length = Int(numBytesEncrypted)
+                return cryptData as NSData
+            } else {
+                NSLog("Error: \(cryptStatus)")
+            }
+        }
+        return nil
+    }
+    
+    func writeNewLockCode(encryptedKey: NSData) {
+        let value = NSMutableData(bytes: [0x00 as UInt8], length: 1)
+        value.append(encryptedKey as Data)
+        if let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.lockState.UUID) {
+            sensorTag.writeValue(value as Data, for: characteristic, type: .withResponse)
+        }
+    }
+    
+    func changeLockCode(oldCode: String, newCode: String, callback: @escaping (_ lockState: LockState) -> Void) {
+        sensorTag.delegate = self
+        updateLockStateCallback = callback
+        
+        let newCodeBytes = StringUtils.transformStringToByteArray(string: newCode)
+        let newCodeData = NSData(bytes: newCodeBytes, length: newCodeBytes.count)
+        let encryptedKey = AESEncrypt(data: newCodeData, key: oldCode)
+        userPasskey = newCode
+        if let key = encryptedKey {
+            writeNewLockCode(encryptedKey: key)
+        }
+    }
+    
+    func factoryReset(callback: @escaping () -> Void) {
+        factoryResetCallback = callback
+        sensorTag.delegate = self
+        if let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.factoryReset.UUID) {
+            let value = NSData(bytes: [0x0B as UInt8], length: 1)
+            sensorTag.writeValue(value as Data, for: characteristic, type: .withResponse)
+        }
+    }
+    
+    func changeRemainConnectableState(on: Bool, callback: @escaping () -> Void) {
+        remainConnectableCallback = callback
+        sensorTag.delegate = self
+        if let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.remainConnectable.UUID) {
+            var value: UInt8 = 0
+            if on {
+                value = 1
+            }
+            let data = NSData(bytes: [value], length: 1)
+            sensorTag.writeValue(data as Data, for: characteristic, type: .withResponse)
+        }
+    }
+
     
     // MARK: - Did disconnect to a peripheral
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {

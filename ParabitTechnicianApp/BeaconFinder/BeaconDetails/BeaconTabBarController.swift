@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import CoreBluetooth
 
 class BeaconTabBarController: UITabBarController {
     
-    var currentBeacon:Parabeacon?
+    var currentBeacon:Peripheral?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

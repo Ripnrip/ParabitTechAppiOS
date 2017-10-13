@@ -146,8 +146,8 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             default:
                 break
             }
-            
             peripheral.readValue(for: characteristic)
+            //peripheral.writeValue(<#T##data: Data##Data#>, for: <#T##CBDescriptor#>)
         }
     }
     
@@ -156,7 +156,8 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         if error != nil {
             print("there was an error discovering the characteristics \(characteristic) from \(sensorTag)")
         }
-        //print("the updated values for characteristic \(characteristic)")
+        print("the updated values for characteristic is \(characteristic)")
+        
         if characteristic.uuid == CharacteristicID.lockState.UUID {
             print("****PARSE LOCK STATE VALUE****")
             parseLockStateValue()
@@ -165,6 +166,24 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             unlockBeaconWithCharacteristic(characteristic: characteristic)
         }
     }
+    
+//    //MARK : Read characteristic
+//    func readCharacteristic(characteristic:CBCharacteristic){
+//        //read a value from the characteristic
+//        let readFuture = characteristic.read(timeout: 5)
+//        readFuture?.onSuccess { (_) in
+//            //the value is in the dataValue property
+//            let s = String(data:(self.dataCharacteristic?.dataValue)!, encoding: .utf8)
+//            DispatchQueue.main.async {
+//                //self.valueLabel.text = "Read value is \(s)"
+//                print(s)
+//            }
+//        }
+//        readFuture?.onFailure { (_) in
+//            self.valueLabel.text = "read error"
+//            print("read error of characterisic")
+//        }
+//    }
     
     // MARK: - Unlocking Beacon
     func parseLockStateValue() {

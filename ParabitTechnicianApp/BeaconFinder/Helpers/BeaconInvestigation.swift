@@ -290,6 +290,7 @@ class BeaconInvestigation: GATTOperations {
           /// bytes, we will simply truncate it to the ones we need.
           ///
             slotData[scannedSlot]![slotDataUIDKey] = value.subdata(with: NSMakeRange(2, 16)) as NSData
+            
         }
       } else if frameType == BeaconInfo.EddystoneURLFrameTypeID {
         frameTypeName = BeaconInfo.EddystoneFrameType.URLFrameType.description

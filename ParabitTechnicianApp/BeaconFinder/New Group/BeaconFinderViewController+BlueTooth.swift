@@ -218,10 +218,10 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 SwiftSpinner.hide()
                 isBeaconUnlocked = true
                 guard let advSlotChar = advSlotDataCharacteristic else { return }
-                //sensorTag.readValue(for: adChar)
                 //sensorTag.readValue(for: radioTxChar)
                 sensorTag.readValue(for: advSlotChar)
-                
+                sensorTag.readValue(for: advertisingIntervalCharacteristic!)
+
                 if let callback = lockStateCallback {
                     checkLockState(passkey: nil, lockStateCallback: callback)
                 }

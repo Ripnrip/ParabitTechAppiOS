@@ -33,15 +33,18 @@ class BeaconFinderViewController: UIViewController {
     let deviceInformationServiceUUID = "0000180a-0000-1000-8000-00805f9b34fb"
     let advertisingInterval = "A3C87503-8ED3-4BDF-8A39-A01BEBEDE295"
     let radioTxPower = "A3C87504-8ED3-4BDF-8A39-A01BEBEDE295"
+    let unlockUUID = "A3C87507-8ED3-4BDF-8A39-A01BEBEDE295"
+    let advSlotData = "A3C8750A-8ED3-4BDF-8A39-A01BEBEDE295"
     
     var eddystoneService: CBService?
     var deviceInformationCharacteristic: CBCharacteristic?
     var advertisingIntervalCharacteristic: CBCharacteristic?
     var radioTxPowerCharacteristic: CBCharacteristic?
+    var advSlotDataCharacteristic: CBCharacteristic?
     
     var beaconPasskey: String?
     var beaconInvestigation: BeaconInvestigation?
-    var userPasskey: String? = "BD3690EC52B779A30344A52A84D00AD9"
+    var userPasskey: String? = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"//"BD3690EC52B779A30344A52A84D00AD9"
     var didAttemptUnlocking = false
     var beaconGATTOperations: GATTOperations?
     var beaconOperationsCallback: ((_ operationState: OperationState) -> Void)?

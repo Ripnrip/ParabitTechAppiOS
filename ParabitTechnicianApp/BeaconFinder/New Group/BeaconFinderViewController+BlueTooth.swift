@@ -40,7 +40,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             print("Bluetooth is unauthorized")
         case .poweredOff:
             print("Bluetooth is powered off")
-            BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar) // customize duration, delay and position
+            BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar)
                 .message(message: "Bluetooth is turned off, please turn it on for the app")
                 .messageColor(color: .white)
                 .bgColor(color: .red)
@@ -52,6 +52,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
     // MARK: - Did discover peripherals
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print("centralManager didDiscoverPeripheral - CBAdvertisementDataLocalNameKey is \"\(CBAdvertisementDataLocalNameKey) and UUID is \(peripheral.identifier.uuidString)\"")
+        
         // Retrieve the peripheral name from the advertisement data using the "kCBAdvDataLocalName" key
         if let peripheralName = advertisementData[CBAdvertisementDataLocalNameKey] as? String {
             print("NEXT PERIPHERAL NAME: \(peripheralName)")
@@ -112,8 +113,6 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         peripheral.discoverServices(nil)
     }
     
-    
-    
     // MARK: - Did fail to connect
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         print("**** CONNECTION TO SENSOR TAG FAILED!!!")
@@ -132,9 +131,8 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 eddystoneService = service
             }
         }
-        
-        peripheral.discoverCharacteristics(nil, for: peripheral.services![0])
-        
+        guard let service = eddystoneService else { return }
+        peripheral.discoverCharacteristics(nil, for: service)
     }
     
     // MARK: - Did discover charachteristics of a service
@@ -154,13 +152,14 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 advertisingIntervalCharacteristic = characteristic
             case radioTxPower:
                 radioTxPowerCharacteristic = characteristic
-            case "A3C87507-8ED3-4BDF-8A39-A01BEBEDE295":
+            case advSlotData:
+                advSlotDataCharacteristic = characteristic
+            case unlockUUID:
                 print("the unlock value is \(characteristic.value)")
             default:
                 break
             }
             peripheral.readValue(for: characteristic)
-            //peripheral.writeValue(<#T##data: Data##Data#>, for: <#T##CBDescriptor#>)
         }
     }
     
@@ -170,23 +169,40 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             print("there was an error discovering the characteristics \(characteristic) from \(sensorTag)")
         }
         print("the updated values for characteristic is \(characteristic.uuid) with value \(characteristic.value)")
-        if characteristic.uuid == CharacteristicID.lockState.UUID {
+        
+        switch characteristic.uuid {
+        case CharacteristicID.advertisingInterval.UUID:
+            print("Found the Advertising Characteristic ID \(characteristic)")
+        case CharacteristicID.ADVSlotData.UUID:
+            print("Found the ADVSlotData ID \(characteristic)")
+        case CharacteristicID.radioTxPower.UUID:
+            print("Found the radioTxPower ID \(characteristic)")
+        case CharacteristicID.lockState.UUID:
             print("****PARSE LOCK STATE VALUE****")
             parseLockStateValue()
-        } else if characteristic.uuid == CharacteristicID.unlock.UUID {
+        case CharacteristicID.unlock.UUID:
             print("****UNLOCK BEACON****")
             unlockBeacon()
-            //unlockBeaconWithCharacteristic(characteristic: characteristic)
+        default:
+            print("*****************")
         }
     }
     
+    // MARK: - Did write value for a characteristic
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
             print("did write value for characteristic \(characteristic.uuid) with value \(characteristic.value)")
             if error != nil {
                 print("there was an error while writing to the characteristis \(characteristic)")
             }
-            sensorTag.readValue(for: characteristic)
+            //sensorTag.readValue(for: advertisingIntervalCharacteristic!)
             if characteristic.uuid == CharacteristicID.unlock.UUID {
+                //Wrote to the unlock characteristic, the other values should be ready
+                SwiftSpinner.hide()
+                guard let adChar = advertisingIntervalCharacteristic , let radioTxChar = radioTxPowerCharacteristic, let advSlotChar = advSlotDataCharacteristic else { return }
+                sensorTag.readValue(for: adChar)
+                sensorTag.readValue(for: radioTxChar)
+                sensorTag.readValue(for: advSlotChar)
+                
                 if let callback = lockStateCallback {
                     checkLockState(passkey: nil, lockStateCallback: callback)
                 }
@@ -218,28 +234,11 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                     ptr.pointee
                 }
                 if lockState == LockState.Locked.rawValue {
-                    NSLog("The beacon is locked :( .")
+                    print("The beacon is locked :( .")
                     didUpdateLockState(lockState: LockState.Locked)
                     unlockBeacon()
-                    
-//                    beginUnlockingBeacon(passKey: userPasskey!) { lockState in
-//                        DispatchQueue.main.async {
-//                            if lockState == LockState.Locked {
-//                                /// User inserted a wrong password.
-//                                print("wrong password")
-//
-//                            } else if lockState == LockState.Unlocked {
-//                                /// The beacon is now unlocked!
-//                                print("unlocked BEACON")
-//                                //self.beaconPasskey = passkey
-//                               // self.displayThrobber(message: "Reading slot data...")
-//                                self.investigateBeacon()
-//                            }
-//                        }
-//                    }
-                    
                 } else {
-                    NSLog("The beacon is unlocked!")
+                    print("The beacon is unlocked!")
                     didUpdateLockState(lockState: LockState.Unlocked)
                 }
             }

@@ -370,6 +370,10 @@ class BeaconInvestigation: GATTOperations {
       let bytes = NSData(bytes: &littleEndianAdvInterval,
                          length: MemoryLayout<UInt16>.size)
       slotData[scannedSlot]![slotDataAdvIntervalKey] = bytes
+        
+    }else{
+        print("slot data is nill :( ")
+        
     }
     didUpdateInvestigationState(investigationState: InvestigationState.DidReadAdvertisingInterval)
   }

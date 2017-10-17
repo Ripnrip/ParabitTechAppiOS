@@ -26,6 +26,8 @@ class BeaconFinderViewController: UIViewController {
     var availableDoors = [Peripheral]()
     var slotData: Dictionary <NSNumber, Dictionary <String, NSData>> = [:]
     var slotUpdateData: Dictionary <NSNumber, Dictionary <String, NSData>> = [:]
+    var callback: ((_ beaconBroadcastCapabilities: NSDictionary,
+    _ slotData: Dictionary <NSNumber, Dictionary <String, NSData>>) -> Void)?
     var beaconCapabilities: NSDictionary = [:]
     var currentlyScannedSlot: UInt8 = 0
 
@@ -44,6 +46,8 @@ class BeaconFinderViewController: UIViewController {
     var radioTxPowerCharacteristic: CBCharacteristic?
     var advSlotDataCharacteristic: CBCharacteristic?
     
+    var isBeaconUnlocked = false
+    
     var beaconPasskey: String?
     var beaconInvestigation: BeaconInvestigation?
     var userPasskey: String? = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"//"BD3690EC52B779A30344A52A84D00AD9"
@@ -54,6 +58,10 @@ class BeaconFinderViewController: UIViewController {
     var updateLockStateCallback: ((_ lockState: LockState) -> Void)?
     var remainConnectableCallback: (() -> Void)?
     var factoryResetCallback: (() -> Void)?
+
+    override func viewWillAppear(_ animated: Bool) {
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

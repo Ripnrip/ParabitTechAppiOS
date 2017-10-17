@@ -132,6 +132,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             }
         }
         guard let service = eddystoneService else { return }
+        beaconInvestigation = BeaconInvestigation(peripheral: sensorTag)
         peripheral.discoverCharacteristics(nil, for: service)
     }
     
@@ -170,22 +171,39 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         }
         print("the updated values for characteristic is \(characteristic.uuid) with value \(characteristic.value)")
         
-        switch characteristic.uuid {
-        case CharacteristicID.advertisingInterval.UUID:
-            print("Found the Advertising Characteristic ID \(characteristic)")
-        case CharacteristicID.ADVSlotData.UUID:
-            print("Found the ADVSlotData ID \(characteristic) and properties \(characteristic.properties) and descriptors \(characteristic.descriptors)")
-        case CharacteristicID.radioTxPower.UUID:
-            print("Found the radioTxPower ID \(characteristic)")
-        case CharacteristicID.lockState.UUID:
-            print("****PARSE LOCK STATE VALUE****")
-            parseLockStateValue()
-        case CharacteristicID.unlock.UUID:
-            print("****UNLOCK BEACON****")
-            unlockBeacon()
-        default:
-            print("*****************")
-        }
+        if isBeaconUnlocked {
+                switch characteristic.uuid {
+                case CharacteristicID.capabilities.UUID:
+                    beaconInvestigation?.didReadBroadcastCapabilities()
+                case CharacteristicID.ADVSlotData.UUID:
+                    print("Found the ADVSlotData ID \(characteristic) and properties \(characteristic.properties) and descriptors \(characteristic.descriptors)")
+                    beaconInvestigation?.didReadSlotData()
+                case CharacteristicID.radioTxPower.UUID:
+                    print("Found the radioTxPower ID \(characteristic)")
+                    beaconInvestigation?.didReadTxPower()
+                case CharacteristicID.advertisingInterval.UUID:
+                    print("Found the Advertising Characteristic ID \(characteristic)")
+                    beaconInvestigation?.didReadAdvertisingInterval()
+                case CharacteristicID.remainConnectable.UUID:
+                    beaconInvestigation?.didReadRemainConnectableState()
+                default:
+                    return
+                }
+            }else{
+                switch characteristic.uuid {
+                case CharacteristicID.lockState.UUID:
+                    print("****PARSE LOCK STATE VALUE****")
+                    parseLockStateValue()
+                case CharacteristicID.unlock.UUID:
+                    print("****UNLOCK BEACON****")
+                    unlockBeacon()
+                default:
+                    return
+                }
+            }
+        
+
+
     }
     
     // MARK: - Did write value for a characteristic
@@ -198,11 +216,11 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             if characteristic.uuid == CharacteristicID.unlock.UUID {
                 //Wrote to the unlock characteristic, the other values should be ready
                 SwiftSpinner.hide()
-                guard let adChar = advertisingIntervalCharacteristic , let radioTxChar = radioTxPowerCharacteristic, let advSlotChar = advSlotDataCharacteristic else { return }
-                sensorTag.readValue(for: adChar)
-                sensorTag.readValue(for: radioTxChar)
+                isBeaconUnlocked = true
+                guard let advSlotChar = advSlotDataCharacteristic else { return }
+                //sensorTag.readValue(for: adChar)
+                //sensorTag.readValue(for: radioTxChar)
                 sensorTag.readValue(for: advSlotChar)
-                didReadAdvertisingInterval()
                 
                 if let callback = lockStateCallback {
                     checkLockState(passkey: nil, lockStateCallback: callback)

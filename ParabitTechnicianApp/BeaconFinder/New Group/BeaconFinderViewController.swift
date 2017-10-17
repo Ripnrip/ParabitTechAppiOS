@@ -27,6 +27,8 @@ class BeaconFinderViewController: UIViewController {
     var slotData: Dictionary <NSNumber, Dictionary <String, NSData>> = [:]
     var slotUpdateData: Dictionary <NSNumber, Dictionary <String, NSData>> = [:]
     var beaconCapabilities: NSDictionary = [:]
+    var currentlyScannedSlot: UInt8 = 0
+
 
     let peripheralName = "Parabeacon"
     let eddystoneConfigurationServiceUUID = "A3C87500-8ED3-4BDF-8A39-A01BEBEDE295"

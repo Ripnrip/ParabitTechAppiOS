@@ -174,7 +174,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         case CharacteristicID.advertisingInterval.UUID:
             print("Found the Advertising Characteristic ID \(characteristic)")
         case CharacteristicID.ADVSlotData.UUID:
-            print("Found the ADVSlotData ID \(characteristic)")
+            print("Found the ADVSlotData ID \(characteristic) and properties \(characteristic.properties) and descriptors \(characteristic.descriptors)")
         case CharacteristicID.radioTxPower.UUID:
             print("Found the radioTxPower ID \(characteristic)")
         case CharacteristicID.lockState.UUID:
@@ -202,6 +202,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 sensorTag.readValue(for: adChar)
                 sensorTag.readValue(for: radioTxChar)
                 sensorTag.readValue(for: advSlotChar)
+                didReadAdvertisingInterval()
                 
                 if let callback = lockStateCallback {
                     checkLockState(passkey: nil, lockStateCallback: callback)
@@ -223,6 +224,36 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         
     }
 
+    // Mark: - readInterval
+    func getValueForCharacteristic(characteristicID: CBUUID) -> NSData? {
+        if let
+            characteristic = findCharacteristicByID(characteristicID: characteristicID),
+            let value = characteristic.value {
+            return value as NSData
+        }
+        return nil
+    }
+    
+    func didReadAdvertisingInterval() {
+        let scannedSlot: NSNumber = NSNumber(value: currentlyScannedSlot)
+        var advertisingInterval: UInt16 = 0
+        if let value = getValueForCharacteristic(characteristicID: CharacteristicID.advertisingInterval.UUID) {
+            value.getBytes(&advertisingInterval, length: MemoryLayout<UInt16>.size)
+        }
+        if slotData[scannedSlot] != nil {
+            var littleEndianAdvInterval: UInt16 = CFSwapInt16BigToHost(advertisingInterval)
+            let bytes = NSData(bytes: &littleEndianAdvInterval,
+                               length: MemoryLayout<UInt16>.size)
+            slotData[scannedSlot]![slotDataAdvIntervalKey] = bytes
+            print("converted the slot data for advertising Interval \(bytes)")
+            
+        }else{
+            print("the slotData[scannedSlot] is empty :( ")
+            
+        }
+       // didUpdateInvestigationState(investigationState: InvestigationState.DidReadAdvertisingInterval)
+    }
+    
     
     // MARK: - Unlocking Beacon
 

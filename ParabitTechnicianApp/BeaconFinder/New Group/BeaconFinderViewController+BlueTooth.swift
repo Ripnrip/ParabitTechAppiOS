@@ -188,6 +188,12 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                     beaconInvestigation?.didReadRemainConnectableState()
                     guard let slotData = beaconInvestigation?.slotData else { break }
                     print("the beacon slot data values are \(slotData)")
+                    // lets try writing here
+                    let dataString = "-4"
+                    let data = dataString.hexadecimal()
+
+                    peripheral.writeValue(data!, for: radioTxPowerCharacteristic!, type: CBCharacteristicWriteType.withResponse)
+                    
                 default:
                     return
                 }

@@ -72,7 +72,7 @@ class BeaconFinderViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.orange
         
-        loadBeacons()
+        //loadBeacons()
         self.tableView.separatorColor = UIColor.clear
         
         centralManager = CBCentralManager(delegate: self,

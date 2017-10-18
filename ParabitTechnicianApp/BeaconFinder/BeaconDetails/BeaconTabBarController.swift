@@ -37,9 +37,9 @@ class BeaconTabBarController: UITabBarController {
         
         guard let beacon = currentBeacon else { return }
         
-        guard let advertisingCharacteristic = advertisingIntervalCharacteristic else { return }
-        beacon.sensorTag?.readValue(for: advertisingCharacteristic)
-        beacon.sensorTag?.readValue(for: radioTxPowerCharacteristic!)
+        //guard let advertisingCharacteristic = advertisingIntervalCharacteristic else { return }
+        //beacon.sensorTag?.readValue(for: advertisingCharacteristic)
+        //beacon.sensorTag?.readValue(for: radioTxPowerCharacteristic!)
         
     }
 

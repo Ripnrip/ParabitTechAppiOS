@@ -50,7 +50,7 @@ class BeaconFinderViewController: UIViewController {
     
     var beaconPasskey: String?
     var beaconInvestigation: BeaconInvestigation?
-    var userPasskey: String? = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"//"BD3690EC52B779A30344A52A84D00AD9"
+    var userPasskey: String? = "BD3690EC52B779A30344A52A84D00AD9"//"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
     var didAttemptUnlocking = false
     var beaconGATTOperations: GATTOperations?
     var beaconOperationsCallback: ((_ operationState: OperationState) -> Void)?

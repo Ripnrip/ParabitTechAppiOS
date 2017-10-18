@@ -220,6 +220,12 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             if error != nil {
                 print("there was an error while writing to the characteristis \(characteristic)")
             }
+        
+            if characteristic.uuid == CharacteristicID.advertisingInterval.UUID {
+                sensorTag.readValue(for: characteristic)
+                
+        }
+        
             //sensorTag.readValue(for: advertisingIntervalCharacteristic!)
             if characteristic.uuid == CharacteristicID.unlock.UUID {
                 //Wrote to the unlock characteristic, the other values should be ready

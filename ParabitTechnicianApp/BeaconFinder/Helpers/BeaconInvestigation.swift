@@ -185,6 +185,7 @@ class BeaconInvestigation: GATTOperations {
         let capabilities = capabilitiesCharacteristic.value {
         if capabilities.count < MemoryLayout<EddystoneGATTBroadcastCapabilities>.size {
         didUpdateInvestigationState(investigationState: InvestigationState.ErrorDiscoveringCapabilities)
+            
       } else {
         var broadcastCapabilities = EddystoneGATTBroadcastCapabilities()
             
@@ -194,6 +195,7 @@ class BeaconInvestigation: GATTOperations {
             //capabilities.copyBytes(to:&broadcastCapabilities, count: capabilities.length)
         if broadcastCapabilities.version != kBroadCastCapabilitiesVersion {
             didUpdateInvestigationState(investigationState: InvestigationState.ErrorDiscoveringCapabilities)
+            
         } else {
           let txPowers: NSMutableArray = []
           var i = 6

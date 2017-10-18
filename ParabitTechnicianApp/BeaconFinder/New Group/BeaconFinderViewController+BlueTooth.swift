@@ -29,7 +29,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             centralManager.scanForPeripherals(withServices: nil, options: nil)
             
             // 4
-            SwiftSpinner.show("Scanning")
+            SwiftSpinner.show(duration: 4, title: "Scanning")
         case .unknown:
             print("Bluetooth is unknown")
         case .resetting:
@@ -186,6 +186,8 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                     beaconInvestigation?.didReadAdvertisingInterval()
                 case CharacteristicID.remainConnectable.UUID:
                     beaconInvestigation?.didReadRemainConnectableState()
+                    guard let slotData = beaconInvestigation?.slotData else { break }
+                    print("the beacon slot data values are \(slotData)")
                 default:
                     return
                 }
@@ -217,10 +219,9 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 //Wrote to the unlock characteristic, the other values should be ready
                 SwiftSpinner.hide()
                 isBeaconUnlocked = true
-                guard let advSlotChar = advSlotDataCharacteristic else { return }
-                //sensorTag.readValue(for: radioTxChar)
+                guard let advSlotChar = advSlotDataCharacteristic, let deviceInfoChar = deviceInformationCharacteristic else { return }
+                sensorTag.readValue(for: deviceInfoChar)
                 sensorTag.readValue(for: advSlotChar)
-                sensorTag.readValue(for: advertisingIntervalCharacteristic!)
 
                 if let callback = lockStateCallback {
                     checkLockState(passkey: nil, lockStateCallback: callback)

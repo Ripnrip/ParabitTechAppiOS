@@ -34,7 +34,7 @@ class BeaconFinderViewController: UIViewController {
 
     let peripheralName = "Parabeacon"
     let eddystoneConfigurationServiceUUID = "A3C87500-8ED3-4BDF-8A39-A01BEBEDE295"
-    let deviceInformationServiceUUID = "0000180a-0000-1000-8000-00805f9b34fb"
+    let deviceInformationServiceUUID = "A3C87501-8ED3-4BDF-8A39-A01BEBEDE295"
     let advertisingInterval = "A3C87503-8ED3-4BDF-8A39-A01BEBEDE295"
     let radioTxPower = "A3C87504-8ED3-4BDF-8A39-A01BEBEDE295"
     let unlockUUID = "A3C87507-8ED3-4BDF-8A39-A01BEBEDE295"
@@ -87,7 +87,7 @@ class BeaconFinderViewController: UIViewController {
     }
 
     @IBAction func refresh(_ sender: Any) {
-        SwiftSpinner.show("Scanning")
+        SwiftSpinner.show(duration: 4, title: "Scanning")
 
         let when = DispatchTime.now() + 0 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {

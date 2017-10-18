@@ -34,13 +34,15 @@ class BeaconFinderViewController: UIViewController {
 
     let peripheralName = "Parabeacon"
     let eddystoneConfigurationServiceUUID = "A3C87500-8ED3-4BDF-8A39-A01BEBEDE295"
-    let deviceInformationServiceUUID = "A3C87501-8ED3-4BDF-8A39-A01BEBEDE295"
+    let deviceInformationServiceUUID = "180A"
+    //let deviceInformationServiceUUID = "A3C87501-8ED3-4BDF-8A39-A01BEBEDE295"
     let advertisingInterval = "A3C87503-8ED3-4BDF-8A39-A01BEBEDE295"
     let radioTxPower = "A3C87504-8ED3-4BDF-8A39-A01BEBEDE295"
     let unlockUUID = "A3C87507-8ED3-4BDF-8A39-A01BEBEDE295"
     let advSlotData = "A3C8750A-8ED3-4BDF-8A39-A01BEBEDE295"
     
     var eddystoneService: CBService?
+    var deviceInformationService: CBService?
     var deviceInformationCharacteristic: CBCharacteristic?
     var advertisingIntervalCharacteristic: CBCharacteristic?
     var radioTxPowerCharacteristic: CBCharacteristic?

@@ -247,6 +247,7 @@
 				8C5E0C6A1F86681D00F09225 /* Resources */,
 				5D5FA09F8BFD1034A83BBCB0 /* [CP] Embed Pods Frameworks */,
 				C477D7F485F9C5F08E9C4620 /* [CP] Copy Pods Resources */,
+				8CFB012C1F97CC750044FB89 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -324,6 +325,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ParabitTechnicianApp/Pods-ParabitTechnicianApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		8CFB012C1F97CC750044FB89 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Applications/Checker.app/Contents/Resources/start-analyzer.app/Contents/MacOS/start-analyzer || echo \"WARNING: start-analyzer not installed.\"";
 		};
 		C477D7F485F9C5F08E9C4620 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

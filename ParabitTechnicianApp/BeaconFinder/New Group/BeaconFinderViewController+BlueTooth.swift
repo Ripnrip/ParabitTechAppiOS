@@ -127,9 +127,15 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         print("The discovered services are \(services))")
         
         services.forEach { (service) in
-            if service.uuid.uuidString == eddystoneConfigurationServiceUUID {
-                eddystoneService = service
+            switch service.uuid.uuidString {
+                case eddystoneConfigurationServiceUUID:
+                     eddystoneService = service
+                case deviceInformationServiceUUID:
+                     deviceInformationService = service
+                default:
+                     break
             }
+            print("The discovered service is \(service) with UUID \(service.uuid.uuidString)")
         }
         guard let service = eddystoneService else { return }
         beaconInvestigation = BeaconInvestigation(peripheral: sensorTag)
@@ -147,8 +153,6 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
 
         characteristics.forEach { (characteristic) in
             switch characteristic.uuid.uuidString {
-            case deviceInformationServiceUUID:
-                deviceInformationCharacteristic = characteristic
             case advertisingInterval:
                 advertisingIntervalCharacteristic = characteristic
             case radioTxPower:

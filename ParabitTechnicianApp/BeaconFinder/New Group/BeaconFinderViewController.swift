@@ -81,9 +81,11 @@ class BeaconFinderViewController: UIViewController {
                                           queue: nil)
         
         //test networking call
-        ParabitNetworking.sharedInstance.getFirmware { (success) in
-            if success {
-            print("yay got the firmware info")
+        ParabitNetworking.sharedInstance.getFirmwareInfoFor(revision: "01-10-17") { (success) in
+            if success{
+                print("got the revision firmware")
+            }else{
+                print("error getting firmware info for revison")
             }
         }
         

@@ -40,9 +40,7 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
                 //TODO: Change tab bar controller's beacon to peripheral struct controller.currentBeacon = availableDoors[indexPath.row]
                 controller.currentBeacon = self.currentBeacon
                 controller.eddystoneService = self.eddystoneService
-                controller.deviceInformationCharacteristic = self.deviceInformationCharacteristic
-                controller.advertisingIntervalCharacteristic = self.advertisingIntervalCharacteristic
-                controller.radioTxPowerCharacteristic = self.radioTxPowerCharacteristic
+
                 self.navigationController?.pushViewController(controller, animated: true)
             })
         }else{

@@ -13,9 +13,6 @@ class BeaconTabBarController: UITabBarController {
     
     var currentBeacon:Peripheral?
     var eddystoneService: CBService?
-    var deviceInformationCharacteristic: CBCharacteristic?
-    var advertisingIntervalCharacteristic: CBCharacteristic?
-    var radioTxPowerCharacteristic: CBCharacteristic?
 
     
     override func viewDidLoad() {

@@ -74,9 +74,9 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 sensorTag.delegate = self
                 
                 //add peripheral to available doors tableview
-                let paraDoor = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: true, sensorTag: sensorTag)
-                currentBeacon = paraDoor
-                availableDoors.append(paraDoor)
+                currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: true, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, firmwareRevisionString: nil)
+                guard let door = currentBeacon else {return}
+                availableDoors.append(door)
                 tableView.reloadData()
                 
                 centralManager.connect(sensorTag, options: nil)
@@ -84,9 +84,9 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
 
                 }else{
                 //add peripheral to available doors tableview, but don't add the sensor, and set nil for sensortag, and false for isConnectable
-                let paraDoor = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: false, sensorTag: nil)
-                currentBeacon = paraDoor
-                availableDoors.append(paraDoor)
+                currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: false, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, firmwareRevisionString: nil)
+                guard let door = currentBeacon else {return}
+                availableDoors.append(door)
                 tableView.reloadData()
                 SwiftSpinner.hide()
                     
@@ -159,11 +159,11 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         characteristics.forEach { (characteristic) in
             switch characteristic.uuid.uuidString {
             case advertisingInterval:
-                advertisingIntervalCharacteristic = characteristic
+                currentBeacon?.advertisingIntervalCharacteristic = characteristic
             case radioTxPower:
-                radioTxPowerCharacteristic = characteristic
+                currentBeacon?.radioTxPowerCharacteristic = characteristic
             case advSlotData:
-                advSlotDataCharacteristic = characteristic
+                currentBeacon?.advSlotDataCharacteristic = characteristic
             case unlockUUID:
                 print("the unlock value is \(characteristic.value)")
             default:
@@ -185,7 +185,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 print("the updated values for characteristic is \(characteristic.uuid) with value \(datastring) ")
             
                 //2A26 is firmware revision string .uuidString
-                if characteristic.uuid.uuidString == "2A26" {firmwareRevisionString = datastring as String}
+            if characteristic.uuid.uuidString == "2A26" {currentBeacon?.firmwareRevisionString = datastring as String}
             
                 switch characteristic.uuid {
                 case CharacteristicID.capabilities.UUID:
@@ -203,11 +203,11 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                     beaconInvestigation?.didReadRemainConnectableState()
                     guard let slotData = beaconInvestigation?.slotData else { break }
                     print("the beacon slot data values are \(slotData)")
+                    
                     // lets try writing here
                     let dataString = "012C"
                     let data = dataString.hexadecimal()
-
-                    peripheral.writeValue(data!, for: advertisingIntervalCharacteristic!, type: CBCharacteristicWriteType.withResponse)
+                    peripheral.writeValue(data!, for: (currentBeacon?.advertisingIntervalCharacteristic!)!, type: CBCharacteristicWriteType.withResponse)
                     
                 default:
                     return
@@ -251,7 +251,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 guard let deviceInfoService = deviceInformationService else { return }
                 peripheral.discoverCharacteristics(nil, for: deviceInfoService)
                 
-                guard let advSlotChar = advSlotDataCharacteristic, let deviceInfoChar = deviceInformationCharacteristic else { return }
+                guard let advSlotChar = currentBeacon?.advSlotDataCharacteristic, let deviceInfoChar = currentBeacon?.deviceInformationCharacteristic else { return }
                 sensorTag.readValue(for: deviceInfoChar)
                 sensorTag.readValue(for: advSlotChar)
 

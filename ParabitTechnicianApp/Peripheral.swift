@@ -14,8 +14,11 @@ struct Peripheral {
     let UUID: String
     let isConnectable:Bool
     var sensorTag:CBPeripheral?
-//    let eddystoneService: CBService?
-//    let deviceInformationCharacteristic: CBCharacteristic?
-//    let advertisingIntervalCharacteristic: CBCharacteristic?
-//    let radioTxPowerCharacteristic: CBCharacteristic?
+    var isUnlocked:Bool?
+    var deviceInformationCharacteristic: CBCharacteristic?
+    var advertisingIntervalCharacteristic: CBCharacteristic?
+    var radioTxPowerCharacteristic: CBCharacteristic?
+    var advSlotDataCharacteristic: CBCharacteristic?
+
+    var firmwareRevisionString: String?
 }

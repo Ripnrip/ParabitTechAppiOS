@@ -71,15 +71,21 @@ class BeaconFinderViewController: UIViewController {
         
         tableView.separatorColor = UIColor.clear
         self.title = "Parabit Beacon Config"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        //self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.orange
         
-        //loadBeacons()
         self.tableView.separatorColor = UIColor.clear
         
         centralManager = CBCentralManager(delegate: self,
                                           queue: nil)
+        
+        //test networking call
+        ParabitNetworking.sharedInstance.getFirmware { (success) in
+            if success {
+            print("yay got the firmware info")
+            }
+        }
         
     }
 

@@ -7,7 +7,8 @@ target 'ParabitTechnicianApp' do
 
    pod 'SwiftSpinner'
    pod "BPStatusBarAlert"
-
+   pod 'Alamofire', '~> 4.0'
+   pod 'SwiftyJSON'pod 'SwiftyJSON'
   # Pods for ParabitTechnicianApp
 
 end

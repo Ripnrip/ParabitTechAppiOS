@@ -41,6 +41,7 @@
 		8CE5DD8C1F91163A00B6A2DA /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5DD8B1F91163A00B6A2DA /* CustomViews.swift */; };
 		8CE5DD8E1F9116A800B6A2DA /* EIDConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5DD8D1F9116A800B6A2DA /* EIDConfiguration.swift */; };
 		8CE5DD901F9116DB00B6A2DA /* ConfigureBeaconSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5DD8F1F9116DA00B6A2DA /* ConfigureBeaconSlotData.swift */; };
+		8CFB012F1F98EC070044FB89 /* ParabitNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFB012E1F98EC070044FB89 /* ParabitNetworking.swift */; };
 		D58E3C424C30575BEC3671C5 /* Pods_ParabitTechnicianApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DF9117B55B3B48863A8BA6 /* Pods_ParabitTechnicianApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,7 @@
 		8CE5DD8B1F91163A00B6A2DA /* CustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
 		8CE5DD8D1F9116A800B6A2DA /* EIDConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EIDConfiguration.swift; sourceTree = "<group>"; };
 		8CE5DD8F1F9116DA00B6A2DA /* ConfigureBeaconSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigureBeaconSlotData.swift; sourceTree = "<group>"; };
+		8CFB012E1F98EC070044FB89 /* ParabitNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParabitNetworking.swift; sourceTree = "<group>"; };
 		9C9D1D3944089DBCB06FBCEE /* Pods-ParabitTechnicianApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParabitTechnicianApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParabitTechnicianApp/Pods-ParabitTechnicianApp.release.xcconfig"; sourceTree = "<group>"; };
 		E3DF9117B55B3B48863A8BA6 /* Pods_ParabitTechnicianApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParabitTechnicianApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -129,6 +131,7 @@
 		8C5E0C6E1F86681D00F09225 /* ParabitTechnicianApp */ = {
 			isa = PBXGroup;
 			children = (
+				8CFB012D1F98EBE20044FB89 /* Networking */,
 				8C85A7991F88FB6100D185D0 /* Models */,
 				8C5E0C8B1F86CDD900F09225 /* Cells */,
 				8C5E0C821F86C9A300F09225 /* Login */,
@@ -226,6 +229,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		8CFB012D1F98EBE20044FB89 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				8CFB012E1F98EC070044FB89 /* ParabitNetworking.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		C2E2BC4AAF9E1B0FDDD84A9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,13 +324,17 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ParabitTechnicianApp/Pods-ParabitTechnicianApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BPStatusBarAlert/BPStatusBarAlert.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSpinner/SwiftSpinner.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BPStatusBarAlert.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSpinner.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -408,6 +423,7 @@
 				8C85A79F1F890B0000D185D0 /* BeaconTabBarController.swift in Sources */,
 				8CE5DD8C1F91163A00B6A2DA /* CustomViews.swift in Sources */,
 				8CE5DD7E1F91009500B6A2DA /* BeaconTabBarController+BlueTooth.swift in Sources */,
+				8CFB012F1F98EC070044FB89 /* ParabitNetworking.swift in Sources */,
 				8CE5DD801F9112DC00B6A2DA /* GATTOperations.swift in Sources */,
 				8C85A7AB1F892AE400D185D0 /* UIDViewController+TableView.swift in Sources */,
 			);
@@ -555,7 +571,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Parabit.ParabitTechnicianApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = ParabitTechnicianApp/BridgingHeader.h;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -573,7 +589,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Parabit.ParabitTechnicianApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = ParabitTechnicianApp/BridgingHeader.h;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

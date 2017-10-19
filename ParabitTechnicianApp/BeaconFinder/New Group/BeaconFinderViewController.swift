@@ -47,6 +47,7 @@ class BeaconFinderViewController: UIViewController {
     var advertisingIntervalCharacteristic: CBCharacteristic?
     var radioTxPowerCharacteristic: CBCharacteristic?
     var advSlotDataCharacteristic: CBCharacteristic?
+    var firmwareRevisionString: String?
     
     var isBeaconUnlocked = false
     

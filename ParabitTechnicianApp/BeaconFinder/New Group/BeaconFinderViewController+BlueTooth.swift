@@ -124,7 +124,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             print("there was an error discovering the services after connecting \(String(describing: error))")
         }
         guard let services = peripheral.services else {return}
-        print("The discovered services are \(services))")
+        //print("The discovered services are \(services))")
         
         services.forEach { (service) in
             switch service.uuid.uuidString {
@@ -137,9 +137,10 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             }
             print("The discovered service is \(service) with UUID \(service.uuid.uuidString)")
         }
-        guard let service = eddystoneService else { return }
+        guard let eddyStoneService = eddystoneService, let deviceInfoService = deviceInformationService else { return }
         beaconInvestigation = BeaconInvestigation(peripheral: sensorTag)
-        peripheral.discoverCharacteristics(nil, for: service)
+        
+        peripheral.discoverCharacteristics(nil, for: eddyStoneService)
     }
     
     // MARK: - Did discover charachteristics of a service
@@ -150,6 +151,10 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         guard let characteristics = service.characteristics else {return}
         print("The discovered characteristics are \(characteristics))")
         
+        if service == deviceInformationService {
+            print("the device information service characteristics are \(characteristics)")
+            
+        }
 
         characteristics.forEach { (characteristic) in
             switch characteristic.uuid.uuidString {
@@ -173,9 +178,15 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         if error != nil {
             print("there was an error discovering the characteristics \(characteristic) from \(sensorTag)")
         }
-        print("the updated values for characteristic is \(characteristic.uuid) with value \(characteristic.value)")
+
         
         if isBeaconUnlocked {
+                guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
+                print("the updated values for characteristic is \(characteristic.uuid) with value \(datastring) ")
+            
+                //2A26 is firmware revision string .uuidString
+                if characteristic.uuid.uuidString == "2A26" {firmwareRevisionString = datastring as String}
+            
                 switch characteristic.uuid {
                 case CharacteristicID.capabilities.UUID:
                     beaconInvestigation?.didReadBroadcastCapabilities()
@@ -201,6 +212,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 default:
                     return
                 }
+            
             }else{
                 switch characteristic.uuid {
                 case CharacteristicID.lockState.UUID:
@@ -235,6 +247,10 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 //Wrote to the unlock characteristic, the other values should be ready
                 SwiftSpinner.hide()
                 isBeaconUnlocked = true
+                
+                guard let deviceInfoService = deviceInformationService else { return }
+                peripheral.discoverCharacteristics(nil, for: deviceInfoService)
+                
                 guard let advSlotChar = advSlotDataCharacteristic, let deviceInfoChar = deviceInformationCharacteristic else { return }
                 sensorTag.readValue(for: deviceInfoChar)
                 sensorTag.readValue(for: advSlotChar)

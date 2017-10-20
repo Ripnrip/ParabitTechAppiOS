@@ -19,8 +19,10 @@ class GlobalSettingsViewController: UIViewController {
     var currentBeacon:Peripheral?
     
     var txPower:Int8 = 0
+    var txPowerHex = "003"
+    
     var advInterval:UInt16 = 1000
-    var advIntervalHex = ""
+    var advIntervalHex = "03E8"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,8 +53,12 @@ class GlobalSettingsViewController: UIViewController {
     func saveTapped () {
         
         //Advertising Interval Save
-        let data = advIntervalHex.hexadecimal()
-        currentBeacon?.sensorTag?.writeValue(data!, for: (currentBeacon?.advertisingIntervalCharacteristic!)!, type: CBCharacteristicWriteType.withResponse)
+        let adData = advIntervalHex.hexadecimal()
+        currentBeacon?.sensorTag?.writeValue(adData!, for: (currentBeacon?.advertisingIntervalCharacteristic!)!, type: CBCharacteristicWriteType.withResponse)
+        
+        //TXPower Save
+        let txData = txPowerHex.hexadecimal()
+        currentBeacon?.sensorTag?.writeValue(txData!, for: (currentBeacon?.radioTxPowerCharacteristic!)!, type: CBCharacteristicWriteType.withResponse)
         
     }
     
@@ -96,24 +102,34 @@ class GlobalSettingsViewController: UIViewController {
         switch stepper.value {
         case 0:
             txPower = -40
+            txPowerHex = "d8"
         case 1:
             txPower = -20
+            txPowerHex = "eC"
         case 2:
             txPower = -16
+            txPowerHex = "f0"
         case 3:
             txPower = -12
+            txPowerHex = "f4"
         case 4:
             txPower = -8
+            txPowerHex = "f8"
         case 5:
             txPower = -4
+            txPowerHex = "fc"
         case 6:
             txPower = 0
+            txPowerHex = "00"
         case 7:
             txPower = 3
+            txPowerHex = "03"
         case 8:
             txPower = 4
+            txPowerHex = "04"
         default:
             txPower = 3
+            txPowerHex = "d8"
         }
         txPowerLabel.text = "\(txPower) dBm"
 

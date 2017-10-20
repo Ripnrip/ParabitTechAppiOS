@@ -243,8 +243,12 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         
             if characteristic.uuid == CharacteristicID.advertisingInterval.UUID {
                 sensorTag.readValue(for: characteristic)
+            }
+        
+            if characteristic.uuid == CharacteristicID.radioTxPower.UUID {
+                sensorTag.readValue(for: characteristic)
                 
-        }
+            }
         
             //sensorTag.readValue(for: advertisingIntervalCharacteristic!)
             if characteristic.uuid == CharacteristicID.unlock.UUID {

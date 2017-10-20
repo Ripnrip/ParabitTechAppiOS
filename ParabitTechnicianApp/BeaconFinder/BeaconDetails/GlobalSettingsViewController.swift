@@ -12,23 +12,23 @@ class GlobalSettingsViewController: UIViewController {
     @IBOutlet weak var advLabel: UILabel!
     
     @IBOutlet weak var txPowerLabel: UILabel!
-    var txPower = 0
+    var txPower:Int8 = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //txPower Value
         guard let currentTabController = self.tabBarController as? BeaconTabBarController else { return }
         guard let beacon  = currentTabController.currentBeacon else { return }
-        guard let txPowerValue = beacon.radioTxPowerCharacteristic?.value else { return }
+        guard let txPowerValue = beacon.radioTxPowerCharacteristic else { return }
         guard let advSlotDataValue = beacon.advSlotDataCharacteristic else { return }
         
         let investigation = BeaconInvestigation(peripheral: beacon.sensorTag!)
+        txPower = investigation.didReadTxPower()
+        txPowerLabel.text = "\(txPower) dBM"
+        
         print("the readPower data is \(investigation.didReadTxPower())")
         print("the readAdvertising data is \(investigation.didReadAdvertisingInterval())")
-        
 
-        print(" the advSlotData is \(advSlotDataValue) and the txPower Value is \(txPowerValue))")
         
 
     }

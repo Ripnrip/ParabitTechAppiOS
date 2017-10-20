@@ -343,7 +343,7 @@ class BeaconInvestigation: GATTOperations {
     return nil
   }
 
-  func didReadTxPower() -> NSData? {
+  func didReadTxPower() -> Int8 {
     let scannedSlot: NSNumber = NSNumber(value: currentlyScannedSlot)
     var txPower: Int8 = 0
     if let value = getValueForCharacteristic(characteristicID: CharacteristicID.radioTxPower.UUID) {
@@ -353,7 +353,7 @@ class BeaconInvestigation: GATTOperations {
         slotData[scannedSlot]![slotDataTxPowerKey] = NSData(bytes: &txPower, length: MemoryLayout<Int8>.size)
     }
     didUpdateInvestigationState(investigationState: InvestigationState.DidReadTxPower)
-    return NSData(bytes: &txPower, length: MemoryLayout<Int8>.size)
+    return txPower
   }
 
   func readAdvertisingInterval() {

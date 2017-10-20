@@ -18,11 +18,8 @@ class BeaconTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveTapped))
+
     }
-    
-    func saveTapped () {
-        
-    }
+
 
 }

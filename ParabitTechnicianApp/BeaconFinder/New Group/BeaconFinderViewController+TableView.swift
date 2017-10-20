@@ -65,6 +65,8 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         }
         else {
             cell.configurableStatusLabel.isHidden = true
+            cell.statusBubbleImageView.backgroundColor = UIColor.red
+
         }
         
         cell.statusBubbleImageView.layer.cornerRadius = cell.statusBubbleImageView.frame.height/2

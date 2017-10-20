@@ -343,7 +343,7 @@ class BeaconInvestigation: GATTOperations {
     return nil
   }
 
-  func didReadTxPower() {
+  func didReadTxPower() -> NSData? {
     let scannedSlot: NSNumber = NSNumber(value: currentlyScannedSlot)
     var txPower: Int8 = 0
     if let value = getValueForCharacteristic(characteristicID: CharacteristicID.radioTxPower.UUID) {
@@ -353,6 +353,7 @@ class BeaconInvestigation: GATTOperations {
         slotData[scannedSlot]![slotDataTxPowerKey] = NSData(bytes: &txPower, length: MemoryLayout<Int8>.size)
     }
     didUpdateInvestigationState(investigationState: InvestigationState.DidReadTxPower)
+    return NSData(bytes: &txPower, length: MemoryLayout<Int8>.size)
   }
 
   func readAdvertisingInterval() {
@@ -362,7 +363,7 @@ class BeaconInvestigation: GATTOperations {
   }
 
 
-  func didReadAdvertisingInterval() {
+  func didReadAdvertisingInterval()  -> NSData? {
     let scannedSlot: NSNumber = NSNumber(value: currentlyScannedSlot)
     var advertisingInterval: UInt16 = 0
     if let value = getValueForCharacteristic(characteristicID: CharacteristicID.advertisingInterval.UUID) {
@@ -373,9 +374,12 @@ class BeaconInvestigation: GATTOperations {
       let bytes = NSData(bytes: &littleEndianAdvInterval,
                          length: MemoryLayout<UInt16>.size)
       slotData[scannedSlot]![slotDataAdvIntervalKey] = bytes
+      print("didReadAdvertisingInterval with value \(bytes)")
+      return bytes
         
     }else{
         print("slot data is nill :( ")
+        return nil
         
     }
     didUpdateInvestigationState(investigationState: InvestigationState.DidReadAdvertisingInterval)

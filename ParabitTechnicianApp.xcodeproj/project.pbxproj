@@ -22,7 +22,6 @@
 		8C85A7A31F891F6D00D185D0 /* UIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7A21F891F6D00D185D0 /* UIDViewController.swift */; };
 		8C85A7A51F891F7500D185D0 /* DFUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7A41F891F7500D185D0 /* DFUViewController.swift */; };
 		8C85A7A71F891F7D00D185D0 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7A61F891F7D00D185D0 /* RegistrationViewController.swift */; };
-		8C85A7A91F89221C00D185D0 /* GlobalSettingsViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7A81F89221C00D185D0 /* GlobalSettingsViewController+TableView.swift */; };
 		8C85A7AB1F892AE400D185D0 /* UIDViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AA1F892AE400D185D0 /* UIDViewController+TableView.swift */; };
 		8C85A7AD1F892C8A00D185D0 /* UIDViewController+PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AC1F892C8A00D185D0 /* UIDViewController+PickerView.swift */; };
 		8C85A7AF1F89315400D185D0 /* RegistrationViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AE1F89315400D185D0 /* RegistrationViewController+TableView.swift */; };
@@ -64,7 +63,6 @@
 		8C85A7A21F891F6D00D185D0 /* UIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDViewController.swift; sourceTree = "<group>"; };
 		8C85A7A41F891F7500D185D0 /* DFUViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFUViewController.swift; sourceTree = "<group>"; };
 		8C85A7A61F891F7D00D185D0 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
-		8C85A7A81F89221C00D185D0 /* GlobalSettingsViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GlobalSettingsViewController+TableView.swift"; sourceTree = "<group>"; };
 		8C85A7AA1F892AE400D185D0 /* UIDViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDViewController+TableView.swift"; sourceTree = "<group>"; };
 		8C85A7AC1F892C8A00D185D0 /* UIDViewController+PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDViewController+PickerView.swift"; sourceTree = "<group>"; };
 		8C85A7AE1F89315400D185D0 /* RegistrationViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RegistrationViewController+TableView.swift"; sourceTree = "<group>"; };
@@ -189,7 +187,6 @@
 				8C85A79E1F890B0000D185D0 /* BeaconTabBarController.swift */,
 				8CE5DD7D1F91009500B6A2DA /* BeaconTabBarController+BlueTooth.swift */,
 				8C85A7A01F891F3300D185D0 /* GlobalSettingsViewController.swift */,
-				8C85A7A81F89221C00D185D0 /* GlobalSettingsViewController+TableView.swift */,
 				8C85A7A21F891F6D00D185D0 /* UIDViewController.swift */,
 				8C85A7AA1F892AE400D185D0 /* UIDViewController+TableView.swift */,
 				8C85A7AC1F892C8A00D185D0 /* UIDViewController+PickerView.swift */,
@@ -417,7 +414,6 @@
 				8C85A7A51F891F7500D185D0 /* DFUViewController.swift in Sources */,
 				8CB4D79A1F8D394200B26563 /* Peripheral.swift in Sources */,
 				8CE5DD821F91141B00B6A2DA /* BeaconScanner.swift in Sources */,
-				8C85A7A91F89221C00D185D0 /* GlobalSettingsViewController+TableView.swift in Sources */,
 				8C85A7AF1F89315400D185D0 /* RegistrationViewController+TableView.swift in Sources */,
 				8CE5DD7C1F9036E900B6A2DA /* BeaconHelper.swift in Sources */,
 				8C85A79F1F890B0000D185D0 /* BeaconTabBarController.swift in Sources */,

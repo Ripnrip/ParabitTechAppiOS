@@ -35,7 +35,6 @@ class BeaconFinderViewController: UIViewController {
     let peripheralName = "Parabeacon"
     let eddystoneConfigurationServiceUUID = "A3C87500-8ED3-4BDF-8A39-A01BEBEDE295"
     let deviceInformationServiceUUID = "180A"
-    //let deviceInformationServiceUUID = "A3C87501-8ED3-4BDF-8A39-A01BEBEDE295"
     let advertisingInterval = "A3C87503-8ED3-4BDF-8A39-A01BEBEDE295"
     let radioTxPower = "A3C87504-8ED3-4BDF-8A39-A01BEBEDE295"
     let unlockUUID = "A3C87507-8ED3-4BDF-8A39-A01BEBEDE295"
@@ -43,11 +42,6 @@ class BeaconFinderViewController: UIViewController {
     
     var eddystoneService: CBService?
     var deviceInformationService: CBService?
-//    var deviceInformationCharacteristic: CBCharacteristic?
-//    var advertisingIntervalCharacteristic: CBCharacteristic?
-//    var radioTxPowerCharacteristic: CBCharacteristic?
-//    var advSlotDataCharacteristic: CBCharacteristic?
-//    var firmwareRevisionString: String?
     
     var isBeaconUnlocked = false
     
@@ -71,7 +65,7 @@ class BeaconFinderViewController: UIViewController {
         
         tableView.separatorColor = UIColor.clear
         self.title = "Parabit Beacon Config"
-        //self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.orange
         
@@ -80,14 +74,6 @@ class BeaconFinderViewController: UIViewController {
         centralManager = CBCentralManager(delegate: self,
                                           queue: nil)
         
-        //test networking call
-        ParabitNetworking.sharedInstance.getFirmwareInfoFor(revision: "01-10-17") { (success) in
-            if success{
-                print("got the revision firmware")
-            }else{
-                print("error getting firmware info for revison")
-            }
-        }
     }
 
     @IBAction func refresh(_ sender: Any) {

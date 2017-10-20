@@ -181,11 +181,15 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
 
         
         if isBeaconUnlocked {
-                guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
-                print("the updated values for characteristic is \(characteristic.uuid) with value \(datastring) ")
+
+                print("the updated values for characteristic is \(characteristic.uuid) with value \(characteristic.value) ")
             
                 //2A26 is firmware revision string .uuidString
-            if characteristic.uuid.uuidString == "2A26" {currentBeacon?.firmwareRevisionString = datastring as String}
+            if characteristic.uuid.uuidString == "2A26" {
+                guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
+                currentBeacon?.firmwareRevisionString = datastring as String
+                
+            }
             
                 switch characteristic.uuid {
                 case CharacteristicID.capabilities.UUID:
@@ -196,19 +200,20 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 case CharacteristicID.radioTxPower.UUID:
                     print("Found the radioTxPower ID \(characteristic)")
                     beaconInvestigation?.didReadTxPower()
+                    currentBeacon?.radioTxPowerCharacteristic = characteristic
                 case CharacteristicID.advertisingInterval.UUID:
                     print("Found the Advertising Characteristic ID \(characteristic)")
                     beaconInvestigation?.didReadAdvertisingInterval()
+                    currentBeacon?.advertisingIntervalCharacteristic = characteristic
                 case CharacteristicID.remainConnectable.UUID:
                     beaconInvestigation?.didReadRemainConnectableState()
                     guard let slotData = beaconInvestigation?.slotData else { break }
                     print("the beacon slot data values are \(slotData)")
                     
                     // lets try writing here
-                    let dataString = "012C"
-                    let data = dataString.hexadecimal()
-                    peripheral.writeValue(data!, for: (currentBeacon?.advertisingIntervalCharacteristic!)!, type: CBCharacteristicWriteType.withResponse)
-                    
+//                    let dataString = "012C"
+//                    let data = dataString.hexadecimal()
+//                    peripheral.writeValue(data!, for: (currentBeacon?.advertisingIntervalCharacteristic!)!, type: CBCharacteristicWriteType.withResponse)
                 default:
                     return
                 }
@@ -225,7 +230,6 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                     return
                 }
             }
-        
 
 
     }
@@ -248,13 +252,15 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 SwiftSpinner.hide()
                 isBeaconUnlocked = true
                 
+                
+                guard let advSlotChar = currentBeacon?.advSlotDataCharacteristic else { return }
+                sensorTag.readValue(for: advSlotChar)
+
+                //let deviceInfoChar = currentBeacon?.deviceInformationCharacteristic sensorTag.readValue(for: deviceInfoChar)
+
                 guard let deviceInfoService = deviceInformationService else { return }
                 peripheral.discoverCharacteristics(nil, for: deviceInfoService)
                 
-                guard let advSlotChar = currentBeacon?.advSlotDataCharacteristic, let deviceInfoChar = currentBeacon?.deviceInformationCharacteristic else { return }
-                sensorTag.readValue(for: deviceInfoChar)
-                sensorTag.readValue(for: advSlotChar)
-
                 if let callback = lockStateCallback {
                     checkLockState(passkey: nil, lockStateCallback: callback)
                 }
@@ -302,7 +308,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             print("the slotData[scannedSlot] is empty :( ")
             
         }
-       // didUpdateInvestigationState(investigationState: InvestigationState.DidReadAdvertisingInterval)
+        //didUpdateInvestigationState(investigationState: InvestigationState.DidReadAdvertisingInterval)
     }
     
     

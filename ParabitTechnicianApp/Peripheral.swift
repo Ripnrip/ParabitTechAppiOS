@@ -21,4 +21,6 @@ struct Peripheral {
     var advSlotDataCharacteristic: CBCharacteristic?
 
     var firmwareRevisionString: String?
+    
+    var advertisingValue:UInt16?
 }

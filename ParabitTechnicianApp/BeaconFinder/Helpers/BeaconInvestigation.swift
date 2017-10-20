@@ -363,23 +363,24 @@ class BeaconInvestigation: GATTOperations {
   }
 
 
-  func didReadAdvertisingInterval()  -> NSData? {
+  func didReadAdvertisingInterval()  -> UInt16 {
     let scannedSlot: NSNumber = NSNumber(value: currentlyScannedSlot)
     var advertisingInterval: UInt16 = 0
     if let value = getValueForCharacteristic(characteristicID: CharacteristicID.advertisingInterval.UUID) {
         value.getBytes(&advertisingInterval, length: MemoryLayout<UInt16>.size)
     }
+    //hack to always return a value || true
     if slotData[scannedSlot] != nil {
       var littleEndianAdvInterval: UInt16 = CFSwapInt16BigToHost(advertisingInterval)
       let bytes = NSData(bytes: &littleEndianAdvInterval,
                          length: MemoryLayout<UInt16>.size)
       slotData[scannedSlot]![slotDataAdvIntervalKey] = bytes
-      print("didReadAdvertisingInterval with value \(bytes)")
-      return bytes
+      print("didReadAdvertisingInterval with value \(littleEndianAdvInterval) ")
+      return littleEndianAdvInterval
         
     }else{
         print("slot data is nill :( ")
-        return nil
+        return advertisingInterval
         
     }
     didUpdateInvestigationState(investigationState: InvestigationState.DidReadAdvertisingInterval)

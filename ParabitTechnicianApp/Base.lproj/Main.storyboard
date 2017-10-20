@@ -412,6 +412,7 @@
                     <tabBarItem key="tabBarItem" title="" image="grid-world" id="BDf-4z-GIF"/>
                     <connections>
                         <outlet property="advLabel" destination="wuK-dW-V0K" id="sYr-XM-qAN"/>
+                        <outlet property="advSlider" destination="lk0-To-kVo" id="Hxn-Jx-RIG"/>
                         <outlet property="txPowerLabel" destination="er1-bB-aVo" id="1bB-rX-4QH"/>
                         <segue destination="0bG-EY-maO" kind="show" identifier="showDFU" id="Qov-kk-pzZ"/>
                     </connections>

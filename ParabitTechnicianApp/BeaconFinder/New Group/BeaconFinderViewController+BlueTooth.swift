@@ -74,7 +74,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 sensorTag.delegate = self
                 
                 //add peripheral to available doors tableview
-                currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: true, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, firmwareRevisionString: nil)
+                    currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: true, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, firmwareRevisionString: nil, advertisingValue: nil)
                 guard let door = currentBeacon else {return}
                 availableDoors.append(door)
                 tableView.reloadData()
@@ -84,7 +84,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
 
                 }else{
                 //add peripheral to available doors tableview, but don't add the sensor, and set nil for sensortag, and false for isConnectable
-                currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: false, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, firmwareRevisionString: nil)
+                    currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: false, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, firmwareRevisionString: nil, advertisingValue: nil)
                 guard let door = currentBeacon else {return}
                 availableDoors.append(door)
                 tableView.reloadData()
@@ -203,7 +203,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                     currentBeacon?.radioTxPowerCharacteristic = characteristic
                 case CharacteristicID.advertisingInterval.UUID:
                     print("Found the Advertising Characteristic ID \(characteristic)")
-                    beaconInvestigation?.didReadAdvertisingInterval()
+                    currentBeacon?.advertisingValue = beaconInvestigation?.didReadAdvertisingInterval()
                     currentBeacon?.advertisingIntervalCharacteristic = characteristic
                 case CharacteristicID.remainConnectable.UUID:
                     beaconInvestigation?.didReadRemainConnectableState()

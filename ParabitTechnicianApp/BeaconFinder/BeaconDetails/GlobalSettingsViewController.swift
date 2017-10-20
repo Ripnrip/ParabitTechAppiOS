@@ -10,9 +10,11 @@ import UIKit
 
 class GlobalSettingsViewController: UIViewController {
     @IBOutlet weak var advLabel: UILabel!
+    @IBOutlet weak var advSlider: UISlider!
     
     @IBOutlet weak var txPowerLabel: UILabel!
     var txPower:Int8 = 0
+    var advInterval:UInt16 = 1000
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +23,17 @@ class GlobalSettingsViewController: UIViewController {
         guard let beacon  = currentTabController.currentBeacon else { return }
         guard let txPowerValue = beacon.radioTxPowerCharacteristic else { return }
         guard let advSlotDataValue = beacon.advSlotDataCharacteristic else { return }
+        guard let advertisingCharacteristic = beacon.advertisingIntervalCharacteristic else { return }
         
         let investigation = BeaconInvestigation(peripheral: beacon.sensorTag!)
         txPower = investigation.didReadTxPower()
         txPowerLabel.text = "\(txPower) dBM"
+        
+        advInterval = beacon.advertisingValue ?? 0
+        advLabel.text = "\(advInterval)"
+        advSlider.value = Float(advInterval)
+        
+
         
         print("the readPower data is \(investigation.didReadTxPower())")
         print("the readAdvertising data is \(investigation.didReadAdvertisingInterval())")

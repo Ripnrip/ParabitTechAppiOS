@@ -10,9 +10,12 @@ import UIKit
 
 class DFUViewController: UIViewController {
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.navigationItem.rightBarButtonItem = nil
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         //test networking call
         ParabitNetworking.sharedInstance.getFirmwareInfoFor(revision: "01-10-17") { (success) in
             if success{

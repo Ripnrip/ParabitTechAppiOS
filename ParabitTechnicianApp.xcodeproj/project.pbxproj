@@ -159,6 +159,7 @@
 				8CB4D79D1F8D4F7500B26563 /* Helpers */,
 				8CB4D7921F8D38E800B26563 /* AvailableDoors */,
 				8C85A79D1F8909F200D185D0 /* BeaconDetails */,
+				8C6A013A1F9E7BE000040604 /* DFU */,
 			);
 			path = BeaconFinder;
 			sourceTree = "<group>";
@@ -169,6 +170,14 @@
 				8C5E0C8C1F86CDEC00F09225 /* ParaBeaconTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		8C6A013A1F9E7BE000040604 /* DFU */ = {
+			isa = PBXGroup;
+			children = (
+				8C85A7A41F891F7500D185D0 /* DFUViewController.swift */,
+			);
+			path = DFU;
 			sourceTree = "<group>";
 		};
 		8C85A7991F88FB6100D185D0 /* Models */ = {
@@ -190,7 +199,6 @@
 				8C85A7A21F891F6D00D185D0 /* UIDViewController.swift */,
 				8C85A7AA1F892AE400D185D0 /* UIDViewController+TableView.swift */,
 				8C85A7AC1F892C8A00D185D0 /* UIDViewController+PickerView.swift */,
-				8C85A7A41F891F7500D185D0 /* DFUViewController.swift */,
 				8C85A7A61F891F7D00D185D0 /* RegistrationViewController.swift */,
 				8C85A7AE1F89315400D185D0 /* RegistrationViewController+TableView.swift */,
 			);

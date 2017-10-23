@@ -393,18 +393,6 @@
                                     <action selector="stepperValueChanged:" destination="BLI-oh-xsR" eventType="valueChanged" id="4ge-cc-pva"/>
                                 </connections>
                             </stepper>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No updates available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xym-bb-VzQ">
-                                <rect key="frame" x="87" y="409" width="200" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m5z-8S-D4j">
-                                <rect key="frame" x="102" y="479" width="169" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Check for updates"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="YGu-ky-zwc"/>
@@ -432,6 +420,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="BLI-oh-xsR" kind="relationship" relationship="viewControllers" id="HTW-p4-2sM"/>
+                        <segue destination="0bG-EY-maO" kind="relationship" relationship="viewControllers" id="NoR-cc-ME3"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xfl-JX-44C" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -593,4 +582,7 @@
         <image name="grid-world" width="32" height="32"/>
         <image name="refresh" width="64" height="64"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Qov-kk-pzZ"/>
+    </inferredMetricsTieBreakers>
 </document>

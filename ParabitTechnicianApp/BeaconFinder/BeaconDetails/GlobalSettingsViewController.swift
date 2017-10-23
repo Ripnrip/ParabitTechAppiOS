@@ -24,10 +24,11 @@ class GlobalSettingsViewController: UIViewController {
     var advInterval:UInt16 = 1000
     var advIntervalHex = "03E8"
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveTapped))
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveTapped))
 
         guard let currentTabController = self.tabBarController as? BeaconTabBarController else { return }
         guard let beacon  = currentTabController.currentBeacon else { return }

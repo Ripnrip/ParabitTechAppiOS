@@ -86,6 +86,8 @@ class BeaconFinderViewController: UIViewController {
                 self.tableView.reloadData()
         }
     }
+    
+
 
     
 }

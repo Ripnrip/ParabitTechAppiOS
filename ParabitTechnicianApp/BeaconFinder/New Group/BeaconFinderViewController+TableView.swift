@@ -33,13 +33,17 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
             //connect
             //centralManager.connect(currentBeacon.sensorTag!, options: nil)
             SwiftSpinner.show(duration: 3.0, title: "Connecting", animated: true)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
                 let sensor = self.availableDoors[indexPath.row].sensorTag
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "BeaconTabBarController") as! BeaconTabBarController
                 //TODO: Change tab bar controller's beacon to peripheral struct controller.currentBeacon = availableDoors[indexPath.row]
                 controller.currentBeacon = self.currentBeacon
                 controller.eddystoneService = self.eddystoneService
+                controller.centralManager = self.centralManager
+                controller.selectedPeripheral = self.sensorTag
+                controller.selectedPeripheralIsSecure = true 
+                
 
                 self.navigationController?.pushViewController(controller, animated: true)
             })

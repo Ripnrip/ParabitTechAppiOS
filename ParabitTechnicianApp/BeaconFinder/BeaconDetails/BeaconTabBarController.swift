@@ -13,11 +13,15 @@ class BeaconTabBarController: UITabBarController {
     
     var currentBeacon:Peripheral?
     var eddystoneService: CBService?
+    
+    var centralManager              : CBCentralManager?
+    var selectedPeripheral          : CBPeripheral?
+    var selectedPeripheralIsSecure  : Bool?
+    
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
 
     }
 

@@ -38,11 +38,13 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
         
+        
         guard let myTabBarController = self.tabBarController as? BeaconTabBarController else { return }
         self.dfuPeripheral = myTabBarController.selectedPeripheral
         self.centralManager = myTabBarController.centralManager
         self.secureDFU = myTabBarController.selectedPeripheralIsSecure
         
+
         peripheralNameLabel.text = "Flashing \((dfuPeripheral?.name)!)..."
         dfuActivityIndicator.startAnimating()
         dfuUploadProgressView.progress = 0.0
@@ -62,6 +64,8 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
             centralManager!.delegate = self
             centralManager!.connect(dfuPeripheral!)
         }
+        
+
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -74,14 +78,6 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //test networking call valid -> 01-10-17 --
-        ParabitNetworking.sharedInstance.getFirmwareInfoFor(revision: "someDate") { (success) in
-            if success{
-                print("got the revision firmware")
-            }else{
-                print("error getting firmware info for revison")
-            }
-        }
     }
     
     //MARK: - View Actions

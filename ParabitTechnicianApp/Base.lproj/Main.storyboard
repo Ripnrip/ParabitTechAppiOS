@@ -143,7 +143,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="EC:A9:AB:10:DE:68" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grB-ue-msi">
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="EC:A9:AB:10:DE:68" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grB-ue-msi">
                                                     <rect key="frame" x="215" y="11" width="145" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -359,7 +359,12 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2a9-un-INE">
                                 <rect key="frame" x="102" y="354" width="169" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Check for updates"/>
+                                <state key="normal" title="Check for updates">
+                                    <color key="titleColor" red="0.96206325290000005" green="0.4814415574" blue="0.12690275910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="checkForUpdates:" destination="BLI-oh-xsR" eventType="touchUpInside" id="Pme-lp-S13"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No updates available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="leA-st-xij">
                                 <rect key="frame" x="87" y="284" width="200" height="32"/>
@@ -460,7 +465,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="YGu-ky-zwc"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="grid-world" id="BDf-4z-GIF"/>
+                    <navigationItem key="navigationItem" id="K0a-Nb-kJ4"/>
                     <connections>
                         <outlet property="advLabel" destination="wuK-dW-V0K" id="sYr-XM-qAN"/>
                         <outlet property="advSlider" destination="lk0-To-kVo" id="Hxn-Jx-RIG"/>
@@ -468,12 +473,14 @@
                         <outlet property="generalView" destination="ZZc-w0-WLS" id="7rV-8u-ZUt"/>
                         <outlet property="txPowerLabel" destination="er1-bB-aVo" id="1bB-rX-4QH"/>
                         <outlet property="txPowerSlider" destination="Mhc-Xf-apB" id="aKy-Rx-ldD"/>
+                        <outlet property="updatesButton" destination="2a9-un-INE" id="9Eu-Fn-3jt"/>
+                        <outlet property="updatesLabel" destination="leA-st-xij" id="bGc-6U-XCu"/>
                         <segue destination="0bG-EY-maO" kind="show" identifier="showDFU" id="Qov-kk-pzZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8QF-EI-ygJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4277.6000000000004" y="-201.04947526236884"/>
+            <point key="canvasLocation" x="4943" y="-202"/>
         </scene>
         <!--Beacon Tab Bar Controller-->
         <scene sceneID="6dz-hb-Fdn">
@@ -483,9 +490,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.96206325290000005" green="0.4814415574" blue="0.12690275910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BLI-oh-xsR" kind="relationship" relationship="viewControllers" id="HTW-p4-2sM"/>
+                        <segue destination="J1m-Ha-Stc" kind="relationship" relationship="viewControllers" id="HTW-p4-2sM"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xfl-JX-44C" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -513,7 +521,7 @@
         <!--DFU-->
         <scene sceneID="mVf-uf-FtA">
             <objects>
-                <viewController id="0bG-EY-maO" customClass="DFUViewController" customModule="ParabitTechnicianApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="dfuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0bG-EY-maO" customClass="DFUViewController" customModule="ParabitTechnicianApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jcq-tW-fHZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -579,7 +587,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jNs-0B-ifY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5281" y="-201"/>
+            <point key="canvasLocation" x="5620" y="-201.04947526236884"/>
         </scene>
         <!--REGISTRATION-->
         <scene sceneID="gn8-VR-kOG">
@@ -680,7 +688,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5UQ-13-4Rb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6493.6000000000004" y="-201.04947526236884"/>
+            <point key="canvasLocation" x="6832.8000000000002" y="-201.04947526236884"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Cke-bx-TVu">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="J1m-Ha-Stc" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="grid-world" id="BDf-4z-GIF"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="W8B-8V-ZNs">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BLI-oh-xsR" kind="relationship" relationship="rootViewController" id="Zb8-Rq-F0v"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nHS-Ao-aKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4276.8000000000002" y="-201.49925037481262"/>
         </scene>
     </scenes>
     <resources>
@@ -688,4 +715,5 @@
         <image name="refresh" width="64" height="64"/>
         <image name="" width="25" height="14"/>
     </resources>
+    <color key="tintColor" red="0.96206325290000005" green="0.4814415574" blue="0.12690275910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

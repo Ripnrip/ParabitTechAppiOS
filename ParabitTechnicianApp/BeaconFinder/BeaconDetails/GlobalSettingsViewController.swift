@@ -21,6 +21,10 @@ class GlobalSettingsViewController: UIViewController {
     
     @IBOutlet weak var generalView: UIView!
     
+    @IBOutlet weak var updatesButton: UIButton!
+    @IBOutlet weak var updatesLabel: UILabel!
+    var isUpdateAvailable = false
+    
     var currentBeacon:Peripheral?
     
     var txPower:Int8 = 0
@@ -67,6 +71,8 @@ class GlobalSettingsViewController: UIViewController {
         currentBeacon?.sensorTag?.writeValue(txData!, for: (currentBeacon?.radioTxPowerCharacteristic!)!, type: CBCharacteristicWriteType.withResponse)
         
     }
+
+    
     
     @IBAction func sliderValueChanged(_ sender: Any) {
         guard let slider = sender as? UISlider else { return }
@@ -156,7 +162,40 @@ class GlobalSettingsViewController: UIViewController {
         
     }
     
+    
+    @IBAction func checkForUpdates(_ sender: Any) {
+        
+        if isUpdateAvailable == false {
+            //test networking call valid -> 01-10-17 --
+            ParabitNetworking.sharedInstance.getFirmwareInfoFor(revision: "01-10-17") { (success) in
+                if success{
+                    print("got the revision firmware")
+                    self.isUpdateAvailable = true
+                    self.updatesLabel.text = "1 update found"
+                    self.updatesButton.setTitle("Update firmware", for: .normal)
+                }else{
+                    print("error getting firmware info for revison")
+                }
+            }
+        } else {
+            //go to update screen
+            //self.performSegue(withIdentifier: "showDFU", sender: nil)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let dfuViewController = storyboard.instantiateViewController(withIdentifier :"dfuViewController") as? DFUViewController, let myTabBarController = self.tabBarController as? BeaconTabBarController, let centralManager = myTabBarController.centralManager, let selectedPeripheral = myTabBarController.selectedPeripheral else { return }
+            
+            dfuViewController.setCentralManager(centralManager)
+            dfuViewController.secureDFUMode(myTabBarController.selectedPeripheralIsSecure)
+            dfuViewController.setTargetPeripheral(selectedPeripheral)
+            
+            //self.present(dfuViewController, animated: true)
+            self.navigationController?.pushViewController(dfuViewController, animated: true)
+            
 
+        }
+        
+    }
+    
     
 
 }

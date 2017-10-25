@@ -11,11 +11,16 @@ import CoreBluetooth
 
 
 class GlobalSettingsViewController: UIViewController {
+    @IBOutlet weak var generalFirmwareSegmentControl: UISegmentedControl!
+    
     @IBOutlet weak var advLabel: UILabel!
     @IBOutlet weak var advSlider: UISlider!
+    @IBOutlet weak var txPowerSlider: UISlider!
     
     @IBOutlet weak var txPowerLabel: UILabel!
-
+    
+    @IBOutlet weak var generalView: UIView!
+    
     var currentBeacon:Peripheral?
     
     var txPower:Int8 = 0
@@ -97,10 +102,11 @@ class GlobalSettingsViewController: UIViewController {
         
     }
     
-    @IBAction func stepperValueChanged(_ sender: Any) {
-        guard let stepper = sender as? UIStepper else { return }
+    @IBAction func txSliderChanged(_ sender: Any) {
+        guard let slider = sender as? UISlider else { return }
+        let currentValue =   Int(slider.value)
         
-        switch stepper.value {
+        switch currentValue{//slider.value {
         case 0:
             txPower = -40
             txPowerHex = "d8"
@@ -133,8 +139,24 @@ class GlobalSettingsViewController: UIViewController {
             txPowerHex = "d8"
         }
         txPowerLabel.text = "\(txPower) dBm"
-
+        
     }
+    
+    @IBAction func toggleSwitched(_ sender: Any) {
+        guard let toggle = sender as? UISegmentedControl else { return }
+        
+        switch toggle.selectedSegmentIndex {
+        case 0:
+            generalView.isHidden = false
+        case 1:
+            generalView.isHidden = true
+        default:
+            return
+        }
+        
+    }
+    
+
     
 
 }

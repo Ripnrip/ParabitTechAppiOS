@@ -32,12 +32,36 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             SwiftSpinner.show(duration: 4, title: "Scanning")
         case .unknown:
             print("Bluetooth is unknown")
+            BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar)
+                .message(message: "Bluetooth status is unknown")
+                .messageColor(color: .white)
+                .bgColor(color: .red)
+                .completion { print("")}
+                .show()
         case .resetting:
             print("Bluetooth is resetting; a state update is pending.")
+            BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar)
+                .message(message: "Bluetooth is resetting; a state update is pending.")
+                .messageColor(color: .white)
+                .bgColor(color: .red)
+                .completion { print("")}
+                .show()
         case .unsupported:
             print("Bluetooth is unsupported")
+            BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar)
+                .message(message: "Bluetooth is unsupported")
+                .messageColor(color: .white)
+                .bgColor(color: .red)
+                .completion { print("")}
+                .show()
         case .unauthorized:
             print("Bluetooth is unauthorized")
+            BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar)
+                .message(message: "Bluetooth is unauthorized")
+                .messageColor(color: .white)
+                .bgColor(color: .red)
+                .completion { print("")}
+                .show()
         case .poweredOff:
             print("Bluetooth is powered off")
             BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar)
@@ -64,6 +88,9 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 keepScanning = false
                 pauseScan()
                 
+                //read rssi
+                peripheral.readRSSI()
+                
                 //determine if beacon is connectablee
                 guard let isConnectable = advertisementData["kCBAdvDataIsConnectable"] as? Bool else {return}
                 print("the Parabeacon's configuration state is \(isConnectable)")
@@ -74,21 +101,37 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 sensorTag.delegate = self
                 
                 //add peripheral to available doors tableview
-                    currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: true, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, firmwareRevisionString: nil, advertisingValue: nil)
+                currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: true, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, firmwareRevisionString: nil, advertisingValue: nil, rssiValue: RSSI)
+                    
                 guard let door = currentBeacon else {return}
-                availableDoors.append(door)
-                tableView.reloadData()
+                    if availableDoors.contains(where: { $0.name == peripheralName }) {
+                        // found
+                        tableView.reloadData()
+                    } else {
+                        // not
+                        availableDoors.append(door)
+                        tableView.reloadData()
+                    }
                 
                 centralManager.connect(sensorTag, options: nil)
 
 
                 }else{
                 //add peripheral to available doors tableview, but don't add the sensor, and set nil for sensortag, and false for isConnectable
-                    currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: false, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, firmwareRevisionString: nil, advertisingValue: nil)
+                    currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: false, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, firmwareRevisionString: nil, advertisingValue: nil, rssiValue: RSSI)
                 guard let door = currentBeacon else {return}
-                availableDoors.append(door)
-                tableView.reloadData()
-                SwiftSpinner.hide()
+                
+                if availableDoors.contains(where: { $0.name == peripheralName }) {
+                    // found
+                    tableView.reloadData()
+                    SwiftSpinner.hide()
+                } else {
+                    // not
+                    availableDoors.append(door)
+                    tableView.reloadData()
+                    SwiftSpinner.hide()
+                }
+
                     
                 }
             }
@@ -157,6 +200,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         }
 
         characteristics.forEach { (characteristic) in
+            
             switch characteristic.uuid.uuidString {
             case advertisingInterval:
                 currentBeacon?.advertisingIntervalCharacteristic = characteristic
@@ -485,6 +529,16 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         }
     }
 
+    // Mark: - Read RSSI Value
+    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
+        if error != nil {
+            
+        } else {
+            currentBeacon?.rssiValue = RSSI
+            tableView.reloadData()
+            
+        }
+    }
     
     // MARK: - Did disconnect to a peripheral
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {

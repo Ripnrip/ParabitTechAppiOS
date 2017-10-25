@@ -29,7 +29,7 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let currentBeacon = self.availableDoors[indexPath.row]
-        if currentBeacon.isConnectable == true {
+        if currentBeacon.isConnectable == true && currentBeacon.name == peripheralName && beaconInvestigation?.discoveredAdvAndTXCharacteristic == true {
             //connect
             //centralManager.connect(currentBeacon.sensorTag!, options: nil)
             SwiftSpinner.show(duration: 3.0, title: "Connecting", animated: true)
@@ -63,7 +63,9 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "beaconCell") as? ParaBeaconTableViewCell else {return UITableViewCell()}
         let currentBeacon = availableDoors[indexPath.row]
         
-        if currentBeacon.isConnectable == true {
+        cell.beaconNameLabel.text = currentBeacon.name
+
+        if currentBeacon.isConnectable == true  {
             cell.configurableStatusLabel.isHidden = false
             cell.statusBubbleImageView.backgroundColor = UIColor.green
         }
@@ -75,6 +77,10 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         
         cell.statusBubbleImageView.layer.cornerRadius = cell.statusBubbleImageView.frame.height/2
         cell.statusBubbleImageView.clipsToBounds = true
+        
+        guard let rssiValue = currentBeacon.rssiValue else {return UITableViewCell()}
+        cell.rssiLabel.text = "RSSI: \(rssiValue)"
+        
         return cell
     }
     

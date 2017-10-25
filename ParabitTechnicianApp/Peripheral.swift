@@ -23,4 +23,6 @@ struct Peripheral {
     var firmwareRevisionString: String?
     
     var advertisingValue:UInt16?
+    
+    var rssiValue:NSNumber?
 }

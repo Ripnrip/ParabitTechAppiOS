@@ -60,6 +60,9 @@ class BeaconInvestigation: GATTOperations {
     var callback: ((_ beaconBroadcastCapabilities: NSDictionary,
     _ slotData: Dictionary <NSNumber, Dictionary <String, NSData>>) -> Void)?
 
+
+  var discoveredAdvAndTXCharacteristic = false
+    
   enum InvestigationState {
     case BeaconUnlocked
     case DiscoveredCapabilities
@@ -376,6 +379,7 @@ class BeaconInvestigation: GATTOperations {
                          length: MemoryLayout<UInt16>.size)
       slotData[scannedSlot]![slotDataAdvIntervalKey] = bytes
       print("didReadAdvertisingInterval with value \(littleEndianAdvInterval) ")
+      discoveredAdvAndTXCharacteristic = true
       return littleEndianAdvInterval
         
     }else{

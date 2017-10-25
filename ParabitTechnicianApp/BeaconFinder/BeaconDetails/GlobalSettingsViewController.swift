@@ -18,6 +18,7 @@ class GlobalSettingsViewController: UIViewController {
     @IBOutlet weak var txPowerSlider: UISlider!
     
     @IBOutlet weak var txPowerLabel: UILabel!
+    @IBOutlet weak var rssiLabel: UILabel!
     
     @IBOutlet weak var generalView: UIView!
     
@@ -45,6 +46,8 @@ class GlobalSettingsViewController: UIViewController {
         guard let txPowerValue = beacon.radioTxPowerCharacteristic else { return }
         guard let advSlotDataValue = beacon.advSlotDataCharacteristic else { return }
         guard let advertisingCharacteristic = beacon.advertisingIntervalCharacteristic else { return }
+        guard let rssiValue = currentBeacon?.rssiValue else { return }
+        rssiLabel.text = "\(rssiValue) db"
         
         let investigation = BeaconInvestigation(peripheral: (currentBeacon?.sensorTag!)!)
         txPower = investigation.didReadTxPower()

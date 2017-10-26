@@ -64,7 +64,7 @@ class BeaconFinderViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.separatorColor = UIColor.clear
-        self.title = "Parabit Beacon Config"
+        self.title = "Parabit Beacon Configuration"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.orange

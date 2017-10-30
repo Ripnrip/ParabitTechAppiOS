@@ -220,6 +220,12 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
         // Forget the controller when DFU is done
         if state == .completed {
             dfuController = nil
+            
+            //notify listeners
+            let nc = NotificationCenter.default
+            nc.post(name:Notification.Name(rawValue:" "),
+                    object: nil,
+                    userInfo: ["message":"Hello there!", "date":Date()])
         }
     }
     

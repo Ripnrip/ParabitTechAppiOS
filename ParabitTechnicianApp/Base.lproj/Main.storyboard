@@ -429,6 +429,7 @@
                                 </constraints>
                                 <segments>
                                     <segment title="General"/>
+                                    <segment title="Configuration"/>
                                     <segment title="Firmware"/>
                                 </segments>
                                 <color key="tintColor" red="0.9620632529258728" green="0.48144155740737915" blue="0.12690275907516479" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

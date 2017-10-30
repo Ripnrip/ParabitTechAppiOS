@@ -18,6 +18,7 @@
 		8C5E0C8D1F86CDEC00F09225 /* ParaBeaconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5E0C8C1F86CDEC00F09225 /* ParaBeaconTableViewCell.swift */; };
 		8C6A013E1F9F7B4A00040604 /* hrm_legacy_dfu_with_sd_s132_2_0_0.zip in Resources */ = {isa = PBXBuildFile; fileRef = 8C6A013C1F9F7B4A00040604 /* hrm_legacy_dfu_with_sd_s132_2_0_0.zip */; };
 		8C6A01401FA22E3200040604 /* pb_secure_dfu_package.zip in Resources */ = {isa = PBXBuildFile; fileRef = 8C6A013F1FA22E3100040604 /* pb_secure_dfu_package.zip */; };
+		8C6BF9EA1FA7C7EE009A4ED5 /* Firmware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BF9E91FA7C7EE009A4ED5 /* Firmware.swift */; };
 		8C85A79B1F88FB7C00D185D0 /* Parabeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A79A1F88FB7C00D185D0 /* Parabeacon.swift */; };
 		8C85A79F1F890B0000D185D0 /* BeaconTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A79E1F890B0000D185D0 /* BeaconTabBarController.swift */; };
 		8C85A7A11F891F3300D185D0 /* GlobalSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7A01F891F3300D185D0 /* GlobalSettingsViewController.swift */; };
@@ -61,6 +62,7 @@
 		8C5E0C8C1F86CDEC00F09225 /* ParaBeaconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParaBeaconTableViewCell.swift; sourceTree = "<group>"; };
 		8C6A013C1F9F7B4A00040604 /* hrm_legacy_dfu_with_sd_s132_2_0_0.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = hrm_legacy_dfu_with_sd_s132_2_0_0.zip; sourceTree = "<group>"; };
 		8C6A013F1FA22E3100040604 /* pb_secure_dfu_package.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = pb_secure_dfu_package.zip; sourceTree = "<group>"; };
+		8C6BF9E91FA7C7EE009A4ED5 /* Firmware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firmware.swift; sourceTree = "<group>"; };
 		8C85A79A1F88FB7C00D185D0 /* Parabeacon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parabeacon.swift; sourceTree = "<group>"; };
 		8C85A79E1F890B0000D185D0 /* BeaconTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconTabBarController.swift; sourceTree = "<group>"; };
 		8C85A7A01F891F3300D185D0 /* GlobalSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSettingsViewController.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				8CE5DD871F9115D500B6A2DA /* BeaconItem.swift */,
 				8C85A79A1F88FB7C00D185D0 /* Parabeacon.swift */,
 				8CB4D7991F8D394200B26563 /* Peripheral.swift */,
+				8C6BF9E91FA7C7EE009A4ED5 /* Firmware.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				8CE5DD841F91149100B6A2DA /* BeaconInvestigation.swift in Sources */,
 				8CB4D79C1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift in Sources */,
 				8C5E0C881F86CB6200F09225 /* BeaconFinderViewController.swift in Sources */,
+				8C6BF9EA1FA7C7EE009A4ED5 /* Firmware.swift in Sources */,
 				8CE5DD8E1F9116A800B6A2DA /* EIDConfiguration.swift in Sources */,
 				8C5E0C851F86C9C000F09225 /* LoginViewController.swift in Sources */,
 				8CE5DD8A1F91162300B6A2DA /* BeaconFramesSupported.swift in Sources */,

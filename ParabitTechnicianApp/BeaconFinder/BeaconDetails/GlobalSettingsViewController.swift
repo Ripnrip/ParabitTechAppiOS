@@ -59,7 +59,29 @@ class GlobalSettingsViewController: UIViewController {
         
         print("the readPower data is \(investigation.didReadTxPower())")
         print("the readAdvertising data is \(investigation.didReadAdvertisingInterval())")
+        
+        let nc = NotificationCenter.default // Note that default is now a property, not a method call
+        nc.addObserver(forName:Notification.Name(rawValue:"finishedDFU"),
+                       object:nil, queue:nil,
+                       using:catchNotification)
 
+    }
+    
+
+    func catchNotification(notification:Notification) -> Void {
+        print("Catch notification")
+        
+        guard let userInfo = notification.userInfo,
+            let message  = userInfo["message"] as? String,
+            let date     = userInfo["date"]    as? Date else {
+                print("No userInfo found in notification")
+                return
+        }
+        
+        updatesButton.isHidden = true
+        updatesLabel.text = "Firmware is up-to-date"
+        
+        
     }
     
     

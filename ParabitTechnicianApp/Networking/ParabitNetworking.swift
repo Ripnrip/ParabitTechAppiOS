@@ -71,6 +71,12 @@ class ParabitNetworking: NSObject {
             let currentFirmware = Firmware(createdAt: (current["createdAt"] as! Int), id: current["id"] as! String, revision: current["revision"] as! String, updatedAt: current["updatedAt"] as! Int, unlockcode: current["unlock_code"] as! String)
             let latestFirmware = Firmware(createdAt: (latest["createdAt"] as! Int), id: latest["id"] as! String, revision: latest["revision"] as! String, updatedAt: latest["updatedAt"] as! Int, unlockcode: latest["unlock_code"] as! String)
             let firmware = FirmwareInfo(currentFirmware: currentFirmware, latestFirmware: latestFirmware, latestURL: URL(string: latestURL)!)
+            
+            if currentFirmware.revision == latestFirmware.revision {
+                //firmware is up-to-date
+                completionHandler(nil)
+                return
+            }
 
             
             completionHandler(firmware)

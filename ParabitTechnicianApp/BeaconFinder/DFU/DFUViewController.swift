@@ -194,8 +194,6 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
             }
         }
         if secureDFU != nil {
-            //selectedFileURL  = getBundledFirmwareURLHelper()
-            //set passed fileURL here
             selectedFirmware = DFUFirmware(urlToZipFile: selectedFileURL!)
             startDFUProcess()
         } else {
@@ -230,7 +228,7 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
             
             //notify listeners
             let nc = NotificationCenter.default
-            nc.post(name:Notification.Name(rawValue:" "),
+            nc.post(name:Notification.Name(rawValue:"finishedDFU"),
                     object: nil,
                     userInfo: ["message":"Hello there!", "date":Date()])
         }

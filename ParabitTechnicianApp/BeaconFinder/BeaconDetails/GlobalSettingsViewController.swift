@@ -221,7 +221,8 @@ class GlobalSettingsViewController: UIViewController {
         
         if isUpdateAvailable == false {
             //test networking call valid -> 01-10-17 --
-            ParabitNetworking.sharedInstance.getFirmwareInfoFor(revision: "01-10-17") { (firmware) in
+            guard let revisionString = currentBeacon?.firmwareRevisionString else { return }
+            ParabitNetworking.sharedInstance.getFirmwareInfoFor(revision: revisionString) { (firmware) in
                 if firmware != nil {
                     print("got the revision firmware")
                     self.currentFirmwareObject = firmware
@@ -272,7 +273,11 @@ class GlobalSettingsViewController: UIViewController {
                     }
                     
                 }else{
-                    print("error getting firmware info for revison")
+                    print("error getting firmware info for revison, or the firmware is up-to-date")
+                    
+                    DispatchQueue.main.async {
+                        self.updatesLabel.text = "Firmware is up-to-date"
+                    }
                 }
             }
         } else {

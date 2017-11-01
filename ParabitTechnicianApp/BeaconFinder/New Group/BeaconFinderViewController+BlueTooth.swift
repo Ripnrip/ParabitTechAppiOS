@@ -226,12 +226,37 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         
         if isBeaconUnlocked {
 
-                print("the updated values for characteristic is \(characteristic.uuid) with value \(characteristic.value) ")
+               // print("the updated values for characteristic is \(characteristic.uuid) with value \(characteristic.value) ")
             
                 //2A26 is firmware revision string .uuidString
             if characteristic.uuid.uuidString == "2A26" {
                 guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
                 currentBeacon?.firmwareRevisionString = datastring as String
+                
+            }
+            if String(describing: characteristic.uuid) == "Manufacturer Name String" {
+                guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
+                print("found the manufacturer string with value \(value) and data \(datastring)")
+                
+            }
+            if String(describing: characteristic.uuid) == "Model Number String" {
+                guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
+                
+                print("found the Model Number String  with value \(value) and data \(datastring)")
+                
+            }
+            if String(describing: characteristic.uuid) == "Serial Number String" {
+                guard let value = characteristic.value  else { return }
+                guard let datastring = NSString(data: value, encoding: String.Encoding.ascii) else {
+                    print("error converting serial number to data string")
+                    return
+                }
+                print("found the Serial Number String with value \(value) and data \(datastring)")
+                
+            }
+            if String(describing: characteristic.uuid) == "Hardware Revision String" {
+                guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
+                print("found the Hardware Revision String with value \(value) and data \(datastring)")
                 
             }
             
@@ -253,11 +278,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                     beaconInvestigation?.didReadRemainConnectableState()
                     guard let slotData = beaconInvestigation?.slotData else { break }
                     print("the beacon slot data values are \(slotData)")
-                    
-                    // lets try writing here
-//                    let dataString = "012C"
-//                    let data = dataString.hexadecimal()
-//                    peripheral.writeValue(data!, for: (currentBeacon?.advertisingIntervalCharacteristic!)!, type: CBCharacteristicWriteType.withResponse)
+
                 default:
                     return
                 }

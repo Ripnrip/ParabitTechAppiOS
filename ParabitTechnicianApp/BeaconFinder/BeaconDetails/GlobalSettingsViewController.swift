@@ -41,7 +41,16 @@ class GlobalSettingsViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    
+        setup()
+        
+        let nc = NotificationCenter.default // Note that default is now a property, not a method call
+        nc.addObserver(forName:Notification.Name(rawValue:"finishedDFU"),
+                       object:nil, queue:nil,
+                       using:catchNotification)
+    }
+    
+    func setup(){
         guard let currentTabController = self.tabBarController as? BeaconTabBarController else { return }
         guard let beacon  = currentTabController.currentBeacon else { return }
         currentBeacon = beacon
@@ -93,12 +102,6 @@ class GlobalSettingsViewController: UIViewController {
         
         print("the readPower data is \(investigation.didReadTxPower())")
         print("the readAdvertising data is \(investigation.didReadAdvertisingInterval())")
-        
-        let nc = NotificationCenter.default // Note that default is now a property, not a method call
-        nc.addObserver(forName:Notification.Name(rawValue:"finishedDFU"),
-                       object:nil, queue:nil,
-                       using:catchNotification)
-
     }
     
 

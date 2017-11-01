@@ -17,6 +17,9 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
     static var secureDfuServiceUUID  = CBUUID(string: "FE59")
     static var deviceInfoServiceUUID = CBUUID(string: "180A")
     
+    //MARK: - DFU File URL
+    
+    
     //MARK: - Class Properties
     fileprivate var dfuPeripheral    : CBPeripheral?
     fileprivate var dfuController    : DFUServiceController?
@@ -56,7 +59,6 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        selectedFileURL  = getBundledFirmwareURLHelper()
         if selectedFileURL != nil {
             selectedFirmware = DFUFirmware(urlToZipFile: selectedFileURL!)
             startDFUProcess()
@@ -119,6 +121,10 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
     
     func setTargetPeripheral(_ targetPeripheral: CBPeripheral) {
         self.dfuPeripheral = targetPeripheral
+    }
+    
+    func setSelectedFileURL (_ url:URL) {
+        self.selectedFileURL = url
     }
     
     func getBundledFirmwareURLHelper() -> URL? {
@@ -188,7 +194,8 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
             }
         }
         if secureDFU != nil {
-            selectedFileURL  = getBundledFirmwareURLHelper()
+            //selectedFileURL  = getBundledFirmwareURLHelper()
+            //set passed fileURL here
             selectedFirmware = DFUFirmware(urlToZipFile: selectedFileURL!)
             startDFUProcess()
         } else {

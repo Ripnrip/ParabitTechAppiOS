@@ -12,7 +12,7 @@ import CoreBluetooth
 struct Peripheral {
     let name: String
     let UUID: String
-    let isConnectable:Bool
+    var isConnectable:Bool
     var sensorTag:CBPeripheral?
     var isUnlocked:Bool?
     var deviceInformationCharacteristic: CBCharacteristic?

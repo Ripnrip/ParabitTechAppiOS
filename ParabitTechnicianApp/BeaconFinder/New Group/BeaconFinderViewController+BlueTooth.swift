@@ -549,7 +549,16 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         }
         sensorTag = nil
         availableDoors = availableDoors.filter {$0.sensorTag != sensorTag}
+        currentBeacon?.sensorTag = nil
+        currentBeacon?.isConnectable = false
         tableView.reloadData()
+        
+        BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar)
+            .message(message: "Disconnected from device")
+            .messageColor(color: .white)
+            .bgColor(color: .red)
+            .completion { print("")}
+            .show()
     }
     
     // MARK: - Bluetooth scanning

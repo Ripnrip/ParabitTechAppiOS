@@ -8,14 +8,16 @@
 
 import Foundation
 
-
-enum FirmwareType{
-    case current, new
-}
-struct Firmware {
+struct Firmware:Codable {
     let createdAt: Int
     let id: String
     let revision: String
-    let updatedAt: Date
+    let updatedAt: Int
     let unlockcode: String
+}
+
+struct FirmwareInfo {
+    let currentFirmware : Firmware
+    let latestFirmware : Firmware
+    let latestURL : URL
 }

@@ -27,6 +27,8 @@ class GlobalSettingsViewController: UIViewController {
     var isUpdateAvailable = false
     
     var currentBeacon:Peripheral?
+    var currentFirmwareObject: FirmwareInfo?
+    var firmwareZipURL : URL?
     
     var txPower:Int8 = 0
     var txPowerHex = "003"
@@ -52,6 +54,38 @@ class GlobalSettingsViewController: UIViewController {
         let investigation = BeaconInvestigation(peripheral: (currentBeacon?.sensorTag!)!)
         txPower = investigation.didReadTxPower()
         txPowerLabel.text = "\(txPower) dBM"
+        switch txPower{
+        case -40:
+            txPowerHex = "d8"
+            txPowerSlider.value = 0
+        case -20:
+            txPowerSlider.value = 1
+            txPowerHex = "eC"
+        case -16:
+            txPowerSlider.value = 2
+            txPowerHex = "f0"
+        case -12:
+            txPowerSlider.value = 3
+            txPowerHex = "f4"
+        case -8:
+            txPowerSlider.value = 4
+            txPowerHex = "f8"
+        case -4:
+            txPowerSlider.value = 5
+            txPowerHex = "fc"
+        case 0:
+            txPowerSlider.value = 6
+            txPowerHex = "00"
+        case 3:
+            txPowerSlider.value = 7
+            txPowerHex = "03"
+        case 4:
+            txPowerSlider.value = 8
+            txPowerHex = "04"
+        default:
+            txPower = 3
+            txPowerHex = "d8"
+        }
         
         advInterval = beacon.advertisingValue ?? 0
         advLabel.text = "\(advInterval)"
@@ -77,16 +111,12 @@ class GlobalSettingsViewController: UIViewController {
                 print("No userInfo found in notification")
                 return
         }
-        
         updatesButton.isHidden = true
         updatesLabel.text = "Firmware is up-to-date"
-        
-        
     }
     
     
     func saveTapped () {
-        
         //Advertising Interval Save
         let adData = advIntervalHex.hexadecimal()
         currentBeacon?.sensorTag?.writeValue(adData!, for: (currentBeacon?.advertisingIntervalCharacteristic!)!, type: CBCharacteristicWriteType.withResponse)
@@ -94,7 +124,6 @@ class GlobalSettingsViewController: UIViewController {
         //TXPower Save
         let txData = txPowerHex.hexadecimal()
         currentBeacon?.sensorTag?.writeValue(txData!, for: (currentBeacon?.radioTxPowerCharacteristic!)!, type: CBCharacteristicWriteType.withResponse)
-        
     }
 
     
@@ -192,12 +221,56 @@ class GlobalSettingsViewController: UIViewController {
         
         if isUpdateAvailable == false {
             //test networking call valid -> 01-10-17 --
-            ParabitNetworking.sharedInstance.getFirmwareInfoFor(revision: "01-10-17") { (success) in
-                if success{
+            ParabitNetworking.sharedInstance.getFirmwareInfoFor(revision: "01-10-17") { (firmware) in
+                if firmware != nil {
                     print("got the revision firmware")
-                    self.isUpdateAvailable = true
-                    self.updatesLabel.text = "1 update found"
-                    self.updatesButton.setTitle("Update firmware", for: .normal)
+                    self.currentFirmwareObject = firmware
+ 
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        //download currentFirmware.latestURL and use the zip for the next vc
+                        guard let downloadURL = self.currentFirmwareObject?.latestURL else { return }
+                        // create your document folder url
+                        let documentsUrl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+                        // your destination file url
+                        let destination = documentsUrl.appendingPathComponent(downloadURL.lastPathComponent)
+                        print(destination)
+                        // check if it exists before downloading it
+                        if FileManager().fileExists(atPath: destination.path) {
+                            //file exists, set the firmware file URL to that path
+                            print("The file already exists at path")
+                            DispatchQueue.main.async {
+                                self.firmwareZipURL = destination
+                                self.updatesLabel.text = "1 update found"
+                                self.updatesButton.setTitle("Update firmware", for: .normal)
+                                self.isUpdateAvailable = true
+                            }
+                            
+                        } else {
+                            //  if the file doesn't exist
+                            //  just download the data from your url
+                            URLSession.shared.downloadTask(with: downloadURL, completionHandler: { (location, response, error) in
+                                // after downloading your data you need to save it to your destination url
+                                guard
+                                    let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                                    let location = location, error == nil
+                                    else { return }
+                                do {
+                                    try FileManager.default.moveItem(at: location, to: destination)
+                                    print("file saved")
+                                    DispatchQueue.main.async {
+                                        self.updatesLabel.text = "1 update found"
+                                        self.updatesButton.setTitle("Update firmware", for: .normal)
+                                        self.isUpdateAvailable = true
+                                        self.firmwareZipURL = destination
+                                    }
+                                    
+                                } catch {
+                                    print(error)
+                                }
+                            }).resume()
+                        }
+                    }
+                    
                 }else{
                     print("error getting firmware info for revison")
                 }
@@ -212,16 +285,14 @@ class GlobalSettingsViewController: UIViewController {
             dfuViewController.setCentralManager(centralManager)
             dfuViewController.secureDFUMode(myTabBarController.selectedPeripheralIsSecure)
             dfuViewController.setTargetPeripheral(selectedPeripheral)
+            guard let zipURL = self.firmwareZipURL else { return }
+            dfuViewController.setSelectedFileURL(zipURL)
             
             //self.present(dfuViewController, animated: true)
             self.navigationController?.pushViewController(dfuViewController, animated: true)
             
-
         }
-        
     }
-    
-    
 
 }
 

@@ -46,7 +46,7 @@ class ParabitNetworking: NSObject {
     }
     
     //MARK: GET a firmware check
-    func getFirmwareInfoFor(revision:String, completionHandler:@escaping (Bool) -> ()){
+    func getFirmwareInfoFor(revision:String, completionHandler:@escaping (FirmwareInfo?) -> ()){
         guard let url = URL(string: "\(baseURL)firmware/info") else { return }
         print("the url for the GET firmware info is \(url)")
         
@@ -54,14 +54,26 @@ class ParabitNetworking: NSObject {
             
             if dataResponse.error != nil || dataResponse.response?.statusCode != 200 {
                 print("there was an error getting the firmware info for revision \(dataResponse.error)")
-                completionHandler(false)
+                completionHandler(nil)
                 return
             }
             guard let request = dataResponse.request, let response = dataResponse.response, let value = dataResponse.value else {return}
             print("the request is ",request)
             print("the response is ",response)
             print("the value is ",value)
-            completionHandler(true)
+            
+            guard let json = value as? [String:Any],
+            let current = json["current"] as? [String:Any],
+            let latest = json["latest"] as? [String:Any],
+            let latestURL = json["latestURL"] as? String else { return }
+            print("the current is \(current) and the latest is \(latest) with url \(latestURL)")
+            
+            let currentFirmware = Firmware(createdAt: (current["createdAt"] as! Int), id: current["id"] as! String, revision: current["revision"] as! String, updatedAt: current["updatedAt"] as! Int, unlockcode: current["unlock_code"] as! String)
+            let latestFirmware = Firmware(createdAt: (latest["createdAt"] as! Int), id: latest["id"] as! String, revision: latest["revision"] as! String, updatedAt: latest["updatedAt"] as! Int, unlockcode: latest["unlock_code"] as! String)
+            let firmware = FirmwareInfo(currentFirmware: currentFirmware, latestFirmware: latestFirmware, latestURL: URL(string: latestURL)!)
+
+            
+            completionHandler(firmware)
         }
         
         

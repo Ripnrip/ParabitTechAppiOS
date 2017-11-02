@@ -101,7 +101,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 sensorTag.delegate = self
                 
                 //add peripheral to available doors tableview
-                currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: true, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, firmwareRevisionString: nil, advertisingValue: nil, rssiValue: RSSI)
+                    currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: true, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, deviceName: nil, serialNumber: nil, modelNumber: nil, firmwareRevision: nil, hardware: nil, advertisingValue: nil, rssiValue: RSSI)
                     
                 guard let door = currentBeacon else {return}
                     if availableDoors.contains(where: { $0.name == peripheralName }) {
@@ -118,7 +118,8 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
 
                 }else{
                 //add peripheral to available doors tableview, but don't add the sensor, and set nil for sensortag, and false for isConnectable
-                    currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: false, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, firmwareRevisionString: nil, advertisingValue: nil, rssiValue: RSSI)
+                    currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: false, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, deviceName: nil, serialNumber: nil, modelNumber: nil, firmwareRevision: nil, hardware: nil, advertisingValue: nil, rssiValue: RSSI)
+
                 guard let door = currentBeacon else {return}
                 
                 if availableDoors.contains(where: { $0.name == peripheralName }) {
@@ -229,35 +230,36 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                // print("the updated values for characteristic is \(characteristic.uuid) with value \(characteristic.value) ")
             
                 //2A26 is firmware revision string .uuidString
-            if characteristic.uuid.uuidString == "2A26" {
+            if String(describing: characteristic.uuid) == "Firmware Revision String" {
                 guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
-                currentBeacon?.firmwareRevisionString = datastring as String
+                currentBeacon?.firmwareRevision = datastring as String
                 
             }
             if String(describing: characteristic.uuid) == "Manufacturer Name String" {
                 guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
                 print("found the manufacturer string with value \(value) and data \(datastring)")
+                currentBeacon?.deviceName = datastring as String
                 
             }
             if String(describing: characteristic.uuid) == "Model Number String" {
                 guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
                 
                 print("found the Model Number String  with value \(value) and data \(datastring)")
-                
+                currentBeacon?.modelNumber = datastring as String
             }
             if String(describing: characteristic.uuid) == "Serial Number String" {
                 guard let value = characteristic.value  else { return }
-                guard let datastring = NSString(data: value, encoding: String.Encoding.ascii) else {
+                guard let datastring = NSString(data: value, encoding: String.Encoding.utf16.rawValue) else {
                     print("error converting serial number to data string")
                     return
                 }
                 print("found the Serial Number String with value \(value) and data \(datastring)")
-                
+                currentBeacon?.serialNumber = datastring as String
             }
             if String(describing: characteristic.uuid) == "Hardware Revision String" {
                 guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
                 print("found the Hardware Revision String with value \(value) and data \(datastring)")
-                
+                currentBeacon?.hardware = datastring as String
             }
             
                 switch characteristic.uuid {

@@ -20,7 +20,11 @@ struct Peripheral {
     var radioTxPowerCharacteristic: CBCharacteristic?
     var advSlotDataCharacteristic: CBCharacteristic?
 
-    var firmwareRevisionString: String?
+    var deviceName: String?
+    var serialNumber: String?
+    var modelNumber: String?
+    var firmwareRevision: String?
+    var hardware: String?
     
     var advertisingValue:UInt16?
     

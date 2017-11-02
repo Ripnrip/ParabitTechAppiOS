@@ -9,7 +9,6 @@
 import UIKit
 import CoreBluetooth
 
-
 class GlobalSettingsViewController: UIViewController {
     @IBOutlet weak var generalFirmwareSegmentControl: UISegmentedControl!
     
@@ -21,9 +20,20 @@ class GlobalSettingsViewController: UIViewController {
     @IBOutlet weak var rssiLabel: UILabel!
     
     @IBOutlet weak var generalView: UIView!
+    @IBOutlet weak var configurationView: UIView!
+    @IBOutlet weak var updatesView: UIView!
     
     @IBOutlet weak var updatesButton: UIButton!
     @IBOutlet weak var updatesLabel: UILabel!
+    
+    //General Values
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var serialNumberLabel: UILabel!
+    @IBOutlet weak var modelNumberLabel: UILabel!
+    @IBOutlet weak var firwmareLabel: UILabel!
+    @IBOutlet weak var hardwareLabel: UILabel!
+    
+    
     var isUpdateAvailable = false
     
     var currentBeacon:Peripheral?
@@ -54,9 +64,12 @@ class GlobalSettingsViewController: UIViewController {
         guard let currentTabController = self.tabBarController as? BeaconTabBarController else { return }
         guard let beacon  = currentTabController.currentBeacon else { return }
         currentBeacon = beacon
-        guard let txPowerValue = beacon.radioTxPowerCharacteristic else { return }
-        guard let advSlotDataValue = beacon.advSlotDataCharacteristic else { return }
-        guard let advertisingCharacteristic = beacon.advertisingIntervalCharacteristic else { return }
+        nameLabel.text = beacon.deviceName
+        serialNumberLabel.text = beacon.serialNumber
+        modelNumberLabel.text = beacon.modelNumber
+        firwmareLabel.text = beacon.firmwareRevision
+        hardwareLabel.text = beacon.hardware
+
         guard let rssiValue = currentBeacon?.rssiValue else { return }
         rssiLabel.text = "\(rssiValue) db"
         
@@ -127,6 +140,10 @@ class GlobalSettingsViewController: UIViewController {
         //TXPower Save
         let txData = txPowerHex.hexadecimal()
         currentBeacon?.sensorTag?.writeValue(txData!, for: (currentBeacon?.radioTxPowerCharacteristic!)!, type: CBCharacteristicWriteType.withResponse)
+        
+        let alert = UIAlertController(title: "Success", message: "Saved new value(s)", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 
     
@@ -211,8 +228,18 @@ class GlobalSettingsViewController: UIViewController {
         switch toggle.selectedSegmentIndex {
         case 0:
             generalView.isHidden = false
+            updatesView.isHidden = true
+            configurationView.isHidden = true
+
         case 1:
+            configurationView.isHidden = false
+            updatesView.isHidden = true
             generalView.isHidden = true
+
+        case 2:
+            generalView.isHidden = true
+            configurationView.isHidden = true
+            updatesView.isHidden = false
         default:
             return
         }
@@ -224,7 +251,7 @@ class GlobalSettingsViewController: UIViewController {
         
         if isUpdateAvailable == false {
             //test networking call valid -> 01-10-17 --
-            guard let revisionString = currentBeacon?.firmwareRevisionString else { return }
+            guard let revisionString = currentBeacon?.firmwareRevision else { return }
             ParabitNetworking.sharedInstance.getFirmwareInfoFor(revision: revisionString) { (firmware) in
                 if firmware != nil {
                     print("got the revision firmware")

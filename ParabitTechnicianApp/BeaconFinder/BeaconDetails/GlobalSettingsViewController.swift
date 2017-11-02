@@ -133,17 +133,40 @@ class GlobalSettingsViewController: UIViewController {
     
     
     func saveTapped () {
-        //Advertising Interval Save
-        let adData = advIntervalHex.hexadecimal()
-        currentBeacon?.sensorTag?.writeValue(adData!, for: (currentBeacon?.advertisingIntervalCharacteristic!)!, type: CBCharacteristicWriteType.withResponse)
         
-        //TXPower Save
-        let txData = txPowerHex.hexadecimal()
-        currentBeacon?.sensorTag?.writeValue(txData!, for: (currentBeacon?.radioTxPowerCharacteristic!)!, type: CBCharacteristicWriteType.withResponse)
+        let alertController = UIAlertController(title: "Save Changes", message: "Are you sure you would like to save these new values?", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
         
-        let alert = UIAlertController(title: "Success", message: "Saved new value(s)", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        let DestructiveAction = UIAlertAction(title: "No", style: UIAlertActionStyle.destructive) {
+            (result : UIAlertAction) -> Void in
+            print("No")
+        }
+        
+        // Replace UIAlertActionStyle.Default by UIAlertActionStyle.default
+        
+        let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
+            (result : UIAlertAction) -> Void in
+            print("OK")
+            //Advertising Interval Save
+            let adData = self.advIntervalHex.hexadecimal()
+            self.currentBeacon?.sensorTag?.writeValue(adData!, for: (self.currentBeacon?.advertisingIntervalCharacteristic!)!, type: CBCharacteristicWriteType.withResponse)
+            
+            //TXPower Save
+            let txData = self.txPowerHex.hexadecimal()
+            self.currentBeacon?.sensorTag?.writeValue(txData!, for: (self.currentBeacon?.radioTxPowerCharacteristic!)!, type: CBCharacteristicWriteType.withResponse)
+            
+            let alert = UIAlertController(title: "Success", message: "Saved new value(s)", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        alertController.addAction(DestructiveAction)
+
+        self.present(alertController, animated: true, completion: nil)
+        
+
+        
+
     }
 
     

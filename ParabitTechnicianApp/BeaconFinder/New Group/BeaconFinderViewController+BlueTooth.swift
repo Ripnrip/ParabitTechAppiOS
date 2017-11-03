@@ -249,12 +249,13 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             }
             if String(describing: characteristic.uuid) == "Serial Number String" {
                 guard let value = characteristic.value  else { return }
-                guard let datastring = NSString(data: value, encoding: String.Encoding.utf16.rawValue) else {
-                    print("error converting serial number to data string")
-                    return
-                }
-                print("found the Serial Number String with value \(value) and data \(datastring)")
-                currentBeacon?.serialNumber = datastring as String
+                guard let string = String(data: value, encoding: .utf8) else {print("not a valid UTF-8 sequence");return}
+                print("found the Serial Number String with value \(value) and data \(string)")
+
+                    print(string)
+
+                currentBeacon?.serialNumber = string
+                
             }
             if String(describing: characteristic.uuid) == "Hardware Revision String" {
                 guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }

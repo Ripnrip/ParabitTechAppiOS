@@ -6,7 +6,7 @@ target 'ParabitTechnicianApp' do
   use_frameworks!
 
    pod 'SwiftSpinner'
-   pod "BPStatusBarAlert"
+   pod 'BPStatusBarAlert'
    pod 'Alamofire', '~> 4.0'
    pod 'SwiftyJSON'
    pod 'iOSDFULibrary'

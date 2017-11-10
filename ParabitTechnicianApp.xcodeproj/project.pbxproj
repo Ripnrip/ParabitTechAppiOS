@@ -41,6 +41,16 @@
 		8CE5DD8C1F91163A00B6A2DA /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5DD8B1F91163A00B6A2DA /* CustomViews.swift */; };
 		8CE5DD8E1F9116A800B6A2DA /* EIDConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5DD8D1F9116A800B6A2DA /* EIDConfiguration.swift */; };
 		8CE5DD901F9116DB00B6A2DA /* ConfigureBeaconSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5DD8F1F9116DA00B6A2DA /* ConfigureBeaconSlotData.swift */; };
+		8CF3A4EA1FB39198009A4ACE /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 8CF3A4E91FB39198009A4ACE /* awsconfiguration.json */; };
+		8CF3A4EC1FB3969F009A4ACE /* '.json in Resources */ = {isa = PBXBuildFile; fileRef = 8CF3A4EB1FB3969F009A4ACE /* '.json */; };
+		8CF3A4EF1FB3B375009A4ACE /* AWSConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3A4EE1FB3B374009A4ACE /* AWSConstants.swift */; };
+		8CF3A4F11FB3B399009A4ACE /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3A4F01FB3B399009A4ACE /* SignUpViewController.swift */; };
+		8CF3A4F31FB3B405009A4ACE /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3A4F21FB3B405009A4ACE /* SignInViewController.swift */; };
+		8CF3A4F91FB3B49F009A4ACE /* UserDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3A4F41FB3B49F009A4ACE /* UserDetailTableViewController.swift */; };
+		8CF3A4FA1FB3B49F009A4ACE /* DevicesDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3A4F51FB3B49F009A4ACE /* DevicesDetailTableViewController.swift */; };
+		8CF3A4FB1FB3B49F009A4ACE /* ConfirmSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3A4F61FB3B49F009A4ACE /* ConfirmSignUpViewController.swift */; };
+		8CF3A4FC1FB3B49F009A4ACE /* ConfirmForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3A4F71FB3B49F009A4ACE /* ConfirmForgotPasswordViewController.swift */; };
+		8CF3A4FD1FB3B49F009A4ACE /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3A4F81FB3B49F009A4ACE /* ForgotPasswordViewController.swift */; };
 		8CFB012F1F98EC070044FB89 /* ParabitNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFB012E1F98EC070044FB89 /* ParabitNetworking.swift */; };
 		D58E3C424C30575BEC3671C5 /* Pods_ParabitTechnicianApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DF9117B55B3B48863A8BA6 /* Pods_ParabitTechnicianApp.framework */; };
 /* End PBXBuildFile section */
@@ -84,6 +94,16 @@
 		8CE5DD8B1F91163A00B6A2DA /* CustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
 		8CE5DD8D1F9116A800B6A2DA /* EIDConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EIDConfiguration.swift; sourceTree = "<group>"; };
 		8CE5DD8F1F9116DA00B6A2DA /* ConfigureBeaconSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigureBeaconSlotData.swift; sourceTree = "<group>"; };
+		8CF3A4E91FB39198009A4ACE /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		8CF3A4EB1FB3969F009A4ACE /* '.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "'.json"; sourceTree = "<group>"; };
+		8CF3A4EE1FB3B374009A4ACE /* AWSConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSConstants.swift; sourceTree = "<group>"; };
+		8CF3A4F01FB3B399009A4ACE /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		8CF3A4F21FB3B405009A4ACE /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		8CF3A4F41FB3B49F009A4ACE /* UserDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailTableViewController.swift; sourceTree = "<group>"; };
+		8CF3A4F51FB3B49F009A4ACE /* DevicesDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicesDetailTableViewController.swift; sourceTree = "<group>"; };
+		8CF3A4F61FB3B49F009A4ACE /* ConfirmSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmSignUpViewController.swift; sourceTree = "<group>"; };
+		8CF3A4F71FB3B49F009A4ACE /* ConfirmForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		8CF3A4F81FB3B49F009A4ACE /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		8CFB012E1F98EC070044FB89 /* ParabitNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParabitNetworking.swift; sourceTree = "<group>"; };
 		9C9D1D3944089DBCB06FBCEE /* Pods-ParabitTechnicianApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParabitTechnicianApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParabitTechnicianApp/Pods-ParabitTechnicianApp.release.xcconfig"; sourceTree = "<group>"; };
 		E3DF9117B55B3B48863A8BA6 /* Pods_ParabitTechnicianApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParabitTechnicianApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +162,8 @@
 				8C5E0C761F86681D00F09225 /* Assets.xcassets */,
 				8C5E0C781F86681D00F09225 /* LaunchScreen.storyboard */,
 				8C5E0C7B1F86681D00F09225 /* Info.plist */,
+				8CF3A4EB1FB3969F009A4ACE /* '.json */,
+				8CF3A4E91FB39198009A4ACE /* awsconfiguration.json */,
 				8CB4D7A21F8D533300B26563 /* BridgingHeader.h */,
 			);
 			path = ParabitTechnicianApp;
@@ -151,6 +173,13 @@
 			isa = PBXGroup;
 			children = (
 				8C5E0C841F86C9C000F09225 /* LoginViewController.swift */,
+				8CF3A4F21FB3B405009A4ACE /* SignInViewController.swift */,
+				8CF3A4F01FB3B399009A4ACE /* SignUpViewController.swift */,
+				8CF3A4F71FB3B49F009A4ACE /* ConfirmForgotPasswordViewController.swift */,
+				8CF3A4F61FB3B49F009A4ACE /* ConfirmSignUpViewController.swift */,
+				8CF3A4F51FB3B49F009A4ACE /* DevicesDetailTableViewController.swift */,
+				8CF3A4F81FB3B49F009A4ACE /* ForgotPasswordViewController.swift */,
+				8CF3A4F41FB3B49F009A4ACE /* UserDetailTableViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -237,9 +266,18 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		8CF3A4ED1FB3B363009A4ACE /* AWS */ = {
+			isa = PBXGroup;
+			children = (
+				8CF3A4EE1FB3B374009A4ACE /* AWSConstants.swift */,
+			);
+			path = AWS;
+			sourceTree = "<group>";
+		};
 		8CFB012D1F98EBE20044FB89 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				8CF3A4ED1FB3B363009A4ACE /* AWS */,
 				8CFB012E1F98EC070044FB89 /* ParabitNetworking.swift */,
 			);
 			path = Networking;
@@ -316,6 +354,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CF3A4EC1FB3969F009A4ACE /* '.json in Resources */,
+				8CF3A4EA1FB39198009A4ACE /* awsconfiguration.json in Resources */,
 				8C5E0C7A1F86681D00F09225 /* LaunchScreen.storyboard in Resources */,
 				8C5E0C771F86681D00F09225 /* Assets.xcassets in Resources */,
 				8C5E0C751F86681D00F09225 /* Main.storyboard in Resources */,
@@ -332,6 +372,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ParabitTechnicianApp/Pods-ParabitTechnicianApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AWSAuthCore/AWSAuthCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSAuthUI/AWSAuthUI.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCognito/AWSCognito.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSDynamoDB/AWSDynamoDB.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSLambda/AWSLambda.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BPStatusBarAlert/BPStatusBarAlert.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSpinner/SwiftSpinner.framework",
@@ -341,6 +389,14 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthUI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognito.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProvider.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSDynamoDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSLambda.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSUserPoolsSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BPStatusBarAlert.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSpinner.framework",
@@ -409,6 +465,8 @@
 				8CE5DD901F9116DB00B6A2DA /* ConfigureBeaconSlotData.swift in Sources */,
 				8CB4D79F1F8D4F8000B26563 /* Constants.swift in Sources */,
 				8CE5DD861F9114E400B6A2DA /* Eddystone.swift in Sources */,
+				8CF3A4FC1FB3B49F009A4ACE /* ConfirmForgotPasswordViewController.swift in Sources */,
+				8CF3A4FB1FB3B49F009A4ACE /* ConfirmSignUpViewController.swift in Sources */,
 				8CE5DD841F91149100B6A2DA /* BeaconInvestigation.swift in Sources */,
 				8CB4D79C1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift in Sources */,
 				8C5E0C881F86CB6200F09225 /* BeaconFinderViewController.swift in Sources */,
@@ -420,7 +478,9 @@
 				8C5E0C8D1F86CDEC00F09225 /* ParaBeaconTableViewCell.swift in Sources */,
 				8C85A79B1F88FB7C00D185D0 /* Parabeacon.swift in Sources */,
 				8C85A7A31F891F6D00D185D0 /* UIDViewController.swift in Sources */,
+				8CF3A4FD1FB3B49F009A4ACE /* ForgotPasswordViewController.swift in Sources */,
 				8CB4D7A11F8D51FC00B26563 /* StringUtils.swift in Sources */,
+				8CF3A4F91FB3B49F009A4ACE /* UserDetailTableViewController.swift in Sources */,
 				8CE5DD881F9115D600B6A2DA /* BeaconItem.swift in Sources */,
 				8C85A7A71F891F7D00D185D0 /* RegistrationViewController.swift in Sources */,
 				8C85A7AD1F892C8A00D185D0 /* UIDViewController+PickerView.swift in Sources */,
@@ -428,16 +488,20 @@
 				8C85A7A11F891F3300D185D0 /* GlobalSettingsViewController.swift in Sources */,
 				8C5E0C701F86681D00F09225 /* AppDelegate.swift in Sources */,
 				8C85A7A51F891F7500D185D0 /* DFUViewController.swift in Sources */,
+				8CF3A4F11FB3B399009A4ACE /* SignUpViewController.swift in Sources */,
 				8CB4D79A1F8D394200B26563 /* Peripheral.swift in Sources */,
+				8CF3A4EF1FB3B375009A4ACE /* AWSConstants.swift in Sources */,
 				8CE5DD821F91141B00B6A2DA /* BeaconScanner.swift in Sources */,
 				8C85A7AF1F89315400D185D0 /* RegistrationViewController+TableView.swift in Sources */,
 				8CE5DD7C1F9036E900B6A2DA /* BeaconHelper.swift in Sources */,
+				8CF3A4F31FB3B405009A4ACE /* SignInViewController.swift in Sources */,
 				8C85A79F1F890B0000D185D0 /* BeaconTabBarController.swift in Sources */,
 				8CE5DD8C1F91163A00B6A2DA /* CustomViews.swift in Sources */,
 				8CE5DD7E1F91009500B6A2DA /* BeaconTabBarController+BlueTooth.swift in Sources */,
 				8CFB012F1F98EC070044FB89 /* ParabitNetworking.swift in Sources */,
 				8CE5DD801F9112DC00B6A2DA /* GATTOperations.swift in Sources */,
 				8C85A7AB1F892AE400D185D0 /* UIDViewController+TableView.swift in Sources */,
+				8CF3A4FA1FB3B49F009A4ACE /* DevicesDetailTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,13 @@ target 'ParabitTechnicianApp' do
    pod 'Alamofire', '~> 4.0'
    pod 'SwiftyJSON'
    pod 'iOSDFULibrary'
+   pod 'AWSCognito'
+   pod 'AWSCognitoIdentityProvider'
+   pod 'AWSDynamoDB'
+   pod 'AWSLambda'
+   pod 'AWSAuthCore', '~> 2.6.5'
+   pod 'AWSUserPoolsSignIn', '~> 2.6.5'
+   pod 'AWSAuthUI', '~> 2.6.5'
 
   # Pods for ParabitTechnicianApp
 

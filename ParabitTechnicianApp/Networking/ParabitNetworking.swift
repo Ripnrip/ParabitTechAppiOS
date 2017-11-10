@@ -77,12 +77,8 @@ class ParabitNetworking: NSObject {
                 completionHandler(nil)
                 return
             }
-
-            
             completionHandler(firmware)
         }
-        
-        
     }
     
     

@@ -642,7 +642,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3BYY78T4C5;
 				INFOPLIST_FILE = ParabitTechnicianApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Parabit.ParabitTechnicianApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -660,7 +660,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3BYY78T4C5;
 				INFOPLIST_FILE = ParabitTechnicianApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Parabit.ParabitTechnicianApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

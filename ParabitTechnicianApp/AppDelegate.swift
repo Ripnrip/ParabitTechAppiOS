@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.storyboard = UIStoryboard(name: "Main", bundle: nil)
         pool.delegate = self
         
-        //self.startPasswordAuthentication()
+        self.startPasswordAuthentication()
         
         return true
         

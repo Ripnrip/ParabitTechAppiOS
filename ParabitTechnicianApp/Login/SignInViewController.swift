@@ -49,7 +49,8 @@ class SignInViewController: UIViewController {
             DispatchQueue.main.async(execute: {
                 self.response = task.result
                 self.title = self.user?.username
-            
+                self.username.text = self.pool?.currentUser()!.username
+
             })
             return nil
         }

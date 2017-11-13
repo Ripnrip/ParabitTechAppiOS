@@ -49,7 +49,7 @@ class SignInViewController: UIViewController {
             DispatchQueue.main.async(execute: {
                 self.response = task.result
                 self.title = self.user?.username
-            
+                self.username.text = self.user?.username
             })
             return nil
         }
@@ -59,6 +59,7 @@ class SignInViewController: UIViewController {
         if (self.username.text?.count != 0 && self.password.text?.count != 0) || false {
             let authDetails = AWSCognitoIdentityPasswordAuthenticationDetails(username: self.username.text!, password: self.password.text! )
             self.passwordAuthenticationCompletion?.set(result: authDetails)
+            print("did set auth details.")
         } else {
             let alertController = UIAlertController(title: "Missing information",
                                                     message: "Please enter a valid user name and password",
@@ -68,6 +69,8 @@ class SignInViewController: UIViewController {
             self.present(alertController, animated: true, completion: nil)
         }
     }
+    
+    
 }
 
 extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {

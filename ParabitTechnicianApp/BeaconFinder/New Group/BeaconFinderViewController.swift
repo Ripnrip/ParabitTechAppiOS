@@ -58,6 +58,7 @@ class BeaconFinderViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         UIApplication.shared.statusBarStyle = .lightContent
+
     }
     
     override func viewDidLoad() {
@@ -84,6 +85,7 @@ class BeaconFinderViewController: UIViewController {
                 self.availableDoors = []
                 self.centralManager.scanForPeripherals(withServices: nil, options: nil)
                 self.tableView.reloadData()
+            
         }
     }
     

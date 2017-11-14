@@ -82,7 +82,12 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             print("NEXT PERIPHERAL NAME: \(peripheralName)")
             print("NEXT PERIPHERAL UUID: \(peripheral.identifier.uuidString)")
             print("NEXT PERIPHERAL STATE: \(peripheral.state.rawValue)")
-            if peripheralName == peripheralName {
+            
+            if peripheral.state.rawValue == 2 {
+                central.cancelPeripheralConnection(peripheral)
+            }
+            
+            if peripheralName == peripheralName && peripheral.state.rawValue != 2 {
                 print("SENSOR TAG FOUND! ADDING NOW!!!")
                 // to save power, stop scanning for other devices
                 keepScanning = false
@@ -167,7 +172,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         if error != nil {
             print("there was an error discovering the services after connecting \(String(describing: error))")
         }
-        guard let services = peripheral.services else {return}
+        guard let services = peripheral.services else { return }
         //print("The discovered services are \(services))")
         
         services.forEach { (service) in
@@ -478,6 +483,22 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                                       type: CBCharacteristicWriteType.withResponse)
             }
         }
+    }
+    
+    func unlockBeaconWithCharacteristic(characteristic:CBCharacteristic) {
+        print("the value of the characteristic is \(characteristic)")
+        guard let unlockChallenge = characteristic.value else {return}
+        ParabitNetworking.sharedInstance.getUnlockToken(currentFirmwareRevision:"String", unlockChallenge:"String", completionHandler: { (success) in
+            
+            })
+        //let token = ParabitNetworking.getf(
+        didAttemptUnlocking = true
+        if let unlockToken = token {
+            sensorTag.writeValue(unlockToken as Data,
+                                 for: characteristic,
+                                 type: CBCharacteristicWriteType.withResponse)
+        }
+        
     }
     
     func AESEncrypt(data: NSData, key: String?) -> NSData? {

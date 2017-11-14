@@ -54,22 +54,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.storyboard = UIStoryboard(name: "Main", bundle: nil)
         pool.delegate = self
         
+        pool.currentUser()?.signOut()
+        
         guard let isUserSignedIn = pool.currentUser()?.isSignedIn else { return true }
         if !isUserSignedIn {
             _ = self.startPasswordAuthentication()
         }
-        //pool.currentUser()?.getDetails()
-        //pool.currentUser()?.getAttributeVerificationCode("custom:beacon-api-key")
-        let user = pool.getUser((pool.currentUser()?.username)!)
-        print("the user is \(user)")
         
-        pool.currentUser()?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
-            DispatchQueue.main.async(execute: {
-                self.response = task.result
-
-            })
-            return nil
-        }
+//        pool.currentUser()?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
+//            DispatchQueue.main.async(execute: {
+//                self.response = task.result
+//
+//            })
+//            return nil
+//        }
         
         return true
         

@@ -77,8 +77,15 @@ class ParabitNetworking: NSObject {
                 completionHandler(nil)
                 return
             }
-            completionHandler(firmware)
         }
+    }
+    
+    func getUnlockToken(currentFirmwareRevision:String, unlockChallenge:String, completionHandler:@escaping (Bool) -> ()) {
+        guard let url = URL(string: "\(baseURL)firmware/unlock") else { return }
+        print("the url for the POST firmware unlcok is \(url)")
+        
+        
+        
     }
     
     

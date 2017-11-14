@@ -78,8 +78,10 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
     public func getDetails(_ authenticationInput: AWSCognitoIdentityPasswordAuthenticationInput, passwordAuthenticationCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>) {
         self.passwordAuthenticationCompletion = passwordAuthenticationCompletionSource
         DispatchQueue.main.async {
-            if (self.usernameText == nil) {
+            if (self.usernameText == nil && self.username != nil) {
                 self.usernameText = authenticationInput.lastKnownUsername
+                self.username.text = self.user?.username
+
             }
         }
     }

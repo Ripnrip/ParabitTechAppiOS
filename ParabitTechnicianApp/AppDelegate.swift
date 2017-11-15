@@ -55,22 +55,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         pool.delegate = self
         
         //pool.currentUser()?.signOut()
+        ParabitNetworking.sharedInstance
         
         guard let isUserSignedIn = pool.currentUser()?.isSignedIn else { return true }
         if !isUserSignedIn {
             _ = self.startPasswordAuthentication()
         }
-        
-//        pool.currentUser()?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
-//            DispatchQueue.main.async(execute: {
-//                self.response = task.result
-//
-//            })
-//            return nil
-//        }
-        
+    
         return true
-        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -119,34 +111,9 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
                                                          animated: true,
                                                          completion: nil)
             }
-            
         }
         return self.signInViewController!
     }
-    
-//    func startMultiFactorAuthentication() -> AWSCognitoIdentityMultiFactorAuthentication {
-//        if (self.mfaViewController == nil) {
-//            self.mfaViewController = MFAViewController()
-//            self.mfaViewController?.modalPresentationStyle = .popover
-//        }
-//        DispatchQueue.main.async {
-//            if (!self.mfaViewController!.isViewLoaded
-//                || self.mfaViewController!.view.window == nil) {
-//                //display mfa as popover on current view controller
-//                let viewController = self.window?.rootViewController!
-//                viewController?.present(self.mfaViewController!,
-//                                        animated: true,
-//                                        completion: nil)
-//
-//                // configure popover vc
-//                let presentationController = self.mfaViewController!.popoverPresentationController
-//                presentationController?.permittedArrowDirections = UIPopoverArrowDirection.left
-//                presentationController?.sourceView = viewController!.view
-//                presentationController?.sourceRect = viewController!.view.bounds
-//            }
-//        }
-//        return AWSCognitoIdentityMultiFactorAuthentication()
-//    }
     
     func startRememberDevice() -> AWSCognitoIdentityRememberDevice {
         return self

@@ -108,7 +108,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 //add peripheral to available doors tableview
                     currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: true, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, deviceName: nil, serialNumber: nil, modelNumber: nil, firmwareRevision: nil, hardware: nil, advertisingValue: nil, rssiValue: RSSI)
                     
-                guard let door = currentBeacon else {return}
+                    guard let door = currentBeacon else {return}
                     if availableDoors.contains(where: { $0.name == peripheralName }) {
                         // found
                         tableView.reloadData()
@@ -117,9 +117,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                         availableDoors.append(door)
                         tableView.reloadData()
                     }
-                
                 centralManager.connect(sensorTag, options: nil)
-
 
                 }else{
                 //add peripheral to available doors tableview, but don't add the sensor, and set nil for sensortag, and false for isConnectable
@@ -137,11 +135,9 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                     tableView.reloadData()
                     SwiftSpinner.hide()
                 }
-
-                    
-                }
-            }
-        }
+              }
+          }
+      }
     }
     
     //MARK: Did connect to peripheral
@@ -229,6 +225,15 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             print("there was an error discovering the characteristics \(characteristic) from \(sensorTag)")
         }
 
+//        switch String(describing: characteristic.uuid) {
+//        case "Firmware Revision String":
+//            guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
+//            print("found the Firmware Revision String  with value \(value) and data \(datastring)")
+//            currentBeacon?.firmwareRevision = datastring as String
+//        default:
+//            break
+//        }
+        
         if isBeaconUnlocked {
                // print("the updated values for characteristic is \(characteristic.uuid) with value \(characteristic.value) ")
             
@@ -238,6 +243,11 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
                 print("found the Firmware Revision String  with value \(value) and data \(datastring)")
                 currentBeacon?.firmwareRevision = datastring as String
+                
+                let token = ParabitNetworking.sharedInstance.getUnlockToken(currentFirmwareRevision: (currentBeacon?.firmwareRevision)!, unlockChallenge:"string", completionHandler: { (success) in
+                    
+                })
+                
             case "Manufacturer Name String":
                 guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
                 print("found the manufacturer string with value \(value) and data \(datastring)")
@@ -458,17 +468,17 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         // #1 get revision info first
         
         // #2 get unlock token for over-the-air unlock
-        let token = ParabitNetworking.sharedInstance.getUnlockToken(currentFirmwareRevision: revision, unlockChallenge:"string", completionHandler: { (success) in
-            
-        })
+//        let token = ParabitNetworking.sharedInstance.getUnlockToken(currentFirmwareRevision: revision, unlockChallenge:"string", completionHandler: { (success) in
+//
+//        })
         let unlockToken = "".data(using: .utf8)!
         
         didAttemptUnlocking = true
-        //if let unlockToken = token {
+        
         sensorTag.writeValue(unlockToken as Data,
                              for: characteristic,
                              type: CBCharacteristicWriteType.withResponse)
-        //}
+ 
     }
     
 //    func unlockBeacon3() {

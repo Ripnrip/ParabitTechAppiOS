@@ -70,7 +70,6 @@ class SignInViewController: UIViewController {
         }
     }
     
-    
 }
 
 extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {

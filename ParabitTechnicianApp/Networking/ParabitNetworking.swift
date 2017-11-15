@@ -8,15 +8,33 @@
 
 import Foundation
 import Alamofire
+import AWSCognitoIdentityProvider
+
 
 class ParabitNetworking: NSObject {
     static let sharedInstance = ParabitNetworking()
     fileprivate var isInitialized: Bool
     //Used for checking whether Push Notification is enabled in Amazon Pinpoint
     static let remoteNotificationKey = "RemoteNotification"
+    
+    var response: AWSCognitoIdentityUserGetDetailsResponse?
+    var user: AWSCognitoIdentityUser?
+    var pool: AWSCognitoIdentityUserPool?
+    
+    var firmwareAPIVersion:AWSCognitoIdentityProviderAttributeType?
+    var firmwareAPIKey:AWSCognitoIdentityProviderAttributeType?
+    var firmwareAPIURL: AWSCognitoIdentityProviderAttributeType?
+    
     fileprivate override init() {
         isInitialized = false
         super.init()
+        
+        self.pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
+        if (self.user == nil) {
+            self.user = self.pool?.currentUser()
+        }
+        self.getAuthenticationKeys()
+        
     }
     
     deinit {
@@ -24,7 +42,13 @@ class ParabitNetworking: NSObject {
         print("Mobile Client deinitialized. This should not happen.")
     }
     
-    let baseURL = "https://6yomwzar14.execute-api.us-east-1.amazonaws.com/dev/"
+
+    
+    let baseURL = "https://api.parabit.com/dev-firmware/"//https://6yomwzar14.execute-api.us-east-1.amazonaws.com/dev/"
+    
+    let apiKey1 = " "
+    let apiKey2 = " "
+    
     
     //MARK: GET a list of firmware
     func getFirmware(completionHandler:@escaping (Bool) -> ()){
@@ -100,6 +124,22 @@ class ParabitNetworking: NSObject {
         }
     }
     
+    //Mark: Helper for authentication
     
+    func getAuthenticationKeys() {
+        self.user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
+            DispatchQueue.main.async(execute: {
+                self.response = task.result
+                print("the response for getting user info in the ParabitNetworkingClass is \(self.response?.userAttributes)")
+                
+                guard let userAttributes = self.response?.userAttributes else { return }
+                self.firmwareAPIVersion = userAttributes[2]
+                self.firmwareAPIKey = userAttributes[3]
+                self.firmwareAPIURL = userAttributes[4] 
+                
+            })
+            return nil
+        }
+    }
     
 }

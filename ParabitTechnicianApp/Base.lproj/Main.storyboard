@@ -918,7 +918,7 @@
                                     <action selector="signInPressed:" destination="1Ib-3E-jU2" eventType="touchUpInside" id="0P5-p7-KeR"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CognitoLogo" translatesAutoresizingMaskIntoConstraints="NO" id="D0x-5d-SzB">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="parabitLogo" translatesAutoresizingMaskIntoConstraints="NO" id="D0x-5d-SzB">
                                 <rect key="frame" x="97.5" y="20" width="180" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="Osk-85-lCQ"/>
@@ -933,7 +933,7 @@
                                 <rect key="frame" x="244" y="414" width="115" height="30"/>
                                 <state key="normal" title="Forgot Password"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cognito User Pools Sample" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45B-dF-acv">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parabit Technician App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45B-dF-acv">
                                 <rect key="frame" x="59.5" y="208" width="256" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="256" id="WTs-ka-hTq"/>
@@ -1062,8 +1062,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CognitoLogo" width="250" height="250"/>
         <image name="grid-world" width="32" height="32"/>
+        <image name="parabitLogo" width="180" height="180"/>
         <image name="refresh" width="64" height="64"/>
         <image name="" width="25" height="14"/>
     </resources>

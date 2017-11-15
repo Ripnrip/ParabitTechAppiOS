@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.storyboard = UIStoryboard(name: "Main", bundle: nil)
         pool.delegate = self
         
-        pool.currentUser()?.signOut()
+        //pool.currentUser()?.signOut()
         
         guard let isUserSignedIn = pool.currentUser()?.isSignedIn else { return true }
         if !isUserSignedIn {

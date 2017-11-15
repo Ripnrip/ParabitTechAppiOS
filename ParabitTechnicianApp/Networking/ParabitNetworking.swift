@@ -84,10 +84,21 @@ class ParabitNetworking: NSObject {
         guard let url = URL(string: "\(baseURL)firmware/unlock") else { return }
         print("the url for the POST firmware unlcok is \(url)")
         
-        
-        
+        Alamofire.request(url, method: HTTPMethod.post, parameters: ["revision":currentFirmwareRevision,"":unlockChallenge], encoding: URLEncoding.default, headers: nil).responseJSON { (dataResponse) in
+            
+            if dataResponse.error != nil || dataResponse.response?.statusCode != 200 {
+                print("there was an error getting the firmware unlock for revision \(dataResponse.error)")
+                completionHandler(false)
+                return
+            }
+            guard let request = dataResponse.request, let response = dataResponse.response, let value = dataResponse.value else {return}
+            print("the request is ",request)
+            print("the response is ",response)
+            print("the value is ",value)
+            
+            
+        }
     }
-    
     
     
     

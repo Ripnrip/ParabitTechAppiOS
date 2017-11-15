@@ -229,82 +229,72 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             print("there was an error discovering the characteristics \(characteristic) from \(sensorTag)")
         }
 
-        
         if isBeaconUnlocked {
-
                // print("the updated values for characteristic is \(characteristic.uuid) with value \(characteristic.value) ")
             
-                //2A26 is firmware revision string .uuidString
-            if String(describing: characteristic.uuid) == "Firmware Revision String" {
+            //Device information
+            switch String(describing: characteristic.uuid) {
+            case "Firmware Revision String":
                 guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
+                print("found the Firmware Revision String  with value \(value) and data \(datastring)")
                 currentBeacon?.firmwareRevision = datastring as String
-                
-            }
-            if String(describing: characteristic.uuid) == "Manufacturer Name String" {
+            case "Manufacturer Name String":
                 guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
                 print("found the manufacturer string with value \(value) and data \(datastring)")
                 currentBeacon?.deviceName = datastring as String
-                
-            }
-            if String(describing: characteristic.uuid) == "Model Number String" {
+            case "Model Number String":
                 guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
-                
                 print("found the Model Number String  with value \(value) and data \(datastring)")
                 currentBeacon?.modelNumber = datastring as String
-            }
-            if String(describing: characteristic.uuid) == "Serial Number String" {
+            case "Serial Number String":
                 guard let value = characteristic.value  else { return }
                 guard let string = String(data: value, encoding: .utf8) else {print("not a valid UTF-8 sequence");return}
                 print("found the Serial Number String with value \(value) and data \(string)")
-
-                    print(string)
-
                 currentBeacon?.serialNumber = string
-                
-            }
-            if String(describing: characteristic.uuid) == "Hardware Revision String" {
+            case "Hardware Revision String":
                 guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
                 print("found the Hardware Revision String with value \(value) and data \(datastring)")
                 currentBeacon?.hardware = datastring as String
+            default:
+                break
             }
             
-                switch characteristic.uuid {
-                case CharacteristicID.capabilities.UUID:
-                    beaconInvestigation?.didReadBroadcastCapabilities()
-                case CharacteristicID.ADVSlotData.UUID:
-                    print("Found the ADVSlotData ID \(characteristic) and properties \(characteristic.properties) and descriptors \(characteristic.descriptors)")
-                    beaconInvestigation?.didReadSlotData()
-                case CharacteristicID.radioTxPower.UUID:
-                    print("Found the radioTxPower ID \(characteristic)")
-                    beaconInvestigation?.didReadTxPower()
-                    currentBeacon?.radioTxPowerCharacteristic = characteristic
-                case CharacteristicID.advertisingInterval.UUID:
-                    print("Found the Advertising Characteristic ID \(characteristic)")
-                    currentBeacon?.advertisingValue = beaconInvestigation?.didReadAdvertisingInterval()
-                    currentBeacon?.advertisingIntervalCharacteristic = characteristic
-                case CharacteristicID.remainConnectable.UUID:
-                    beaconInvestigation?.didReadRemainConnectableState()
-                    guard let slotData = beaconInvestigation?.slotData else { break }
-                    print("the beacon slot data values are \(slotData)")
-
-                default:
-                    return
-                }
+            //Characteristics Information
+            switch characteristic.uuid {
+            case CharacteristicID.capabilities.UUID:
+                beaconInvestigation?.didReadBroadcastCapabilities()
+            case CharacteristicID.ADVSlotData.UUID:
+                print("Found the ADVSlotData ID \(characteristic) and properties \(characteristic.properties) and descriptors \(characteristic.descriptors)")
+                beaconInvestigation?.didReadSlotData()
+            case CharacteristicID.radioTxPower.UUID:
+                print("Found the radioTxPower ID \(characteristic)")
+                beaconInvestigation?.didReadTxPower()
+                currentBeacon?.radioTxPowerCharacteristic = characteristic
+            case CharacteristicID.advertisingInterval.UUID:
+                print("Found the Advertising Characteristic ID \(characteristic)")
+                currentBeacon?.advertisingValue = beaconInvestigation?.didReadAdvertisingInterval()
+                currentBeacon?.advertisingIntervalCharacteristic = characteristic
+            case CharacteristicID.remainConnectable.UUID:
+                beaconInvestigation?.didReadRemainConnectableState()
+                guard let slotData = beaconInvestigation?.slotData else { break }
+                print("the beacon slot data values are \(slotData)")
+            default:
+                return
+            }
             
             }else{
-                switch characteristic.uuid {
-                case CharacteristicID.lockState.UUID:
-                    print("****PARSE LOCK STATE VALUE****")
-                    parseLockStateValue()
-                case CharacteristicID.unlock.UUID:
-                    print("****UNLOCK BEACON****")
-                    unlockBeacon()
-                default:
-                    return
-                }
+            
+            switch characteristic.uuid {
+            case CharacteristicID.lockState.UUID:
+                print("****PARSE LOCK STATE VALUE****")
+                parseLockStateValue()
+            case CharacteristicID.unlock.UUID:
+                print("****UNLOCK BEACON****")
+                unlockBeacon()
+            default:
+                return
             }
-
-
+        }
     }
     
     // MARK: - Did write value for a characteristic
@@ -314,48 +304,37 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 print("there was an error while writing to the characteristis \(characteristic)")
             }
         
-            if characteristic.uuid == CharacteristicID.advertisingInterval.UUID {
-                sensorTag.readValue(for: characteristic)
-            }
-        
-            if characteristic.uuid == CharacteristicID.radioTxPower.UUID {
-                sensorTag.readValue(for: characteristic)
-                
-            }
-        
-            //sensorTag.readValue(for: advertisingIntervalCharacteristic!)
-            if characteristic.uuid == CharacteristicID.unlock.UUID {
-                //Wrote to the unlock characteristic, the other values should be ready
-                SwiftSpinner.hide()
-                isBeaconUnlocked = true
-                
-                
-                guard let advSlotChar = currentBeacon?.advSlotDataCharacteristic else { return }
-                sensorTag.readValue(for: advSlotChar)
-
-                //let deviceInfoChar = currentBeacon?.deviceInformationCharacteristic sensorTag.readValue(for: deviceInfoChar)
-
-                guard let deviceInfoService = deviceInformationService else { return }
-                peripheral.discoverCharacteristics(nil, for: deviceInfoService)
-                
-                if let callback = lockStateCallback {
-                    checkLockState(passkey: nil, lockStateCallback: callback)
-                }
-            } else if characteristic.uuid == CharacteristicID.lockState.UUID {
-                if let callback = updateLockStateCallback {
-                    lockStateCallback = callback
-                    getUnlockChallenge()
-                }
-            } else if characteristic.uuid == CharacteristicID.factoryReset.UUID {
-                if let callback = factoryResetCallback {
-                    callback()
-                }
-            } else if characteristic.uuid == CharacteristicID.remainConnectable.UUID {
-                if let callback = remainConnectableCallback {
-                    callback()
-                }
-            }
-        
+        switch characteristic.uuid {
+        case CharacteristicID.advertisingInterval.UUID:
+            sensorTag.readValue(for: characteristic)
+        case CharacteristicID.radioTxPower.UUID:
+            sensorTag.readValue(for: characteristic)
+        case CharacteristicID.unlock.UUID:
+            //Wrote to the unlock characteristic, the other values should be ready
+            SwiftSpinner.hide()
+            isBeaconUnlocked = true
+            
+            guard let advSlotChar = currentBeacon?.advSlotDataCharacteristic else { return }
+            sensorTag.readValue(for: advSlotChar)
+            
+            guard let deviceInfoService = deviceInformationService else { return }
+            peripheral.discoverCharacteristics(nil, for: deviceInfoService)
+            
+            guard let callback = lockStateCallback else { return }
+            checkLockState(passkey: nil, lockStateCallback: callback)
+        case CharacteristicID.lockState.UUID:
+            guard let callback = updateLockStateCallback else { return }
+            lockStateCallback = callback
+            getUnlockChallenge()
+        case CharacteristicID.factoryReset.UUID:
+            guard let callback = factoryResetCallback else { return }
+            callback()
+        case CharacteristicID.remainConnectable.UUID:
+            guard let callback = remainConnectableCallback else { return }
+            callback()
+        default:
+            break
+        }
     }
 
     // Mark: - readInterval
@@ -468,38 +447,46 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         }
     }
     
+    
     func unlockBeacon() {
-        if let
-            passKey = userPasskey,
-            let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.unlock.UUID),
-            let unlockChallenge = characteristic.value {
-            let token: NSData? = AESEncrypt(data: unlockChallenge as NSData, key: passKey)
-            // erase old password
-            userPasskey = nil
-            didAttemptUnlocking = true
-            if let unlockToken = token {
-                sensorTag.writeValue(unlockToken as Data,
-                                      for: characteristic,
-                                      type: CBCharacteristicWriteType.withResponse)
-            }
-        }
+        guard let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.unlock.UUID),
+        let unlockChallenge = characteristic.value else { return }
+        print("the value of the characteristic is \(characteristic)")
+        let revision = ""
+        let string = String(data: unlockChallenge, encoding: String.Encoding.utf8) as String!
+        
+        // #1 get revision info first
+        
+        // #2 get unlock token for over-the-air unlock
+        let token = ParabitNetworking.sharedInstance.getUnlockToken(currentFirmwareRevision: revision, unlockChallenge:"string", completionHandler: { (success) in
+            
+        })
+        let unlockToken = "".data(using: .utf8)!
+        
+        didAttemptUnlocking = true
+        //if let unlockToken = token {
+        sensorTag.writeValue(unlockToken as Data,
+                             for: characteristic,
+                             type: CBCharacteristicWriteType.withResponse)
+        //}
     }
     
-    func unlockBeaconWithCharacteristic(characteristic:CBCharacteristic) {
-        print("the value of the characteristic is \(characteristic)")
-        guard let unlockChallenge = characteristic.value else {return}
-        ParabitNetworking.sharedInstance.getUnlockToken(currentFirmwareRevision:"String", unlockChallenge:"String", completionHandler: { (success) in
-            
-            })
-        //let token = ParabitNetworking.getf(
-        didAttemptUnlocking = true
-        if let unlockToken = token {
-            sensorTag.writeValue(unlockToken as Data,
-                                 for: characteristic,
-                                 type: CBCharacteristicWriteType.withResponse)
-        }
-        
-    }
+//    func unlockBeacon3() {
+//        if let
+//            passKey = userPasskey,
+//            let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.unlock.UUID),
+//            let unlockChallenge = characteristic.value {
+//            let token: NSData? = AESEncrypt(data: unlockChallenge as NSData, key: passKey)
+//            // erase old password
+//            userPasskey = nil
+//            didAttemptUnlocking = true
+//            if let unlockToken = token {
+//                sensorTag.writeValue(unlockToken as Data,
+//                                      for: characteristic,
+//                                      type: CBCharacteristicWriteType.withResponse)
+//            }
+//        }
+//    }
     
     func AESEncrypt(data: NSData, key: String?) -> NSData? {
         if let passKey = key {

@@ -11,9 +11,8 @@ import UIKit
 import CoreBluetooth
 import BPStatusBarAlert
 import SwiftSpinner
-
-extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDelegate {
-    
+import CoreLocation
+extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDelegate  {
     // MARK: - CBCentralManagerDelegate methods
     
     // MARK: - Update status methods
@@ -184,6 +183,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         guard let eddyStoneService = eddystoneService, let deviceInfoService = deviceInformationService else { return }
         beaconInvestigation = BeaconInvestigation(peripheral: sensorTag)
         
+        peripheral.discoverCharacteristics(nil, for: deviceInfoService)
         peripheral.discoverCharacteristics(nil, for: eddyStoneService)
     }
     

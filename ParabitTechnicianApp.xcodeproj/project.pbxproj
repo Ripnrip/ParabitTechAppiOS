@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C08830E1FBDF2930031A485 /* BeaconFinderViewController+CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C08830D1FBDF2930031A485 /* BeaconFinderViewController+CoreLocation.swift */; };
 		8C5E0C701F86681D00F09225 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5E0C6F1F86681D00F09225 /* AppDelegate.swift */; };
 		8C5E0C721F86681D00F09225 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5E0C711F86681D00F09225 /* ViewController.swift */; };
 		8C5E0C751F86681D00F09225 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C5E0C731F86681D00F09225 /* Main.storyboard */; };
@@ -57,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		5C5EB26023B5A42CDA2DD7A3 /* Pods-ParabitTechnicianApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParabitTechnicianApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParabitTechnicianApp/Pods-ParabitTechnicianApp.debug.xcconfig"; sourceTree = "<group>"; };
+		8C08830D1FBDF2930031A485 /* BeaconFinderViewController+CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeaconFinderViewController+CoreLocation.swift"; sourceTree = "<group>"; };
 		8C5E0C6C1F86681D00F09225 /* ParabitTechnicianApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParabitTechnicianApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C5E0C6F1F86681D00F09225 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C5E0C711F86681D00F09225 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 			children = (
 				8C5E0C871F86CB6200F09225 /* BeaconFinderViewController.swift */,
 				8CB4D79B1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift */,
+				8C08830D1FBDF2930031A485 /* BeaconFinderViewController+CoreLocation.swift */,
 				8C5E0C891F86CC3400F09225 /* BeaconFinderViewController+TableView.swift */,
 			);
 			name = AvailableDoors;
@@ -499,6 +502,7 @@
 				8CE5DD8C1F91163A00B6A2DA /* CustomViews.swift in Sources */,
 				8CE5DD7E1F91009500B6A2DA /* BeaconTabBarController+BlueTooth.swift in Sources */,
 				8CFB012F1F98EC070044FB89 /* ParabitNetworking.swift in Sources */,
+				8C08830E1FBDF2930031A485 /* BeaconFinderViewController+CoreLocation.swift in Sources */,
 				8CE5DD801F9112DC00B6A2DA /* GATTOperations.swift in Sources */,
 				8C85A7AB1F892AE400D185D0 /* UIDViewController+TableView.swift in Sources */,
 				8CF3A4FA1FB3B49F009A4ACE /* DevicesDetailTableViewController.swift in Sources */,

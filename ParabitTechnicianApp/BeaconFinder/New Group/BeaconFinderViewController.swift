@@ -10,7 +10,8 @@ import UIKit
 import SwiftSpinner
 import BPStatusBarAlert
 import CoreBluetooth
- 
+import CoreLocation
+
 class BeaconFinderViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
@@ -56,6 +57,10 @@ class BeaconFinderViewController: UIViewController {
     var remainConnectableCallback: (() -> Void)?
     var factoryResetCallback: (() -> Void)?
 
+    //CoreLocation for major/minor
+    var locationManager = CLLocationManager()
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         UIApplication.shared.statusBarStyle = .lightContent
     }
@@ -71,9 +76,14 @@ class BeaconFinderViewController: UIViewController {
         
         self.tableView.separatorColor = UIColor.clear
         
+        
         centralManager = CBCentralManager(delegate: self,
                                           queue: nil)
         
+//        locationManager = CLLocationManager.init()
+//        locationManager.delegate = self
+//        locationManager.requestWhenInUseAuthorization()
+//        startScanningForBeaconRegion(beaconRegion: getBeaconRegion())
     }
 
     @IBAction func refresh(_ sender: Any) {

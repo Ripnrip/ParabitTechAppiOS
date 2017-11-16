@@ -457,30 +457,34 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         }
     }
     
+    //OLD
     
-    func unlockBeacon() {
-        guard let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.unlock.UUID),
-        let unlockChallenge = characteristic.value else { return }
-        print("the value of the characteristic is \(characteristic)")
-        let revision = ""
-        let string = String(data: unlockChallenge, encoding: String.Encoding.utf8) as String!
-        
-        // #1 get revision info first
-        
-        // #2 get unlock token for over-the-air unlock
-//        let token = ParabitNetworking.sharedInstance.getUnlockToken(currentFirmwareRevision: revision, unlockChallenge:"string", completionHandler: { (success) in
+    
+    
+    //NEW
+//    func unlockBeacon() {
+//        guard let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.unlock.UUID),
+//        let unlockChallenge = characteristic.value else { return }
+//        print("the value of the characteristic is \(characteristic)")
+//        let revision = ""
+//        let string = String(data: unlockChallenge, encoding: String.Encoding.utf8) as String!
 //
-//        })
-        let unlockToken = "".data(using: .utf8)!
-        
-        didAttemptUnlocking = true
-        
-        sensorTag.writeValue(unlockToken as Data,
-                             for: characteristic,
-                             type: CBCharacteristicWriteType.withResponse)
- 
-    }
-    
+//        // #1 get revision info first
+//
+//        // #2 get unlock token for over-the-air unlock
+////        let token = ParabitNetworking.sharedInstance.getUnlockToken(currentFirmwareRevision: revision, unlockChallenge:"string", completionHandler: { (success) in
+////
+////        })
+//        let unlockToken = "".data(using: .utf8)!
+//
+//        didAttemptUnlocking = true
+//
+//        sensorTag.writeValue(unlockToken as Data,
+//                             for: characteristic,
+//                             type: CBCharacteristicWriteType.withResponse)
+//
+//    }
+//
 //    func unlockBeacon3() {
 //        if let
 //            passKey = userPasskey,

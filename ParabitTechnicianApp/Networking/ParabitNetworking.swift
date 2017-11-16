@@ -34,7 +34,6 @@ class ParabitNetworking: NSObject {
             self.user = self.pool?.currentUser()
         }
         self.getAuthenticationKeys()
-        
     }
     
     deinit {
@@ -42,13 +41,7 @@ class ParabitNetworking: NSObject {
         print("Mobile Client deinitialized. This should not happen.")
     }
     
-
-    
     let baseURL = "https://api.parabit.com/dev-firmware/"//https://6yomwzar14.execute-api.us-east-1.amazonaws.com/dev/"
-    
-    let apiKey1 = " "
-    let apiKey2 = " "
-    
     
     //MARK: GET a list of firmware
     func getFirmware(completionHandler:@escaping (Bool) -> ()){
@@ -119,13 +112,10 @@ class ParabitNetworking: NSObject {
             print("the request is ",request)
             print("the response is ",response)
             print("the value is ",value)
-            
-            
         }
     }
     
     //Mark: Helper for authentication
-    
     func getAuthenticationKeys() {
         self.user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
             DispatchQueue.main.async(execute: {
@@ -136,7 +126,6 @@ class ParabitNetworking: NSObject {
                 self.firmwareAPIVersion = userAttributes[2]
                 self.firmwareAPIKey = userAttributes[3]
                 self.firmwareAPIURL = userAttributes[4] 
-                
             })
             return nil
         }

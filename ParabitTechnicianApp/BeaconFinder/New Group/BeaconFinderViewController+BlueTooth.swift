@@ -185,6 +185,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         guard let eddyStoneService = eddystoneService, let deviceInfoService = deviceInformationService else { return }
         beaconInvestigation = BeaconInvestigation(peripheral: sensorTag)
         
+        peripheral.discoverCharacteristics(nil, for: deviceInfoService)
         peripheral.discoverCharacteristics(nil, for: eddyStoneService)
     }
     
@@ -225,14 +226,14 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             print("there was an error discovering the characteristics \(characteristic) from \(sensorTag)")
         }
 
-//        switch String(describing: characteristic.uuid) {
-//        case "Firmware Revision String":
-//            guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
-//            print("found the Firmware Revision String  with value \(value) and data \(datastring)")
-//            currentBeacon?.firmwareRevision = datastring as String
-//        default:
-//            break
-//        }
+        switch String(describing: characteristic.uuid) {
+        case "Firmware Revision String":
+            guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
+            print("found the Firmware Revision String  with value \(value) and data \(datastring)")
+            currentBeacon?.firmwareRevision = datastring as String
+        default:
+            break
+        }
         
         if isBeaconUnlocked {
                // print("the updated values for characteristic is \(characteristic.uuid) with value \(characteristic.value) ")
@@ -462,28 +463,28 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
     
     
     //NEW
-//    func unlockBeacon() {
-//        guard let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.unlock.UUID),
-//        let unlockChallenge = characteristic.value else { return }
-//        print("the value of the characteristic is \(characteristic)")
-//        let revision = ""
-//        let string = String(data: unlockChallenge, encoding: String.Encoding.utf8) as String!
+    func unlockBeacon() {
+        guard let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.unlock.UUID),
+        let unlockChallenge = characteristic.value else { return }
+        print("the value of the characteristic is \(characteristic)")
+        let revision = ""
+        let string = String(data: unlockChallenge, encoding: String.Encoding.utf8) as String!
+
+        // #1 get revision info first
+
+        // #2 get unlock token for over-the-air unlock
+//        let token = ParabitNetworking.sharedInstance.getUnlockToken(currentFirmwareRevision: revision, unlockChallenge:"string", completionHandler: { (success) in
 //
-//        // #1 get revision info first
-//
-//        // #2 get unlock token for over-the-air unlock
-////        let token = ParabitNetworking.sharedInstance.getUnlockToken(currentFirmwareRevision: revision, unlockChallenge:"string", completionHandler: { (success) in
-////
-////        })
-//        let unlockToken = "".data(using: .utf8)!
-//
-//        didAttemptUnlocking = true
-//
-//        sensorTag.writeValue(unlockToken as Data,
-//                             for: characteristic,
-//                             type: CBCharacteristicWriteType.withResponse)
-//
-//    }
+//        })
+        let unlockToken = "".data(using: .utf8)!
+
+        didAttemptUnlocking = true
+
+        sensorTag.writeValue(unlockToken as Data,
+                             for: characteristic,
+                             type: CBCharacteristicWriteType.withResponse)
+
+    }
 //
 //    func unlockBeacon3() {
 //        if let

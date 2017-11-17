@@ -467,42 +467,20 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         let string = unlockChallenge.hexadecimal()
         
         print("the value of the characteristic is \(characteristic)")
-        // #1 get revision info first
 
-         //#2 get unlock token for over-the-air unlock
-        let token = ParabitNetworking.sharedInstance.getUnlockToken(currentFirmwareRevision: revision, unlockChallenge:string, completionHandler: { (success) in
-            if success {
-                let unlockToken = "".data(using: .utf8)!
+        let token = ParabitNetworking.sharedInstance.getUnlockToken(currentFirmwareRevision: revision, unlockChallenge:string, completionHandler: { (unlockString) in
+            if unlockString != nil {
+                guard let unlockToken = unlockString?.hexadecimal() else { return }
                 self.didAttemptUnlocking = true
-                self.sensorTag.writeValue(unlockToken as Data,
+                self.sensorTag.writeValue(unlockToken,
                                      for: characteristic,
                                      type: CBCharacteristicWriteType.withResponse)
             }else{
                 print("failed getting the unlock challenge from the endpoint")
             }
-            
         })
-
-
     }
-//
-//    func unlockBeacon3() {
-//        if let
-//            passKey = userPasskey,
-//            let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.unlock.UUID),
-//            let unlockChallenge = characteristic.value {
-//            let token: NSData? = AESEncrypt(data: unlockChallenge as NSData, key: passKey)
-//            // erase old password
-//            userPasskey = nil
-//            didAttemptUnlocking = true
-//            if let unlockToken = token {
-//                sensorTag.writeValue(unlockToken as Data,
-//                                      for: characteristic,
-//                                      type: CBCharacteristicWriteType.withResponse)
-//            }
-//        }
-//    }
-    
+
     func AESEncrypt(data: NSData, key: String?) -> NSData? {
         if let passKey = key {
             let keyBytes = StringUtils.transformStringToByteArray(string: passKey)

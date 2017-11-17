@@ -97,7 +97,7 @@ class ParabitNetworking: NSObject {
         }
     }
     
-    func getUnlockToken(currentFirmwareRevision:String, unlockChallenge:String, completionHandler:@escaping (Bool) -> ()) {
+    func getUnlockToken(currentFirmwareRevision:String, unlockChallenge:String, completionHandler:@escaping (String?) -> ()) {
         guard let url = URL(string: "\(baseURL)firmware/unlock"),
         let apiKey = firmwareAPIKey?.value
         else { return }
@@ -106,18 +106,17 @@ class ParabitNetworking: NSObject {
         let headers:[String : String] = ["x-api-key" : apiKey]
         let parameters:[String : Any] = ["firmware_revision":currentFirmwareRevision,"challenge":unlockChallenge]
         
-        Alamofire.request(url, method: HTTPMethod.post, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (dataResponse) in
+        Alamofire.request(url, method: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (dataResponse) in
             
             if dataResponse.error != nil || dataResponse.response?.statusCode != 200 {
                 print("there was an error getting the firmware unlock for revision \(dataResponse.error)")
-                completionHandler(false)
+                completionHandler(nil)
                 return
             }
-            guard let request = dataResponse.request, let response = dataResponse.response, let value = dataResponse.value else {return}
-            print("the request is ",request)
-            print("the response is ",response)
-            print("the value is ",value)
-        }
+            guard let request = dataResponse.request, let response = dataResponse.response, let value = dataResponse.value, let dict = value as? [String:Any], let unlockResponse = dict["unlock_response"] as? String
+                else {return}
+            completionHandler(unlockResponse)
+                }
     }
     
     //Mark: Helper for authentication

@@ -244,11 +244,6 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
                 print("found the Firmware Revision String  with value \(value) and data \(datastring)")
                 currentBeacon?.firmwareRevision = datastring as String
-                
-                let token = ParabitNetworking.sharedInstance.getUnlockToken(currentFirmwareRevision: (currentBeacon?.firmwareRevision)!, unlockChallenge:"string", completionHandler: { (success) in
-                    
-                })
-                
             case "Manufacturer Name String":
                 guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
                 print("found the manufacturer string with value \(value) and data \(datastring)")
@@ -465,24 +460,29 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
     //NEW
     func unlockBeacon() {
         guard let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.unlock.UUID),
-        let unlockChallenge = characteristic.value else { return }
+        let unlockChallenge = characteristic.value,
+        let revision = currentBeacon?.firmwareRevision
+            else { return }
+        
+        let string = unlockChallenge.hexadecimal()
+        
         print("the value of the characteristic is \(characteristic)")
-        let revision = ""
-        let string = String(data: unlockChallenge, encoding: String.Encoding.utf8) as String!
-
         // #1 get revision info first
 
-        // #2 get unlock token for over-the-air unlock
-//        let token = ParabitNetworking.sharedInstance.getUnlockToken(currentFirmwareRevision: revision, unlockChallenge:"string", completionHandler: { (success) in
-//
-//        })
-        let unlockToken = "".data(using: .utf8)!
+         //#2 get unlock token for over-the-air unlock
+        let token = ParabitNetworking.sharedInstance.getUnlockToken(currentFirmwareRevision: revision, unlockChallenge:string, completionHandler: { (success) in
+            if success {
+                let unlockToken = "".data(using: .utf8)!
+                self.didAttemptUnlocking = true
+                self.sensorTag.writeValue(unlockToken as Data,
+                                     for: characteristic,
+                                     type: CBCharacteristicWriteType.withResponse)
+            }else{
+                print("failed getting the unlock challenge from the endpoint")
+            }
+            
+        })
 
-        didAttemptUnlocking = true
-
-        sensorTag.writeValue(unlockToken as Data,
-                             for: characteristic,
-                             type: CBCharacteristicWriteType.withResponse)
 
     }
 //

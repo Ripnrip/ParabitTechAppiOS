@@ -98,10 +98,15 @@ class ParabitNetworking: NSObject {
     }
     
     func getUnlockToken(currentFirmwareRevision:String, unlockChallenge:String, completionHandler:@escaping (Bool) -> ()) {
-        guard let url = URL(string: "\(baseURL)firmware/unlock") else { return }
+        guard let url = URL(string: "\(baseURL)firmware/unlock"),
+        let apiKey = firmwareAPIKey?.value
+        else { return }
         print("the url for the POST firmware unlcok is \(url)")
         
-        Alamofire.request(url, method: HTTPMethod.post, parameters: ["revision":currentFirmwareRevision,"":unlockChallenge], encoding: URLEncoding.default, headers: nil).responseJSON { (dataResponse) in
+        let headers:[String : String] = ["x-api-key" : apiKey]
+        let parameters:[String : Any] = ["firmware_revision":currentFirmwareRevision,"challenge":unlockChallenge]
+        
+        Alamofire.request(url, method: HTTPMethod.post, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (dataResponse) in
             
             if dataResponse.error != nil || dataResponse.response?.statusCode != 200 {
                 print("there was an error getting the firmware unlock for revision \(dataResponse.error)")

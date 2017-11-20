@@ -305,7 +305,7 @@ class GlobalSettingsViewController: UIViewController {
                             URLSession.shared.downloadTask(with: downloadURL, completionHandler: { (location, response, error) in
                                 // after downloading your data you need to save it to your destination url
                                 guard
-                                    let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                                    let httpURLResponse = response as? HTTPURLResponse,
                                     let location = location, error == nil
                                     else { return }
                                 do {

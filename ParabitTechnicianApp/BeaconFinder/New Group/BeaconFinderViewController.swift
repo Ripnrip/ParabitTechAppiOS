@@ -82,10 +82,10 @@ class BeaconFinderViewController: UIViewController {
 
         let when = DispatchTime.now() + 0 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
+                self.sensorTag = nil
                 self.availableDoors = []
                 self.centralManager.scanForPeripherals(withServices: nil, options: nil)
                 self.tableView.reloadData()
-            
         }
     }
     

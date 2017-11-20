@@ -64,10 +64,12 @@ class ParabitNetworking: NSObject {
     
     //MARK: GET a firmware check
     func getFirmwareInfoFor(revision:String, completionHandler:@escaping (FirmwareInfo?) -> ()){
-        guard let url = URL(string: "\(baseURL)firmware/info") else { return }
+        guard let url = URL(string: "\(baseURL)firmware/info"), let apiKey = firmwareAPIKey?.value else { return }
         print("the url for the GET firmware info is \(url)")
+
         
-        Alamofire.request(url, method: HTTPMethod.get, parameters: ["revision":revision], encoding: URLEncoding.default, headers: nil).responseJSON { (dataResponse) in
+        let headers:[String : String] = ["x-api-key" : apiKey]
+        Alamofire.request(url, method: HTTPMethod.get, parameters: ["revision":revision], encoding: URLEncoding.default, headers: headers).responseJSON { (dataResponse) in
             
             if dataResponse.error != nil || dataResponse.response?.statusCode != 200 {
                 print("there was an error getting the firmware info for revision \(dataResponse.error)")
@@ -93,6 +95,9 @@ class ParabitNetworking: NSObject {
                 //firmware is up-to-date
                 completionHandler(nil)
                 return
+            } else {
+                //firmware is not up-to-date
+                completionHandler(firmware)
             }
         }
     }

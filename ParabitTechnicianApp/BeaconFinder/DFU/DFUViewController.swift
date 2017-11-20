@@ -154,8 +154,8 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
         // This enables the experimental Buttonless DFU feature from SDK 12.
         // Please, read the field documentation before use.
         dfuInitiator.enableUnsafeExperimentalButtonlessServiceInSecureDfu = true
-        
-        dfuController = dfuInitiator.with(firmware: selectedFirmware!).start()
+        guard let firmware = selectedFirmware else { return }
+        dfuController = dfuInitiator.with(firmware: firmware).start()
     }
     
     //MARK: - CBCentralManagerDelegate

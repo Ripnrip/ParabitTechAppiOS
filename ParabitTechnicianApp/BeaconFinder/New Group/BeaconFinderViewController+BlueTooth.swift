@@ -386,7 +386,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 if lockState == LockState.Locked.rawValue {
                     print("The beacon is locked :( .")
                     didUpdateLockState(lockState: LockState.Locked)
-                    unlockBeacon()
+                    //unlockBeacon()
                 } else {
                     print("The beacon is unlocked!")
                     didUpdateLockState(lockState: LockState.Unlocked)

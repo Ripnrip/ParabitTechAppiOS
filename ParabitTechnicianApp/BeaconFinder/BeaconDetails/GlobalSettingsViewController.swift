@@ -141,8 +141,6 @@ class GlobalSettingsViewController: UIViewController {
             print("No")
         }
         
-        // Replace UIAlertActionStyle.Default by UIAlertActionStyle.default
-        
         let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
             (result : UIAlertAction) -> Void in
             print("OK")

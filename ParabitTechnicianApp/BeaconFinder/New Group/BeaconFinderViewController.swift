@@ -78,18 +78,44 @@ class BeaconFinderViewController: UIViewController {
     }
 
     @IBAction func refresh(_ sender: Any) {
-        SwiftSpinner.show(duration: 4, title: "Scanning")
-
-        let when = DispatchTime.now() + 0 // change 2 to desired number of seconds
-        DispatchQueue.main.asyncAfter(deadline: when) {
+        
+        if sensorTag != nil {
+        //Ask user if the want to disconnect from the current beacon
+        let alertController = UIAlertController(title: "Find New Beacons", message: "Are you sure you would like to disconnect from the current beacon?", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+        
+        let DestructiveAction = UIAlertAction(title: "No", style: UIAlertActionStyle.destructive) {
+            (result : UIAlertAction) -> Void in
+            print("No")
+        }
+        
+        let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
+            (result : UIAlertAction) -> Void in
+            print("OK")
+            SwiftSpinner.show(duration: 4, title: "Scanning")
+            
+            let when = DispatchTime.now() + 0 // change 2 to desired number of seconds
+            DispatchQueue.main.asyncAfter(deadline: when) {
                 self.sensorTag = nil
                 self.availableDoors = []
                 self.centralManager.scanForPeripherals(withServices: nil, options: nil)
                 self.tableView.reloadData()
+            }
+        }
+        alertController.addAction(okAction)
+        alertController.addAction(DestructiveAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    } else {
+        //regular refresh
+        SwiftSpinner.show(duration: 4, title: "Scanning")
+    
+        let when = DispatchTime.now() + 0 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+        self.sensorTag = nil
+        self.availableDoors = []
+        self.centralManager.scanForPeripherals(withServices: nil, options: nil)
+        self.tableView.reloadData()
         }
     }
-    
-
-
-    
+  }
 }

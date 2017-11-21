@@ -171,6 +171,13 @@
                                                     <color key="textColor" red="0.99602621793746948" green="0.0" blue="0.034961890429258347" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fkt-zs-m7G">
+                                                    <rect key="frame" x="277" y="14" width="83" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Disconnect">
+                                                        <color key="titleColor" red="0.99602621793746948" green="0.0" blue="0.034961890429258347" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="ssW-Ya-jTZ" secondAttribute="trailing" constant="15" id="JjA-lS-as7"/>
@@ -181,6 +188,7 @@
                                             <outlet property="addressLabel" destination="grB-ue-msi" id="d5t-mz-g7C"/>
                                             <outlet property="beaconNameLabel" destination="X56-hf-V1A" id="YIR-Qu-yZN"/>
                                             <outlet property="configurableStatusLabel" destination="luO-1E-s7R" id="Tku-nB-yOG"/>
+                                            <outlet property="disconnectButton" destination="Fkt-zs-m7G" id="8vE-Q4-Il8"/>
                                             <outlet property="registeredLabel" destination="bwx-U2-orU" id="Ztb-PR-vgu"/>
                                             <outlet property="rssiLabel" destination="ssW-Ya-jTZ" id="ecr-EM-qJd"/>
                                             <outlet property="statusBubbleImageView" destination="j0s-3W-gR5" id="fQl-Iv-YRg"/>

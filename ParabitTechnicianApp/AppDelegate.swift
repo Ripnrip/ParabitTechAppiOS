@@ -54,6 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.storyboard = UIStoryboard(name: "Main", bundle: nil)
         pool.delegate = self
         
+        ParabitNetworking.sharedInstance
+        
         //pool.currentUser()?.signOut()
     
     

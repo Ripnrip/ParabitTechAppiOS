@@ -274,8 +274,8 @@ class GlobalSettingsViewController: UIViewController {
  
                     DispatchQueue.global(qos: .userInitiated).async {
                         //download currentFirmware.latestURL and use the zip for the next vc
-                        guard let downloadURL = URL(string: "https://parabit-beacon-firmware-updates.s3.amazonaws.com/firmware/pb_secure_dfu_package_10-10-17.zip?AWSAccessKeyId=ASIAIOT63UZVKJ4FV4IQ&Expires=1511282648&Signature=5y0QiKhr4%2FVjuLObXOPdxVY3IWk%3D&x-amz-security-token=FQoDYXdzEPL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEHEM8q2fVrDOiGOYCL9Aeg%2BhkihqyFV%2F7Kicliw7z7S5bO%2BCxpGnkq7n6B1NTt4%2BKagikfv6BTp6TCIVlc%2Bw5bgGHAhVhQcvAxDMTy9N0Qgi4gZh8FtyHQ8uXw%2FE48N74F7YtBrVTSPqgIkLmYrOrZ51TyQNRBHA632kMKojri4lK9ZDhGW3lkSU%2FPmuSrVdt%2BaUpDr7X%2FwbbeG5Zb7b9Iwgze%2B8FBZ0%2FG%2F2Ne%2Fk58xRB%2B842Clfnf10Q%2F%2F3KiRqHfxAAuS64pHINDF%2F%2FGAcRifmvOi2zpU6pVueQhPuTxUpnCKrXHgkmwRWR7TQlRj3OJ6fPFsUExaye8p6Ykyw%2BI6UP8zwdEWS%2FY%2FTB4oq63R0AU%3D") else { return }
-                        //guard let downloadURL = self.currentFirmwareObject?.latestURL else { return }
+
+                        guard let downloadURL = self.currentFirmwareObject?.latestURL else { return }
                         // create your document folder url
                         let documentsUrl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
                         // your destination file url

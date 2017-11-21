@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C3F44811FC4BB1A0051729C /* pb_secure_dfu_package.zip in Resources */ = {isa = PBXBuildFile; fileRef = 8C3F44801FC4BB1A0051729C /* pb_secure_dfu_package.zip */; };
 		8C5E0C701F86681D00F09225 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5E0C6F1F86681D00F09225 /* AppDelegate.swift */; };
 		8C5E0C721F86681D00F09225 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5E0C711F86681D00F09225 /* ViewController.swift */; };
 		8C5E0C751F86681D00F09225 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C5E0C731F86681D00F09225 /* Main.storyboard */; };
@@ -57,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		5C5EB26023B5A42CDA2DD7A3 /* Pods-ParabitTechnicianApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParabitTechnicianApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParabitTechnicianApp/Pods-ParabitTechnicianApp.debug.xcconfig"; sourceTree = "<group>"; };
+		8C3F44801FC4BB1A0051729C /* pb_secure_dfu_package.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = pb_secure_dfu_package.zip; sourceTree = "<group>"; };
 		8C5E0C6C1F86681D00F09225 /* ParabitTechnicianApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParabitTechnicianApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C5E0C6F1F86681D00F09225 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C5E0C711F86681D00F09225 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				8C5E0C821F86C9A300F09225 /* Login */,
 				8C5E0C861F86CB4E00F09225 /* BeaconFinder */,
 				8C5E0C711F86681D00F09225 /* ViewController.swift */,
+				8C3F44801FC4BB1A0051729C /* pb_secure_dfu_package.zip */,
 				8C5E0C6F1F86681D00F09225 /* AppDelegate.swift */,
 				8C5E0C731F86681D00F09225 /* Main.storyboard */,
 				8C5E0C761F86681D00F09225 /* Assets.xcassets */,
@@ -357,6 +360,7 @@
 				8CF3A4EC1FB3969F009A4ACE /* '.json in Resources */,
 				8CF3A4EA1FB39198009A4ACE /* awsconfiguration.json in Resources */,
 				8C5E0C7A1F86681D00F09225 /* LaunchScreen.storyboard in Resources */,
+				8C3F44811FC4BB1A0051729C /* pb_secure_dfu_package.zip in Resources */,
 				8C5E0C771F86681D00F09225 /* Assets.xcassets in Resources */,
 				8C5E0C751F86681D00F09225 /* Main.storyboard in Resources */,
 			);

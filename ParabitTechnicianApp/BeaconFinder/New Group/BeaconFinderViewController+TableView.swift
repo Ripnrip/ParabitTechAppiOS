@@ -88,14 +88,9 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func disconnectTapped(_ sender: Any?) {
-        // We need to call the "love" method on the underlying object, but I don't know which row the user tapped!
-        // The sender is the button itself, not the table view cell. One way to get the index path would be to ascend
-        // the view hierarchy until we find the UITableviewCell instance.
         print("disconnectTapped", sender)
         guard let sensor = sensorTag else { return }
         self.centralManager.cancelPeripheralConnection(sensor)
-        //self.currentBeacon?.isConnectable = false
-        self.tableView.reloadData()
         self.refresh(self)
     }
     

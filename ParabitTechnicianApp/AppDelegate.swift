@@ -54,13 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.storyboard = UIStoryboard(name: "Main", bundle: nil)
         pool.delegate = self
         
-        //pool.currentUser()?.signOut()
-        ParabitNetworking.sharedInstance
-        
-        guard let isUserSignedIn = pool.currentUser()?.isSignedIn else { return true }
-        if !isUserSignedIn {
-            _ = self.startPasswordAuthentication()
-        }
+        pool.currentUser()?.signOut()
+    
     
         return true
     }

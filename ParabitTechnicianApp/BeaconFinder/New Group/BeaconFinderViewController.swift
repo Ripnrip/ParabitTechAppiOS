@@ -25,7 +25,6 @@ class BeaconFinderViewController: UIViewController {
     
     var availableDoors = [Peripheral]()
     var slotData: Dictionary <NSNumber, Dictionary <String, NSData>> = [:]
-    var slotUpdateData: Dictionary <NSNumber, Dictionary <String, NSData>> = [:]
     var callback: ((_ beaconBroadcastCapabilities: NSDictionary,
     _ slotData: Dictionary <NSNumber, Dictionary <String, NSData>>) -> Void)?
     var beaconCapabilities: NSDictionary = [:]
@@ -81,25 +80,15 @@ class BeaconFinderViewController: UIViewController {
         
         if sensorTag != nil {
         //Ask user if the want to disconnect from the current beacon
-        let alertController = UIAlertController(title: "Find New Beacons", message: "Are you sure you would like to disconnect from the current beacon?", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
-        
+        let alertController = UIAlertController(title: "Find New Beacons", message: "Are you sure you would like to disconnect from the current beacon?", preferredStyle: UIAlertControllerStyle.alert)
         let DestructiveAction = UIAlertAction(title: "No", style: UIAlertActionStyle.destructive) {
             (result : UIAlertAction) -> Void in
             print("No")
         }
-        
         let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
             (result : UIAlertAction) -> Void in
             print("OK")
-            SwiftSpinner.show(duration: 4, title: "Scanning")
-            
-            let when = DispatchTime.now() + 0 // change 2 to desired number of seconds
-            DispatchQueue.main.asyncAfter(deadline: when) {
-                self.sensorTag = nil
-                self.availableDoors = []
-                self.centralManager.scanForPeripherals(withServices: nil, options: nil)
-                self.tableView.reloadData()
-            }
+            self.resetBluetooth()
         }
         alertController.addAction(okAction)
         alertController.addAction(DestructiveAction)
@@ -107,15 +96,22 @@ class BeaconFinderViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     } else {
         //regular refresh
-        SwiftSpinner.show(duration: 4, title: "Scanning")
-    
-        let when = DispatchTime.now() + 0 // change 2 to desired number of seconds
-        DispatchQueue.main.asyncAfter(deadline: when) {
-        self.sensorTag = nil
-        self.availableDoors = []
-        self.centralManager.scanForPeripherals(withServices: nil, options: nil)
-        self.tableView.reloadData()
-        }
+            self.resetBluetooth()
     }
   }
+    
+    func resetBluetooth () {
+        SwiftSpinner.show(duration: 4, title: "Scanning")
+        let when = DispatchTime.now() + 0 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.sensorTag = nil
+            self.currentBeacon = nil
+            self.beaconInvestigation = nil
+            self.eddystoneService = nil
+            self.deviceInformationService = nil
+            self.availableDoors = []
+            self.centralManager.scanForPeripherals(withServices: nil, options: nil)
+            self.tableView.reloadData()
+        }
+    }
 }

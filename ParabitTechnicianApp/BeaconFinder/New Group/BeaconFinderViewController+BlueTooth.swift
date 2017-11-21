@@ -83,11 +83,11 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             print("NEXT PERIPHERAL UUID: \(peripheral.identifier.uuidString)")
             print("NEXT PERIPHERAL STATE: \(peripheral.state.rawValue)")
             
-            if peripheral.state.rawValue == 2 {
-                central.cancelPeripheralConnection(peripheral)
-            }
+//            if peripheral.state.rawValue == 2 {
+//                central.cancelPeripheralConnection(peripheral)
+//            }
             
-            if peripheralName == peripheralName && peripheral.state.rawValue != 2 {
+            if peripheralName == self.peripheralName && peripheral.state.rawValue != 2 {
                 print("SENSOR TAG FOUND! ADDING NOW!!!")
                 // to save power, stop scanning for other devices
                 keepScanning = false
@@ -276,6 +276,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 print("Found the radioTxPower ID \(characteristic)")
                 beaconInvestigation?.didReadTxPower()
                 currentBeacon?.radioTxPowerCharacteristic = characteristic
+                print("Found the Radio TX Characteristic ID \(characteristic)")
             case CharacteristicID.advertisingInterval.UUID:
                 print("Found the Advertising Characteristic ID \(characteristic)")
                 currentBeacon?.advertisingValue = beaconInvestigation?.didReadAdvertisingInterval()

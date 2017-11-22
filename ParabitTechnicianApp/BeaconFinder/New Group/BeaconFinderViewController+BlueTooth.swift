@@ -463,12 +463,11 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         guard let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.unlock.UUID),
         let unlockChallenge = characteristic.value,
         let revision = currentBeacon?.firmwareRevision
-            else { return }
+else { return }
         
         let string = unlockChallenge.hexadecimal()
         
         print("the value of the characteristic is \(characteristic)")
-
         let token = ParabitNetworking.sharedInstance.getUnlockToken(currentFirmwareRevision: revision, unlockChallenge:string, completionHandler: { (unlockString) in
             if unlockString != nil {
                 guard let unlockToken = unlockString?.hexadecimal() else { return }

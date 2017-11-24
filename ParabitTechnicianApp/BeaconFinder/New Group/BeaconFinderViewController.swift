@@ -143,6 +143,11 @@ class BeaconFinderViewController: UIViewController {
     
     }
     
+    @IBAction func feedbackTapped(_ sender: Any) {
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "FeedbackController") as? FeedbackViewController else { return }
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 
     @IBAction func refresh(_ sender: Any) {
         self.resetBluetooth()

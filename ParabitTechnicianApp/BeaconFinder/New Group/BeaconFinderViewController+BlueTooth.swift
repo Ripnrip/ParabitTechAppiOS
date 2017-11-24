@@ -227,15 +227,6 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         if error != nil {
             print("there was an error discovering the characteristics \(characteristic) from \(sensorTag)")
         }
-
-//        switch String(describing: characteristic.uuid) {
-//        case "Firmware Revision String":
-//            guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
-//            print("found the Firmware Revision String  with value \(value) and data \(datastring)")
-//            currentBeacon?.firmwareRevision = datastring as String
-//        default:
-//            break
-//        }
         
         //Device information
         switch String(describing: characteristic.uuid) {

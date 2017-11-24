@@ -96,6 +96,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
                 
                 self.present(alertController, animated: true, completion:  nil)
             } else {
+                _ = ParabitNetworking.sharedInstance
                 self.username.text = nil
                 self.dismiss(animated: true, completion: nil)
             }

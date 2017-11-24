@@ -17,6 +17,7 @@ target 'ParabitTechnicianApp' do
    pod 'AWSAuthCore', '~> 2.6.5'
    pod 'AWSUserPoolsSignIn', '~> 2.6.5'
    pod 'AWSAuthUI', '~> 2.6.5'
+   pod "iOSSideMainMenu"
 
   # Pods for ParabitTechnicianApp
 

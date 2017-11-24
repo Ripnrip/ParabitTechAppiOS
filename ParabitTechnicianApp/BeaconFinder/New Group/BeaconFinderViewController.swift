@@ -10,7 +10,8 @@ import UIKit
 import SwiftSpinner
 import BPStatusBarAlert
 import CoreBluetooth
- 
+import AWSCognitoIdentityProvider
+
 class BeaconFinderViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
@@ -55,9 +56,11 @@ class BeaconFinderViewController: UIViewController {
     var remainConnectableCallback: (() -> Void)?
     var factoryResetCallback: (() -> Void)?
 
+    var user: AWSCognitoIdentityUser?
+
+    
     override func viewWillAppear(_ animated: Bool) {
         UIApplication.shared.statusBarStyle = .lightContent
-
     }
     
     override func viewDidLoad() {
@@ -71,8 +74,11 @@ class BeaconFinderViewController: UIViewController {
         
         self.tableView.separatorColor = UIColor.clear
         
+        guard let isSignedIn = user?.isSignedIn else { return }
+        if !isSignedIn { return }
         centralManager = CBCentralManager(delegate: self,
                                           queue: nil)
+
         
     }
 
@@ -101,6 +107,9 @@ class BeaconFinderViewController: UIViewController {
   }
     
     func resetBluetooth () {
+        
+        if centralManager == nil { centralManager = CBCentralManager(delegate: self,
+                                                                     queue: nil)}
         SwiftSpinner.show(duration: 4, title: "Scanning")
         let when = DispatchTime.now() + 0 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {

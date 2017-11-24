@@ -235,15 +235,18 @@
                                 <rect key="frame" x="-139" y="0.0" width="139" height="667"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbE-P8-NN6">
-                                        <rect key="frame" x="0.0" y="76" width="139" height="42"/>
+                                        <rect key="frame" x="0.0" y="91" width="139" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Home">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="homeTapped:" destination="pJi-zV-voA" eventType="touchUpInside" id="Tlx-Xb-cv2"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Fk-RY-rib">
-                                        <rect key="frame" x="0.0" y="126" width="139" height="42"/>
+                                        <rect key="frame" x="0.0" y="141" width="139" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Profile">
@@ -253,7 +256,7 @@
                                             <action selector="profileTapped:" destination="pJi-zV-voA" eventType="touchUpInside" id="JJ7-hp-EDt"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRz-3V-1HR">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRz-3V-1HR">
                                         <rect key="frame" x="0.0" y="617" width="139" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="27V-Fi-tCl"/>

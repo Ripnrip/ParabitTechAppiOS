@@ -109,6 +109,11 @@ class BeaconFinderViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func homeTapped(_ sender: Any) {
+        showMenu()
+    }
+    
     @IBAction func profileTapped(_ sender: Any) {
         guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "attributesView") as? UserDetailTableViewController else { return }
         self.navigationController?.pushViewController(vc, animated: true)
@@ -157,6 +162,8 @@ class BeaconFinderViewController: UIViewController {
             self.deviceInformationService = nil
             self.availableDoors = []
             self.centralManager.scanForPeripherals(withServices: nil, options: nil)
+            self.currentBeacon?.isUnlocked = false
+            self.isBeaconUnlocked = false
             self.tableView.reloadData()
         }
     }

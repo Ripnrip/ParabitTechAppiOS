@@ -128,12 +128,12 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 if availableDoors.contains(where: { $0.name == peripheralName }) {
                     // found
                     tableView.reloadData()
-                    SwiftSpinner.hide()
+                    //SwiftSpinner.hide()
                 } else {
                     // not
                     availableDoors.append(door)
                     tableView.reloadData()
-                    SwiftSpinner.hide()
+                    //SwiftSpinner.hide()
                 }
               }
           }
@@ -228,11 +228,38 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             print("there was an error discovering the characteristics \(characteristic) from \(sensorTag)")
         }
 
+//        switch String(describing: characteristic.uuid) {
+//        case "Firmware Revision String":
+//            guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
+//            print("found the Firmware Revision String  with value \(value) and data \(datastring)")
+//            currentBeacon?.firmwareRevision = datastring as String
+//        default:
+//            break
+//        }
+        
+        //Device information
         switch String(describing: characteristic.uuid) {
         case "Firmware Revision String":
             guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
             print("found the Firmware Revision String  with value \(value) and data \(datastring)")
             currentBeacon?.firmwareRevision = datastring as String
+        case "Manufacturer Name String":
+            guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
+            print("found the manufacturer string with value \(value) and data \(datastring)")
+            currentBeacon?.deviceName = datastring as String
+        case "Model Number String":
+            guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
+            print("found the Model Number String  with value \(value) and data \(datastring)")
+            currentBeacon?.modelNumber = datastring as String
+        case "Serial Number String":
+            guard let value = characteristic.value  else { return }
+            guard let string = String(data: value, encoding: .utf8) else {print("not a valid UTF-8 sequence");return}
+            print("found the Serial Number String with value \(value) and data \(string)")
+            currentBeacon?.serialNumber = string
+        case "Hardware Revision String":
+            guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
+            print("found the Hardware Revision String with value \(value) and data \(datastring)")
+            currentBeacon?.hardware = datastring as String
         default:
             break
         }
@@ -240,32 +267,6 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         if isBeaconUnlocked {
                // print("the updated values for characteristic is \(characteristic.uuid) with value \(characteristic.value) ")
             
-            //Device information
-            switch String(describing: characteristic.uuid) {
-            case "Firmware Revision String":
-                guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
-                print("found the Firmware Revision String  with value \(value) and data \(datastring)")
-                currentBeacon?.firmwareRevision = datastring as String
-            case "Manufacturer Name String":
-                guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
-                print("found the manufacturer string with value \(value) and data \(datastring)")
-                currentBeacon?.deviceName = datastring as String
-            case "Model Number String":
-                guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
-                print("found the Model Number String  with value \(value) and data \(datastring)")
-                currentBeacon?.modelNumber = datastring as String
-            case "Serial Number String":
-                guard let value = characteristic.value  else { return }
-                guard let string = String(data: value, encoding: .utf8) else {print("not a valid UTF-8 sequence");return}
-                print("found the Serial Number String with value \(value) and data \(string)")
-                currentBeacon?.serialNumber = string
-            case "Hardware Revision String":
-                guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
-                print("found the Hardware Revision String with value \(value) and data \(datastring)")
-                currentBeacon?.hardware = datastring as String
-            default:
-                break
-            }
             
             //Characteristics Information
             switch characteristic.uuid {
@@ -283,6 +284,10 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 print("Found the Advertising Characteristic ID \(characteristic)")
                 currentBeacon?.advertisingValue = beaconInvestigation?.didReadAdvertisingInterval()
                 currentBeacon?.advertisingIntervalCharacteristic = characteristic
+                
+                SwiftSpinner.hide()
+                self.tableView.reloadData()
+
             case CharacteristicID.remainConnectable.UUID:
                 beaconInvestigation?.didReadRemainConnectableState()
                 guard let slotData = beaconInvestigation?.slotData else { break }
@@ -320,15 +325,10 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             sensorTag.readValue(for: characteristic)
         case CharacteristicID.unlock.UUID:
             //Wrote to the unlock characteristic, the other values should be ready
-            SwiftSpinner.hide()
-            isBeaconUnlocked = true
-            
+            //this means it was unlocked
             guard let advSlotChar = currentBeacon?.advSlotDataCharacteristic else { return }
             sensorTag.readValue(for: advSlotChar)
-            
-            guard let deviceInfoService = deviceInformationService else { return }
-            peripheral.discoverCharacteristics(nil, for: deviceInfoService)
-            
+        
             guard let callback = lockStateCallback else { return }
             checkLockState(passkey: nil, lockStateCallback: callback)
         case CharacteristicID.lockState.UUID:
@@ -475,10 +475,10 @@ else { return }
                 guard let unlockToken = unlockString?.hexadecimal() else { return }
                 self.didAttemptUnlocking = true
                 self.currentBeacon?.isUnlocked = true
+                self.isBeaconUnlocked = true
                 self.sensorTag.writeValue(unlockToken,
                                      for: characteristic,
                                      type: CBCharacteristicWriteType.withResponse)
-                self.tableView.reloadData()
             }else{
                 print("failed getting the unlock challenge from the endpoint")
             }

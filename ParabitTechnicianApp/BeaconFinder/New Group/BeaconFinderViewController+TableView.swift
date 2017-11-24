@@ -50,7 +50,7 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         }else{
             //if non-connectable, alert user
             BPStatusBarAlert(duration: 0.5, delay: 0.5, position: .statusBar) // customize duration, delay and position
-                .message(message: "Beacon not configurable")
+                .message(message: "Can not access the Beacon, please try connecting")
                 .messageColor(color: .white)
                 .bgColor(color: .red)
                 .completion { print("")}
@@ -77,7 +77,7 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         }
         else {
             cell.configurableStatusLabel.isHidden = true
-            cell.disconnectButton.isHidden = false
+            //cell.disconnectButton.isHidden = false
             cell.connectButton.isHidden = true
             cell.statusBubbleImageView.backgroundColor = UIColor.red
         }
@@ -85,6 +85,9 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         if self.currentBeacon?.isUnlocked == true {
             cell.disconnectButton.isHidden = false
             cell.connectButton.isHidden = true
+        }else{
+            cell.disconnectButton.isHidden = true
+            
         }
         
         cell.statusBubbleImageView.layer.cornerRadius = cell.statusBubbleImageView.frame.height/2
@@ -108,7 +111,8 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         guard let sensor = sensorTag else { return }
         centralManager.connect(sensor, options: nil)
         
-        SwiftSpinner.show(delay: 4.0, title: "Connecting")
+        //SwiftSpinner.show(delay: 4.0, title: "Connecting")
+        SwiftSpinner.show("Connecting", animated: true)
         
         
     }

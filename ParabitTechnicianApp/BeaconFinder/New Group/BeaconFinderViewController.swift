@@ -12,8 +12,10 @@ import BPStatusBarAlert
 import CoreBluetooth
 import AWSCognitoIdentityProvider
 
+
 class BeaconFinderViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var menuView: UIView!
     
     var beacons = [Parabeacon]()
     var currentBeacon:Peripheral?
@@ -57,7 +59,8 @@ class BeaconFinderViewController: UIViewController {
     var factoryResetCallback: (() -> Void)?
 
     var user: AWSCognitoIdentityUser?
-
+    
+    var isMenuShown:Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
         UIApplication.shared.statusBarStyle = .lightContent
@@ -66,11 +69,21 @@ class BeaconFinderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
+        user = pool.currentUser()
+        
         tableView.separatorColor = UIColor.clear
         self.title = "Parabit Beacon Configuration"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.orange
+        let btn1 = UIButton(type: .custom)
+        btn1.setImage(UIImage(named: "menu"), for: .normal)
+        btn1.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        btn1.addTarget(self, action: #selector(BeaconFinderViewController.showMenu), for: .touchUpInside)
+        let item1 = UIBarButtonItem(customView: btn1)
+        
+        self.navigationItem.setLeftBarButton(item1, animated: true)
         
         self.tableView.separatorColor = UIColor.clear
         
@@ -81,6 +94,50 @@ class BeaconFinderViewController: UIViewController {
 
         
     }
+    
+    func showMenu() {
+        if isMenuShown {
+            UIView.animate(withDuration: 0.5) {
+                self.menuView.frame = CGRect(x: -180, y: self.menuView.frame.origin.y, width: self.menuView.frame.width, height: self.menuView.frame.height)
+                    self.isMenuShown = false
+            }
+        }else{
+            UIView.animate(withDuration: 0.5) {
+                self.menuView.frame = CGRect(x: 0, y: self.menuView.frame.origin.y, width: self.menuView.frame.width, height: self.menuView.frame.height)
+                    self.isMenuShown = true
+                }
+        }
+    }
+    
+    @IBAction func profileTapped(_ sender: Any) {
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "attributesView") as? UserDetailTableViewController else { return }
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func signOutTapped(_ sender: Any) {
+        let alertController = UIAlertController(title: "Sign Out", message: "Are you sure you would like to sign out?", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+        
+        let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
+            (result : UIAlertAction) -> Void in
+            print("OK")
+            self.user?.signOut()
+            guard let signupController = self.storyboard?.instantiateViewController(withIdentifier: "signInViewController") as? SignInViewController else { return }
+            self.present(signupController, animated: true, completion: nil)
+        }
+        
+        let DestructiveAction = UIAlertAction(title: "No", style: UIAlertActionStyle.destructive) {
+            (result : UIAlertAction) -> Void in
+            print("No")
+        }
+        
+        alertController.addAction(okAction)
+        alertController.addAction(DestructiveAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+
+    
+    }
+    
 
     @IBAction func refresh(_ sender: Any) {
         self.resetBluetooth()

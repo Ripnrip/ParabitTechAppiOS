@@ -231,14 +231,61 @@
                                     <action selector="refresh:" destination="pJi-zV-voA" eventType="touchUpInside" id="XZb-wH-w9v"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GUJ-Ig-vJL">
+                                <rect key="frame" x="-139" y="0.0" width="139" height="667"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbE-P8-NN6">
+                                        <rect key="frame" x="0.0" y="76" width="139" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <state key="normal" title="Home">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Fk-RY-rib">
+                                        <rect key="frame" x="0.0" y="126" width="139" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <state key="normal" title="Profile">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="profileTapped:" destination="pJi-zV-voA" eventType="touchUpInside" id="JJ7-hp-EDt"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRz-3V-1HR">
+                                        <rect key="frame" x="0.0" y="617" width="139" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="42" id="27V-Fi-tCl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <state key="normal" title="Sign Out">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="signOutTapped:" destination="pJi-zV-voA" eventType="touchUpInside" id="5yU-LT-LMu"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96206325290000005" green="0.4814415574" blue="0.12690275910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="uRz-3V-1HR" secondAttribute="bottom" constant="8" id="6zZ-Yb-oev"/>
+                                    <constraint firstItem="uRz-3V-1HR" firstAttribute="leading" secondItem="GUJ-Ig-vJL" secondAttribute="leading" id="7dg-LK-o7C"/>
+                                    <constraint firstAttribute="width" constant="139" id="F6y-7A-jqj"/>
+                                    <constraint firstAttribute="trailing" secondItem="uRz-3V-1HR" secondAttribute="trailing" id="N33-3r-8Ub"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Bc7-v7-Zl8" firstAttribute="bottom" secondItem="qHP-qR-Gui" secondAttribute="bottom" constant="45" id="2UI-hQ-8go"/>
                             <constraint firstItem="Bc7-v7-Zl8" firstAttribute="trailing" secondItem="qHP-qR-Gui" secondAttribute="trailing" constant="19" id="8vD-VA-kpH"/>
                             <constraint firstItem="JnZ-t8-Cah" firstAttribute="leading" secondItem="Bc7-v7-Zl8" secondAttribute="leading" id="8vj-Qr-lO9"/>
+                            <constraint firstItem="GUJ-Ig-vJL" firstAttribute="top" secondItem="Uce-ic-jbJ" secondAttribute="top" id="JgF-4j-lMX"/>
                             <constraint firstItem="JnZ-t8-Cah" firstAttribute="trailing" secondItem="Bc7-v7-Zl8" secondAttribute="trailing" id="abs-kh-5tJ"/>
+                            <constraint firstItem="JnZ-t8-Cah" firstAttribute="leading" secondItem="GUJ-Ig-vJL" secondAttribute="trailing" id="cEQ-TJ-9Uz"/>
                             <constraint firstItem="JnZ-t8-Cah" firstAttribute="bottom" secondItem="Bc7-v7-Zl8" secondAttribute="bottom" id="ckl-oa-v9b"/>
+                            <constraint firstAttribute="bottom" secondItem="GUJ-Ig-vJL" secondAttribute="bottom" id="j9j-qn-CKo"/>
                             <constraint firstItem="JnZ-t8-Cah" firstAttribute="top" secondItem="Uce-ic-jbJ" secondAttribute="top" id="uOG-cY-qlP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Bc7-v7-Zl8"/>
@@ -246,6 +293,7 @@
                     <navigationItem key="navigationItem" id="bjw-qU-hCF"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="menuView" destination="GUJ-Ig-vJL" id="9W0-rV-wO0"/>
                         <outlet property="tableView" destination="JnZ-t8-Cah" id="rOW-r1-8t2"/>
                     </connections>
                 </viewController>
@@ -944,7 +992,7 @@
         <!--SignIn View Controller-->
         <scene sceneID="iWi-cz-6jd">
             <objects>
-                <viewController id="1Ib-3E-jU2" userLabel="SignIn View Controller" customClass="SignInViewController" customModule="ParabitTechnicianApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1Ib-3E-jU2" userLabel="SignIn View Controller" customClass="SignInViewController" customModule="ParabitTechnicianApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gpH-Sb-FAY"/>
                         <viewControllerLayoutGuide type="bottom" id="pPd-w3-nP1"/>
@@ -981,11 +1029,11 @@
                                     <constraint firstAttribute="height" constant="180" id="tru-FS-yi9"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZc-iZ-6b7">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZc-iZ-6b7">
                                 <rect key="frame" x="16" y="414" width="55" height="30"/>
                                 <state key="normal" title="Sign Up"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jf0-7q-zlb">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jf0-7q-zlb">
                                 <rect key="frame" x="244" y="414" width="115" height="30"/>
                                 <state key="normal" title="Forgot Password"/>
                             </button>
@@ -1064,7 +1112,7 @@
         <!--User Details-->
         <scene sceneID="7VW-MS-FVH">
             <objects>
-                <tableViewController storyboardIdentifier="attributesView" id="adf-ba-rBp" userLabel="User Details" customClass="UserDetailTableViewController" customModule="ParabitTechnicianApp" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="attributesView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="adf-ba-rBp" userLabel="User Details" customClass="UserDetailTableViewController" customModule="ParabitTechnicianApp" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="K9P-gR-wBr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1101,7 +1149,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem title="Devices" id="EJc-DJ-pyE"/>
+                        <barButtonItem id="EJc-DJ-pyE"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="xA1-ch-z5V"/>
                         <barButtonItem title="Sign out" id="mS3-PV-ZHG">
                             <connections>
@@ -1114,7 +1162,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CKh-rh-VWn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1201" y="877"/>
+            <point key="canvasLocation" x="2354" y="870"/>
         </scene>
     </scenes>
     <resources>

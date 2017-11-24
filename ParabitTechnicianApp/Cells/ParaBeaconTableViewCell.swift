@@ -20,6 +20,7 @@ class ParaBeaconTableViewCell: UITableViewCell {
     @IBOutlet weak var configurableStatusLabel: UILabel!
     @IBOutlet weak var registeredLabel: UILabel!
     @IBOutlet weak var disconnectButton: UIButton!
+    @IBOutlet weak var connectButton: UIButton!
     
     
     override func awakeFromNib() {

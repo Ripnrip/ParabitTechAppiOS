@@ -64,18 +64,27 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         let currentBeacon = availableDoors[indexPath.row]
         
         cell.beaconNameLabel.text = currentBeacon.name
+        
+        cell.connectButton.addTarget(self, action: #selector(BeaconFinderViewController.connectTapped(_:)), for: .touchUpInside)
         cell.disconnectButton.addTarget(self, action: #selector(BeaconFinderViewController.disconnectTapped(_:)), for: .touchUpInside)
+
 
         if currentBeacon.isConnectable == true  {
             cell.configurableStatusLabel.isHidden = false
-            cell.disconnectButton.isHidden = false
+            cell.disconnectButton.isHidden = true
+            cell.connectButton.isHidden = false
             cell.statusBubbleImageView.backgroundColor = UIColor.green
         }
         else {
             cell.configurableStatusLabel.isHidden = true
-            cell.disconnectButton.isHidden = true
+            cell.disconnectButton.isHidden = false
+            cell.connectButton.isHidden = true
             cell.statusBubbleImageView.backgroundColor = UIColor.red
-
+        }
+        
+        if self.currentBeacon?.isUnlocked == true {
+            cell.disconnectButton.isHidden = false
+            cell.connectButton.isHidden = true
         }
         
         cell.statusBubbleImageView.layer.cornerRadius = cell.statusBubbleImageView.frame.height/2
@@ -92,6 +101,16 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         guard let sensor = sensorTag else { return }
         self.centralManager.cancelPeripheralConnection(sensor)
         self.refresh(self)
+    }
+    
+    func connectTapped(_ sender: Any?) {
+        print("connectTapped", sender)
+        guard let sensor = sensorTag else { return }
+        centralManager.connect(sensor, options: nil)
+        
+        SwiftSpinner.show(delay: 4.0, title: "Connecting")
+        
+        
     }
     
     

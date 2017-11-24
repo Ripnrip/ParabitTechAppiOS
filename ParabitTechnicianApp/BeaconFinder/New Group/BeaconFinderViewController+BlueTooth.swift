@@ -117,7 +117,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                         availableDoors.append(door)
                         tableView.reloadData()
                     }
-                centralManager.connect(sensorTag, options: nil)
+                // stop autoconnecting centralManager.connect(sensorTag, options: nil)
 
                 }else{
                 //add peripheral to available doors tableview, but don't add the sensor, and set nil for sensortag, and false for isConnectable
@@ -148,7 +148,9 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             .message(message: "Successfully connected to the device")
             .messageColor(color: .white)
             .bgColor(color: .green)
-            .completion { print("")}
+            .completion { print("")
+                
+            }
             .show()
         
         // Now that we've successfully connected to the SensorTag, let's discover the services.
@@ -472,9 +474,11 @@ else { return }
             if unlockString != nil {
                 guard let unlockToken = unlockString?.hexadecimal() else { return }
                 self.didAttemptUnlocking = true
+                self.currentBeacon?.isUnlocked = true
                 self.sensorTag.writeValue(unlockToken,
                                      for: characteristic,
                                      type: CBCharacteristicWriteType.withResponse)
+                self.tableView.reloadData()
             }else{
                 print("failed getting the unlock challenge from the endpoint")
             }

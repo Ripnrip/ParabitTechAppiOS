@@ -83,27 +83,7 @@ class BeaconFinderViewController: UIViewController {
     }
 
     @IBAction func refresh(_ sender: Any) {
-        
-        if sensorTag != nil {
-        //Ask user if the want to disconnect from the current beacon
-        let alertController = UIAlertController(title: "Find New Beacons", message: "Are you sure you would like to disconnect from the current beacon?", preferredStyle: UIAlertControllerStyle.alert)
-        let DestructiveAction = UIAlertAction(title: "No", style: UIAlertActionStyle.destructive) {
-            (result : UIAlertAction) -> Void in
-            print("No")
-        }
-        let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
-            (result : UIAlertAction) -> Void in
-            print("OK")
-            self.resetBluetooth()
-        }
-        alertController.addAction(okAction)
-        alertController.addAction(DestructiveAction)
-        
-        self.present(alertController, animated: true, completion: nil)
-    } else {
-        //regular refresh
-            self.resetBluetooth()
-    }
+        self.resetBluetooth()
   }
     
     func resetBluetooth () {

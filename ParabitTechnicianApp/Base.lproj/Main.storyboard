@@ -171,6 +171,18 @@
                                                     <color key="textColor" red="0.99602621793746948" green="0.0" blue="0.034961890429258347" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tcf-jm-6sp">
+                                                    <rect key="frame" x="277" y="13.5" width="83" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="83" id="51i-bl-Vz8"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="83" id="AUT-m4-T9g"/>
+                                                        <constraint firstAttribute="height" constant="16" id="aUw-JB-fQv"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="obr-fh-PHo"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Connect">
+                                                        <color key="titleColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fkt-zs-m7G">
                                                     <rect key="frame" x="277" y="14" width="83" height="16"/>
                                                     <constraints>
@@ -184,8 +196,10 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Fkt-zs-m7G" secondAttribute="trailing" constant="15" id="2ma-3j-YRG"/>
+                                                <constraint firstAttribute="trailing" secondItem="tcf-jm-6sp" secondAttribute="trailing" constant="15" id="HGO-3y-XFz"/>
                                                 <constraint firstAttribute="trailing" secondItem="ssW-Ya-jTZ" secondAttribute="trailing" constant="15" id="JjA-lS-as7"/>
                                                 <constraint firstItem="Fkt-zs-m7G" firstAttribute="top" secondItem="BTS-Sf-GIp" secondAttribute="top" constant="14" id="VVg-3J-tEX"/>
+                                                <constraint firstItem="tcf-jm-6sp" firstAttribute="top" secondItem="BTS-Sf-GIp" secondAttribute="top" constant="14" id="VvM-5R-xDg"/>
                                                 <constraint firstAttribute="bottom" secondItem="ssW-Ya-jTZ" secondAttribute="bottom" constant="3.5" id="fg1-j3-1LQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -193,6 +207,7 @@
                                             <outlet property="addressLabel" destination="grB-ue-msi" id="d5t-mz-g7C"/>
                                             <outlet property="beaconNameLabel" destination="X56-hf-V1A" id="YIR-Qu-yZN"/>
                                             <outlet property="configurableStatusLabel" destination="luO-1E-s7R" id="Tku-nB-yOG"/>
+                                            <outlet property="connectButton" destination="tcf-jm-6sp" id="YKz-i6-zju"/>
                                             <outlet property="disconnectButton" destination="Fkt-zs-m7G" id="8vE-Q4-Il8"/>
                                             <outlet property="registeredLabel" destination="bwx-U2-orU" id="Ztb-PR-vgu"/>
                                             <outlet property="rssiLabel" destination="ssW-Ya-jTZ" id="ecr-EM-qJd"/>

@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 import AWSCognitoIdentityProvider
-
+import SwiftSpinner
 
 class ParabitNetworking: NSObject {
     static let sharedInstance = ParabitNetworking()
@@ -110,12 +110,13 @@ class ParabitNetworking: NSObject {
         
         let headers:[String : String] = ["x-api-key" : apiKey]
         let parameters:[String : Any] = ["firmware_revision":currentFirmwareRevision,"challenge":unlockChallenge]
-        
+
         Alamofire.request(url, method: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (dataResponse) in
             
             if dataResponse.error != nil || dataResponse.response?.statusCode != 200 {
                 print("there was an error getting the firmware unlock for revision \(dataResponse.error)")
                 completionHandler(nil)
+                SwiftSpinner.hide()
                 return
             }
             guard let request = dataResponse.request, let response = dataResponse.response, let value = dataResponse.value, let dict = value as? [String:Any], let unlockResponse = dict["unlock_response"] as? String

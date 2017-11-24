@@ -150,8 +150,11 @@ class BeaconFinderViewController: UIViewController {
     
     func resetBluetooth () {
         
-        if centralManager == nil { centralManager = CBCentralManager(delegate: self,
-                                                                     queue: nil)}
+        if centralManager == nil {
+            centralManager = CBCentralManager(delegate: self,queue: nil)
+            
+        }
+        
         SwiftSpinner.show(duration: 4, title: "Scanning")
         let when = DispatchTime.now() + 0 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {

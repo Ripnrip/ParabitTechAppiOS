@@ -133,9 +133,20 @@ class ParabitNetworking: NSObject {
                 print("the response for getting user info in the ParabitNetworkingClass is \(self.response?.userAttributes)")
                 
                 guard let userAttributes = self.response?.userAttributes else { return }
-                self.firmwareAPIVersion = userAttributes[2]
-                self.firmwareAPIKey = userAttributes[3]
-                self.firmwareAPIURL = userAttributes[4] 
+                
+                userAttributes.forEach({ (attribute) in
+                    switch attribute.name! {
+                        case "custom:firmware-api-key":
+                            self.firmwareAPIKey = attribute
+                        case "custom:firmware-api-url":
+                            self.firmwareAPIURL = attribute
+                        case "custom:firmware-api-version":
+                            self.firmwareAPIVersion = attribute
+                        default:
+                        print("printing value for attribute \(attribute)")
+                    }
+                })
+
             })
             return nil
         }

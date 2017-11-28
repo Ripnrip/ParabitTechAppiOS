@@ -88,7 +88,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
     public func didCompleteStepWithError(_ error: Error?) {
         DispatchQueue.main.async {
             if let error = error as? NSError {
-                let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
+                let alertController = UIAlertController(title: "Log In Error",
                                                         message: error.userInfo["message"] as? String,
                                                         preferredStyle: .alert)
                 let retryAction = UIAlertAction(title: "Retry", style: .default, handler: nil)

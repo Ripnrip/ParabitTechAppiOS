@@ -345,6 +345,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IAK-hf-7xx"/>
                     </view>
+                    <connections>
+                        <outlet property="feedbackTextView" destination="2cq-fG-P2q" id="iMz-vD-71d"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jlV-V6-Z6p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -25,6 +25,10 @@ class ParabitNetworking: NSObject {
     var firmwareAPIKey:AWSCognitoIdentityProviderAttributeType?
     var firmwareAPIURL: AWSCognitoIdentityProviderAttributeType?
     
+    var feedbackAPIURL:AWSCognitoIdentityProviderAttributeType?
+    var feedbackAPIKey:AWSCognitoIdentityProviderAttributeType?
+    
+    
     fileprivate override init() {
         isInitialized = false
         super.init()
@@ -102,6 +106,7 @@ class ParabitNetworking: NSObject {
         }
     }
     
+    //Mark: POST a unlock code to get an unlock token
     func getUnlockToken(currentFirmwareRevision:String, unlockChallenge:String, completionHandler:@escaping (String?) -> ()) {
         guard let url = URL(string: "\(baseURL)firmware/unlock"),
         let apiKey = firmwareAPIKey?.value
@@ -125,6 +130,43 @@ class ParabitNetworking: NSObject {
                 }
     }
     
+    //Mark: POST Feedback about the app
+    func submitFeedback(feedback:String, context:String?, completionHandler:@escaping (Bool) -> ()) {
+        //category general
+        guard var url = feedbackAPIURL?.value,
+            let apiKey = feedbackAPIKey?.value,
+            let username = user?.username
+            else { return }
+        
+        url = "\(url)feedback"
+        print("the url for the POST firmware unlcok is \(url)")
+        let headers:[String : String] = ["x-api-key" : apiKey]
+        let parameters:[String : Any] = ["username":username,"feedback":feedback,"context":"","category":"general"]
+        
+        Alamofire.request(url, method: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (dataResponse) in
+            
+            if dataResponse.error != nil || dataResponse.response?.statusCode != 200 {
+                print("there was an error getting the firmware unlock for revision \(dataResponse.error)")
+                completionHandler(false)
+                SwiftSpinner.hide()
+                return
+            }
+            guard let request = dataResponse.request, let response = dataResponse.response, let value = dataResponse.value, let dict = value as? [String:Any]
+                else {return}
+            print("the response from posting feedback is \(response)")
+            completionHandler(true)
+            
+        }
+            
+    }
+    
+    //Mark: POST Problem about the app
+    func submitProblem(problem:String, context:String?, completionHandler:@escaping (Bool) -> ()) {
+        //category problem
+        
+        
+    }
+    
     //Mark: Helper for authentication
     func getAuthenticationKeys() {
         self.user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
@@ -142,6 +184,10 @@ class ParabitNetworking: NSObject {
                             self.firmwareAPIURL = attribute
                         case "custom:firmware-api-version":
                             self.firmwareAPIVersion = attribute
+                        case "custom:feedback-api-url":
+                            self.feedbackAPIURL = attribute
+                        case "custom:feedback-api-key":
+                            self.feedbackAPIKey = attribute
                         default:
                         print("printing value for attribute \(attribute)")
                     }

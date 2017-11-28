@@ -9,7 +9,8 @@
 import UIKit
 
 class FeedbackViewController: UIViewController {
-
+    @IBOutlet weak var feedbackTextView: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -25,7 +26,13 @@ class FeedbackViewController: UIViewController {
     }
     
     func sendFeedback() {
-        
+        ParabitNetworking.sharedInstance.submitFeedback(feedback: feedbackTextView.text, context: "") { (success) in
+            if success {
+                print("succesfully send feedback")
+            }else{
+                print("error in sending feedback")
+            }
+        }
     }
 
     

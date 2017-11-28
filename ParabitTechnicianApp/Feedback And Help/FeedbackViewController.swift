@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BPStatusBarAlert
 
 class FeedbackViewController: UIViewController {
     @IBOutlet weak var feedbackTextView: UITextView!
@@ -29,8 +30,23 @@ class FeedbackViewController: UIViewController {
         ParabitNetworking.sharedInstance.submitFeedback(feedback: feedbackTextView.text, context: "") { (success) in
             if success {
                 print("succesfully send feedback")
+                
+                BPStatusBarAlert(duration: 0.1, delay: 2, position: .statusBar) // customize duration, delay and position
+                    .message(message: "Successfully sent feedback, thank you!")
+                    .messageColor(color: .white)
+                    .bgColor(color: .green)
+                    .completion { self.navigationController?.popViewController(animated: true) }
+                    .show()
             }else{
                 print("error in sending feedback")
+                
+                BPStatusBarAlert(duration: 0.1, delay: 2, position: .statusBar) // customize duration, delay and position
+                    .message(message: "Error sending feedback, please try again later.")
+                    .messageColor(color: .white)
+                    .bgColor(color: .red)
+                    .completion { print("")
+                    }
+                    .show()
             }
         }
     }

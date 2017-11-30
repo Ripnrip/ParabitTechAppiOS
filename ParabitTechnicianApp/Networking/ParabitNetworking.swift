@@ -21,12 +21,15 @@ class ParabitNetworking: NSObject {
     var user: AWSCognitoIdentityUser?
     var pool: AWSCognitoIdentityUserPool?
     
-    var firmwareAPIVersion:AWSCognitoIdentityProviderAttributeType?
-    var firmwareAPIKey:AWSCognitoIdentityProviderAttributeType?
+    var firmwareAPIVersion: AWSCognitoIdentityProviderAttributeType?
+    var firmwareAPIKey: AWSCognitoIdentityProviderAttributeType?
     var firmwareAPIURL: AWSCognitoIdentityProviderAttributeType?
     
-    var feedbackAPIURL:AWSCognitoIdentityProviderAttributeType?
-    var feedbackAPIKey:AWSCognitoIdentityProviderAttributeType?
+    var feedbackAPIURL: AWSCognitoIdentityProviderAttributeType?
+    var feedbackAPIKey: AWSCognitoIdentityProviderAttributeType?
+    
+    var beaconAPIRUL: AWSCognitoIdentityProviderAttributeType?
+    var beaconAPIKey: AWSCognitoIdentityProviderAttributeType?
     
     var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
     var timer:Timer!
@@ -212,6 +215,10 @@ class ParabitNetworking: NSObject {
                             self.feedbackAPIURL = attribute
                         case "custom:feedback-api-key":
                             self.feedbackAPIKey = attribute
+                        case "custom:beacon-api-key":
+                            self.beaconAPIRUL = attribute
+                        case "custom:beacon-api-url":
+                            self.beaconAPIKey = attribute
                         default:
                         print("printing value for attribute \(attribute)")
                     }

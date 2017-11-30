@@ -126,6 +126,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
             } else {
                 _ = ParabitNetworking.sharedInstance
                 ParabitNetworking.sharedInstance.startSessionTimer()
+                ParabitNetworking.sharedInstance.getAuthenticationKeys()
                 self.username.text = nil
                 self.dismiss(animated: true, completion: nil)
             }

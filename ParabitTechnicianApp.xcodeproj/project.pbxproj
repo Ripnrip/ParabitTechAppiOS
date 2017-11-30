@@ -53,6 +53,7 @@
 		8CF3A4FB1FB3B49F009A4ACE /* ConfirmSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3A4F61FB3B49F009A4ACE /* ConfirmSignUpViewController.swift */; };
 		8CF3A4FC1FB3B49F009A4ACE /* ConfirmForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3A4F71FB3B49F009A4ACE /* ConfirmForgotPasswordViewController.swift */; };
 		8CF3A4FD1FB3B49F009A4ACE /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3A4F81FB3B49F009A4ACE /* ForgotPasswordViewController.swift */; };
+		8CF441BA1FD0912E00486A66 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF441B91FD0912E00486A66 /* Date.swift */; };
 		8CFB012F1F98EC070044FB89 /* ParabitNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFB012E1F98EC070044FB89 /* ParabitNetworking.swift */; };
 		D58E3C424C30575BEC3671C5 /* Pods_ParabitTechnicianApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DF9117B55B3B48863A8BA6 /* Pods_ParabitTechnicianApp.framework */; };
 /* End PBXBuildFile section */
@@ -108,6 +109,7 @@
 		8CF3A4F61FB3B49F009A4ACE /* ConfirmSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmSignUpViewController.swift; sourceTree = "<group>"; };
 		8CF3A4F71FB3B49F009A4ACE /* ConfirmForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		8CF3A4F81FB3B49F009A4ACE /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		8CF441B91FD0912E00486A66 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		8CFB012E1F98EC070044FB89 /* ParabitNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParabitNetworking.swift; sourceTree = "<group>"; };
 		9C9D1D3944089DBCB06FBCEE /* Pods-ParabitTechnicianApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParabitTechnicianApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParabitTechnicianApp/Pods-ParabitTechnicianApp.release.xcconfig"; sourceTree = "<group>"; };
 		E3DF9117B55B3B48863A8BA6 /* Pods_ParabitTechnicianApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParabitTechnicianApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -276,6 +278,7 @@
 				8CB4D7A01F8D51FC00B26563 /* StringUtils.swift */,
 				8CB4D79E1F8D4F8000B26563 /* Constants.swift */,
 				8CE5DD7B1F9036E900B6A2DA /* BeaconHelper.swift */,
+				8CF441B91FD0912E00486A66 /* Date.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -342,6 +345,11 @@
 					8C5E0C6B1F86681D00F09225 = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -518,6 +526,7 @@
 				8C85A79F1F890B0000D185D0 /* BeaconTabBarController.swift in Sources */,
 				8CE5DD8C1F91163A00B6A2DA /* CustomViews.swift in Sources */,
 				8CE5DD7E1F91009500B6A2DA /* BeaconTabBarController+BlueTooth.swift in Sources */,
+				8CF441BA1FD0912E00486A66 /* Date.swift in Sources */,
 				8CFB012F1F98EC070044FB89 /* ParabitNetworking.swift in Sources */,
 				8CE5DD801F9112DC00B6A2DA /* GATTOperations.swift in Sources */,
 				8C85A7AB1F892AE400D185D0 /* UIDViewController+TableView.swift in Sources */,

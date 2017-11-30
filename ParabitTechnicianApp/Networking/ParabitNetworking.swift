@@ -228,7 +228,7 @@ class ParabitNetworking: NSObject {
         let oneHour = Int(60 * 60)
         let halfHour = Int(60 * 30)
         let fiveMinutes = Int(60 * 5)
-        timer = Timer.scheduledTimer(timeInterval: TimeInterval(fiveMinutes), target: self, selector: #selector(sessionTimeOut), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(halfHour), target: self, selector: #selector(sessionTimeOut), userInfo: nil, repeats: true)
     }
     
     func sessionTimeOut(){

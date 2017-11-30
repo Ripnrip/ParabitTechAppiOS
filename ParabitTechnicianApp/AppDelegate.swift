@@ -54,7 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.storyboard = UIStoryboard(name: "Main", bundle: nil)
         pool.delegate = self
         
-        //pool.currentUser()?.signOut()
+        //We want the technician to log in everytime
+        pool.currentUser()?.signOut()
 
         _ = ParabitNetworking.sharedInstance
 
@@ -153,6 +154,9 @@ extension AppDelegate: AWSCognitoIdentityRememberDevice {
                 DispatchQueue.main.async {
                     self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
                 }
+            }else{
+                print("some error NOT ")
+                
             }
         }
     }

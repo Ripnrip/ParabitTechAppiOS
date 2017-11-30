@@ -28,6 +28,9 @@ class ParabitNetworking: NSObject {
     var feedbackAPIURL:AWSCognitoIdentityProviderAttributeType?
     var feedbackAPIKey:AWSCognitoIdentityProviderAttributeType?
     
+    var timer:Timer!
+    var counter = 0
+    
     
     fileprivate override init() {
         isInitialized = false
@@ -213,6 +216,27 @@ class ParabitNetworking: NSObject {
                     }
                 })
 
+            })
+            return nil
+        }
+    }
+    
+    //Mark: Helper for session timer
+    func startSessionTimer(){
+        print("Started Session Timer")
+        let oneHour = Int(60 * 60)
+        let halfHour = Int(60 * 30)
+        let tenMintes = Int(60 * 10)
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(oneHour), target: self, selector: #selector(sessionTimeOut), userInfo: nil, repeats: true)
+
+    }
+    
+    func sessionTimeOut(){
+        print("Should End Session at time \(timer)")
+        user?.signOut()
+        self.user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
+            DispatchQueue.main.async(execute: {
+                self.response = task.result
             })
             return nil
         }

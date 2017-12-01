@@ -1,0 +1,65 @@
+PODS:
+  - Alamofire (4.5.1)
+  - AWSAuthCore (2.6.6):
+    - AWSCore (= 2.6.6)
+  - AWSAuthUI (2.6.6):
+    - AWSAuthCore (= 2.6.6)
+    - AWSCore (= 2.6.6)
+  - AWSCognito (2.6.6):
+    - AWSCore (= 2.6.6)
+  - AWSCognitoIdentityProvider (2.6.6):
+    - AWSCore (= 2.6.6)
+  - AWSCore (2.6.6)
+  - AWSDynamoDB (2.6.6):
+    - AWSCore (= 2.6.6)
+  - AWSLambda (2.6.6):
+    - AWSCore (= 2.6.6)
+  - AWSUserPoolsSignIn (2.6.6):
+    - AWSAuthCore (= 2.6.6)
+    - AWSCognitoIdentityProvider (= 2.6.6)
+  - BPStatusBarAlert (0.1.5)
+  - iOSDFULibrary (3.2.1):
+    - Zip (~> 0.7)
+  - iOSSideMainMenu (0.1.0)
+  - SideMenuController (0.2.4)
+  - SwiftSpinner (1.5.0)
+  - SwiftyJSON (4.0.0)
+  - Zip (0.8.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.0)
+  - AWSAuthCore (~> 2.6.5)
+  - AWSAuthUI (~> 2.6.5)
+  - AWSCognito
+  - AWSCognitoIdentityProvider
+  - AWSDynamoDB
+  - AWSLambda
+  - AWSUserPoolsSignIn (~> 2.6.5)
+  - BPStatusBarAlert
+  - iOSDFULibrary (~> 3.2.0)
+  - iOSSideMainMenu
+  - SideMenuController
+  - SwiftSpinner
+  - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  AWSAuthCore: 3d6f2d3a62efaa8a02fa4323ff4b297b56be0312
+  AWSAuthUI: a90df858b93c2b5fae0f4f2877e3416a5a9d4bd8
+  AWSCognito: 7683df59094f1b4cd50d5a8e870a8ff59224d9b3
+  AWSCognitoIdentityProvider: 123faad1d1e8361f2c76132f552008d5c4928541
+  AWSCore: 64619e45b47678afab53ca0f9b4fa380ebee6f0b
+  AWSDynamoDB: 02a1de576c49d3dc20c6ca6f11e692150e4a726a
+  AWSLambda: 23749db8fdfea90e4dfd1ce8785e6ea9264e0a05
+  AWSUserPoolsSignIn: 15181f004d5ef846ee94595a69502cce85c999a8
+  BPStatusBarAlert: 0bc567e3a0f740189239f49c6c516bd61cb3c758
+  iOSDFULibrary: f9544a7099c914eb5f1002dc58a5ff8c67dbc86d
+  iOSSideMainMenu: 4782796d2e2982891810567ff217944177c4fef1
+  SideMenuController: b463d2b3aa58e2afe57f57a07938fa9a647894ca
+  SwiftSpinner: 4c058c7a1d6b444dd2e1d70988ead40783097133
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  Zip: bb7d8370de00e50699633d91e03f2ec84f1ee437
+
+PODFILE CHECKSUM: d4e2f76dbf3922e1b8154a3c0603d130610953de
+
+COCOAPODS: 1.3.1

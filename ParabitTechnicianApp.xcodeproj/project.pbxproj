@@ -44,7 +44,6 @@
 		8CE5DD8E1F9116A800B6A2DA /* EIDConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5DD8D1F9116A800B6A2DA /* EIDConfiguration.swift */; };
 		8CE5DD901F9116DB00B6A2DA /* ConfigureBeaconSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5DD8F1F9116DA00B6A2DA /* ConfigureBeaconSlotData.swift */; };
 		8CF3A4EA1FB39198009A4ACE /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 8CF3A4E91FB39198009A4ACE /* awsconfiguration.json */; };
-		8CF3A4EC1FB3969F009A4ACE /* '.json in Resources */ = {isa = PBXBuildFile; fileRef = 8CF3A4EB1FB3969F009A4ACE /* '.json */; };
 		8CF3A4EF1FB3B375009A4ACE /* AWSConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3A4EE1FB3B374009A4ACE /* AWSConstants.swift */; };
 		8CF3A4F11FB3B399009A4ACE /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3A4F01FB3B399009A4ACE /* SignUpViewController.swift */; };
 		8CF3A4F31FB3B405009A4ACE /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3A4F21FB3B405009A4ACE /* SignInViewController.swift */; };
@@ -376,7 +375,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CF3A4EC1FB3969F009A4ACE /* '.json in Resources */,
 				8CF3A4EA1FB39198009A4ACE /* awsconfiguration.json in Resources */,
 				8C5E0C7A1F86681D00F09225 /* LaunchScreen.storyboard in Resources */,
 				8C3F44811FC4BB1A0051729C /* pb_secure_dfu_package.zip in Resources */,

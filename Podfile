@@ -9,7 +9,7 @@ target 'ParabitTechnicianApp' do
    pod 'BPStatusBarAlert'
    pod 'Alamofire', '~> 4.0' 
    pod 'SwiftyJSON'
-   pod 'iOSDFULibrary', '~> 3.2.1'
+   pod 'iOSDFULibrary', '~> 3.2.0'
    pod 'AWSCognito'
    pod 'AWSCognitoIdentityProvider'
    pod 'AWSDynamoDB'

@@ -100,6 +100,17 @@ class SignInViewController: UIViewController {
     
 }
 
+extension SignInViewController: AWSCognitoIdentityInteractiveAuthenticationDelegate{
+    
+    func startNewPasswordRequired() -> AWSCognitoIdentityNewPasswordRequired {
+        DispatchQueue.main.async{
+                /*Write your thread code here*/
+        }
+        
+        return NewPassworController
+    }
+}
+
 extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
     
     public func getDetails(_ authenticationInput: AWSCognitoIdentityPasswordAuthenticationInput, passwordAuthenticationCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>) {

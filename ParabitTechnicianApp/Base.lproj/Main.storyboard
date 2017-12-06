@@ -1150,6 +1150,7 @@
                     <connections>
                         <outlet property="password" destination="WiU-ZU-ORb" id="U6C-Yg-omg"/>
                         <outlet property="username" destination="3QB-OY-gKg" id="UI3-lc-ldx"/>
+                        <segue destination="x0e-41-BBB" kind="show" identifier="firstSignIn" id="y3r-Pi-Jv6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lee-oY-E0m" sceneMemberID="firstResponder"/>
@@ -1232,7 +1233,7 @@
         <!--Forgot Password-->
         <scene sceneID="3Ny-bF-Cg8">
             <objects>
-                <viewController id="Usx-PG-yZ5" userLabel="Forgot Password" customClass="ForgotPasswordViewController" customModule="CognitoYourUserPoolsSample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Usx-PG-yZ5" userLabel="Forgot Password" customClass="ForgotPasswordViewController" customModule="ParabitTechnicianApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OZI-Rd-2g1"/>
                         <viewControllerLayoutGuide type="bottom" id="3aT-Tm-W5F"/>
@@ -1294,7 +1295,7 @@
         <!--Forgot Password-->
         <scene sceneID="9Zh-K6-WPw">
             <objects>
-                <viewController id="H3p-MP-usv" userLabel="Forgot Password" customClass="ConfirmForgotPasswordViewController" customModule="CognitoYourUserPoolsSample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="H3p-MP-usv" userLabel="Forgot Password" customClass="ConfirmForgotPasswordViewController" customModule="ParabitTechnicianApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kv5-i6-9WX"/>
                         <viewControllerLayoutGuide type="bottom" id="86g-vG-GX4"/>
@@ -1376,7 +1377,7 @@
         <!--SignUp-->
         <scene sceneID="WdH-8b-i11">
             <objects>
-                <viewController title="Register" id="kvD-x0-6Gm" userLabel="SignUp" customClass="SignUpViewController" customModule="CognitoYourUserPoolsSample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Register" id="kvD-x0-6Gm" userLabel="SignUp" customClass="SignUpViewController" customModule="ParabitTechnicianApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uqv-RQ-M2t"/>
                         <viewControllerLayoutGuide type="bottom" id="yDR-lp-T1R"/>
@@ -1455,8 +1456,8 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet"/>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="oJn-7B-OCE"/>
                                         <exclude reference="6hB-Am-w5T"/>
+                                        <exclude reference="oJn-7B-OCE"/>
                                     </mask>
                                 </variation>
                             </textField>
@@ -1505,11 +1506,11 @@
                         <viewLayoutGuide key="safeArea" id="eTL-T4-Bys"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="RSV-6B-7Ld"/>
-                                <exclude reference="aVQ-pR-wBE"/>
-                                <exclude reference="FTp-kf-54x"/>
                                 <exclude reference="3Ed-7X-zDx"/>
+                                <exclude reference="FTp-kf-54x"/>
+                                <exclude reference="RSV-6B-7Ld"/>
                                 <exclude reference="Z9Q-01-b9q"/>
+                                <exclude reference="aVQ-pR-wBE"/>
                                 <exclude reference="NiZ-fn-jdG"/>
                             </mask>
                         </variation>
@@ -1530,7 +1531,7 @@
         <!--Confirm SignUp-->
         <scene sceneID="ssp-r3-z6G">
             <objects>
-                <viewController id="4tG-py-HFo" userLabel="Confirm SignUp" customClass="ConfirmSignUpViewController" customModule="CognitoYourUserPoolsSample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4tG-py-HFo" userLabel="Confirm SignUp" customClass="ConfirmSignUpViewController" customModule="ParabitTechnicianApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O9f-PR-pVc"/>
                         <viewControllerLayoutGuide type="bottom" id="spZ-Ce-BcS"/>
@@ -1623,6 +1624,90 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9A0-Sn-KDW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2116" y="-1231"/>
+        </scene>
+        <!--Forgot Password-->
+        <scene sceneID="N9X-yJ-bCP">
+            <objects>
+                <viewController id="x0e-41-BBB" userLabel="Forgot Password" customClass="FirstTimeLoginViewController" customModule="ParabitTechnicianApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="T2M-hd-B0t"/>
+                        <viewControllerLayoutGuide type="bottom" id="WJT-Uo-Gkf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tLO-bg-xDV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PUQ-Dh-X9l">
+                                <rect key="frame" x="17" y="95" width="343" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLX-5z-wGh">
+                                <rect key="frame" x="17" y="72" width="114" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="114" id="B5Y-lJ-Obz"/>
+                                    <constraint firstAttribute="height" constant="21" id="PbY-Tp-9f7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="36C-LT-X5d">
+                                <rect key="frame" x="17" y="156" width="343" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" secureTextEntry="YES"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atx-YW-e3y">
+                                <rect key="frame" x="16" y="133" width="107" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="107" id="Z1Z-Y1-eKu"/>
+                                    <constraint firstAttribute="height" constant="21" id="j6F-FB-DWi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Qa-gq-w8z">
+                                <rect key="frame" x="17" y="194" width="343" height="34"/>
+                                <color key="backgroundColor" red="0.99939042330000005" green="0.45001828669999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Update Password">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="updatePassword:" destination="x0e-41-BBB" eventType="touchUpInside" id="DMg-ba-eZ7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="atx-YW-e3y" firstAttribute="leading" secondItem="36C-LT-X5d" secondAttribute="leading" constant="-1" id="6ii-O6-TRh"/>
+                            <constraint firstItem="PUQ-Dh-X9l" firstAttribute="trailing" secondItem="9Qa-gq-w8z" secondAttribute="trailing" id="9u8-Yf-XRo"/>
+                            <constraint firstItem="mLX-5z-wGh" firstAttribute="top" secondItem="T2M-hd-B0t" secondAttribute="bottom" constant="8" symbolic="YES" id="KgQ-Lh-AHG"/>
+                            <constraint firstItem="atx-YW-e3y" firstAttribute="top" secondItem="PUQ-Dh-X9l" secondAttribute="bottom" constant="8" symbolic="YES" id="Pt5-np-8cZ"/>
+                            <constraint firstItem="PUQ-Dh-X9l" firstAttribute="leading" secondItem="9Qa-gq-w8z" secondAttribute="leading" id="S6u-bC-WBm"/>
+                            <constraint firstItem="mLX-5z-wGh" firstAttribute="leading" secondItem="tLO-bg-xDV" secondAttribute="leadingMargin" constant="1" id="b2W-3O-utA"/>
+                            <constraint firstItem="36C-LT-X5d" firstAttribute="trailing" secondItem="9Qa-gq-w8z" secondAttribute="trailing" id="dSQ-te-6v0"/>
+                            <constraint firstItem="PUQ-Dh-X9l" firstAttribute="top" secondItem="mLX-5z-wGh" secondAttribute="bottom" constant="2" id="jc2-rt-DS3"/>
+                            <constraint firstItem="9Qa-gq-w8z" firstAttribute="top" secondItem="PUQ-Dh-X9l" secondAttribute="bottom" constant="69" id="lcQ-U7-xbw"/>
+                            <constraint firstItem="36C-LT-X5d" firstAttribute="leading" secondItem="9Qa-gq-w8z" secondAttribute="leading" id="mBu-iP-XCE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PUQ-Dh-X9l" secondAttribute="trailing" constant="-1" id="nDv-0e-CjX"/>
+                            <constraint firstItem="mLX-5z-wGh" firstAttribute="leading" secondItem="PUQ-Dh-X9l" secondAttribute="leading" id="oH8-l7-vvg"/>
+                            <constraint firstItem="36C-LT-X5d" firstAttribute="top" secondItem="atx-YW-e3y" secondAttribute="bottom" constant="2" id="ptg-Kc-iXx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bsz-z7-nYU"/>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="confirmPasswordTextField" destination="36C-LT-X5d" id="7ym-cI-2Vp"/>
+                        <outlet property="confirmationCode" destination="PUQ-Dh-X9l" id="JRF-mI-Urm"/>
+                        <outlet property="passwordTextField" destination="PUQ-Dh-X9l" id="2dj-Ca-c2v"/>
+                        <outlet property="proposedPassword" destination="36C-LT-X5d" id="k1M-dI-yAY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BXI-dE-Ryg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="559" y="-1247"/>
         </scene>
     </scenes>
     <resources>

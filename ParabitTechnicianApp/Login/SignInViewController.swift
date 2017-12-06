@@ -107,8 +107,22 @@ extension SignInViewController: AWSCognitoIdentityInteractiveAuthenticationDeleg
                 /*Write your thread code here*/
         }
         
-        return NewPassworController
+        return FirstTimeLoginViewController()
     }
+}
+
+extension SignInViewController: AWSCognitoIdentityNewPasswordRequired {
+    func getNewPasswordDetails(_ newPasswordRequiredInput: AWSCognitoIdentityNewPasswordRequiredInput, newPasswordRequiredCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityNewPasswordRequiredDetails>) {
+        
+        
+    }
+    
+    func didCompleteNewPasswordStepWithError(_ error: Error?) {
+        
+        
+    }
+    
+    
 }
 
 extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
@@ -138,6 +152,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
                 _ = ParabitNetworking.sharedInstance
                 ParabitNetworking.sharedInstance.startSessionTimer()
                 ParabitNetworking.sharedInstance.getAuthenticationKeys()
+                print("the user's status is \(self.user!.confirmedStatus)")
                 self.username.text = nil
                 self.dismiss(animated: true, completion: nil)
             }

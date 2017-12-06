@@ -21,6 +21,8 @@ class ParabitNetworking: NSObject {
     var user: AWSCognitoIdentityUser?
     var pool: AWSCognitoIdentityUserPool?
     
+    var userAttributes : [AWSCognitoIdentityProviderAttributeType]?
+    
     var firmwareAPIVersion: AWSCognitoIdentityProviderAttributeType?
     var firmwareAPIKey: AWSCognitoIdentityProviderAttributeType?
     var firmwareAPIURL: AWSCognitoIdentityProviderAttributeType?
@@ -202,6 +204,7 @@ class ParabitNetworking: NSObject {
                 print("the response for getting user info in the ParabitNetworkingClass is \(self.response?.userAttributes)")
                 
                 guard let userAttributes = self.response?.userAttributes else { return }
+                self.userAttributes = userAttributes
                 
                 userAttributes.forEach({ (attribute) in
                     switch attribute.name! {

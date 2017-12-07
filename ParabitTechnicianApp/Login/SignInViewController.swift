@@ -23,6 +23,8 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var password: UITextField!
     var passwordAuthenticationCompletion: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>?
     var usernameText: String?
+    var rememberDeviceCompletionSource: AWSTaskCompletionSource<NSNumber>?
+
     
     var response: AWSCognitoIdentityUserGetDetailsResponse?
     var user: AWSCognitoIdentityUser?
@@ -32,12 +34,13 @@ class SignInViewController: UIViewController {
         super.viewWillAppear(animated)
         self.password.text = nil
         self.username.text = usernameText
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        //self.navigationController?.setNavigationBarHidden(true, animated: false)
         
     }
     
     override func viewDidLoad() {
         self.pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
+        self.pool?.delegate = self
         if (self.user == nil) {
             self.user = self.pool?.currentUser()
         }
@@ -100,21 +103,29 @@ class SignInViewController: UIViewController {
     
 }
 
+
 extension SignInViewController: AWSCognitoIdentityInteractiveAuthenticationDelegate{
     
-    func startNewPasswordRequired() -> AWSCognitoIdentityNewPasswordRequired {
-        DispatchQueue.main.async{
-                /*Write your thread code here*/
-        }
-        
-        return FirstTimeLoginViewController()
+    func startPasswordAuthentication() -> AWSCognitoIdentityPasswordAuthentication {
+        return self
     }
+    
+    func startNewPasswordRequired() -> AWSCognitoIdentityNewPasswordRequired {
+        return self
+    }
+
 }
 
 extension SignInViewController: AWSCognitoIdentityNewPasswordRequired {
     func getNewPasswordDetails(_ newPasswordRequiredInput: AWSCognitoIdentityNewPasswordRequiredInput, newPasswordRequiredCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityNewPasswordRequiredDetails>) {
-        
-        
+        //Show Change Password Screen here for first-time user
+        DispatchQueue.main.async {
+//            //self.performSegue(withIdentifier: "firstSignIn", sender: nil)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "FirstSignInViewController")
+            //self.present(UIViewController(), animated: true, completion: nil)
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
     }
     
     func didCompleteNewPasswordStepWithError(_ error: Error?) {
@@ -125,6 +136,7 @@ extension SignInViewController: AWSCognitoIdentityNewPasswordRequired {
     
 }
 
+
 extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
     
     public func getDetails(_ authenticationInput: AWSCognitoIdentityPasswordAuthenticationInput, passwordAuthenticationCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>) {
@@ -133,7 +145,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
             if (self.usernameText == nil && self.username != nil) {
                 self.usernameText = authenticationInput.lastKnownUsername
                 self.username.text = self.user?.username
-
+                
             }
         }
     }
@@ -154,8 +166,14 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
                 ParabitNetworking.sharedInstance.getAuthenticationKeys()
                 print("the user's status is \(self.user!.confirmedStatus)")
                 self.username.text = nil
-                self.dismiss(animated: true, completion: nil)
+               // self.dismiss(animated: true, completion: nil)
             }
         }
     }
 }
+
+
+
+
+
+

@@ -15,6 +15,12 @@ class FirstTimeLoginViewController: UIViewController, AWSCognitoIdentityNewPassw
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     
+    var newPasswordAuthenticationCompletion: AWSTaskCompletionSource<AWSCognitoIdentityNewPasswordRequiredDetails>?
+
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,8 +31,8 @@ class FirstTimeLoginViewController: UIViewController, AWSCognitoIdentityNewPassw
         if (self.passwordTextField.text == self.confirmPasswordTextField.text)  {
             var requiredAttributes = Set<String>()
             let authDetails = AWSCognitoIdentityNewPasswordRequiredInput(userAttributes: [:], requiredAttributes: requiredAttributes)
-            var newPasswordRequiredDetails = AWSTaskCompletionSource<AWSCognitoIdentityNewPasswordRequiredDetails>()
-            self.getNewPasswordDetails(authDetails, newPasswordRequiredCompletionSource: newPasswordRequiredDetails)
+
+            self.getNewPasswordDetails(authDetails, newPasswordRequiredCompletionSource: newPasswordAuthenticationCompletion!)
             print("did set auth details.")
         } else {
             let alertController = UIAlertController(title: "Missing information",
@@ -40,7 +46,16 @@ class FirstTimeLoginViewController: UIViewController, AWSCognitoIdentityNewPassw
     }
     
     func getNewPasswordDetails(_ newPasswordRequiredInput: AWSCognitoIdentityNewPasswordRequiredInput, newPasswordRequiredCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityNewPasswordRequiredDetails>) {
-        //
+        self.newPasswordAuthenticationCompletion = newPasswordRequiredCompletionSource
+        DispatchQueue.main.async {
+            if (self.passwordTextField.text == self.confirmPasswordTextField.text) {
+                //self.usernameText = authenticationInput.lastKnownUsername
+                //self.username.text = self.user?.username
+                
+            }else{
+                //user should match passwords
+            }
+        }
         
     }
     

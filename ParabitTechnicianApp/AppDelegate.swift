@@ -98,7 +98,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 // MARK:- AWSCognitoIdentityInteractiveAuthenticationDelegate protocol delegate
-
 extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
     
     func startPasswordAuthentication() -> AWSCognitoIdentityPasswordAuthentication {
@@ -128,7 +127,6 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
 }
 
 // MARK:- AWSCognitoIdentityRememberDevice protocol delegate
-
 extension AppDelegate: AWSCognitoIdentityRememberDevice {
     
     func getRememberDevice(_ rememberDeviceCompletionSource: AWSTaskCompletionSource<NSNumber>) {

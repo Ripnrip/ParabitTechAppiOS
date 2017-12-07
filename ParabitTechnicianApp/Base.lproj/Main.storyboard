@@ -1150,7 +1150,7 @@
                     <connections>
                         <outlet property="password" destination="WiU-ZU-ORb" id="U6C-Yg-omg"/>
                         <outlet property="username" destination="3QB-OY-gKg" id="UI3-lc-ldx"/>
-                        <segue destination="x0e-41-BBB" kind="show" identifier="firstSignIn" id="y3r-Pi-Jv6"/>
+                        <segue destination="x0e-41-BBB" kind="show" identifier="firstSignIn" id="10k-TF-Ae5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lee-oY-E0m" sceneMemberID="firstResponder"/>
@@ -1625,10 +1625,10 @@
             </objects>
             <point key="canvasLocation" x="2116" y="-1231"/>
         </scene>
-        <!--Forgot Password-->
+        <!--First Time SIgn In-->
         <scene sceneID="N9X-yJ-bCP">
             <objects>
-                <viewController id="x0e-41-BBB" userLabel="Forgot Password" customClass="FirstTimeLoginViewController" customModule="ParabitTechnicianApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FirstSignInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="x0e-41-BBB" userLabel="First Time SIgn In" customClass="FirstTimeLoginViewController" customModule="ParabitTechnicianApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="T2M-hd-B0t"/>
                         <viewControllerLayoutGuide type="bottom" id="WJT-Uo-Gkf"/>
@@ -1700,9 +1700,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="confirmPasswordTextField" destination="36C-LT-X5d" id="7ym-cI-2Vp"/>
-                        <outlet property="confirmationCode" destination="PUQ-Dh-X9l" id="JRF-mI-Urm"/>
                         <outlet property="passwordTextField" destination="PUQ-Dh-X9l" id="2dj-Ca-c2v"/>
-                        <outlet property="proposedPassword" destination="36C-LT-X5d" id="k1M-dI-yAY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BXI-dE-Ryg" userLabel="First Responder" sceneMemberID="firstResponder"/>

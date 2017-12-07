@@ -68,6 +68,7 @@ class UserDetailTableViewController : UITableViewController {
     // MARK: - IBActions
     
     @IBAction func signOut(_ sender: AnyObject) {
+        self.pool?.delegate = UIApplication.shared.delegate as! AppDelegate
         self.user?.signOut()
         self.title = nil
         self.response = nil

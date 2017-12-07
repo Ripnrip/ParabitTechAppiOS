@@ -122,10 +122,8 @@ extension SignInViewController: AWSCognitoIdentityNewPasswordRequired {
         //Show Change Password Screen here for first-time user
         userRequiresNewPassword = true
         DispatchQueue.main.async {
-//            //self.performSegue(withIdentifier: "firstSignIn", sender: nil)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "FirstSignInViewController")
-            //self.present(UIViewController(), animated: true, completion: nil)
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }

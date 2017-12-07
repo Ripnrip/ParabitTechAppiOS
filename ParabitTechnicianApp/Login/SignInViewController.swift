@@ -25,6 +25,7 @@ class SignInViewController: UIViewController {
     var usernameText: String?
     var rememberDeviceCompletionSource: AWSTaskCompletionSource<NSNumber>?
 
+    var userRequiresNewPassword = false
     
     var response: AWSCognitoIdentityUserGetDetailsResponse?
     var user: AWSCognitoIdentityUser?
@@ -119,6 +120,7 @@ extension SignInViewController: AWSCognitoIdentityInteractiveAuthenticationDeleg
 extension SignInViewController: AWSCognitoIdentityNewPasswordRequired {
     func getNewPasswordDetails(_ newPasswordRequiredInput: AWSCognitoIdentityNewPasswordRequiredInput, newPasswordRequiredCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityNewPasswordRequiredDetails>) {
         //Show Change Password Screen here for first-time user
+        userRequiresNewPassword = true
         DispatchQueue.main.async {
 //            //self.performSegue(withIdentifier: "firstSignIn", sender: nil)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -166,7 +168,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
                 ParabitNetworking.sharedInstance.getAuthenticationKeys()
                 print("the user's status is \(self.user!.confirmedStatus)")
                 self.username.text = nil
-               // self.dismiss(animated: true, completion: nil)
+                self.userRequiresNewPassword ? nil : self.dismiss(animated: true, completion: nil)
             }
         }
     }

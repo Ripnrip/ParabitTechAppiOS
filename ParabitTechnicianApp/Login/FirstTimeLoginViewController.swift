@@ -31,7 +31,7 @@ class FirstTimeLoginViewController: UIViewController, AWSCognitoIdentityNewPassw
         if (self.passwordTextField.text == self.confirmPasswordTextField.text)  {
             var requiredAttributes = Set<String>()
             let authDetails = AWSCognitoIdentityNewPasswordRequiredInput(userAttributes: [:], requiredAttributes: requiredAttributes)
-
+            self.newPasswordAuthenticationCompletion?.set(result: AWSCognitoIdentityNewPasswordRequiredDetails(proposedPassword: self.confirmPasswordTextField.text!, userAttributes: [:]))
             self.getNewPasswordDetails(authDetails, newPasswordRequiredCompletionSource: newPasswordAuthenticationCompletion!)
             print("did set auth details.")
         } else {

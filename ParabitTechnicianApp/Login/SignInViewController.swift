@@ -36,7 +36,7 @@ class SignInViewController: UIViewController {
         self.password.text = nil
         self.username.text = usernameText
         //self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
+        userRequiresNewPassword = false
     }
     
     override func viewDidLoad() {
@@ -80,7 +80,7 @@ class SignInViewController: UIViewController {
         self.user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
             DispatchQueue.main.async(execute: {
                 self.response = task.result
-                self.title = self.user?.username
+                //self.title = self.user?.username
                 self.username.text = self.user?.username
             })
             return nil
@@ -106,11 +106,11 @@ class SignInViewController: UIViewController {
 
 
 extension SignInViewController: AWSCognitoIdentityInteractiveAuthenticationDelegate{
-    
+
     func startPasswordAuthentication() -> AWSCognitoIdentityPasswordAuthentication {
         return self
     }
-    
+
     func startNewPasswordRequired() -> AWSCognitoIdentityNewPasswordRequired {
         return self
     }
@@ -129,7 +129,7 @@ extension SignInViewController: AWSCognitoIdentityNewPasswordRequired {
     }
     
     func didCompleteNewPasswordStepWithError(_ error: Error?) {
-        
+        print("the error is \(error)")
         
     }
     
@@ -166,6 +166,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
                 ParabitNetworking.sharedInstance.getAuthenticationKeys()
                 print("the user's status is \(self.user!.confirmedStatus)")
                 self.username.text = nil
+                //determine if user needs to go to new password set screen
                 self.userRequiresNewPassword ? nil : self.dismiss(animated: true, completion: nil)
             }
         }

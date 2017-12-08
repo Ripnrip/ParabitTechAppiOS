@@ -10,11 +10,13 @@ import UIKit
 import AWSCognitoIdentityProvider
 
 
-class FirstTimeLoginViewController: UIViewController, AWSCognitoIdentityNewPasswordRequired {
+class FirstTimeLoginViewController: UIViewController {
     
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     
+    var pool: AWSCognitoIdentityUserPool?
+
     var newPasswordAuthenticationCompletion: AWSTaskCompletionSource<AWSCognitoIdentityNewPasswordRequiredDetails>?
 
     override func viewWillAppear(_ animated: Bool) {
@@ -23,16 +25,24 @@ class FirstTimeLoginViewController: UIViewController, AWSCognitoIdentityNewPassw
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.newPasswordAuthenticationCompletion = AWSTaskCompletionSource()
+        //newPasswordAuthenticationCompletio
+        self.pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
+        self.pool?.delegate = self
     }
 
     @IBAction func updatePassword(_ sender: Any) {
         if (self.passwordTextField.text == self.confirmPasswordTextField.text)  {
-            var requiredAttributes = Set<String>()
-            let authDetails = AWSCognitoIdentityNewPasswordRequiredInput(userAttributes: [:], requiredAttributes: requiredAttributes)
-            self.newPasswordAuthenticationCompletion?.set(result: AWSCognitoIdentityNewPasswordRequiredDetails(proposedPassword: self.confirmPasswordTextField.text!, userAttributes: [:]))
-            self.getNewPasswordDetails(authDetails, newPasswordRequiredCompletionSource: newPasswordAuthenticationCompletion!)
+            
+            
+            let requiredAttributes = Set<String>()
+            let details = AWSCognitoIdentityNewPasswordRequiredDetails(proposedPassword: self.confirmPasswordTextField.text!, userAttributes: ["taco":"taco","water":"water"])
+            let newPasswordInput = AWSCognitoIdentityNewPasswordRequiredInput(userAttributes: ["taco":"taco","water":"water"], requiredAttributes: requiredAttributes)
+            self.newPasswordAuthenticationCompletion?.set(result: details)
+            
+            //self.getNewPasswordDetails(newPasswordInput, newPasswordRequiredCompletionSource: self.newPasswordAuthenticationCompletion!)
+
+            
             print("did set auth details.")
         } else {
             let alertController = UIAlertController(title: "Missing information",
@@ -45,36 +55,58 @@ class FirstTimeLoginViewController: UIViewController, AWSCognitoIdentityNewPassw
         
     }
     
+}
+
+extension FirstTimeLoginViewController: AWSCognitoIdentityInteractiveAuthenticationDelegate{
+    
+    func startPasswordAuthentication() -> AWSCognitoIdentityPasswordAuthentication {
+        return self
+    }
+    
+    func startNewPasswordRequired() -> AWSCognitoIdentityNewPasswordRequired {
+        return self
+    }
+    
+}
+
+extension FirstTimeLoginViewController: AWSCognitoIdentityNewPasswordRequired {
     func getNewPasswordDetails(_ newPasswordRequiredInput: AWSCognitoIdentityNewPasswordRequiredInput, newPasswordRequiredCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityNewPasswordRequiredDetails>) {
         self.newPasswordAuthenticationCompletion = newPasswordRequiredCompletionSource
-        DispatchQueue.main.async {
-            if (self.passwordTextField.text == self.confirmPasswordTextField.text) {
-                //self.usernameText = authenticationInput.lastKnownUsername
-                //self.username.text = self.user?.username
-                
-            }else{
-                //user should match passwords
-            }
-        }
+        self.newPasswordAuthenticationCompletion?.task.continueOnSuccessWith(block: { (task) -> Any? in
+            print("the task is \(task) /n with result \(task.result!)")
+            return self.didCompleteNewPasswordStepWithError(task.error)
+        })
         
     }
     
     func didCompleteNewPasswordStepWithError(_ error: Error?) {
-            DispatchQueue.main.async {
-                if let error = error as? NSError {
-                    let alertController = UIAlertController(title: "Log In Error",
-                                                            message: error.userInfo["message"] as? String,
-                                                            preferredStyle: .alert)
-                    let retryAction = UIAlertAction(title: "Retry", style: .default, handler: nil)
-                    alertController.addAction(retryAction)
-                    
-                    self.present(alertController, animated: true, completion:  nil)
-                }else{
-                    //did complete login success
-                    print("did complete new password setup, should dismiss view now, or check if they are logged in ")
-                }
+        DispatchQueue.main.async {
+            if let error = error as? NSError {
+                let alertController = UIAlertController(title: "Log In Error",
+                                                        message: error.userInfo["message"] as? String,
+                                                        preferredStyle: .alert)
+                let retryAction = UIAlertAction(title: "Retry", style: .default, handler: nil)
+                alertController.addAction(retryAction)
+                
+                self.present(alertController, animated: true, completion:  nil)
+            }else{
+                //did complete login success
+                print("did complete new password setup, should dismiss view now, or check if they are logged in ")
+                //self.dismiss(animated: true, completion: nil)
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
-    
+}
 
+extension FirstTimeLoginViewController : AWSCognitoIdentityPasswordAuthentication {
+    func getDetails(_ authenticationInput: AWSCognitoIdentityPasswordAuthenticationInput, passwordAuthenticationCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>) {
+        //
+        
+    }
+    
+    func didCompleteStepWithError(_ error: Error?) {
+        //
+        
+    }
 }

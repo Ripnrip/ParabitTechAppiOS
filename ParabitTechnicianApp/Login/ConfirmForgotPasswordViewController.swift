@@ -56,6 +56,7 @@ class ConfirmForgotPasswordViewController: UIViewController {
                     
                     self?.present(alertController, animated: true, completion:  nil)
                 } else {
+                    //TODO: Show alert saying password has been set
                     let _ = strongSelf.navigationController?.popToRootViewController(animated: true)
                 }
             })

@@ -83,6 +83,8 @@ extension FirstTimeLoginViewController: AWSCognitoIdentityNewPasswordRequired {
                 self.present(alertController, animated: true, completion:  nil)
             }else{
                 //did complete login success
+                //TODO: Show alert saying password has been set
+
                 print("did complete new password setup, should dismiss view now, or check if they are logged in ")
                 //self.dismiss(animated: true, completion: nil)
                 //self.navigationController?.popViewController(animated: true)

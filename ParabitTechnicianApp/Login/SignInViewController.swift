@@ -41,7 +41,7 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         self.pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
-        self.pool?.delegate = self
+        //self.pool?.delegate = self
         if (self.user == nil) {
             self.user = self.pool?.currentUser()
         }

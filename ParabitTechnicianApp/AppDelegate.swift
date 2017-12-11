@@ -15,10 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var signInViewController: SignInViewController?
+    var resetPasswordViewController: FirstTimeLoginViewController?
     var navigationController: UINavigationController?
     var storyboard: UIStoryboard?
     var rememberDeviceCompletionSource: AWSTaskCompletionSource<NSNumber>?
 
+    var newPasswordAuthenticationCompletion: AWSTaskCompletionSource<AWSCognitoIdentityNewPasswordRequiredDetails>?
+    
     var user: AWSCognitoIdentityUser?
     var response: AWSCognitoIdentityUserGetDetailsResponse?
     
@@ -121,10 +124,32 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
         return self.signInViewController!
     }
     
+    // This method is called when we need to reset a password.
+    // It will grab the view controller from the storyboard and present it.
+    func startNewPasswordRequired() -> AWSCognitoIdentityNewPasswordRequired {
+        if (self.resetPasswordViewController == nil) {
+            self.resetPasswordViewController = self.storyboard?.instantiateViewController(withIdentifier: "FirstSignInViewController") as? FirstTimeLoginViewController
+        }
+        DispatchQueue.main.async {
+            if(self.resetPasswordViewController!.isViewLoaded || self.resetPasswordViewController!.view.window == nil) {
+                self.navigationController?.present(self.resetPasswordViewController!, animated: true, completion: nil)
+
+                self.window?.rootViewController?.present(self.resetPasswordViewController!,
+                                                         animated: true,
+                                                         completion: nil)
+            }
+        }
+        
+        return self.resetPasswordViewController!
+    }
+    
+    
     func startRememberDevice() -> AWSCognitoIdentityRememberDevice {
         return self
     }
 }
+
+
 
 // MARK:- AWSCognitoIdentityRememberDevice protocol delegate
 extension AppDelegate: AWSCognitoIdentityRememberDevice {
@@ -169,5 +194,3 @@ extension AppDelegate: AWSCognitoIdentityRememberDevice {
         }
     }
 }
-
-

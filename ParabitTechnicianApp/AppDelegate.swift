@@ -132,15 +132,15 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
         }
         DispatchQueue.main.async {
             if(self.resetPasswordViewController!.isViewLoaded || self.resetPasswordViewController!.view.window == nil) {
-                self.navigationController?.present(self.resetPasswordViewController!, animated: true, completion: nil)
+               // self.navigationController?.present(self.resetPasswordViewController!, animated: true, completion: nil)
 
                 self.window?.rootViewController?.present(self.resetPasswordViewController!,
                                                          animated: true,
                                                          completion: nil)
             }
         }
-        
-        return self.resetPasswordViewController!
+        guard let controller = self.resetPasswordViewController else { return UIViewController()  as! AWSCognitoIdentityNewPasswordRequired }
+        return controller
     }
     
     

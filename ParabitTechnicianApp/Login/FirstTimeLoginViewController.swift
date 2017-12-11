@@ -34,7 +34,6 @@ class FirstTimeLoginViewController: UIViewController {
             
             let requiredAttributes = Set<String>()
             let details = AWSCognitoIdentityNewPasswordRequiredDetails(proposedPassword: self.confirmPasswordTextField.text!, userAttributes: [:])
-            let newPasswordInput = AWSCognitoIdentityNewPasswordRequiredInput(userAttributes: ["taco":"taco","water":"water"], requiredAttributes: requiredAttributes)
             proposedPassword = self.confirmPasswordTextField.text!
 
             self.newPasswordAuthenticationCompletion?.set(result: details)

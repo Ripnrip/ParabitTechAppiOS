@@ -8,7 +8,9 @@
 
 import UIKit
 import AWSCognitoIdentityProvider
-
+import Fabric
+import Crashlytics
+import AWSCognito
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -38,8 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             self.window?.rootViewController!.present(alertController, animated: true, completion:  nil)
         }
+        //Fabiric
+        Fabric.with([Crashlytics.self,AWSCognito.self])
         
-        // setup logging
+        // setup AWS logging
         AWSLogger.default().logLevel = .verbose
         
         // setup service configuration

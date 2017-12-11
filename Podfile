@@ -19,7 +19,8 @@ target 'ParabitTechnicianApp' do
    pod 'AWSAuthUI', '~> 2.6.5'
    pod "iOSSideMainMenu"
    pod 'SideMenuController'
-
+   pod 'Fabric'
+   pod 'Crashlytics'
   # Pods for ParabitTechnicianApp
 
 end

@@ -17,6 +17,8 @@
 
 import Foundation
 import AWSCognitoIdentityProvider
+import Fabric
+import Crashlytics
 
 class SignInViewController: UIViewController {
     @IBOutlet weak var username: UITextField!
@@ -145,9 +147,19 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
             if (self.usernameText == nil && self.username != nil) {
                 self.usernameText = authenticationInput.lastKnownUsername
                 self.username.text = self.user?.username
+                //log user fabric
+                self.logUser()
                 
             }
         }
+    }
+    
+    func logUser() {
+       guard let userName = self.user?.username else { return }
+       Crashlytics.sharedInstance().setUserName(userName)
+       Crashlytics.sharedInstance().setUserEmail(userName)
+       Crashlytics.sharedInstance().setUserIdentifier(self.user?.deviceId)
+       print("set the fabric/crashlytics info")
     }
     
     public func didCompleteStepWithError(_ error: Error?) {

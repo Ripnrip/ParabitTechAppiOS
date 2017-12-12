@@ -69,6 +69,10 @@ class BeaconFinderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if ParabitNetworking.sharedInstance.userAttributes == nil {
+            ParabitNetworking.sharedInstance.getAuthenticationKeys()
+        }
+        
         let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
         user = pool.currentUser()
         
@@ -154,6 +158,10 @@ class BeaconFinderViewController: UIViewController {
     
 
     @IBAction func refresh(_ sender: Any) {
+        if ParabitNetworking.sharedInstance.userAttributes == nil {
+            ParabitNetworking.sharedInstance.getAuthenticationKeys()
+        }
+        
         self.resetBluetooth()
         guard let user = self.user else { return }
         Answers.logCustomEvent(withName: "userHitRefresh", customAttributes: ["user":user])

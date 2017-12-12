@@ -37,7 +37,7 @@ class SignInViewController: UIViewController {
         super.viewWillAppear(animated)
         self.password.text = nil
         self.username.text = usernameText
-        //self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         userRequiresNewPassword = false
     }
     
@@ -65,7 +65,7 @@ class SignInViewController: UIViewController {
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0{
-                self.view.frame.origin.y -= 44//keyboardSize.height
+                self.view.frame.origin.y -= 70//keyboardSize.height
             }
         }
     }
@@ -73,7 +73,7 @@ class SignInViewController: UIViewController {
     func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y != 0{
-                self.view.frame.origin.y += 44//keyboardSize.height
+                self.view.frame.origin.y += 70//keyboardSize.height
             }
         }
     }
@@ -178,7 +178,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
             } else {
                 _ = ParabitNetworking.sharedInstance
                 ParabitNetworking.sharedInstance.startSessionTimer()
-                ParabitNetworking.sharedInstance.getAuthenticationKeys()
+                //ParabitNetworking.sharedInstance.getAuthenticationKeys()
                 print("the user's status is \(self.user!.confirmedStatus)")
                 self.username.text = nil
                 //determine if user needs to go to new password set screen

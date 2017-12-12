@@ -45,7 +45,7 @@ class ParabitNetworking: NSObject {
         if (self.user == nil) {
             self.user = self.pool?.currentUser()
         }
-        self.getAuthenticationKeys()
+        //self.getAuthenticationKeys()
         
     }
     

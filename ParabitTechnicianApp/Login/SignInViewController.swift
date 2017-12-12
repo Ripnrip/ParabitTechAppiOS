@@ -90,6 +90,7 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signInPressed(_ sender: AnyObject) {
+        Answers.logCustomEvent(withName: "signInPressed", customAttributes: [:])
         if (self.username.text?.count != 0 && self.password.text?.count != 0) || false {
             let authDetails = AWSCognitoIdentityPasswordAuthenticationDetails(username: self.username.text!, password: self.password.text! )
             self.passwordAuthenticationCompletion?.set(result: authDetails)
@@ -122,6 +123,8 @@ extension SignInViewController: AWSCognitoIdentityInteractiveAuthenticationDeleg
 extension SignInViewController: AWSCognitoIdentityNewPasswordRequired {
     func getNewPasswordDetails(_ newPasswordRequiredInput: AWSCognitoIdentityNewPasswordRequiredInput, newPasswordRequiredCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityNewPasswordRequiredDetails>) {
         //Show Change Password Screen here for first-time user
+        guard let user = self.user else { return }
+        Answers.logCustomEvent(withName: "userNeedsToSetupFirstTimePassword", customAttributes: ["user":user])
         userRequiresNewPassword = true
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

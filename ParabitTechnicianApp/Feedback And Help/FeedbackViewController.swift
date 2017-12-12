@@ -8,9 +8,14 @@
 
 import UIKit
 import BPStatusBarAlert
+import Crashlytics
+import Fabric
+import AWSCognitoIdentityProvider
 
 class FeedbackViewController: UIViewController {
     @IBOutlet weak var feedbackTextView: UITextView!
+    
+    var user:AWSCognitoIdentityUser?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,9 +29,15 @@ class FeedbackViewController: UIViewController {
         let item1 = UIBarButtonItem(customView: btn1)
         
         self.navigationItem.setRightBarButton(item1, animated: true)
+        
+        let pool = AWSCognitoIdentityUserPool(forKey:AWSCognitoUserPoolsSignInProviderKey)
+        user = pool.currentUser()
     }
     
     func sendFeedback() {
+        guard let user = self.user else { return }
+        Answers.logCustomEvent(withName: "userSentFeedback", customAttributes: ["user":user,"feedback":feedbackTextView.text])
+        
         ParabitNetworking.sharedInstance.submitFeedback(feedback: feedbackTextView.text, context: "") { (success) in
             if success {
                 print("succesfully send feedback")

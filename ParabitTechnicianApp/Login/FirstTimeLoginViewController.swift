@@ -8,7 +8,8 @@
 
 import UIKit
 import AWSCognitoIdentityProvider
-
+import Fabric
+import Crashlytics
 
 class FirstTimeLoginViewController: UIViewController {
     
@@ -87,6 +88,8 @@ extension FirstTimeLoginViewController: AWSCognitoIdentityNewPasswordRequired {
                 print("did complete new password setup, should dismiss view now, or check if they are logged in ")
                 //self.dismiss(animated: true, completion: nil)
                 //self.navigationController?.popViewController(animated: true)
+                guard let user = self.pool?.currentUser() else { return }
+                Answers.logCustomEvent(withName: "userSetupFirstPassword", customAttributes: ["user":user])
                 self.dismiss(animated: true, completion: nil)
             }
         }

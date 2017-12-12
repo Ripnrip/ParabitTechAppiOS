@@ -9,6 +9,8 @@
 import UIKit
 import CoreBluetooth
 import iOSDFULibrary
+import Crashlytics
+import AWSCognitoIdentityProvider
 
 class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, DFUServiceDelegate, DFUProgressDelegate, LoggerDelegate {
     
@@ -37,10 +39,13 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
     @IBOutlet weak var dfuUploadStatus       : UILabel!
     @IBOutlet weak var stopProcessButton     : UIButton!
     
+    var user: AWSCognitoIdentityUser?
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
         
+        let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
+        user = pool.currentUser()
         
         guard let myTabBarController = self.tabBarController as? BeaconTabBarController else { return }
         self.dfuPeripheral = myTabBarController.selectedPeripheral
@@ -143,6 +148,11 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
     }
     //pb_secure_dfu_package
     func startDFUProcess() {
+        
+        guard let user = self.user else { return }
+        Answers.logCustomEvent(withName: "startedDFU", customAttributes: ["user":user,"firmware":selectedFirmware.debugDescription])
+        
+        
         guard dfuPeripheral != nil else {
             print("No DFU peripheral was set")
             return
@@ -226,6 +236,9 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
         
         // Forget the controller when DFU is done
         if state == .completed {
+            guard let user = self.user else { return }
+            Answers.logCustomEvent(withName: "finishedDFU", customAttributes: ["user":user,"firmware":selectedFirmware.debugDescription])
+            
             dfuController = nil
             
             //notify listeners
@@ -241,6 +254,9 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
         dfuActivityIndicator.stopAnimating()
         dfuUploadProgressView.setProgress(0, animated: true)
         print("Error \(error.rawValue): \(message)")
+        
+        guard let user = self.user else { return }
+        Answers.logCustomEvent(withName: "errorWithDFU", customAttributes: ["user":user,"firmware":selectedFirmware.debugDescription,"error":message])
         
         // Forget the controller when DFU finished with an error
         dfuController = nil

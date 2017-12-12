@@ -17,6 +17,8 @@
 
 import Foundation
 import AWSCognitoIdentityProvider
+import Crashlytics
+import Fabric
 
 class ConfirmForgotPasswordViewController: UIViewController {
     
@@ -57,6 +59,9 @@ class ConfirmForgotPasswordViewController: UIViewController {
                     self?.present(alertController, animated: true, completion:  nil)
                 } else {
                     //TODO: Show alert saying password has been set
+                    guard let user = self?.user else { return }
+                    Answers.logCustomEvent(withName: "userResetPassword", customAttributes: ["user":user])
+                    
                     let _ = strongSelf.navigationController?.popToRootViewController(animated: true)
                 }
             })

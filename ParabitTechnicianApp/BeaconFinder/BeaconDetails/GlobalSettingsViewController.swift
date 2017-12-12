@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreBluetooth
+import Crashlytics
+import AWSCognitoIdentityProvider
 
 class GlobalSettingsViewController: UIViewController {
     @IBOutlet weak var generalFirmwareSegmentControl: UISegmentedControl!
@@ -46,6 +48,8 @@ class GlobalSettingsViewController: UIViewController {
     var advInterval:UInt16 = 1000
     var advIntervalHex = "03E8"
     
+    var user:AWSCognitoIdentityUser?
+    
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveTapped))
     }
@@ -61,6 +65,9 @@ class GlobalSettingsViewController: UIViewController {
     }
     
     func setup(){
+        let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey )
+        user = pool.currentUser()
+        
         guard let currentTabController = self.tabBarController as? BeaconTabBarController else { return }
         guard let beacon  = currentTabController.currentBeacon else { return }
         currentBeacon = beacon
@@ -172,6 +179,9 @@ class GlobalSettingsViewController: UIViewController {
         slider.value = Float(currentValue)
         advLabel.text = "\(currentValue)"
         
+        guard let user = self.user else { return }
+        Answers.logCustomEvent(withName: "advertisingIntervalChanged", customAttributes: ["user":user,"value":currentValue])
+        
         switch currentValue {
         case 1000:
             advIntervalHex = "03E8"
@@ -202,6 +212,9 @@ class GlobalSettingsViewController: UIViewController {
     @IBAction func txSliderChanged(_ sender: Any) {
         guard let slider = sender as? UISlider else { return }
         let currentValue =   Int(slider.value)
+        
+        guard let user = self.user else { return }
+        Answers.logCustomEvent(withName: "radioTXPowerChanged", customAttributes: ["user":user,"value":currentValue])
         
         switch currentValue{//slider.value {
         case 0:
@@ -263,6 +276,8 @@ class GlobalSettingsViewController: UIViewController {
     }
     
     @IBAction func checkForUpdates(_ sender: Any) {
+        guard let user = self.user else { return }
+        Answers.logCustomEvent(withName: "userCheckedForFirmwareUpdates", customAttributes: ["user":user])
         
         if isUpdateAvailable == false {
             //test networking call valid -> 01-10-17 --
@@ -270,6 +285,7 @@ class GlobalSettingsViewController: UIViewController {
             ParabitNetworking.sharedInstance.getFirmwareInfoFor(revision: revisionString) { (firmware) in
                 if firmware != nil {
                     print("got the revision firmware")
+                    Answers.logCustomEvent(withName: "firmwareUpdateFound", customAttributes: ["user":user,"version":firmware?.latestFirmware.id ?? 0])
                     self.currentFirmwareObject = firmware
  
                     DispatchQueue.global(qos: .userInitiated).async {
@@ -319,6 +335,8 @@ class GlobalSettingsViewController: UIViewController {
                     
                 }else{
                     print("error getting firmware info for revison, or the firmware is up-to-date")
+                    guard let user = self.user else { return }
+                    Answers.logCustomEvent(withName: "errorWithRevisionOrFirmwareIsUp-To-Date", customAttributes: ["user":user,"firmware":firmware.debugDescription ?? ""])
                     
                     DispatchQueue.main.async {
                         self.updatesLabel.text = "Firmware is up-to-date"
@@ -328,6 +346,10 @@ class GlobalSettingsViewController: UIViewController {
         } else {
             //go to update screen
             //self.performSegue(withIdentifier: "showDFU", sender: nil)
+            
+            guard let user = self.user else { return }
+            Answers.logCustomEvent(withName: "userWentToStartDFU", customAttributes: ["user":user])
+            
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             guard let dfuViewController = storyboard.instantiateViewController(withIdentifier :"dfuViewController") as? DFUViewController, let myTabBarController = self.tabBarController as? BeaconTabBarController, let centralManager = myTabBarController.centralManager, let selectedPeripheral = myTabBarController.selectedPeripheral else { return }

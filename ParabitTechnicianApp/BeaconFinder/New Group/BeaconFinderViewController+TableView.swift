@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import BPStatusBarAlert
 import SwiftSpinner
+import Crashlytics
 
 extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource{
     
@@ -44,11 +45,14 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
                 controller.selectedPeripheral = self.sensorTag
                 controller.selectedPeripheralIsSecure = true 
                 
-
+                guard let user = self.user else { return }
+                Answers.logCustomEvent(withName: "userOpenedBeaconConfiguration", customAttributes: ["user":user])
                 self.navigationController?.pushViewController(controller, animated: true)
             })
         }else{
             //if non-connectable, alert user
+            guard let user = self.user else { return }
+            Answers.logCustomEvent(withName: "userTappedNonConnectableBeacon", customAttributes: ["user":user])
             BPStatusBarAlert(duration: 0.5, delay: 0.5, position: .statusBar) // customize duration, delay and position
                 .message(message: "Can not access the Beacon, please try connecting")
                 .messageColor(color: .white)
@@ -101,6 +105,8 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
     
     func disconnectTapped(_ sender: Any?) {
         print("disconnectTapped", sender)
+        guard let user = self.user else { return }
+        Answers.logCustomEvent(withName: "userTappedDisconnect", customAttributes: ["user":user])
         guard let sensor = sensorTag else { return }
         self.centralManager.cancelPeripheralConnection(sensor)
         self.refresh(self)
@@ -108,6 +114,8 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
     
     func connectTapped(_ sender: Any?) {
         print("connectTapped", sender)
+        guard let user = self.user else { return }
+        Answers.logCustomEvent(withName: "userTappedConnect", customAttributes: ["user":user])
         guard let sensor = sensorTag else { return }
         centralManager.connect(sensor, options: nil)
         

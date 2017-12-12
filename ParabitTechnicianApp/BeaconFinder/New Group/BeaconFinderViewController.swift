@@ -11,7 +11,7 @@ import SwiftSpinner
 import BPStatusBarAlert
 import CoreBluetooth
 import AWSCognitoIdentityProvider
-
+import Crashlytics
 
 class BeaconFinderViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -112,9 +112,13 @@ class BeaconFinderViewController: UIViewController {
     
     @IBAction func homeTapped(_ sender: Any) {
         showMenu()
+        guard let user = self.user else { return }
+        Answers.logCustomEvent(withName: "userOpenedMenu", customAttributes: ["user":user])
     }
     
     @IBAction func profileTapped(_ sender: Any) {
+        guard let user = self.user else { return }
+        Answers.logCustomEvent(withName: "userTappedProfile", customAttributes: ["user":user])
         guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "attributesView") as? UserDetailTableViewController else { return }
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -151,6 +155,8 @@ class BeaconFinderViewController: UIViewController {
 
     @IBAction func refresh(_ sender: Any) {
         self.resetBluetooth()
+        guard let user = self.user else { return }
+        Answers.logCustomEvent(withName: "userHitRefresh", customAttributes: ["user":user])
   }
     
     func resetBluetooth () {

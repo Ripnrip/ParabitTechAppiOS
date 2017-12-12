@@ -11,6 +11,7 @@ import UIKit
 import CoreBluetooth
 import BPStatusBarAlert
 import SwiftSpinner
+import Crashlytics
 
 extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDelegate {
     
@@ -567,6 +568,10 @@ else { return }
         if error != nil {
             print("****** DISCONNECTION DETAILS: \(error!.localizedDescription)")
         }
+        
+        guard let user = self.user else { return }
+        Answers.logCustomEvent(withName: "disconnectedFromBeacon", customAttributes: ["user":user,"beacon":peripheral])
+        
         sensorTag = nil
         availableDoors = availableDoors.filter {$0.sensorTag != sensorTag}
         currentBeacon?.sensorTag = nil

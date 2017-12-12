@@ -17,6 +17,7 @@
 
 import Foundation
 import AWSCognitoIdentityProvider
+import Crashlytics
 
 class ForgotPasswordViewController: UIViewController {
     
@@ -55,6 +56,9 @@ class ForgotPasswordViewController: UIViewController {
             self.present(alertController, animated: true, completion:  nil)
             return
         }
+        
+        guard let user = self.user else { return }
+        Answers.logCustomEvent(withName: "userForgotPassword", customAttributes: ["user":user])
         
         self.user = self.pool?.getUser(self.username.text!)
         self.user?.forgotPassword().continueWith{[weak self] (task: AWSTask) -> AnyObject? in

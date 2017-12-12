@@ -21,6 +21,8 @@ target 'ParabitTechnicianApp' do
    pod 'SideMenuController'
    pod 'Fabric'
    pod 'Crashlytics'
+   pod 'SkyFloatingLabelTextField', '~> 3.0'
+
   # Pods for ParabitTechnicianApp
 
 end

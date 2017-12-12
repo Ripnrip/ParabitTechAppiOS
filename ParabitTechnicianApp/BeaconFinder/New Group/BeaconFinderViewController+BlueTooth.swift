@@ -236,8 +236,6 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             print("found the Firmware Revision String  with value \(value) and data \(datastring)")
             currentBeacon?.firmwareRevision = datastring as String
             
-            //should be finished connecting now
-            SwiftSpinner.hide()
         case "Manufacturer Name String":
             guard let value = characteristic.value , let datastring = NSString(data: value, encoding: String.Encoding.utf8.rawValue) else { return }
             print("found the manufacturer string with value \(value) and data \(datastring)")

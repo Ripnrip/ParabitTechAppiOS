@@ -158,6 +158,7 @@ class BeaconFinderViewController: UIViewController {
     
 
     @IBAction func refresh(_ sender: Any) {
+        //temp hack to get user attributes
         if ParabitNetworking.sharedInstance.userAttributes == nil {
             ParabitNetworking.sharedInstance.getAuthenticationKeys()
         }

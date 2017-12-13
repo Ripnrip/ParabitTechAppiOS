@@ -1054,7 +1054,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" background="emailLabel" translatesAutoresizingMaskIntoConstraints="NO" id="3QB-OY-gKg">
-                                <rect key="frame" x="16" y="219" width="343" height="52"/>
+                                <rect key="frame" x="16" y="141" width="343" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="6zD-8N-XfW"/>
                                 </constraints>
@@ -1062,7 +1062,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" background="passwordLabel" translatesAutoresizingMaskIntoConstraints="NO" id="WiU-ZU-ORb">
-                                <rect key="frame" x="16" y="289" width="343" height="52"/>
+                                <rect key="frame" x="16" y="211" width="343" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="2wB-Ol-fnH"/>
                                 </constraints>
@@ -1070,7 +1070,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RjR-is-TxI">
-                                <rect key="frame" x="16" y="407" width="343" height="34"/>
+                                <rect key="frame" x="16" y="329" width="343" height="34"/>
                                 <color key="backgroundColor" red="0.99939018487930298" green="0.45001888275146484" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Log In">
@@ -1080,16 +1080,8 @@
                                     <action selector="signInPressed:" destination="1Ib-3E-jU2" eventType="touchUpInside" id="0P5-p7-KeR"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ParabitBanner" translatesAutoresizingMaskIntoConstraints="NO" id="D0x-5d-SzB">
-                                <rect key="frame" x="16" y="58" width="343" height="43"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="343" id="Osk-85-lCQ"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="43" id="fAZ-zC-cLc"/>
-                                    <constraint firstAttribute="height" constant="43" id="tru-FS-yi9"/>
-                                </constraints>
-                            </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZc-iZ-6b7">
-                                <rect key="frame" x="16" y="359" width="55" height="30"/>
+                                <rect key="frame" x="16" y="281" width="55" height="30"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1098,7 +1090,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jf0-7q-zlb">
-                                <rect key="frame" x="202" y="359" width="157" height="30"/>
+                                <rect key="frame" x="202" y="281" width="157" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="157" id="ESt-fJ-wBz"/>
                                     <constraint firstAttribute="height" constant="30" id="N8b-sh-7tC"/>
@@ -1110,8 +1102,8 @@
                                     <segue destination="Usx-PG-yZ5" kind="show" id="fBa-ti-CO0"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ParabeaconConfigurationTool" translatesAutoresizingMaskIntoConstraints="NO" id="c99-Em-0qJ">
-                                <rect key="frame" x="16" y="118" width="240" height="73"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PBeacon" translatesAutoresizingMaskIntoConstraints="NO" id="c99-Em-0qJ">
+                                <rect key="frame" x="16" y="40" width="240" height="73"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="5bk-x2-sTg"/>
                                     <constraint firstAttribute="height" constant="73" id="ngK-sj-gOP"/>
@@ -1123,20 +1115,15 @@
                             <constraint firstItem="RjR-is-TxI" firstAttribute="trailing" secondItem="wjZ-Pn-SHU" secondAttribute="trailingMargin" id="4Xn-4z-qhb"/>
                             <constraint firstItem="MyA-Yp-CIW" firstAttribute="trailing" secondItem="jf0-7q-zlb" secondAttribute="trailing" constant="16" id="8SH-V8-an9"/>
                             <constraint firstItem="fZc-iZ-6b7" firstAttribute="baseline" secondItem="jf0-7q-zlb" secondAttribute="baseline" id="C6f-hM-KLm"/>
-                            <constraint firstItem="D0x-5d-SzB" firstAttribute="leading" secondItem="MyA-Yp-CIW" secondAttribute="leading" constant="16" id="Cc0-fH-uaF"/>
-                            <constraint firstItem="MyA-Yp-CIW" firstAttribute="trailing" secondItem="D0x-5d-SzB" secondAttribute="trailing" constant="16" id="MPi-QB-1ur"/>
                             <constraint firstItem="3QB-OY-gKg" firstAttribute="leading" secondItem="wjZ-Pn-SHU" secondAttribute="leadingMargin" id="PQs-Is-h3M"/>
-                            <constraint firstItem="c99-Em-0qJ" firstAttribute="top" secondItem="D0x-5d-SzB" secondAttribute="bottom" constant="17" id="Ten-pW-oOV"/>
-                            <constraint firstItem="D0x-5d-SzB" firstAttribute="centerX" secondItem="3QB-OY-gKg" secondAttribute="centerX" id="U8X-Io-gvM"/>
                             <constraint firstItem="3QB-OY-gKg" firstAttribute="top" secondItem="c99-Em-0qJ" secondAttribute="bottom" constant="28" id="VVO-89-h8t"/>
-                            <constraint firstItem="D0x-5d-SzB" firstAttribute="centerX" secondItem="wjZ-Pn-SHU" secondAttribute="centerX" id="Z4r-MI-1mC"/>
                             <constraint firstItem="jf0-7q-zlb" firstAttribute="top" secondItem="WiU-ZU-ORb" secondAttribute="bottom" constant="18" id="fwe-VJ-V20"/>
+                            <constraint firstItem="c99-Em-0qJ" firstAttribute="top" secondItem="gpH-Sb-FAY" secondAttribute="bottom" constant="20" id="g4g-cy-2js"/>
                             <constraint firstItem="RjR-is-TxI" firstAttribute="leading" secondItem="wjZ-Pn-SHU" secondAttribute="leadingMargin" id="gKG-61-r6g"/>
                             <constraint firstItem="jf0-7q-zlb" firstAttribute="trailing" secondItem="wjZ-Pn-SHU" secondAttribute="trailingMargin" id="iWa-60-JQw"/>
                             <constraint firstItem="WiU-ZU-ORb" firstAttribute="leading" secondItem="wjZ-Pn-SHU" secondAttribute="leadingMargin" id="oX5-6o-5EF"/>
                             <constraint firstItem="WiU-ZU-ORb" firstAttribute="trailing" secondItem="wjZ-Pn-SHU" secondAttribute="trailingMargin" id="pFW-Bt-Fin"/>
                             <constraint firstItem="fZc-iZ-6b7" firstAttribute="leading" secondItem="wjZ-Pn-SHU" secondAttribute="leadingMargin" id="pJZ-LO-2mq"/>
-                            <constraint firstItem="D0x-5d-SzB" firstAttribute="top" secondItem="gpH-Sb-FAY" secondAttribute="bottom" constant="38" id="sKh-UM-hXM"/>
                             <constraint firstItem="WiU-ZU-ORb" firstAttribute="top" secondItem="3QB-OY-gKg" secondAttribute="bottom" constant="18" id="uTm-2g-vLn"/>
                             <constraint firstItem="c99-Em-0qJ" firstAttribute="leading" secondItem="MyA-Yp-CIW" secondAttribute="leading" constant="16" id="xhg-jA-jYx"/>
                             <constraint firstItem="RjR-is-TxI" firstAttribute="top" secondItem="fZc-iZ-6b7" secondAttribute="bottom" constant="18" id="xlm-du-mds"/>
@@ -1709,8 +1696,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ParabeaconConfigurationTool" width="356" height="119"/>
-        <image name="ParabitBanner" width="577" height="95"/>
+        <image name="PBeacon" width="189" height="58"/>
         <image name="emailLabel" width="323" height="49"/>
         <image name="grid-world" width="32" height="32"/>
         <image name="passwordLabel" width="323" height="49"/>

@@ -63,12 +63,15 @@ class BeaconFinderViewController: UIViewController {
     var isMenuShown:Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
+        
         UIApplication.shared.statusBarStyle = .lightContent
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //temp hack to get user attributes
         if ParabitNetworking.sharedInstance.userAttributes == nil {
             ParabitNetworking.sharedInstance.getAuthenticationKeys()
         }
@@ -95,6 +98,7 @@ class BeaconFinderViewController: UIViewController {
         if !isSignedIn { return }
         centralManager = CBCentralManager(delegate: self,
                                           queue: nil)
+        refresh(self) 
 
         
     }

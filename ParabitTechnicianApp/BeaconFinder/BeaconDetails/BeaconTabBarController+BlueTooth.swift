@@ -20,7 +20,7 @@ extension BeaconTabBarController: CBPeripheralManagerDelegate {
         if error != nil {
             print("there was an error discovering characteristics for a service")
         }
-        guard let characteristics = service.characteristics else {return}
+        guard let characteristics = service.characteristics else { return }
         print("The discovered characteristics are \(characteristics))")
         
         

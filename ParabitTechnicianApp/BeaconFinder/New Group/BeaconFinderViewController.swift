@@ -104,12 +104,12 @@ class BeaconFinderViewController: UIViewController {
     func showMenu() {
         if isMenuShown {
             UIView.animate(withDuration: 0.5) {
-                self.menuView.frame = CGRect(x: -300, y: self.menuView.frame.origin.y, width: 300, height: self.menuView.frame.height)
+                self.menuView.frame = CGRect(x: -265, y: self.menuView.frame.origin.y, width: 265, height: self.menuView.frame.height)
                     self.isMenuShown = false
             }
         }else{
             UIView.animate(withDuration: 0.5) {
-                self.menuView.frame = CGRect(x: 0, y: self.menuView.frame.origin.y, width: 300, height: self.menuView.frame.height)
+                self.menuView.frame = CGRect(x: 0, y: self.menuView.frame.origin.y, width: 265, height: self.menuView.frame.height)
                     self.isMenuShown = true
                 }
         }

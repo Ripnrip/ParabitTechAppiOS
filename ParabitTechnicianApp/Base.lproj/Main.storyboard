@@ -230,7 +230,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GUJ-Ig-vJL">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="265" height="667"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbE-P8-NN6">
                                         <rect key="frame" x="75" y="248" width="139" height="42"/>
@@ -275,8 +275,19 @@
                                             <action selector="feedbackTapped:" destination="pJi-zV-voA" eventType="touchUpInside" id="vIK-uX-GcT"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGL-6H-Asf">
+                                        <rect key="frame" x="75" y="570" width="190" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <state key="normal" title="Report a problem">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="feedbackTapped:" destination="pJi-zV-voA" eventType="touchUpInside" id="8jr-bH-Tck"/>
+                                        </connections>
+                                    </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oji-Ya-eK3">
-                                        <rect key="frame" x="0.0" y="88" width="300" height="152"/>
+                                        <rect key="frame" x="0.0" y="88" width="265" height="152"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Currently logged in as" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WiU-yP-occ">
@@ -287,13 +298,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="heyfromjonathan@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Hj-CT-7Xf">
-                                                <rect key="frame" x="25" y="129" width="218" height="14"/>
+                                                <rect key="frame" x="25" y="129" width="218" height="18"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cnJ-eq-Gch">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="cnJ-eq-Gch">
                                                 <rect key="frame" x="25" y="28" width="65" height="65"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
@@ -322,17 +333,10 @@
                                             <action selector="profileTapped:" destination="pJi-zV-voA" eventType="touchUpInside" id="WJY-cO-IFT"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGL-6H-Asf">
-                                        <rect key="frame" x="75" y="570" width="190" height="42"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bdm-UR-CW7">
+                                        <rect key="frame" x="19" y="257" width="25" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <state key="normal" title="Report a problem">
-                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="feedbackTapped:" destination="pJi-zV-voA" eventType="touchUpInside" id="8jr-bH-Tck"/>
-                                        </connections>
-                                    </button>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.98040139675140381" green="0.98038303852081299" blue="0.98039543628692627" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -1748,6 +1752,7 @@
         <image name="grid-world" width="32" height="32"/>
         <image name="passwordLabel" width="323" height="49"/>
         <image name="refresh" width="64" height="64"/>
+        <image name="user" width="64" height="64"/>
         <image name="" width="25" height="14"/>
     </resources>
     <color key="tintColor" red="0.96206325290000005" green="0.4814415574" blue="0.12690275910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

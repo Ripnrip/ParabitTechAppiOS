@@ -14,13 +14,32 @@ import Crashlytics
 
 extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource{
     
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Connectable"
+        case 1:
+            return "Advertising"
+        default:
+            return ""
+        }
+        
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return availableDoors.count
+        switch section {
+        case 0:
+            return availableDoors.filter { $0.isConnectable }.count
+        case 1:
+            return availableDoors.filter { !$0.isConnectable }.count
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -67,19 +86,18 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "beaconCell") as? ParaBeaconTableViewCell else {return UITableViewCell()}
         let currentBeacon = availableDoors[indexPath.row]
         
+        //cell.beaconNameLabel.text = currentBeacon.name
         cell.beaconNameLabel.text = currentBeacon.name
         
         cell.connectButton.addTarget(self, action: #selector(BeaconFinderViewController.connectTapped(_:)), for: .touchUpInside)
         cell.disconnectButton.addTarget(self, action: #selector(BeaconFinderViewController.disconnectTapped(_:)), for: .touchUpInside)
-
 
         if currentBeacon.isConnectable == true  {
             cell.configurableStatusLabel.isHidden = false
             cell.disconnectButton.isHidden = true
             cell.connectButton.isHidden = false
             cell.statusBubbleImageView.backgroundColor = UIColor.green
-        }
-        else {
+        } else {
             cell.configurableStatusLabel.isHidden = true
             //cell.disconnectButton.isHidden = false
             cell.connectButton.isHidden = true
@@ -89,9 +107,8 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         if self.currentBeacon?.isUnlocked == true {
             cell.disconnectButton.isHidden = false
             cell.connectButton.isHidden = true
-        }else{
+        } else {
             cell.disconnectButton.isHidden = true
-            
         }
         
         cell.statusBubbleImageView.layer.cornerRadius = cell.statusBubbleImageView.frame.height/2
@@ -121,7 +138,6 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         
         //SwiftSpinner.show(delay: 4.0, title: "Connecting")
         SwiftSpinner.show("Connecting", animated: true)
-        
         
     }
     

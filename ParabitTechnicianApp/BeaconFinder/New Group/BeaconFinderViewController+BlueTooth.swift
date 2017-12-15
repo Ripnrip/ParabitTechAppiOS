@@ -260,8 +260,6 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         }
         
         if isBeaconUnlocked {
-               // print("the updated values for characteristic is \(characteristic.uuid) with value \(characteristic.value) ")
-            
             
             //Characteristics Information
             switch characteristic.uuid {

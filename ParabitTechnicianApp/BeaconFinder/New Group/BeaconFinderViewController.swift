@@ -72,7 +72,7 @@ class BeaconFinderViewController: UIViewController {
         super.viewDidLoad()
         
         //temp hack to get user attributes
-        //shouldShowSignIn()
+        shouldShowSignIn()
         
         let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
         user = pool.currentUser()
@@ -161,7 +161,7 @@ class BeaconFinderViewController: UIViewController {
 
     @IBAction func refresh(_ sender: Any) {
         //temp hack to get user attributes
-        //shouldShowSignIn()
+        shouldShowSignIn()
         
         self.resetBluetooth()
         guard let user = self.user else { return }
@@ -175,7 +175,7 @@ class BeaconFinderViewController: UIViewController {
             
         }
         
-        SwiftSpinner.show(duration: 4, title: "Scanning")
+        SwiftSpinner.show(duration: 3, title: "Scanning")
         let when = DispatchTime.now() + 0 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.sensorTag = nil
@@ -188,6 +188,9 @@ class BeaconFinderViewController: UIViewController {
             self.currentBeacon?.isUnlocked = false
             self.isBeaconUnlocked = false
             self.tableView.reloadData()
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 6) {
+            self.centralManager.stopScan()
         }
     }
     

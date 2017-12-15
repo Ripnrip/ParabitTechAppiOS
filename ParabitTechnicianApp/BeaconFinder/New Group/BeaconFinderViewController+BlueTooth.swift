@@ -91,8 +91,8 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             if peripheralName == self.peripheralName && peripheral.state.rawValue != 2 {
                 print("SENSOR TAG FOUND! ADDING NOW!!!")
                 // to save power, stop scanning for other devices
-                keepScanning = false
-                pauseScan()
+                //keepScanning = false
+                //pauseScan()
                 
                 //read rssi
                 peripheral.readRSSI()
@@ -110,15 +110,16 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                     currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: true, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, deviceName: nil, serialNumber: nil, modelNumber: nil, firmwareRevision: nil, hardware: nil, advertisingValue: nil, rssiValue: RSSI)
                     
                     guard let door = currentBeacon else {return}
-                    if availableDoors.contains(where: { $0.name == peripheralName }) {
+                    if availableDoors.contains(where: { $0.UUID == currentBeacon?.UUID }) {
                         // found
                         tableView.reloadData()
+                        //SwiftSpinner.hide()
                     } else {
                         // not
                         availableDoors.append(door)
                         tableView.reloadData()
+                        //SwiftSpinner.hide()
                     }
-                // stop autoconnecting centralManager.connect(sensorTag, options: nil)
 
                 }else{
                 //add peripheral to available doors tableview, but don't add the sensor, and set nil for sensortag, and false for isConnectable
@@ -126,9 +127,10 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
 
                 guard let door = currentBeacon else {return}
                 
-                if availableDoors.contains(where: { $0.name == peripheralName }) {
+                if availableDoors.contains(where: { $0.UUID == currentBeacon?.UUID }) {
                     // found
                     tableView.reloadData()
+                   // availableDoors.append(door)
                     //SwiftSpinner.hide()
                 } else {
                     // not

@@ -230,67 +230,81 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GUJ-Ig-vJL">
-                                <rect key="frame" x="-139" y="0.0" width="139" height="667"/>
+                                <rect key="frame" x="-300" y="0.0" width="300" height="667"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbE-P8-NN6">
-                                        <rect key="frame" x="0.0" y="91" width="139" height="42"/>
+                                        <rect key="frame" x="48" y="248" width="139" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Home">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="homeTapped:" destination="pJi-zV-voA" eventType="touchUpInside" id="Tlx-Xb-cv2"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Fk-RY-rib">
-                                        <rect key="frame" x="0.0" y="141" width="139" height="42"/>
+                                        <rect key="frame" x="48" y="298" width="139" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Profile">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="profileTapped:" destination="pJi-zV-voA" eventType="touchUpInside" id="JJ7-hp-EDt"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRz-3V-1HR">
-                                        <rect key="frame" x="0.0" y="617" width="139" height="42"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="42" id="27V-Fi-tCl"/>
-                                        </constraints>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oji-Ya-eK3">
+                                        <rect key="frame" x="0.0" y="88" width="300" height="152"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Currently logged in as" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WiU-yP-occ">
+                                                <rect key="frame" x="25" y="111" width="197" height="15"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="heyfromjonathan@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Hj-CT-7Xf">
+                                                <rect key="frame" x="25" y="129" width="218" height="14"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cnJ-eq-Gch">
+                                                <rect key="frame" x="25" y="28" width="65" height="65"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.95676314830780029" green="0.48612210154533386" blue="0.12539553642272949" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </view>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRz-3V-1HR">
+                                        <rect key="frame" x="67" y="617" width="139" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Sign Out">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="signOutTapped:" destination="pJi-zV-voA" eventType="touchUpInside" id="5yU-LT-LMu"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="72P-Qh-lZ9">
-                                        <rect key="frame" x="0.0" y="575" width="139" height="42"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="139" id="L4m-Q9-0H2"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="42" id="gSY-pp-Z33"/>
-                                            <constraint firstAttribute="height" constant="42" id="kMB-kX-LoW"/>
-                                        </constraints>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="72P-Qh-lZ9">
+                                        <rect key="frame" x="67" y="575" width="139" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Feedback">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="feedbackTapped:" destination="pJi-zV-voA" eventType="touchUpInside" id="vIK-uX-GcT"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.96206325290000005" green="0.4814415574" blue="0.12690275910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.98040139675140381" green="0.98038303852081299" blue="0.98039543628692627" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="uRz-3V-1HR" secondAttribute="bottom" constant="8" id="6zZ-Yb-oev"/>
-                                    <constraint firstItem="uRz-3V-1HR" firstAttribute="leading" secondItem="GUJ-Ig-vJL" secondAttribute="leading" id="7dg-LK-o7C"/>
-                                    <constraint firstAttribute="width" constant="139" id="F6y-7A-jqj"/>
-                                    <constraint firstAttribute="trailing" secondItem="72P-Qh-lZ9" secondAttribute="trailing" id="KSl-zP-kgd"/>
-                                    <constraint firstAttribute="trailing" secondItem="uRz-3V-1HR" secondAttribute="trailing" id="N33-3r-8Ub"/>
-                                    <constraint firstItem="uRz-3V-1HR" firstAttribute="top" secondItem="72P-Qh-lZ9" secondAttribute="bottom" id="TLx-yl-bZh"/>
+                                    <constraint firstAttribute="width" constant="300" id="k77-89-GWV"/>
                                 </constraints>
                             </view>
                         </subviews>

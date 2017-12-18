@@ -186,6 +186,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
                 _ = ParabitNetworking.sharedInstance
                 ParabitNetworking.sharedInstance.startSessionTimer()
                 //ParabitNetworking.sharedInstance.getAuthenticationKeys()
+                
                 print("the user's status is \(self.user!.confirmedStatus)")
                 self.username.text = nil
                 //determine if user needs to go to new password set screen

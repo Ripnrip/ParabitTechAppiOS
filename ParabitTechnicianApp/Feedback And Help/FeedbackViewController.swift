@@ -32,6 +32,10 @@ class FeedbackViewController: UIViewController {
         
         let pool = AWSCognitoIdentityUserPool(forKey:AWSCognitoUserPoolsSignInProviderKey)
         user = pool.currentUser()
+        
+        if ParabitNetworking.sharedInstance.userAttributes == nil {
+            ParabitNetworking.sharedInstance.getAuthenticationKeys()
+        }
     }
     
     func sendFeedback() {

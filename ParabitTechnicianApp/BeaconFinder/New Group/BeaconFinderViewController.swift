@@ -75,7 +75,7 @@ class BeaconFinderViewController: UIViewController {
         super.viewDidLoad()
         
         //temp hack to get user attributes
-        //shouldShowSignIn()
+        shouldShowSignIn()
         
         let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
         user = pool.currentUser()
@@ -100,7 +100,6 @@ class BeaconFinderViewController: UIViewController {
         centralManager = CBCentralManager(delegate: self,
                                           queue: nil)
         refresh(self) 
-
         
     }
     

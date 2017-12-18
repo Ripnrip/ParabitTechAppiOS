@@ -125,6 +125,15 @@ class BeaconFinderViewController: UIViewController {
         Answers.logCustomEvent(withName: "userOpenedMenu", customAttributes: ["user":user])
     }
     
+    @IBAction func helpTapped(_ sender: Any) {
+        guard let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String else { return }
+        let date = "12-18-2017"
+        let message = "Parabit Technician App \n Version: \(versionNumber) \n Date: \(date)"
+        let alert = UIAlertController(title: "About", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func profileTapped(_ sender: Any) {
         guard let user = self.user else { return }
         Answers.logCustomEvent(withName: "userTappedProfile", customAttributes: ["user":user])

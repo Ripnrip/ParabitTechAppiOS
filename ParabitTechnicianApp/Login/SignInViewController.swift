@@ -23,6 +23,9 @@ import Crashlytics
 class SignInViewController: UIViewController {
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var versionLabel: UILabel!
+    
+    
     var passwordAuthenticationCompletion: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>?
     var usernameText: String?
     var rememberDeviceCompletionSource: AWSTaskCompletionSource<NSNumber>?
@@ -53,6 +56,9 @@ class SignInViewController: UIViewController {
         tapGesture.cancelsTouchesInView = true
         view.addGestureRecognizer(tapGesture)
 
+        guard let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String else { return }
+        versionLabel.text = "Version: \(versionNumber)"
+        
         //Temp leaving out because of new design that moves view up
 //        NotificationCenter.default.addObserver(self, selector: #selector(SignInViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(SignInViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)

@@ -16,6 +16,7 @@ import Crashlytics
 class BeaconFinderViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuView: UIView!
+    @IBOutlet weak var emailLabel: UILabel!
     
     var beacons = [Parabeacon]()
     var currentBeacon:Peripheral?
@@ -65,6 +66,8 @@ class BeaconFinderViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         UIApplication.shared.statusBarStyle = .lightContent
+        guard let thisUser = user else { return }
+        emailLabel.text = thisUser.username
         
     }
     

@@ -89,7 +89,7 @@ extension FirstTimeLoginViewController: AWSCognitoIdentityNewPasswordRequired {
                 //self.dismiss(animated: true, completion: nil)
                 //self.navigationController?.popViewController(animated: true)
                 guard let user = self.pool?.currentUser() else { return }
-                Answers.logCustomEvent(withName: "userSetupFirstPassword", customAttributes: ["user":user])
+                Answers.logCustomEvent(withName: "USER_SETUP_FIRST_PASSWORD", customAttributes: ["user":user])
                 self.dismiss(animated: true, completion: nil)
             }
         }

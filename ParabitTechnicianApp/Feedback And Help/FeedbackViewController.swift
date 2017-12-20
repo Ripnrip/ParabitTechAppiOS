@@ -40,7 +40,7 @@ class FeedbackViewController: UIViewController {
     
     func sendFeedback() {
         guard let user = self.user else { return }
-        Answers.logCustomEvent(withName: "userSentFeedback", customAttributes: ["user":user,"feedback":feedbackTextView.text])
+        Answers.logCustomEvent(withName: "USER_SENT_FEEDBACK", customAttributes: ["user":user,"feedback":feedbackTextView.text])
         
         ParabitNetworking.sharedInstance.submitFeedback(feedback: feedbackTextView.text, context: "") { (success) in
             if success {

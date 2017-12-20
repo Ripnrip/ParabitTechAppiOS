@@ -29,6 +29,7 @@
 		8C85A7AB1F892AE400D185D0 /* UIDViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AA1F892AE400D185D0 /* UIDViewController+TableView.swift */; };
 		8C85A7AD1F892C8A00D185D0 /* UIDViewController+PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AC1F892C8A00D185D0 /* UIDViewController+PickerView.swift */; };
 		8C85A7AF1F89315400D185D0 /* RegistrationViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AE1F89315400D185D0 /* RegistrationViewController+TableView.swift */; };
+		8C9959851FEAB05F00B405EF /* ParabitEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9959841FEAB05F00B405EF /* ParabitEvents.swift */; };
 		8CB4D79A1F8D394200B26563 /* Peripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D7991F8D394200B26563 /* Peripheral.swift */; };
 		8CB4D79C1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D79B1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift */; };
 		8CB4D79F1F8D4F8000B26563 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D79E1F8D4F8000B26563 /* Constants.swift */; };
@@ -84,6 +85,7 @@
 		8C85A7AA1F892AE400D185D0 /* UIDViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDViewController+TableView.swift"; sourceTree = "<group>"; };
 		8C85A7AC1F892C8A00D185D0 /* UIDViewController+PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDViewController+PickerView.swift"; sourceTree = "<group>"; };
 		8C85A7AE1F89315400D185D0 /* RegistrationViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RegistrationViewController+TableView.swift"; sourceTree = "<group>"; };
+		8C9959841FEAB05F00B405EF /* ParabitEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParabitEvents.swift; sourceTree = "<group>"; };
 		8CB4D7991F8D394200B26563 /* Peripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Peripheral.swift; sourceTree = "<group>"; };
 		8CB4D79B1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeaconFinderViewController+BlueTooth.swift"; sourceTree = "<group>"; };
 		8CB4D79E1F8D4F8000B26563 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 		8C5E0C6E1F86681D00F09225 /* ParabitTechnicianApp */ = {
 			isa = PBXGroup;
 			children = (
+				8C9959831FEAA6E300B405EF /* Logger */,
 				8CFB012D1F98EBE20044FB89 /* Networking */,
 				8C85A7991F88FB6100D185D0 /* Models */,
 				8C5E0C8B1F86CDD900F09225 /* Cells */,
@@ -251,6 +254,14 @@
 				8C85A7AE1F89315400D185D0 /* RegistrationViewController+TableView.swift */,
 			);
 			path = BeaconDetails;
+			sourceTree = "<group>";
+		};
+		8C9959831FEAA6E300B405EF /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				8C9959841FEAB05F00B405EF /* ParabitEvents.swift */,
+			);
+			path = Logger;
 			sourceTree = "<group>";
 		};
 		8CB4D7921F8D38E800B26563 /* AvailableDoors */ = {
@@ -408,6 +419,7 @@
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSpinner/SwiftSpinner.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Trackable/Trackable.framework",
 				"${BUILT_PRODUCTS_DIR}/Zip/Zip.framework",
 				"${BUILT_PRODUCTS_DIR}/iOSDFULibrary/iOSDFULibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/iOSSideMainMenu/iOSSideMainMenu.framework",
@@ -428,6 +440,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSpinner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Trackable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Zip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iOSDFULibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iOSSideMainMenu.framework",
@@ -532,6 +545,7 @@
 				8CFB012F1F98EC070044FB89 /* ParabitNetworking.swift in Sources */,
 				8CE5DD801F9112DC00B6A2DA /* GATTOperations.swift in Sources */,
 				8C85A7AB1F892AE400D185D0 /* UIDViewController+TableView.swift in Sources */,
+				8C9959851FEAB05F00B405EF /* ParabitEvents.swift in Sources */,
 				8CF3A4FA1FB3B49F009A4ACE /* DevicesDetailTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -58,7 +58,7 @@ class ForgotPasswordViewController: UIViewController {
         }
         
         guard let user = self.user else { return }
-        Answers.logCustomEvent(withName: "userForgotPassword", customAttributes: ["user":user])
+        Answers.logCustomEvent(withName: "USER_FORGOT_PASSWORD", customAttributes: ["user":user])
         
         self.user = self.pool?.getUser(self.username.text!)
         self.user?.forgotPassword().continueWith{[weak self] (task: AWSTask) -> AnyObject? in

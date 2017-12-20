@@ -121,23 +121,28 @@ class BeaconFinderViewController: UIViewController {
     @IBAction func homeTapped(_ sender: Any) {
         showMenu()
         guard let user = self.user else { return }
-        Answers.logCustomEvent(withName: "userOpenedMenu", customAttributes: ["user":user])
+        Answers.logCustomEvent(withName: "USER_OPENED_MENU", customAttributes: ["user":user])
     }
     
     @IBAction func helpTapped(_ sender: Any) {
+    
         guard let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String else { return }
-        let date = "12-18-2017"
+        let date = "12-19-2017"
         let message = "Parabit Technician App \n Version: \(versionNumber) \n Date: \(date)"
         let alert = UIAlertController(title: "About", message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+        
+        guard let user = self.user else { return }
+        Answers.logCustomEvent(withName: "USER_TAPPED_HELP", customAttributes: ["user":user])
     }
     
     @IBAction func profileTapped(_ sender: Any) {
-        guard let user = self.user else { return }
-        Answers.logCustomEvent(withName: "userTappedProfile", customAttributes: ["user":user])
         guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "attributesView") as? UserDetailTableViewController else { return }
         self.navigationController?.pushViewController(vc, animated: true)
+        
+        guard let user = self.user else { return }
+        Answers.logCustomEvent(withName: "USER_TAPPED_PROFILE", customAttributes: ["user":user])
     }
     
     @IBAction func signOutTapped(_ sender: Any) {
@@ -146,6 +151,9 @@ class BeaconFinderViewController: UIViewController {
         let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
             (result : UIAlertAction) -> Void in
             print("OK")
+            guard let user = self.user else { return }
+            Answers.logCustomEvent(withName: "USER_SIGNED_OUT", customAttributes: ["user":user])
+            
             self.user?.signOut()
             guard let signupController = self.storyboard?.instantiateViewController(withIdentifier: "signInViewController") as? SignInViewController else { return }
             self.present(signupController, animated: true, completion: nil)
@@ -165,8 +173,12 @@ class BeaconFinderViewController: UIViewController {
     }
     
     @IBAction func feedbackTapped(_ sender: Any) {
+
         guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "FeedbackController") as? FeedbackViewController else { return }
         self.navigationController?.pushViewController(vc, animated: true)
+        
+        guard let user = self.user else { return }
+        Answers.logCustomEvent(withName: "USER_TAPPED_FEEDBACK", customAttributes: ["user":user])
     }
     
 
@@ -176,7 +188,7 @@ class BeaconFinderViewController: UIViewController {
         
         self.resetBluetooth()
         guard let user = self.user else { return }
-        Answers.logCustomEvent(withName: "userHitRefresh", customAttributes: ["user":user])
+        Answers.logCustomEvent(withName: "USER_HIT_REFRESH", customAttributes: ["user":user])
   }
     
     func resetBluetooth () {

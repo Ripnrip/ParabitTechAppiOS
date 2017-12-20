@@ -180,7 +180,7 @@ class GlobalSettingsViewController: UIViewController {
         advLabel.text = "\(currentValue)"
         
         guard let user = self.user else { return }
-        Answers.logCustomEvent(withName: "advertisingIntervalChanged", customAttributes: ["user":user,"value":currentValue])
+        Answers.logCustomEvent(withName: "USER_CHANGED_ADVERTISING_INTERVAL", customAttributes: ["user":user,"value":currentValue])
         
         switch currentValue {
         case 1000:
@@ -214,7 +214,7 @@ class GlobalSettingsViewController: UIViewController {
         let currentValue =   Int(slider.value)
         
         guard let user = self.user else { return }
-        Answers.logCustomEvent(withName: "radioTXPowerChanged", customAttributes: ["user":user,"value":currentValue])
+        Answers.logCustomEvent(withName: "USER_CHANGED_RADIO_TX_POWER_CHANGED", customAttributes: ["user":user,"value":currentValue])
         
         switch currentValue{//slider.value {
         case 0:
@@ -277,7 +277,7 @@ class GlobalSettingsViewController: UIViewController {
     
     @IBAction func checkForUpdates(_ sender: Any) {
         guard let user = self.user else { return }
-        Answers.logCustomEvent(withName: "userCheckedForFirmwareUpdates", customAttributes: ["user":user])
+        Answers.logCustomEvent(withName: "USER_CHECKED_FOR_FIRWARE_UPDATES", customAttributes: ["user":user])
         
         if isUpdateAvailable == false {
             //test networking call valid -> 01-10-17 --
@@ -285,7 +285,7 @@ class GlobalSettingsViewController: UIViewController {
             ParabitNetworking.sharedInstance.getFirmwareInfoFor(revision: revisionString) { (firmware) in
                 if firmware != nil {
                     print("got the revision firmware")
-                    Answers.logCustomEvent(withName: "firmwareUpdateFound", customAttributes: ["user":user,"version":firmware?.latestFirmware.id ?? 0])
+                    Answers.logCustomEvent(withName: "FIRMWARE_UPDATE_FOUND", customAttributes: ["user":user,"version":firmware?.latestFirmware.id ?? 0])
                     self.currentFirmwareObject = firmware
  
                     DispatchQueue.global(qos: .userInitiated).async {
@@ -336,7 +336,7 @@ class GlobalSettingsViewController: UIViewController {
                 }else{
                     print("error getting firmware info for revison, or the firmware is up-to-date")
                     guard let user = self.user else { return }
-                    Answers.logCustomEvent(withName: "errorWithRevisionOrFirmwareIsUp-To-Date", customAttributes: ["user":user,"firmware":firmware.debugDescription ?? ""])
+                    Answers.logCustomEvent(withName: "ERROR_WITH_RETRIEVING_REVISION", customAttributes: ["user":user,"firmware":firmware.debugDescription ?? ""])
                     
                     DispatchQueue.main.async {
                         self.updatesLabel.text = "Firmware is up-to-date"
@@ -348,7 +348,7 @@ class GlobalSettingsViewController: UIViewController {
             //self.performSegue(withIdentifier: "showDFU", sender: nil)
             
             guard let user = self.user else { return }
-            Answers.logCustomEvent(withName: "userWentToStartDFU", customAttributes: ["user":user])
+            Answers.logCustomEvent(withName: "USER_WENT_TO_START_DFU", customAttributes: ["user":user])
             
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

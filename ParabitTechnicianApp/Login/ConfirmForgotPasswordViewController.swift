@@ -60,7 +60,7 @@ class ConfirmForgotPasswordViewController: UIViewController {
                 } else {
                     //TODO: Show alert saying password has been set
                     guard let user = self?.user else { return }
-                    Answers.logCustomEvent(withName: "userResetPassword", customAttributes: ["user":user])
+                    Answers.logCustomEvent(withName: "USER_RESET_PASSWORD", customAttributes: ["user":user])
                     
                     let _ = strongSelf.navigationController?.popToRootViewController(animated: true)
                 }

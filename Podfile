@@ -22,6 +22,7 @@ target 'ParabitTechnicianApp' do
    pod 'Fabric'
    pod 'Crashlytics'
    pod 'SkyFloatingLabelTextField', '~> 3.0'
+   pod 'Trackable'
 
   # Pods for ParabitTechnicianApp
 

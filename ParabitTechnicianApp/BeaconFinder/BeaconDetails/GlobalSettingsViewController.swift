@@ -270,6 +270,7 @@ class GlobalSettingsViewController: UIViewController {
             generalView.isHidden = true
             configurationView.isHidden = true
             updatesView.isHidden = false
+            checkForUpdates(self)
         default:
             return
         }
@@ -303,7 +304,7 @@ class GlobalSettingsViewController: UIViewController {
                             print("The file already exists at path")
                             DispatchQueue.main.async {
                                 self.firmwareZipURL = destination
-                                self.updatesLabel.text = "1 update found"
+                                self.updatesLabel.text = "Update found"
                                 self.updatesButton.setTitle("Update firmware", for: .normal)
                                 self.isUpdateAvailable = true
                             }
@@ -320,7 +321,7 @@ class GlobalSettingsViewController: UIViewController {
                                     try FileManager.default.moveItem(at: location, to: destination)
                                     print("file saved")
                                     DispatchQueue.main.async {
-                                        self.updatesLabel.text = "1 update found"
+                                        self.updatesLabel.text = "Update found"
                                         self.updatesButton.setTitle("Update firmware", for: .normal)
                                         self.isUpdateAvailable = true
                                         self.firmwareZipURL = destination

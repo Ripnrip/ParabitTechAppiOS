@@ -75,7 +75,7 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
             guard let user = self.user else { return }
             Answers.logCustomEvent(withName: "USER_TAPPED_NONCONNECTABLE_BEACON", customAttributes: ["user":user])
             BPStatusBarAlert(duration: 0.5, delay: 0.5, position: .statusBar) // customize duration, delay and position
-                .message(message: "Can not access the Beacon, please try connecting")
+                .message(message: "This beacon is not connectable")
                 .messageColor(color: .white)
                 .bgColor(color: .red)
                 .completion { print("")}

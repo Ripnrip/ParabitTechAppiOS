@@ -19,6 +19,7 @@ import Foundation
 import AWSCognitoIdentityProvider
 import Crashlytics
 import Fabric
+import BPStatusBarAlert
 
 class ConfirmForgotPasswordViewController: UIViewController {
     
@@ -60,6 +61,13 @@ class ConfirmForgotPasswordViewController: UIViewController {
                 } else {
                     //TODO: Show alert saying password has been set
                     guard let user = self?.user else { return }
+                    BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar)
+                        .message(message: "Reset password succesfully")
+                        .messageColor(color: .white)
+                        .bgColor(color: .green)
+                        .completion { print("")}
+                        .show()
+                    
                     Answers.logCustomEvent(withName: "USER_RESET_PASSWORD", customAttributes: ["user":user])
                     
                     let _ = strongSelf.navigationController?.popToRootViewController(animated: true)

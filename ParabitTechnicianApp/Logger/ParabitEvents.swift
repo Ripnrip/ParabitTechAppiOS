@@ -45,4 +45,8 @@ enum Events {
 
     }
     
+    func logEvent (event:Event , info: [String:String]) {
+        
+    }
+    
 }

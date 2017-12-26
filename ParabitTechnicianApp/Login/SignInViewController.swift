@@ -186,11 +186,18 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
                 _ = ParabitNetworking.sharedInstance
                 ParabitNetworking.sharedInstance.startSessionTimer()
                 //ParabitNetworking.sharedInstance.getAuthenticationKeys()
-                
                 print("the user's status is \(self.user!.confirmedStatus)")
                 self.username.text = nil
                 //determine if user needs to go to new password set screen
                 self.userRequiresNewPassword ? nil : self.dismiss(animated: true, completion: nil)
+                
+                //protocol to send delegate after success sign in
+                //notify listeners
+                let nc = NotificationCenter.default
+                nc.post(name:Notification.Name(rawValue:"userSignedIn"),
+                        object: nil,
+                        userInfo: ["message":"Hello there!", "date":Date()])
+                
             }
         }
     }

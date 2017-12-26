@@ -74,6 +74,11 @@ class BeaconFinderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let nc = NotificationCenter.default // Note that default is now a property, not a method call
+        nc.addObserver(forName:Notification.Name(rawValue:"userSignedIn"),
+                       object:nil, queue:nil,
+                       using:catchNotification)
+        
         //temp hack to get user attributes
         shouldShowSignIn()
         
@@ -99,7 +104,7 @@ class BeaconFinderViewController: UIViewController {
         if !isSignedIn { return }
         centralManager = CBCentralManager(delegate: self,
                                           queue: nil)
-        refresh(self) 
+        
         
     }
     
@@ -221,6 +226,19 @@ class BeaconFinderViewController: UIViewController {
         if ParabitNetworking.sharedInstance.userAttributes == nil {
             ParabitNetworking.sharedInstance.getAuthenticationKeys()
         }
+    }
+    
+    //Mark: Notification
+    func catchNotification(notification:Notification) -> Void {
+        print("Catch notification")
+        
+        guard let userInfo = notification.userInfo,
+            let message  = userInfo["message"] as? String,
+            let date     = userInfo["date"]    as? Date else {
+                print("No userInfo found in notification")
+                return
+        }
+        refresh(self)
     }
     
 }

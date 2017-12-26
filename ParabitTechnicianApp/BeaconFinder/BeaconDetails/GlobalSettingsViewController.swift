@@ -57,14 +57,14 @@ class GlobalSettingsViewController: UIViewController {
         super.viewDidLoad()
     
         setup()
-        
+    }
+    
+    func setup(){
         let nc = NotificationCenter.default // Note that default is now a property, not a method call
         nc.addObserver(forName:Notification.Name(rawValue:"finishedDFU"),
                        object:nil, queue:nil,
                        using:catchNotification)
-    }
-    
-    func setup(){
+        
         let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey )
         user = pool.currentUser()
         

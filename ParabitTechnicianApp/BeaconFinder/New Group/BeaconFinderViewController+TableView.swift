@@ -116,7 +116,7 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         cell.statusBubbleImageView.layer.cornerRadius = cell.statusBubbleImageView.frame.height/2
         cell.statusBubbleImageView.clipsToBounds = true
         
-        guard let rssiValue = currentBeacon.rssiValue else {return UITableViewCell()}
+        guard let rssiValue = currentBeacon.rssiValue else { return UITableViewCell() }
         cell.rssiLabel.text = "RSSI: \(rssiValue)"
         
         return cell

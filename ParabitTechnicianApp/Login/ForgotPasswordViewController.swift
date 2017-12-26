@@ -57,7 +57,7 @@ class ForgotPasswordViewController: UIViewController {
             return
         }
         
-        //FAILS guard let user = self.user else { return }
+        //FAILS --> guard let user = self.user else { return }
         Answers.logCustomEvent(withName: "USER_FORGOT_PASSWORD", customAttributes: ["user":self.username.text])
         
         self.user = self.pool?.getUser(self.username.text!)

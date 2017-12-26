@@ -49,11 +49,13 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let currentBeacon = self.availableDoors[indexPath.row]
-        if currentBeacon.isConnectable == true && currentBeacon.name == peripheralName && beaconInvestigation?.discoveredAdvAndTXCharacteristic == true {
+
+        if currentBeacon.isConnectable == true && currentBeacon.name == peripheralName  {
             //connect
-            //centralManager.connect(currentBeacon.sensorTag!, options: nil)
-            SwiftSpinner.show(duration: 3.0, title: "Connecting", animated: true)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+            connectTapped(self)
+
+            SwiftSpinner.show(duration: 4.8, title: "Connecting", animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4.2, execute: {
                 let sensor = self.availableDoors[indexPath.row].sensorTag
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "BeaconTabBarController") as! BeaconTabBarController

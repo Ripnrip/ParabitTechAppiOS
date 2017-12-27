@@ -130,7 +130,7 @@ class ParabitNetworking: NSObject {
             if dataResponse.error != nil || dataResponse.response?.statusCode != 200 {
                 print("there was an error getting the firmware unlock for revision \(dataResponse.error)")
                 completionHandler(nil)
-                SwiftSpinner.hide()
+                //SwiftSpinner.hide()
                 return
             }
             guard let request = dataResponse.request, let response = dataResponse.response, let value = dataResponse.value, let dict = value as? [String:Any], let unlockResponse = dict["unlock_response"] as? String

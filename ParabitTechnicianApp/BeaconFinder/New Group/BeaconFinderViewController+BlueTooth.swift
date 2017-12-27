@@ -125,7 +125,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 //add peripheral to available doors tableview, but don't add the sensor, and set nil for sensortag, and false for isConnectable
                     currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: false, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, deviceName: nil, serialNumber: nil, modelNumber: nil, firmwareRevision: nil, hardware: nil, advertisingValue: nil, rssiValue: RSSI)
 
-                guard let door = currentBeacon else {return}
+                guard let door = currentBeacon else { return }
                 
                 if availableDoors.contains(where: { $0.UUID == currentBeacon?.UUID }) {
                     // found
@@ -174,7 +174,6 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             print("there was an error discovering the services after connecting \(String(describing: error))")
         }
         guard let services = peripheral.services else { return }
-        //print("The discovered services are \(services))")
         
         services.forEach { (service) in
             switch service.uuid.uuidString {
@@ -278,7 +277,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 currentBeacon?.advertisingValue = beaconInvestigation?.didReadAdvertisingInterval()
                 currentBeacon?.advertisingIntervalCharacteristic = characteristic
                 
-                SwiftSpinner.hide()
+                //SwiftSpinner.hide()
                 self.tableView.reloadData()
 
             case CharacteristicID.remainConnectable.UUID:

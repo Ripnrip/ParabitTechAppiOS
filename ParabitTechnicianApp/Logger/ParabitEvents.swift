@@ -46,6 +46,11 @@ enum Events {
     }
     
     func logEvent (event:Event , info: [String:String]) {
+        //aws
+        
+        //fabric
+        
+        //any other
         
     }
     

@@ -48,12 +48,32 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        if indexPath.section == 1 {
+            //if non-connectable, alert user
+            guard let user = self.user else { return }
+            Answers.logCustomEvent(withName: "USER_TAPPED_NONCONNECTABLE_BEACON", customAttributes: ["user":user])
+            BPStatusBarAlert(duration: 0.5, delay: 0.5, position: .statusBar) // customize duration, delay and position
+                .message(message: "This beacon is not connectable")
+                .messageColor(color: .white)
+                .bgColor(color: .red)
+                .completion { print("")}
+                .show()
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+
+            return
+        }
+        
+            
         let currentBeacon = self.availableDoors[indexPath.row]
 
         if currentBeacon.isConnectable == true && currentBeacon.name == peripheralName  {
+            //set isUnlocked to true
+            self.availableDoors[indexPath.row].isUnlocked = true
+            
             //connect
             connectTapped(self)
-
+            
             SwiftSpinner.show(duration: 4.8, title: "Connecting", animated: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 4.2, execute: {
                 let sensor = self.availableDoors[indexPath.row].sensorTag
@@ -70,43 +90,34 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
                 Answers.logCustomEvent(withName: "USER_OPENED_BEACON_CONFIGURATION", customAttributes: ["user":user])
                 self.navigationController?.pushViewController(controller, animated: true)
             })
-        }else{
-            //if non-connectable, alert user
-            guard let user = self.user else { return }
-            Answers.logCustomEvent(withName: "USER_TAPPED_NONCONNECTABLE_BEACON", customAttributes: ["user":user])
-            BPStatusBarAlert(duration: 0.5, delay: 0.5, position: .statusBar) // customize duration, delay and position
-                .message(message: "This beacon is not connectable")
-                .messageColor(color: .white)
-                .bgColor(color: .red)
-                .completion { print("")}
-                .show()
         }
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "beaconCell") as? ParaBeaconTableViewCell else {return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "beaconCell") as? ParaBeaconTableViewCell else { return UITableViewCell() }
         let currentBeacon = availableDoors[indexPath.row]
         
-        //cell.beaconNameLabel.text = currentBeacon.name
         cell.beaconNameLabel.text = currentBeacon.name
         
         cell.connectButton.addTarget(self, action: #selector(BeaconFinderViewController.connectTapped(_:)), for: .touchUpInside)
         cell.disconnectButton.addTarget(self, action: #selector(BeaconFinderViewController.disconnectTapped(_:)), for: .touchUpInside)
 
-        if currentBeacon.isConnectable == true  {
+        if indexPath.section == 0 {
             cell.configurableStatusLabel.isHidden = false
-            cell.disconnectButton.isHidden = true
+            //cell.disconnectButton.isHidden = true
             cell.connectButton.isHidden = false
             cell.statusBubbleImageView.backgroundColor = UIColor.green
-        } else {
+            
+        } else if indexPath.section == 1 {
             cell.configurableStatusLabel.isHidden = true
-            //cell.disconnectButton.isHidden = false
+            cell.disconnectButton.isHidden = true
             cell.connectButton.isHidden = true
             cell.statusBubbleImageView.backgroundColor = UIColor.red
         }
         
-        if self.currentBeacon?.isUnlocked == true {
+        if currentBeacon.isUnlocked == true && indexPath.section != 1 {
             cell.disconnectButton.isHidden = false
             cell.connectButton.isHidden = true
         } else {
@@ -138,8 +149,8 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         guard let sensor = sensorTag else { return }
         centralManager.connect(sensor, options: nil)
         
-        //SwiftSpinner.show(delay: 4.0, title: "Connecting")
-        SwiftSpinner.show("Connecting", animated: true)
+        SwiftSpinner.show(delay: 4.0, title: "Connecting")
+       // SwiftSpinner.show("Connecting", animated: true)
         
     }
     

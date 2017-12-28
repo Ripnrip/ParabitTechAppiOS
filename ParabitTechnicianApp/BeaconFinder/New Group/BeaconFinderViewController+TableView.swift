@@ -67,15 +67,19 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
             
         let currentBeacon = self.availableDoors[indexPath.row]
 
-        if currentBeacon.isConnectable == true && currentBeacon.name == peripheralName  {
+        if currentBeacon.isConnectable == true && currentBeacon.name == peripheralName   {
             //set isUnlocked to true
-            self.availableDoors[indexPath.row].isUnlocked = true
+            //self.availableDoors[indexPath.row].isUnlocked = true
             
             //connect
-            connectTapped(self)
+            //connectTapped(self)
+            guard let user = self.user else { return }
+            Answers.logCustomEvent(withName: "USER_TAPPED_CONNECT", customAttributes: ["user":user])
+            guard let sensor = sensorTag else { return }
+            centralManager.connect(sensor, options: nil)
             
-            SwiftSpinner.show(duration: 4.8, title: "Connecting", animated: true)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4.2, execute: {
+            SwiftSpinner.show(duration: 5.1, title: "Connecting", animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4.8, execute: {
                 let sensor = self.availableDoors[indexPath.row].sensorTag
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "BeaconTabBarController") as! BeaconTabBarController
@@ -84,7 +88,7 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
                 controller.eddystoneService = self.eddystoneService
                 controller.centralManager = self.centralManager
                 controller.selectedPeripheral = self.sensorTag
-                controller.selectedPeripheralIsSecure = true 
+                controller.selectedPeripheralIsSecure = true
                 
                 guard let user = self.user else { return }
                 Answers.logCustomEvent(withName: "USER_OPENED_BEACON_CONFIGURATION", customAttributes: ["user":user])
@@ -143,13 +147,14 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func connectTapped(_ sender: Any?) {
-        print("connectTapped", sender)
-        guard let user = self.user else { return }
-        Answers.logCustomEvent(withName: "USER_TAPPED_CONNECT", customAttributes: ["user":user])
-        guard let sensor = sensorTag else { return }
-        centralManager.connect(sensor, options: nil)
         
-        SwiftSpinner.show(delay: 4.0, title: "Connecting")
+//        SwiftSpinner.show(delay: 4.0, title: "Connecting")
+//        print("connectTapped", sender)
+//        guard let user = self.user else { return }
+//        Answers.logCustomEvent(withName: "USER_TAPPED_CONNECT", customAttributes: ["user":user])
+//        guard let sensor = sensorTag else { return }
+//        centralManager.connect(sensor, options: nil)
+        
        // SwiftSpinner.show("Connecting", animated: true)
         
     }

@@ -60,7 +60,6 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
                 .show()
             
             tableView.deselectRow(at: indexPath, animated: true)
-
             return
         }
         
@@ -73,9 +72,8 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
             
             //connect
             //connectTapped(self)
-            guard let user = self.user else { return }
+            guard let user = self.user, let sensor = sensorTag else { return }
             Answers.logCustomEvent(withName: "USER_TAPPED_CONNECT", customAttributes: ["user":user])
-            guard let sensor = sensorTag else { return }
             centralManager.connect(sensor, options: nil)
             
             SwiftSpinner.show(duration: 5.1, title: "Connecting", animated: true)
@@ -83,7 +81,6 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
                 let sensor = self.availableDoors[indexPath.row].sensorTag
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "BeaconTabBarController") as! BeaconTabBarController
-                //TODO: Change tab bar controller's beacon to peripheral struct controller.currentBeacon = availableDoors[indexPath.row]
                 controller.currentBeacon = self.currentBeacon
                 controller.eddystoneService = self.eddystoneService
                 controller.centralManager = self.centralManager
@@ -139,9 +136,8 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
     
     func disconnectTapped(_ sender: Any?) {
         print("disconnectTapped", sender)
-        guard let user = self.user else { return }
+        guard let user = self.user, let sensor = sensorTag else { return }
         Answers.logCustomEvent(withName: "USER_TAPPED_DISCONNECT", customAttributes: ["user":user])
-        guard let sensor = sensorTag else { return }
         self.centralManager.cancelPeripheralConnection(sensor)
         self.refresh(self)
     }

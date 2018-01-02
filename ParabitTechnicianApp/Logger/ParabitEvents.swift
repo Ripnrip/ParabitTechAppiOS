@@ -8,6 +8,8 @@
 
 import Foundation
 import Trackable
+import Fabric
+import Crashlytics
 
 enum Events {
     enum User : String, Event {
@@ -42,16 +44,30 @@ enum Events {
     enum Error : String, Event {
         case ERROR_WITH_RETRIEVING_REVISION
         case ERROR_WITH_DFU
+        
+    }
+}
 
+final class EventsLogger {
+    // 1
+    static let sharedInstance = EventsLogger()
+    // 2
+    private init() {
+        
     }
     
-    func logEvent (event:Event , info: [String:String]) {
+
+    
+    func logEvent (event:Event , info: [String:String]?) {
         //aws
         
         //fabric
-        
-        //any other
+        Answers.logCustomEvent(withName: event.description, customAttributes: info)
         
     }
     
 }
+
+
+
+

@@ -19,8 +19,9 @@ import Foundation
 import AWSCognitoIdentityProvider
 import Fabric
 import Crashlytics
+import Trackable
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, TrackableClass {
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var versionLabel: UILabel!
@@ -98,6 +99,8 @@ class SignInViewController: UIViewController {
     
     @IBAction func signInPressed(_ sender: AnyObject) {
         Answers.logCustomEvent(withName: "USER_SIGNED_IN", customAttributes: [:])
+        //Events.logEvent(Events.User.USER_SIGNED_IN,nil)
+        EventsLogger.sharedInstance.logEvent(event: Events.User.USER_SIGNED_IN, info: nil)
         if (self.username.text?.count != 0 && self.password.text?.count != 0) || false {
             let authDetails = AWSCognitoIdentityPasswordAuthenticationDetails(username: self.username.text!, password: self.password.text! )
             self.passwordAuthenticationCompletion?.set(result: authDetails)

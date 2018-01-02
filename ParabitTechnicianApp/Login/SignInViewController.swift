@@ -98,8 +98,6 @@ class SignInViewController: UIViewController, TrackableClass {
     }
     
     @IBAction func signInPressed(_ sender: AnyObject) {
-        Answers.logCustomEvent(withName: "USER_SIGNED_IN", customAttributes: [:])
-        //Events.logEvent(Events.User.USER_SIGNED_IN,nil)
         EventsLogger.sharedInstance.logEvent(event: Events.User.USER_SIGNED_IN, info: nil)
         if (self.username.text?.count != 0 && self.password.text?.count != 0) || false {
             let authDetails = AWSCognitoIdentityPasswordAuthenticationDetails(username: self.username.text!, password: self.password.text! )
@@ -134,7 +132,9 @@ extension SignInViewController: AWSCognitoIdentityNewPasswordRequired {
     func getNewPasswordDetails(_ newPasswordRequiredInput: AWSCognitoIdentityNewPasswordRequiredInput, newPasswordRequiredCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityNewPasswordRequiredDetails>) {
         //Show Change Password Screen here for first-time user
         guard let user = self.user else { return }
-        Answers.logCustomEvent(withName: "USER_NEEDS_TO_SETUP_FIRST_TIME_PASSWORD", customAttributes: ["user":user])
+        
+        EventsLogger.sharedInstance.logEvent(event: Events.User.USER_NEEDS_TO_SETUP_FIRST_TIME_PASSWORD, info: ["user":user])
+
         userRequiresNewPassword = true
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

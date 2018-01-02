@@ -51,7 +51,8 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         if indexPath.section == 1 {
             //if non-connectable, alert user
             guard let user = self.user else { return }
-            Answers.logCustomEvent(withName: "USER_TAPPED_NONCONNECTABLE_BEACON", customAttributes: ["user":user])
+            EventsLogger.sharedInstance.logEvent(event: Events.User.USER_TAPPED_NONCONNECTABLE_BEACON, info: ["user":user])
+
             BPStatusBarAlert(duration: 0.5, delay: 0.5, position: .statusBar) // customize duration, delay and position
                 .message(message: "This beacon is not connectable")
                 .messageColor(color: .white)
@@ -73,7 +74,8 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
             //connect
             //connectTapped(self)
             guard let user = self.user, let sensor = sensorTag else { return }
-            Answers.logCustomEvent(withName: "USER_TAPPED_CONNECT", customAttributes: ["user":user])
+            EventsLogger.sharedInstance.logEvent(event: Events.User.USER_TAPPED_CONNECT, info: ["user":user,"beacon":currentBeacon])
+
             centralManager.connect(sensor, options: nil)
             
             SwiftSpinner.show(duration: 5.1, title: "Connecting", animated: true)
@@ -88,7 +90,8 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
                 controller.selectedPeripheralIsSecure = true
                 
                 guard let user = self.user else { return }
-                Answers.logCustomEvent(withName: "USER_OPENED_BEACON_CONFIGURATION", customAttributes: ["user":user])
+                EventsLogger.sharedInstance.logEvent(event: Events.User.USER_OPENED_BEACON_CONFIGURATION, info: ["user":user])
+
                 self.navigationController?.pushViewController(controller, animated: true)
             })
         }
@@ -137,7 +140,8 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
     func disconnectTapped(_ sender: Any?) {
         print("disconnectTapped", sender)
         guard let user = self.user, let sensor = sensorTag else { return }
-        Answers.logCustomEvent(withName: "USER_TAPPED_DISCONNECT", customAttributes: ["user":user])
+        EventsLogger.sharedInstance.logEvent(event: Events.User.USER_TAPPED_DISCONNECT, info: ["user":user])
+
         self.centralManager.cancelPeripheralConnection(sensor)
         self.refresh(self)
     }

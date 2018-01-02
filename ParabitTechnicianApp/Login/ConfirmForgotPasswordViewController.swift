@@ -67,8 +67,7 @@ class ConfirmForgotPasswordViewController: UIViewController {
                         .bgColor(color: .green)
                         .completion { print("")}
                         .show()
-                    
-                    Answers.logCustomEvent(withName: "USER_RESET_PASSWORD", customAttributes: ["user":user])
+                    EventsLogger.sharedInstance.logEvent(event: Events.User.USER_RESET_PASSWORD, info: ["user":user])
                     
                     let _ = strongSelf.navigationController?.popToRootViewController(animated: true)
                 }

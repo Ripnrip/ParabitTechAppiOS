@@ -150,8 +150,8 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
     func startDFUProcess() {
         
         guard let user = self.user else { return }
-        Answers.logCustomEvent(withName: "USER_STARTED_DFU", customAttributes: ["user":user,"firmware":selectedFirmware.debugDescription])
-        
+        EventsLogger.sharedInstance.logEvent(event: Events.User.USER_STARTED_DFU, info: ["user":user,"firmware":selectedFirmware.debugDescription])
+
         
         guard dfuPeripheral != nil else {
             print("No DFU peripheral was set")
@@ -237,8 +237,8 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
         // Forget the controller when DFU is done
         if state == .completed {
             guard let user = self.user else { return }
-            Answers.logCustomEvent(withName: "USER_FINISHED_DFU", customAttributes: ["user":user,"firmware":selectedFirmware.debugDescription])
-            
+            EventsLogger.sharedInstance.logEvent(event: Events.User.USER_FINISHED_DFU, info: ["user":user,"firmware":selectedFirmware.debugDescription])
+
             dfuController = nil
             
             //notify listeners
@@ -256,7 +256,8 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
         print("Error \(error.rawValue): \(message)")
         
         guard let user = self.user else { return }
-        Answers.logCustomEvent(withName: "ERROR_WITH_DFU", customAttributes: ["user":user,"firmware":selectedFirmware.debugDescription,"error":message])
+        EventsLogger.sharedInstance.logEvent(event: Events.Error.ERROR_WITH_DFU, info: ["user":user,"firmware":selectedFirmware.debugDescription,"error":message])
+
         
         // Forget the controller when DFU finished with an error
         dfuController = nil

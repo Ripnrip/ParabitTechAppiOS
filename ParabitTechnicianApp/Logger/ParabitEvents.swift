@@ -27,6 +27,7 @@ enum Events {
         case USER_OPENED_BEACON_CONFIGURATION
         case USER_TAPPED_DISCONNECT
         case USER_TAPPED_CONNECT
+        case USER_TAPPED_NONCONNECTABLE_BEACON
         case USER_CHANGED_ADVERTISING_INTERVAL
         case USER_CHANGED_RADIO_TX_POWER_CHANGED
         case USER_CHECKED_FOR_FIRWARE_UPDATES
@@ -35,6 +36,7 @@ enum Events {
         case USER_STARTED_DFU
         case USER_FINISHED_DFU
         case USER_SENT_FEEDBACK
+        case USER_OPENED_MENU
     }
     
     enum App : String, Event {
@@ -58,7 +60,7 @@ final class EventsLogger {
     
 
     
-    func logEvent (event:Event , info: [String:String]?) {
+    func logEvent (event:Event , info: [String:Any]?) {
         //aws
         
         //fabric

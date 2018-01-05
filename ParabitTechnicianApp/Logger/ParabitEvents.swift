@@ -31,7 +31,6 @@ enum Events {
         case USER_CHANGED_ADVERTISING_INTERVAL
         case USER_CHANGED_RADIO_TX_POWER_CHANGED
         case USER_CHECKED_FOR_FIRWARE_UPDATES
-        case FIRMWARE_UPDATE_FOUND
         case USER_WENT_TO_START_DFU
         case USER_STARTED_DFU
         case USER_FINISHED_DFU
@@ -39,14 +38,38 @@ enum Events {
         case USER_OPENED_MENU
     }
     
+    enum Firmware : String, Event {
+        case FIRMWARE_UPDATE_FOUND
+        case UNLOCK_CLOUD_RESPONSE_FAILURE
+        case UNLOCK_CODE_NOT_FOUND
+        case UNLOCK_WRITE_FAILED
+
+    }
+    
+    enum Dfu : String, Event {
+        case DEBUG_DFU_STARTING
+        case DEBUG_DFU_ENABLING
+        case DEBUG_DFU_VALIDATING
+        case DEBUG_DFU_DISCONNECTING
+        case DEBUG_DFU_COMPLETE
+        case DEBUG_DFU_ABORTED
+        case DEBUG_DFU_ERROR
+        case DEBUG_DFU_CONNECTING
+        case DEBUG_DFU_END_TRANSFER
+        case DEBUG_DFU_START_TRANSFER
+    }
+    
     enum App : String, Event {
         case APPLICATION_DID_BECOME_ACTIVE
+        case SESSION_TIMEOUT
     }
     
     enum Error : String, Event {
         case ERROR_WITH_RETRIEVING_REVISION
         case ERROR_WITH_DFU
-        
+        case FIRMWARE_NOT_FOUND
+        case ERROR_READING_FIRMWARE
+        case LOG_SERVICE_UNAVAILABLE
     }
 }
 
@@ -58,14 +81,13 @@ final class EventsLogger {
         
     }
     
-
-    
     func logEvent (event:Event , info: [String:Any]?) {
         //aws
         
         //fabric
         Answers.logCustomEvent(withName: event.description, customAttributes: info)
         
+        //logz.io (ELK)
     }
     
 }

@@ -243,16 +243,16 @@ class ParabitNetworking: NSObject {
     //Mark: Notification
     func catchNotification(notification:Notification) -> Void {
         print("Catch notification")
-        
+
+        getAuthenticationKeys()
+
         guard let userInfo = notification.userInfo,
             let message  = userInfo["message"] as? String,
             let date     = userInfo["date"]    as? Date else {
                 print("No userInfo found in notification")
                 return
         }
-        
-        getAuthenticationKeys()
-        
+
     }
     
     //Mark: Helper for session timer
@@ -266,6 +266,7 @@ class ParabitNetworking: NSObject {
     
     func sessionTimeOut(){
         print("Should End Session at time \(timer)")
+        EventsLogger.sharedInstance.logEvent(event: Events.App.SESSION_TIMEOUT , info: ["user":self.user?.username ?? "","time":timer])
         user?.signOut()
         self.user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
             DispatchQueue.main.async(execute: {

@@ -37,6 +37,9 @@ class ParabitNetworking: NSObject {
     var timer:Timer!
     var counter = 0
     
+    var baseURL = ""//"https://api.parabit.com/dev-firmware/"//https://6yomwzar14.execute-api.us-east-1.amazonaws.com/dev/"
+
+    
     fileprivate override init() {
         isInitialized = false
         super.init()
@@ -46,6 +49,10 @@ class ParabitNetworking: NSObject {
             self.user = self.pool?.currentUser()
         }
         //self.getAuthenticationKeys()
+        let nc = NotificationCenter.default // Note that default is now a property, not a method call
+        nc.addObserver(forName:Notification.Name(rawValue:"userSignedIn"),
+                       object:nil, queue:nil,
+                       using:catchNotification)
         
     }
     
@@ -54,7 +61,6 @@ class ParabitNetworking: NSObject {
         print("Mobile Client deinitialized. This should not happen.")
     }
     
-    let baseURL = "https://api.parabit.com/dev-firmware/"//https://6yomwzar14.execute-api.us-east-1.amazonaws.com/dev/"
     
     //MARK: GET a list of firmware
     func getFirmware(completionHandler:@escaping (Bool) -> ()){
@@ -212,6 +218,8 @@ class ParabitNetworking: NSObject {
                             self.firmwareAPIKey = attribute
                         case "custom:firmware-api-url":
                             self.firmwareAPIURL = attribute
+                            guard let firmwareURL = self.firmwareAPIURL?.value else { print("error unwrapping firmwareURL"); break }
+                            self.baseURL = firmwareURL
                         case "custom:firmware-api-version":
                             self.firmwareAPIVersion = attribute
                         case "custom:feedback-api-url":
@@ -230,6 +238,21 @@ class ParabitNetworking: NSObject {
             })
             return nil
         }
+    }
+    
+    //Mark: Notification
+    func catchNotification(notification:Notification) -> Void {
+        print("Catch notification")
+        
+        guard let userInfo = notification.userInfo,
+            let message  = userInfo["message"] as? String,
+            let date     = userInfo["date"]    as? Date else {
+                print("No userInfo found in notification")
+                return
+        }
+        
+        getAuthenticationKeys()
+        
     }
     
     //Mark: Helper for session timer

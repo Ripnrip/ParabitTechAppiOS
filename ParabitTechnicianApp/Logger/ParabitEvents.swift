@@ -82,12 +82,23 @@ final class EventsLogger {
     }
     
     func logEvent (event:Event , info: [String:Any]?) {
+        guard let mutableDict = info as? NSMutableDictionary else  { print("error converting dict to mutable dict") ; return }
         //aws
         
         //fabric
-        Answers.logCustomEvent(withName: event.description, customAttributes: info)
+        Answers.logCustomEvent(withName: event.description, customAttributes: addTimeStampToDict(dict: mutableDict))
         
-        //logz.io (ELK)
+    }
+    
+    //MARK: Helper methods
+    
+    func addTimeStampToDict (dict: NSMutableDictionary) -> Dictionary<String,Any> {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let someDateTime = formatter.date(from: "2016/10/08 22:31")
+        dict.addEntries(from: ["timestamp":someDateTime])
+        guard let returnDict = dict as? Dictionary<String,Any> else { return ["":""] }
+        return returnDict
     }
     
 }

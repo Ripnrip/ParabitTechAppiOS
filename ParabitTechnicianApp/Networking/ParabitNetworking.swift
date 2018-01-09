@@ -33,6 +33,9 @@ class ParabitNetworking: NSObject {
     var beaconAPIRUL: AWSCognitoIdentityProviderAttributeType?
     var beaconAPIKey: AWSCognitoIdentityProviderAttributeType?
     
+    var logAPIURL: AWSCognitoIdentityProviderAttributeType?
+    var logAPIKey: AWSCognitoIdentityProviderAttributeType?
+    
     var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
     var timer:Timer!
     var counter = 0
@@ -195,7 +198,34 @@ class ParabitNetworking: NSObject {
                 return
             }
             guard let request = dataResponse.request, let response = dataResponse.response, let value = dataResponse.value, let dict = value as? [String:Any]
-                else {return}
+                else { return }
+            print("the response from posting problem is \(response)")
+            completionHandler(true)
+        }
+        
+    }
+    
+    //Mark: Log/track event
+    func trackEvent(event:String , info: [String:Any], completionHandler:@escaping (Bool) -> () ) {
+        guard var url = logAPIURL?.value,
+            let apiKey = logAPIKey?.value,
+            let username = user?.username
+            else { return }
+        
+        url = "\(url)feedback"
+        print("the url for the POST Log event is \(url)")
+        let headers:[String : String] = ["x-api-key" : apiKey]
+        
+        Alamofire.request(url, method: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (dataResponse) in
+            
+            if dataResponse.error != nil || dataResponse.response?.statusCode != 200 {
+                print("there was an error getting the firmware unlock for revision \(dataResponse.error)")
+                completionHandler(false)
+                SwiftSpinner.hide()
+                return
+            }
+            guard let request = dataResponse.request, let response = dataResponse.response, let value = dataResponse.value, let dict = value as? [String:Any]
+                else { return }
             print("the response from posting problem is \(response)")
             completionHandler(true)
         }
@@ -230,6 +260,10 @@ class ParabitNetworking: NSObject {
                             self.beaconAPIRUL = attribute
                         case "custom:beacon-api-url":
                             self.beaconAPIKey = attribute
+                        case "custom:log-api-url":
+                            self.logAPIURL = attribute
+                        case "custom:log-api-key":
+                            self.logAPIKey = attribute
                         default:
                         print("printing value for attribute \(attribute)")
                     }

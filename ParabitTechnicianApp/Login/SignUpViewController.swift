@@ -77,7 +77,6 @@ class SignUpViewController: UIViewController {
         }
         
         
-        
         //sign up the user
         self.pool?.signUp(userNameValue, password: passwordValue, userAttributes: attributes, validationData: nil).continueWith {[weak self] (task) -> Any? in
             guard let strongSelf = self else { return nil }

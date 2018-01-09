@@ -79,9 +79,7 @@ class BeaconFinderViewController: UIViewController {
                        object:nil, queue:nil,
                        using:catchNotification)
         
-        //temp hack to get user attributes
-        shouldShowSignIn()
-        
+
         let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
         user = pool.currentUser()
         
@@ -104,6 +102,8 @@ class BeaconFinderViewController: UIViewController {
         if !isSignedIn { return }
         centralManager = CBCentralManager(delegate: self,
                                           queue: nil)
+        //temp hack to get user attributes
+        shouldShowSignIn()
         
         
     }
@@ -132,14 +132,13 @@ class BeaconFinderViewController: UIViewController {
     @IBAction func helpTapped(_ sender: Any) {
     
         guard let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String else { return }
-        let date = "12-19-2017"
+        let date = "01-08-2018"
         let message = "Parabit Technician App \n Version: \(versionNumber) \n Date: \(date)"
         let alert = UIAlertController(title: "About", message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
         
         guard let user = self.user else { return }
-        //Answers.logCustomEvent(withName: "USER_TAPPED_HELP", customAttributes: ["user":user])
         EventsLogger.sharedInstance.logEvent(event: Events.User.USER_TAPPED_ABOUT, info: ["user":user])
 
     }

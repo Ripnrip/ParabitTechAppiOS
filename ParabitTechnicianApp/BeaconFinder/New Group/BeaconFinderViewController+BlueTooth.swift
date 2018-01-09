@@ -83,10 +83,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             print("NEXT PERIPHERAL NAME: \(peripheralName)")
             print("NEXT PERIPHERAL UUID: \(peripheral.identifier.uuidString)")
             print("NEXT PERIPHERAL STATE: \(peripheral.state.rawValue)")
-            
-//            if peripheral.state.rawValue == 2 {
-//                central.cancelPeripheralConnection(peripheral)
-//            }
+
             
             if peripheralName == self.peripheralName && peripheral.state.rawValue != 2 {
                 print("SENSOR TAG FOUND! ADDING NOW!!!")
@@ -98,7 +95,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 peripheral.readRSSI()
                 
                 //determine if beacon is connectablee
-                guard let isConnectable = advertisementData["kCBAdvDataIsConnectable"] as? Bool else {return}
+                guard let isConnectable = advertisementData["kCBAdvDataIsConnectable"] as? Bool else { return }
                 print("the Parabeacon's configuration state is \(isConnectable)")
                 
                 if Bool(isConnectable) {

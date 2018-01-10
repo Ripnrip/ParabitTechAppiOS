@@ -170,7 +170,7 @@ class ParabitNetworking: NSObject {
                 return
             }
             guard let request = dataResponse.request, let response = dataResponse.response, let value = dataResponse.value, let dict = value as? [String:Any]
-                else {return}
+                else { return }
             print("the response from posting feedback is \(response)")
             completionHandler(true)
         }
@@ -211,25 +211,22 @@ class ParabitNetworking: NSObject {
             let apiKey = logAPIKey?.value,
             let username = user?.username
             else { return }
-        
-        url = "\(url)feedback"
+
+        url = "\(url)log"
         print("the url for the POST Log event is \(url)")
         let headers:[String : String] = ["x-api-key" : apiKey]
-        
+        var parameters:[String : Any] = ["source":"ios","message":event,"attributes":info,"level":"event","error":["":""]]
+
         Alamofire.request(url, method: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (dataResponse) in
             
-            if dataResponse.error != nil || dataResponse.response?.statusCode != 200 {
-                print("there was an error getting the firmware unlock for revision \(dataResponse.error)")
+            print("the fire and forget for the track event launched \(dataResponse.response?.statusCode)")
+
+            if dataResponse.response?.statusCode == 200 || dataResponse.response?.statusCode == 201 {
+                completionHandler(true)
+            } else {
                 completionHandler(false)
-                SwiftSpinner.hide()
-                return
             }
-            guard let request = dataResponse.request, let response = dataResponse.response, let value = dataResponse.value, let dict = value as? [String:Any]
-                else { return }
-            print("the response from posting problem is \(response)")
-            completionHandler(true)
         }
-        
     }
     
     //Mark: Helper for authentication

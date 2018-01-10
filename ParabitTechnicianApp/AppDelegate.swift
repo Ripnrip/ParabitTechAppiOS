@@ -94,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         let difference = Date().minutes(from: lastActiveTimeStamp)
         print("applicationDidBecomeActive with the last seen time stamp: \(lastActiveTimeStamp) and the currentTimeStamp is: \(Date()) /n the difference in minutes is \(difference)")
-        EventsLogger.sharedInstance.logEvent(event: Events.App.APPLICATION_DID_BECOME_ACTIVE, info: nil)
+        EventsLogger.sharedInstance.logEvent(event: Events.App.APPLICATION_DID_BECOME_ACTIVE, info: ["":""])
 
     }
 

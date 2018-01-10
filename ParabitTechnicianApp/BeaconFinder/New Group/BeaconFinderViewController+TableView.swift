@@ -64,11 +64,6 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
             return
         }
         
-        //hacky way to make sure the endpoint URLS are loaded
-        if ParabitNetworking.sharedInstance.userAttributes == nil {
-            ParabitNetworking.sharedInstance.getAuthenticationKeys()
-        }
-        
         let currentBeacon = self.availableDoors[indexPath.row]
 
         if currentBeacon.isConnectable == true && currentBeacon.name == peripheralName   {

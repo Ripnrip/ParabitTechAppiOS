@@ -235,14 +235,10 @@ class BeaconFinderViewController: UIViewController {
     //Mark: Notification
     func catchNotification(notification:Notification) -> Void {
         print("Catch notification")
-        
-        guard let userInfo = notification.userInfo,
-            let message  = userInfo["message"] as? String,
-            let date     = userInfo["date"]    as? Date else {
-                print("No userInfo found in notification")
-                return
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            self.refresh(self)
         }
-        refresh(self)
     }
     
 }

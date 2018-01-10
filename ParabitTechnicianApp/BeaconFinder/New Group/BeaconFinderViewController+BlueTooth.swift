@@ -85,7 +85,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             print("NEXT PERIPHERAL STATE: \(peripheral.state.rawValue)")
 
             
-            if peripheralName == self.peripheralName && peripheral.state.rawValue != 2 {
+            if peripheralName == self.peripheralName  {
                 print("SENSOR TAG FOUND! ADDING NOW!!!")
                 // to save power, stop scanning for other devices
                 //keepScanning = false
@@ -106,7 +106,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 //add peripheral to available doors tableview
                     currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: true, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, deviceName: nil, serialNumber: nil, modelNumber: nil, firmwareRevision: nil, hardware: nil, advertisingValue: nil, rssiValue: RSSI)
                     
-                    guard let door = currentBeacon else {return}
+                    guard let door = currentBeacon else { return }
                     if availableDoors.contains(where: { $0.UUID == currentBeacon?.UUID }) {
                         // found
                         tableView.reloadData()
@@ -574,6 +574,8 @@ else { return }
         currentBeacon?.sensorTag = nil
         currentBeacon?.isConnectable = false
         tableView.reloadData()
+        
+        self.refresh(self)
         
         BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar)
             .message(message: "Disconnected from device")

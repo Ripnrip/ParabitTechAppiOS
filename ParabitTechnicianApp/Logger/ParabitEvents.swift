@@ -84,10 +84,10 @@ final class EventsLogger {
     func logEvent (event:String , info: [String:Any]) {
         //For Timestamp --> guard let mutableDict = info as? NSMutableDictionary else  { print("error converting dict to mutable dict") ; return }
         //aws
-        ParabitNetworking.sharedInstance.trackEvent(event: event.description, info: info, completionHandler: {_ in })
+        ParabitNetworking.sharedInstance.trackEvent(event: event, info: info, completionHandler: {_ in })
         //fabric
         //With timestamp --> Answers.logCustomEvent(withName: event.description, customAttributes: addTimeStampToDict(dict: mutableDict))
-        Answers.logCustomEvent(withName: event.description, customAttributes: info)
+        Answers.logCustomEvent(withName: event, customAttributes: info)
 
         
     }

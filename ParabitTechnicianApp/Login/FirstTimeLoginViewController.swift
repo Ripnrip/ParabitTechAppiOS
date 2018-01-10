@@ -89,7 +89,7 @@ extension FirstTimeLoginViewController: AWSCognitoIdentityNewPasswordRequired {
                 //self.dismiss(animated: true, completion: nil)
                 //self.navigationController?.popViewController(animated: true)
                 guard let user = self.pool?.currentUser() else { return }
-                EventsLogger.sharedInstance.logEvent(event: Events.User.USER_SETUP_FIRST_PASSWORD, info: ["user":user.username ?? ""])
+                EventsLogger.sharedInstance.logEvent(event: "SET_PWD_SUCCESS", info: ["username":user.username ?? ""])
                 
                 self.dismiss(animated: true, completion: nil)
             }

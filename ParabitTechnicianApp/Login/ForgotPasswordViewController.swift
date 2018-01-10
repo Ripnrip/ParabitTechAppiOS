@@ -58,7 +58,7 @@ class ForgotPasswordViewController: UIViewController {
         }
         
         //FAILS --> guard let user = self.user else { return }
-        EventsLogger.sharedInstance.logEvent(event: Events.User.USER_FORGOT_PASSWORD, info: ["user":self.username.text])
+        EventsLogger.sharedInstance.logEvent(event: "PWD_RESET_STARTED", info: ["username":self.username.text])
         
         self.user = self.pool?.getUser(self.username.text!)
         self.user?.forgotPassword().continueWith{[weak self] (task: AWSTask) -> AnyObject? in

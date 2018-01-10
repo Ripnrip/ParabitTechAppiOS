@@ -180,7 +180,7 @@ class GlobalSettingsViewController: UIViewController {
         advLabel.text = "\(currentValue)"
         
         guard let user = self.user else { return }
-        EventsLogger.sharedInstance.logEvent(event: Events.User.USER_CHANGED_ADVERTISING_INTERVAL, info: ["user":user.username ?? "","value":currentValue.description])
+        EventsLogger.sharedInstance.logEvent(event: "ADV_CHANGED", info: ["username":user.username ?? "","value":currentValue.description])
         
         switch currentValue {
         case 1000:
@@ -214,7 +214,7 @@ class GlobalSettingsViewController: UIViewController {
         let currentValue =   Int(slider.value)
         
         guard let user = self.user else { return }
-        EventsLogger.sharedInstance.logEvent(event: Events.User.USER_CHANGED_RADIO_TX_POWER_CHANGED, info: ["user":user.username ?? "","value":currentValue.description])
+        EventsLogger.sharedInstance.logEvent(event: "TX_CHANGED", info: ["username":user.username ?? "","value":currentValue.description])
 
         switch currentValue {
         case 0:
@@ -278,7 +278,7 @@ class GlobalSettingsViewController: UIViewController {
     
     @IBAction func checkForUpdates(_ sender: Any) {
         guard let user = self.user else { return }
-        EventsLogger.sharedInstance.logEvent(event: Events.User.USER_CHECKED_FOR_FIRWARE_UPDATES, info: ["user":user.username ?? ""])
+        EventsLogger.sharedInstance.logEvent(event: "UPDATE_CHECK", info: ["username":user.username ?? ""])
 
         
         if isUpdateAvailable == false {
@@ -287,7 +287,7 @@ class GlobalSettingsViewController: UIViewController {
             ParabitNetworking.sharedInstance.getFirmwareInfoFor(revision: revisionString) { (firmware) in
                 if firmware != nil {
                     print("got the revision firmware")
-                    EventsLogger.sharedInstance.logEvent(event: Events.Firmware.FIRMWARE_UPDATE_FOUND, info: ["user":user.username ?? "","version":firmware?.latestFirmware.id])
+                    EventsLogger.sharedInstance.logEvent(event: "FIRMWARE_UPDATE_FOUND", info: ["username":user.username ?? "","version":firmware?.latestFirmware.id ?? ""])
 
                     self.currentFirmwareObject = firmware
  
@@ -339,7 +339,7 @@ class GlobalSettingsViewController: UIViewController {
                 }else{
                     print("error getting firmware info for revison, or the firmware is up-to-date")
                     guard let user = self.user else { return }
-                    EventsLogger.sharedInstance.logEvent(event: Events.Error.ERROR_WITH_RETRIEVING_REVISION, info: ["user":user.username ?? "","firmware":firmware.debugDescription ?? ""])
+                    EventsLogger.sharedInstance.logEvent(event: "ERROR_READING_FIRMWARE", info: ["username":user.username ?? "","firmware":firmware.debugDescription ])
 
                     DispatchQueue.main.async {
                         self.updatesLabel.text = "Firmware is up-to-date"

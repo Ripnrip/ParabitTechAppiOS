@@ -150,7 +150,7 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
     func startDFUProcess() {
         
         guard let user = self.user else { return }
-        EventsLogger.sharedInstance.logEvent(event: Events.User.USER_STARTED_DFU, info: ["user":user.username ?? "","firmware":selectedFirmware.debugDescription])
+        EventsLogger.sharedInstance.logEvent(event: "DEBUG_DFU_STARTING", info: ["username":user.username ?? "","firmware":selectedFirmware.debugDescription])
 
         
         guard dfuPeripheral != nil else {
@@ -237,7 +237,7 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
         // Forget the controller when DFU is done
         if state == .completed {
             guard let user = self.user else { return }
-            EventsLogger.sharedInstance.logEvent(event: Events.User.USER_FINISHED_DFU, info: ["user":user.username ?? "","firmware":selectedFirmware.debugDescription])
+            EventsLogger.sharedInstance.logEvent(event: "DEBUG_DFU_COMPLETE", info: ["username":user.username ?? "","firmware":selectedFirmware.debugDescription])
 
             dfuController = nil
             
@@ -246,6 +246,8 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
             nc.post(name:Notification.Name(rawValue:"finishedDFU"),
                     object: nil,
                     userInfo: ["message":"Hello there!", "date":Date()])
+            EventsLogger.sharedInstance.logEvent(event: "UPDATE_SUCCESS", info: ["username":user.username ?? "","firmware":selectedFirmware.debugDescription])
+
         }
     }
     
@@ -256,8 +258,8 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
         print("Error \(error.rawValue): \(message)")
         
         guard let user = self.user else { return }
-        EventsLogger.sharedInstance.logEvent(event: Events.Error.ERROR_WITH_DFU, info: ["user":user.username ?? "","firmware":selectedFirmware.debugDescription,"error":message])
-
+        EventsLogger.sharedInstance.logEvent(event: "DEBUG_DFU_ERROR", info: ["username":user.username ?? "","firmware":selectedFirmware.debugDescription,"error":message])
+        EventsLogger.sharedInstance.logEvent(event: "UPDATE_FAILED", info: ["username":user.username ?? "","firmware":selectedFirmware.debugDescription])
         
         // Forget the controller when DFU finished with an error
         dfuController = nil

@@ -172,6 +172,7 @@ class ParabitNetworking: NSObject {
             guard let request = dataResponse.request, let response = dataResponse.response, let value = dataResponse.value, let dict = value as? [String:Any]
                 else { return }
             print("the response from posting feedback is \(response)")
+            EventsLogger.sharedInstance.logEvent(event: "FEEDBACK_SUCCESS" , info: ["username":self.user?.username ?? ""])
             completionHandler(true)
         }
     }
@@ -215,7 +216,7 @@ class ParabitNetworking: NSObject {
         url = "\(url)log"
         print("the url for the POST Log event is \(url)")
         let headers:[String : String] = ["x-api-key" : apiKey]
-        var parameters:[String : Any] = ["source":"ios","message":event,"attributes":info,"level":"event","error":["":""]]
+        let parameters:[String : Any] = ["source":"ios","message":event,"attributes":info,"level":"event","error":["":""]]
 
         Alamofire.request(url, method: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (dataResponse) in
             
@@ -297,7 +298,7 @@ class ParabitNetworking: NSObject {
     
     func sessionTimeOut(){
         print("Should End Session at time \(timer)")
-        EventsLogger.sharedInstance.logEvent(event: Events.App.SESSION_TIMEOUT , info: ["user":self.user?.username ?? "","time":timer])
+        EventsLogger.sharedInstance.logEvent(event: "SESSION_TIMEOUT" , info: ["username":self.user?.username ?? "","time":timer])
         user?.signOut()
         self.user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
             DispatchQueue.main.async(execute: {

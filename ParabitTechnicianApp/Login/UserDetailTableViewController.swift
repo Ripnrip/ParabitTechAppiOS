@@ -68,7 +68,7 @@ class UserDetailTableViewController : UITableViewController {
     // MARK: - IBActions
     
     @IBAction func signOut(_ sender: AnyObject) {
-        EventsLogger.sharedInstance.logEvent(event: Events.User.USER_SIGNED_OUT , info: ["user":self.user?.username ?? ""])
+        EventsLogger.sharedInstance.logEvent(event: "LOGOUT" , info: ["username":self.user?.username ?? ""])
         self.pool?.delegate = UIApplication.shared.delegate as! AppDelegate
         self.user?.signOut()
         self.title = nil

@@ -126,7 +126,7 @@ class BeaconFinderViewController: UIViewController {
     @IBAction func homeTapped(_ sender: Any) {
         showMenu()
         guard let user = self.user else { return }
-        EventsLogger.sharedInstance.logEvent(event: Events.User.USER_OPENED_MENU, info: ["user":user.username ?? ""])
+        EventsLogger.sharedInstance.logEvent(event: "MENU_OPENED", info: ["username":user.username ?? ""])
     }
     
     @IBAction func helpTapped(_ sender: Any) {
@@ -139,7 +139,7 @@ class BeaconFinderViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
         
         guard let user = self.user else { return }
-        EventsLogger.sharedInstance.logEvent(event: Events.User.USER_TAPPED_ABOUT, info: ["user":user.username ?? ""])
+        EventsLogger.sharedInstance.logEvent(event: "MENU_HELP", info: ["username":user.username ?? ""])
 
     }
     
@@ -148,7 +148,7 @@ class BeaconFinderViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
         
         guard let user = self.user else { return }
-        EventsLogger.sharedInstance.logEvent(event: Events.User.USER_TAPPED_PROFILE, info: ["user":user.username ?? ""])
+        EventsLogger.sharedInstance.logEvent(event: "MENU_PROFILE", info: ["username":user.username ?? ""])
 
     }
     
@@ -159,7 +159,7 @@ class BeaconFinderViewController: UIViewController {
             (result : UIAlertAction) -> Void in
             print("OK")
             guard let user = self.user else { return }
-            EventsLogger.sharedInstance.logEvent(event: Events.User.USER_SIGNED_OUT, info: ["user":user ?? ""])
+            EventsLogger.sharedInstance.logEvent(event: "LOGOUT", info: ["username":user ?? ""])
 
             self.user?.signOut()
             guard let signupController = self.storyboard?.instantiateViewController(withIdentifier: "signInViewController") as? SignInViewController else { return }
@@ -185,7 +185,7 @@ class BeaconFinderViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
         
         guard let user = self.user else { return }
-        EventsLogger.sharedInstance.logEvent(event: Events.User.USER_TAPPED_PROFILE, info: ["user":user.username ?? ""])
+        EventsLogger.sharedInstance.logEvent(event: "MENU_FEEDBACK", info: ["username":user.username ?? ""])
 
     }
     
@@ -196,7 +196,7 @@ class BeaconFinderViewController: UIViewController {
         
         self.resetBluetooth()
         guard let user = self.user else { return }
-        EventsLogger.sharedInstance.logEvent(event: Events.User.USER_HIT_REFRESH, info: ["user":user.username ?? ""])
+        EventsLogger.sharedInstance.logEvent(event: "BEACON_SCAN", info: ["username":user.username ?? ""])
 
   }
     

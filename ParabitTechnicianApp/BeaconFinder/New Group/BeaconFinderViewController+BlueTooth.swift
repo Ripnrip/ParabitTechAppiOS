@@ -567,7 +567,7 @@ else { return }
         }
         
         guard let user = self.user else { return }
-        EventsLogger.sharedInstance.logEvent(event: Events.User.USER_DISCONNECTED_FROM_BEACON, info: ["user":user.username ?? "","beacon":peripheral])
+        EventsLogger.sharedInstance.logEvent(event: "BEACON_DISCONNECTED", info: ["username":user.username ?? "","beacon":peripheral])
         
         sensorTag = nil
         availableDoors = availableDoors.filter {$0.sensorTag != sensorTag}

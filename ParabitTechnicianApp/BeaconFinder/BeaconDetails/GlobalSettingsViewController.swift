@@ -80,7 +80,8 @@ class GlobalSettingsViewController: UIViewController {
         guard let rssiValue = currentBeacon?.rssiValue else { return }
         rssiLabel.text = "\(rssiValue) db"
         
-        let investigation = BeaconInvestigation(peripheral: (currentBeacon?.sensorTag!)!)
+        guard let tag = currentBeacon?.sensorTag else { return }
+        let investigation = BeaconInvestigation(peripheral: tag)
         txPower = investigation.didReadTxPower()
         txPowerLabel.text = "\(txPower) dBM"
         switch txPower{

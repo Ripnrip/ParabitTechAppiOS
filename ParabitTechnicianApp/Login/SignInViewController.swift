@@ -31,7 +31,6 @@ class SignInViewController: UIViewController, TrackableClass {
     var usernameText: String?
     var rememberDeviceCompletionSource: AWSTaskCompletionSource<NSNumber>?
 
-    var userRequiresNewPassword = false
     
     var response: AWSCognitoIdentityUserGetDetailsResponse?
     var user: AWSCognitoIdentityUser?
@@ -42,7 +41,6 @@ class SignInViewController: UIViewController, TrackableClass {
         self.password.text = nil
         self.username.text = usernameText
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        userRequiresNewPassword = false
     }
     
     override func viewDidLoad() {
@@ -130,12 +128,9 @@ extension SignInViewController: AWSCognitoIdentityInteractiveAuthenticationDeleg
 
 extension SignInViewController: AWSCognitoIdentityNewPasswordRequired {
     func getNewPasswordDetails(_ newPasswordRequiredInput: AWSCognitoIdentityNewPasswordRequiredInput, newPasswordRequiredCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityNewPasswordRequiredDetails>) {
-        //Show Change Password Screen here for first-time user
-        guard let user = self.user else { return }
-        
-        EventsLogger.sharedInstance.logEvent(event: "SET_PWD_SUCCESS", info: ["username":user.username ?? ""])
+        //Show Change Password Screen here for first-time user        
+        EventsLogger.sharedInstance.logEvent(event: "SET_PWD_SUCCESS", info: ["username": self.user?.username ?? ""])
 
-        userRequiresNewPassword = true
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "FirstSignInViewController")
@@ -192,14 +187,18 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
                 print("the user's status is \(self.user!.confirmedStatus)")
                 self.username.text = nil
                 //determine if user needs to go to new password set screen
-                self.userRequiresNewPassword ? nil : self.dismiss(animated: true, completion: nil)
-                
-                //protocol to send delegate after success sign in
-                //notify listeners
-                let nc = NotificationCenter.default
-                nc.post(name:Notification.Name(rawValue:"userSignedIn"),
-                        object: nil,
-                        userInfo: ["message":"Hello there!", "date":Date()])
+                if ParabitNetworking.sharedInstance.userRequiresNewPassword  {
+                    return
+                } else {
+                    //protocol to send delegate after success sign in
+                    //notify listeners
+                    let nc = NotificationCenter.default
+                    nc.post(name:Notification.Name(rawValue:"userSignedIn"),
+                            object: nil,
+                            userInfo: ["message":"Hello there!", "date":Date()])
+                    self.dismiss(animated: true, completion: nil)
+                }
+
                 
             }
         }

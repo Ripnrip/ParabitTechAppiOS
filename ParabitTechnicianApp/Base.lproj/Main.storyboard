@@ -1722,12 +1722,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PUQ-Dh-X9l">
-                                <rect key="frame" x="17" y="95" width="343" height="30"/>
+                                <rect key="frame" x="17" y="278" width="343" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLX-5z-wGh">
-                                <rect key="frame" x="17" y="72" width="114" height="21"/>
+                                <rect key="frame" x="17" y="255" width="114" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="114" id="B5Y-lJ-Obz"/>
                                     <constraint firstAttribute="height" constant="21" id="PbY-Tp-9f7"/>
@@ -1737,12 +1737,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="36C-LT-X5d">
-                                <rect key="frame" x="17" y="156" width="343" height="30"/>
+                                <rect key="frame" x="17" y="339" width="343" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atx-YW-e3y">
-                                <rect key="frame" x="16" y="133" width="107" height="21"/>
+                                <rect key="frame" x="16" y="316" width="107" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="107" id="Z1Z-Y1-eKu"/>
                                     <constraint firstAttribute="height" constant="21" id="j6F-FB-DWi"/>
@@ -1752,7 +1752,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Qa-gq-w8z">
-                                <rect key="frame" x="17" y="194" width="343" height="34"/>
+                                <rect key="frame" x="17" y="377" width="343" height="34"/>
                                 <color key="backgroundColor" red="0.99939042330000005" green="0.45001828669999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Update Password">
@@ -1767,7 +1767,7 @@
                         <constraints>
                             <constraint firstItem="atx-YW-e3y" firstAttribute="leading" secondItem="36C-LT-X5d" secondAttribute="leading" constant="-1" id="6ii-O6-TRh"/>
                             <constraint firstItem="PUQ-Dh-X9l" firstAttribute="trailing" secondItem="9Qa-gq-w8z" secondAttribute="trailing" id="9u8-Yf-XRo"/>
-                            <constraint firstItem="mLX-5z-wGh" firstAttribute="top" secondItem="T2M-hd-B0t" secondAttribute="bottom" constant="8" symbolic="YES" id="KgQ-Lh-AHG"/>
+                            <constraint firstItem="mLX-5z-wGh" firstAttribute="top" secondItem="T2M-hd-B0t" secondAttribute="bottom" constant="191" id="KgQ-Lh-AHG"/>
                             <constraint firstItem="atx-YW-e3y" firstAttribute="top" secondItem="PUQ-Dh-X9l" secondAttribute="bottom" constant="8" symbolic="YES" id="Pt5-np-8cZ"/>
                             <constraint firstItem="PUQ-Dh-X9l" firstAttribute="leading" secondItem="9Qa-gq-w8z" secondAttribute="leading" id="S6u-bC-WBm"/>
                             <constraint firstItem="mLX-5z-wGh" firstAttribute="leading" secondItem="tLO-bg-xDV" secondAttribute="leadingMargin" constant="1" id="b2W-3O-utA"/>

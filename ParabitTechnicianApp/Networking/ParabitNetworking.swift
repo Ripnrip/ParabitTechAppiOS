@@ -42,7 +42,8 @@ class ParabitNetworking: NSObject {
     
     var baseURL = ""//"https://api.parabit.com/dev-firmware/"//https://6yomwzar14.execute-api.us-east-1.amazonaws.com/dev/"
 
-    
+    var userRequiresNewPassword = false
+
     fileprivate override init() {
         isInitialized = false
         super.init()
@@ -52,6 +53,8 @@ class ParabitNetworking: NSObject {
             self.user = self.pool?.currentUser()
         }
         //self.getAuthenticationKeys()
+        userRequiresNewPassword = false
+
         let nc = NotificationCenter.default // Note that default is now a property, not a method call
         nc.addObserver(forName:Notification.Name(rawValue:"userSignedIn"),
                        object:nil, queue:nil,

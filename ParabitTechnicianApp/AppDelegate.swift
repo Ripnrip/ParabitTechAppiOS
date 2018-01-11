@@ -133,16 +133,17 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
     // This method is called when we need to reset a password.
     // It will grab the view controller from the storyboard and present it.
     func startNewPasswordRequired() -> AWSCognitoIdentityNewPasswordRequired {
+        ParabitNetworking.sharedInstance.userRequiresNewPassword = true
+
         if (self.resetPasswordViewController == nil) {
             self.resetPasswordViewController = self.storyboard?.instantiateViewController(withIdentifier: "FirstSignInViewController") as? FirstTimeLoginViewController
         }
         DispatchQueue.main.async {
             if(self.resetPasswordViewController!.isViewLoaded || self.resetPasswordViewController!.view.window == nil) {
-               // self.navigationController?.present(self.resetPasswordViewController!, animated: true, completion: nil)
-
-                self.window?.rootViewController?.present(self.resetPasswordViewController!,
-                                                         animated: true,
-                                                         completion: nil)
+                self.navigationController?.present(self.resetPasswordViewController!, animated: true, completion: nil)
+//                self.window?.rootViewController?.present(self.resetPasswordViewController!,
+//                                                         animated: true,
+//                                                         completion: nil)
             }
         }
         guard let controller = self.resetPasswordViewController else { return UIViewController()  as! AWSCognitoIdentityNewPasswordRequired }

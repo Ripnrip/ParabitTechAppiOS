@@ -32,6 +32,7 @@ class FirstTimeLoginViewController: UIViewController {
     @IBAction func updatePassword(_ sender: Any) {
         if (self.passwordTextField.text == self.confirmPasswordTextField.text && self.confirmPasswordTextField.text?.count != 0)  {
             
+            //maybe check for bad cases here , before using native use
             
             let requiredAttributes = Set<String>()
             let details = AWSCognitoIdentityNewPasswordRequiredDetails(proposedPassword: self.confirmPasswordTextField.text!, userAttributes: [:])
@@ -88,10 +89,9 @@ extension FirstTimeLoginViewController: AWSCognitoIdentityNewPasswordRequired {
                 print("did complete new password setup, should dismiss view now, or check if they are logged in ")
                 //self.dismiss(animated: true, completion: nil)
                 //self.navigationController?.popViewController(animated: true)
-                guard let user = self.pool?.currentUser() else { return }
-                EventsLogger.sharedInstance.logEvent(event: "SET_PWD_SUCCESS", info: ["username":user.username ?? ""])
-                
+                EventsLogger.sharedInstance.logEvent(event: "SET_PWD_SUCCESS", info: ["username":self.pool?.currentUser()?.username ?? ""])
                 self.dismiss(animated: true, completion: nil)
+
             }
         }
     }

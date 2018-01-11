@@ -199,7 +199,6 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
                     self.dismiss(animated: true, completion: nil)
                 }
 
-                
             }
         }
     }

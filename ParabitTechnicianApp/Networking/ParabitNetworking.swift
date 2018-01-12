@@ -301,7 +301,7 @@ class ParabitNetworking: NSObject {
     
     func sessionTimeOut(){
         print("Should End Session at time \(timer)")
-        EventsLogger.sharedInstance.logEvent(event: "SESSION_TIMEOUT" , info: ["username":self.user?.username ?? "","time":timer])
+        EventsLogger.sharedInstance.logEvent(event: "SESSION_TIMEOUT" , info: ["username":self.user?.username ?? ""])
         user?.signOut()
         self.user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
             DispatchQueue.main.async(execute: {

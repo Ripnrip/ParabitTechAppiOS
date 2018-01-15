@@ -158,12 +158,17 @@ class BeaconFinderViewController: UIViewController {
         let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
             (result : UIAlertAction) -> Void in
             print("OK")
-            guard let user = self.user else { return }
-            EventsLogger.sharedInstance.logEvent(event: "LOGOUT", info: ["username":user ?? ""])
+            EventsLogger.sharedInstance.logEvent(event: "LOGOUT", info: ["username":self.user?.username ?? ""])
 
             self.user?.signOut()
-            guard let signupController = self.storyboard?.instantiateViewController(withIdentifier: "signInViewController") as? SignInViewController else { return }
-            self.present(signupController, animated: true, completion: nil)
+            self.user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
+                DispatchQueue.main.async(execute: {
+                    //guard let signupController = self.storyboard?.instantiateViewController(withIdentifier: "signInViewController") as? SignInViewController else { return }
+                   // self.present(signupController, animated: true, completion: nil)
+                })
+                return nil
+            }
+
         }
         
         let DestructiveAction = UIAlertAction(title: "No", style: UIAlertActionStyle.destructive) {

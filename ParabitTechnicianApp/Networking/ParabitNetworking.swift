@@ -101,7 +101,7 @@ class ParabitNetworking: NSObject {
                 completionHandler(nil)
                 return
             }
-            guard let request = dataResponse.request, let response = dataResponse.response, let value = dataResponse.value else {return}
+            guard let request = dataResponse.request, let response = dataResponse.response, let value = dataResponse.value else { return }
             print("the request is ",request)
             print("the response is ",response)
             print("the value is ",value)

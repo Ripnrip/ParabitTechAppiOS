@@ -51,7 +51,7 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         if indexPath.section == 1 {
             //if non-connectable, alert user
             guard let user = self.user else { return }
-            EventsLogger.sharedInstance.logEvent(event: "NONCONNECTABLE_BEACON_TAP", info: ["username":user.username ?? ""])
+            EventsLogger.sharedInstance.logEvent(event: "BEACON_TAP", info: ["username":user.username ?? ""])
 
             BPStatusBarAlert(duration: 0.5, delay: 0.5, position: .statusBar) // customize duration, delay and position
                 .message(message: "This beacon is not connectable")
@@ -73,7 +73,7 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
             //connect
             //connectTapped(self)
             guard let user = self.user, let sensor = sensorTag else { return }
-            EventsLogger.sharedInstance.logEvent(event: "BEACON_TAP", info: ["username":user.username ?? "","beacon":currentBeacon.serialNumber ?? ""])
+            EventsLogger.sharedInstance.logEvent(event: "UNLOCK_ATTEMPT", info: ["username":user.username ?? "","serialNumber":currentBeacon.serialNumber ?? ""])
 
             centralManager.connect(sensor, options: nil)
             
@@ -89,7 +89,6 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
                 controller.selectedPeripheralIsSecure = true
                 
                 guard let user = self.user else { return }
-                EventsLogger.sharedInstance.logEvent(event: "BEACON_INFO_SUCCESS", info: ["username":user.username ?? ""])
 
                 self.navigationController?.pushViewController(controller, animated: true)
             })
@@ -139,7 +138,7 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
     func disconnectTapped(_ sender: Any?) {
         print("disconnectTapped", sender)
         guard let user = self.user, let sensor = sensorTag else { return }
-        EventsLogger.sharedInstance.logEvent(event: "BEACON_DISCONNECTED", info: ["username":user.username ?? ""])
+        EventsLogger.sharedInstance.logEvent(event: "BEACON_DISCONNECTED", info: ["username":user.username ?? "", "serialNumber":self.currentBeacon?.serialNumber ?? ""])
 
         self.centralManager.cancelPeripheralConnection(sensor)
         self.refresh(self)

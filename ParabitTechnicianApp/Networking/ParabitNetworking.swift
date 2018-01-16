@@ -162,6 +162,7 @@ class ParabitNetworking: NSObject {
         url = "\(url)feedback"
         print("the url for the POST feedback is \(url)")
         let headers:[String : String] = ["x-api-key" : apiKey]
+        
         let parameters:[String : Any] = ["username":username,"feedback":feedback,"context":"","category":"general"]
         
         Alamofire.request(url, method: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (dataResponse) in
@@ -204,7 +205,7 @@ class ParabitNetworking: NSObject {
             guard let request = dataResponse.request, let response = dataResponse.response, let value = dataResponse.value, let dict = value as? [String:Any]
                 else { return }
             print("the response from posting Report feedback is \(response)")
-            EventsLogger.sharedInstance.logEvent(event: "REPORT_SUCCESS" , info: ["username":self.user?.username ?? ""])
+            EventsLogger.sharedInstance.logEvent(event: "REPORT_PROBLEM_SUCCESS" , info: ["username":self.user?.username ?? ""])
             completionHandler(true)
         }
         
@@ -213,8 +214,7 @@ class ParabitNetworking: NSObject {
     //Mark: Log/track event
     func trackEvent(event:String , info: [String:Any], completionHandler:@escaping (Bool) -> () ) {
         guard var url = logAPIURL?.value,
-            let apiKey = logAPIKey?.value,
-            let username = user?.username
+            let apiKey = logAPIKey?.value
             else { return }
 
         url = "\(url)log"

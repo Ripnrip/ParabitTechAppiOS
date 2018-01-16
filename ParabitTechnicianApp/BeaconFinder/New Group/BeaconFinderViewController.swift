@@ -128,7 +128,6 @@ class BeaconFinderViewController: UIViewController {
     @IBAction func homeTapped(_ sender: Any) {
         showMenu()
         guard let user = self.user else { return }
-        EventsLogger.sharedInstance.logEvent(event: "MENU_OPENED", info: ["username":user.username ?? ""])
     }
     
     @IBAction func helpTapped(_ sender: Any) {
@@ -152,7 +151,6 @@ class BeaconFinderViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
         
         guard let user = self.user else { return }
-        EventsLogger.sharedInstance.logEvent(event: "MENU_PROFILE", info: ["username":user.username ?? ""])
 
     }
     
@@ -204,7 +202,7 @@ class BeaconFinderViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
         
         guard let user = self.user else { return }
-        EventsLogger.sharedInstance.logEvent(event: "MENU_REPORT", info: ["username":user.username ?? ""])
+        EventsLogger.sharedInstance.logEvent(event: "MENU_REPORT_PROBLEM", info: ["username":user.username ?? ""])
         
     }
     

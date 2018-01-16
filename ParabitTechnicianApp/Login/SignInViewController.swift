@@ -96,10 +96,10 @@ class SignInViewController: UIViewController, TrackableClass {
     }
     
     @IBAction func signInPressed(_ sender: AnyObject) {
-        EventsLogger.sharedInstance.logEvent(event: "LOGIN_SUCCESS", info: ["":""])
         if (self.username.text?.count != 0 && self.password.text?.count != 0) || false {
             let authDetails = AWSCognitoIdentityPasswordAuthenticationDetails(username: self.username.text!, password: self.password.text! )
             self.passwordAuthenticationCompletion?.set(result: authDetails)
+            EventsLogger.sharedInstance.logEvent(event: "LOGIN_SUCCESS", info: ["username":self.username.text!])
             print("did set auth details.")
         } else {
             let alertController = UIAlertController(title: "Missing information",

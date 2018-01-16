@@ -288,7 +288,6 @@ class GlobalSettingsViewController: UIViewController {
             ParabitNetworking.sharedInstance.getFirmwareInfoFor(revision: revisionString) { (firmware) in
                 if firmware != nil {
                     print("got the revision firmware")
-                    EventsLogger.sharedInstance.logEvent(event: "FIRMWARE_UPDATE_FOUND", info: ["username":user.username ?? "","version":firmware?.latestFirmware.id ?? ""])
 
                     self.currentFirmwareObject = firmware
  

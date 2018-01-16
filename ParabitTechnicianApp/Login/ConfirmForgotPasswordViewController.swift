@@ -20,6 +20,7 @@ import AWSCognitoIdentityProvider
 import Crashlytics
 import Fabric
 import BPStatusBarAlert
+import CRNotifications
 
 class ConfirmForgotPasswordViewController: UIViewController {
     
@@ -61,12 +62,7 @@ class ConfirmForgotPasswordViewController: UIViewController {
                 } else {
                     //TODO: Show alert saying password has been set
                     guard let user = self?.user else { return }
-                    BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar)
-                        .message(message: "Reset password succesfully")
-                        .messageColor(color: .white)
-                        .bgColor(color: .green)
-                        .completion { print("")}
-                        .show()
+                    CRNotifications.showNotification(type: .success, title: "Alert", message: "Reset password succesfully", dismissDelay: 2.5)
                     EventsLogger.sharedInstance.logEvent(event: "PWD_RESET_SUCCESS", info: ["username":user.username ?? ""])
                     
                     let _ = strongSelf.navigationController?.popToRootViewController(animated: true)

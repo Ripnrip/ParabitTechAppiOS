@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import BPStatusBarAlert
+import CRNotifications
 import Crashlytics
 import Fabric
 import AWSCognitoIdentityProvider
@@ -45,23 +45,14 @@ class FeedbackViewController: UIViewController {
         ParabitNetworking.sharedInstance.submitFeedback(feedback: feedbackTextView.text, context: "") { (success) in
             if success {
                 print("succesfully send feedback")
-                
-                BPStatusBarAlert(duration: 0.1, delay: 2, position: .statusBar) // customize duration, delay and position
-                    .message(message: "Successfully sent feedback, thank you!")
-                    .messageColor(color: .white)
-                    .bgColor(color: .green)
-                    .completion { self.navigationController?.popViewController(animated: true) }
-                    .show()
+                self.navigationController?.popViewController(animated: true)
+                CRNotifications.showNotification(type: .success, title: "Alert", message: "Successfully sent feedback, thank you!", dismissDelay: 2.5)
+
             }else{
                 print("error in sending feedback")
-                
-                BPStatusBarAlert(duration: 0.1, delay: 2, position: .statusBar) // customize duration, delay and position
-                    .message(message: "Error sending feedback, please try again later.")
-                    .messageColor(color: .white)
-                    .bgColor(color: .red)
-                    .completion { print("")
-                    }
-                    .show()
+                self.navigationController?.popViewController(animated: true)
+                CRNotifications.showNotification(type: .error, title: "Alert", message: "Error sending feedback, please try again later.", dismissDelay: 2.5)
+
             }
         }
     }

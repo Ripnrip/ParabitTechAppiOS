@@ -20,6 +20,7 @@ PODS:
   - BPStatusBarAlert (0.1.5)
   - Crashlytics (3.9.3):
     - Fabric (~> 1.7.2)
+  - CRNotifications (1.1.2)
   - Fabric (1.7.2)
   - iOSDFULibrary (3.2.1):
     - Zip (~> 0.7)
@@ -42,6 +43,7 @@ DEPENDENCIES:
   - AWSUserPoolsSignIn (~> 2.6.5)
   - BPStatusBarAlert
   - Crashlytics
+  - CRNotifications (from `https://github.com/dkcas11/CRNotifications.git`, branch `swift3`)
   - Fabric
   - iOSDFULibrary (~> 3.2.0)
   - iOSSideMainMenu
@@ -50,6 +52,16 @@ DEPENDENCIES:
   - SwiftSpinner
   - SwiftyJSON
   - Trackable
+
+EXTERNAL SOURCES:
+  CRNotifications:
+    :branch: swift3
+    :git: https://github.com/dkcas11/CRNotifications.git
+
+CHECKOUT OPTIONS:
+  CRNotifications:
+    :commit: 701fb48b378c6ca90677d5acc2ea13e6bb5c5e93
+    :git: https://github.com/dkcas11/CRNotifications.git
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
@@ -63,6 +75,7 @@ SPEC CHECKSUMS:
   AWSUserPoolsSignIn: 15181f004d5ef846ee94595a69502cce85c999a8
   BPStatusBarAlert: 0bc567e3a0f740189239f49c6c516bd61cb3c758
   Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
+  CRNotifications: bc9a90524986fa3da62d2aa001d773aaef496278
   Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
   iOSDFULibrary: f9544a7099c914eb5f1002dc58a5ff8c67dbc86d
   iOSSideMainMenu: 4782796d2e2982891810567ff217944177c4fef1
@@ -73,6 +86,6 @@ SPEC CHECKSUMS:
   Trackable: 944cffeb7d7f09b9d308546cde75c443e023a62e
   Zip: bb7d8370de00e50699633d91e03f2ec84f1ee437
 
-PODFILE CHECKSUM: cf97baeff574abe7315b4c1751ef4ffdbfa9192d
+PODFILE CHECKSUM: b63e174b7b14d77acc8689b3e1fa917ad0688507
 
 COCOAPODS: 1.3.1

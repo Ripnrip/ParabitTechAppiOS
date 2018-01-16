@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import BPStatusBarAlert
+import CRNotifications
 import SwiftSpinner
 import Crashlytics
 
@@ -52,13 +52,7 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
             //if non-connectable, alert user
             guard let user = self.user else { return }
             EventsLogger.sharedInstance.logEvent(event: "NONCONNECTABLE_BEACON_TAP", info: ["username":user.username ?? ""])
-
-            BPStatusBarAlert(duration: 0.5, delay: 0.5, position: .statusBar) // customize duration, delay and position
-                .message(message: "This beacon is not connectable")
-                .messageColor(color: .white)
-                .bgColor(color: .red)
-                .completion { print("")}
-                .show()
+            CRNotifications.showNotification(type: .error, title: "Alert", message: "This beacon is not connectable", dismissDelay: 3.5)
             
             tableView.deselectRow(at: indexPath, animated: true)
             return

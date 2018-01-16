@@ -12,6 +12,7 @@ import CoreBluetooth
 import BPStatusBarAlert
 import SwiftSpinner
 import Crashlytics
+import CRNotifications
 
 extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDelegate {
     
@@ -33,44 +34,25 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             SwiftSpinner.show(duration: 4, title: "Scanning")
         case .unknown:
             print("Bluetooth is unknown")
-            BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar)
-                .message(message: "Bluetooth status is unknown")
-                .messageColor(color: .white)
-                .bgColor(color: .red)
-                .completion { print("")}
-                .show()
+            CRNotifications.showNotification(type: .info, title: "Warning", message: "Bluetooth status is unknown", dismissDelay: 2.5)
         case .resetting:
             print("Bluetooth is resetting; a state update is pending.")
-            BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar)
-                .message(message: "Bluetooth is resetting; a state update is pending.")
-                .messageColor(color: .white)
-                .bgColor(color: .red)
-                .completion { print("")}
-                .show()
+            CRNotifications.showNotification(type: .info, title: "Error!", message: "Bluetooth is resetting; a state update is pending.", dismissDelay: 2.5)
         case .unsupported:
             print("Bluetooth is unsupported")
-            BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar)
-                .message(message: "Bluetooth is unsupported")
-                .messageColor(color: .white)
-                .bgColor(color: .red)
-                .completion { print("")}
-                .show()
+            //CRNotifications.showNotification(type: .error, title: "Error!", message: "Bluetooth is unsupported.", dismissDelay: 2.5)
+            let alert = UIAlertController(title: "Alert", message: "Bluetooth is unsupported.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         case .unauthorized:
             print("Bluetooth is unauthorized")
-            BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar)
-                .message(message: "Bluetooth is unauthorized")
-                .messageColor(color: .white)
-                .bgColor(color: .red)
-                .completion { print("")}
-                .show()
+            //CRNotifications.showNotification(type: .info, title: "Error!", message: "Bluetooth is unauthorized", dismissDelay: 2.5)
+            let alert = UIAlertController(title: "Alert", message: "Bluetooth is unauthorized", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         case .poweredOff:
             print("Bluetooth is powered off")
-            BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar)
-                .message(message: "Bluetooth is turned off, please turn it on for the app")
-                .messageColor(color: .white)
-                .bgColor(color: .red)
-                .completion { print("")}
-                .show()
+            CRNotifications.showNotification(type: .error, title: "Error!", message: "Bluetooth is turned off, please turn it on for the app.", dismissDelay: 2.5)
         }
     }
     
@@ -144,14 +126,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("**** SUCCESSFULLY CONNECTED TO SENSOR TAG!!!")
         
-        BPStatusBarAlert(duration: 0.1, delay: 2, position: .statusBar) // customize duration, delay and position
-            .message(message: "Successfully connected to the device")
-            .messageColor(color: .white)
-            .bgColor(color: .green)
-            .completion { print("")
-                
-            }
-            .show()
+        CRNotifications.showNotification(type: .success, title: "Alert", message: "Successfully connected to the device", dismissDelay: 2.5)
         
         // Now that we've successfully connected to the SensorTag, let's discover the services.
         // - NOTE:  we pass nil here to request ALL services be discovered.
@@ -577,12 +552,8 @@ else { return }
         
         self.refresh(self)
         
-        BPStatusBarAlert(duration: 0.5, delay: 2.5, position: .statusBar)
-            .message(message: "Disconnected from device")
-            .messageColor(color: .white)
-            .bgColor(color: .red)
-            .completion { print("")}
-            .show()
+        CRNotifications.showNotification(type: .error, title: "Alert", message: "Disconnected from device", dismissDelay: 3.5)
+
     }
     
     // MARK: - Bluetooth scanning

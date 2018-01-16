@@ -69,7 +69,7 @@ class BeaconFinderViewController: UIViewController {
         guard let thisUser = user else { return }
         emailLabel.text = thisUser.username
         
-        if thisUser.isSignedIn{refresh(self)}
+        if thisUser.isSignedIn && !isMenuShown { refresh(self) }
         
     }
     

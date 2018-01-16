@@ -23,6 +23,8 @@ target 'ParabitTechnicianApp' do
    pod 'Crashlytics'
    pod 'SkyFloatingLabelTextField', '~> 3.0'
    pod 'Trackable'
+   pod 'CRNotifications', :git => 'https://github.com/dkcas11/CRNotifications.git', :branch => 'swift3'
+
 
   # Pods for ParabitTechnicianApp
 

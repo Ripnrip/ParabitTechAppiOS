@@ -146,6 +146,8 @@ class BeaconFinderViewController: UIViewController {
     }
     
     @IBAction func profileTapped(_ sender: Any) {
+        return // disabling feature for now
+        
         guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "attributesView") as? UserDetailTableViewController else { return }
         self.navigationController?.pushViewController(vc, animated: true)
         

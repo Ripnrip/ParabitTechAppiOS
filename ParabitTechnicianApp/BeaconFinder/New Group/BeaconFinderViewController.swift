@@ -196,6 +196,16 @@ class BeaconFinderViewController: UIViewController {
 
     }
     
+    @IBAction func reportProblemTapped(_ sender: Any) {
+        
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "ReportProblemController") as? ReportProblemViewController else { return }
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+        guard let user = self.user else { return }
+        EventsLogger.sharedInstance.logEvent(event: "MENU_REPORT", info: ["username":user.username ?? ""])
+        
+    }
+    
 
     @IBAction func refresh(_ sender: Any) {
         //temp hack to get user attributes

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8C3029EE1FC8AF92004C6B8C /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3029ED1FC8AF92004C6B8C /* FeedbackViewController.swift */; };
 		8C3F44811FC4BB1A0051729C /* pb_secure_dfu_package.zip in Resources */ = {isa = PBXBuildFile; fileRef = 8C3F44801FC4BB1A0051729C /* pb_secure_dfu_package.zip */; };
+		8C483158200E3D5600080BBA /* ReportProblemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C483157200E3D5600080BBA /* ReportProblemViewController.swift */; };
 		8C4C084C1FD6F75800AC0DEF /* FirstTimeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4C084B1FD6F75800AC0DEF /* FirstTimeLoginViewController.swift */; };
 		8C5E0C701F86681D00F09225 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5E0C6F1F86681D00F09225 /* AppDelegate.swift */; };
 		8C5E0C721F86681D00F09225 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5E0C711F86681D00F09225 /* ViewController.swift */; };
@@ -63,6 +64,7 @@
 		5C5EB26023B5A42CDA2DD7A3 /* Pods-ParabitTechnicianApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParabitTechnicianApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParabitTechnicianApp/Pods-ParabitTechnicianApp.debug.xcconfig"; sourceTree = "<group>"; };
 		8C3029ED1FC8AF92004C6B8C /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		8C3F44801FC4BB1A0051729C /* pb_secure_dfu_package.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = pb_secure_dfu_package.zip; sourceTree = "<group>"; };
+		8C483157200E3D5600080BBA /* ReportProblemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportProblemViewController.swift; sourceTree = "<group>"; };
 		8C4C084B1FD6F75800AC0DEF /* FirstTimeLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeLoginViewController.swift; sourceTree = "<group>"; };
 		8C5E0C6C1F86681D00F09225 /* ParabitTechnicianApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParabitTechnicianApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C5E0C6F1F86681D00F09225 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				8C3029ED1FC8AF92004C6B8C /* FeedbackViewController.swift */,
+				8C483157200E3D5600080BBA /* ReportProblemViewController.swift */,
 			);
 			path = "Feedback And Help";
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 				8CF3A4EF1FB3B375009A4ACE /* AWSConstants.swift in Sources */,
 				8CE5DD821F91141B00B6A2DA /* BeaconScanner.swift in Sources */,
 				8C85A7AF1F89315400D185D0 /* RegistrationViewController+TableView.swift in Sources */,
+				8C483158200E3D5600080BBA /* ReportProblemViewController.swift in Sources */,
 				8CE5DD7C1F9036E900B6A2DA /* BeaconHelper.swift in Sources */,
 				8CF3A4F31FB3B405009A4ACE /* SignInViewController.swift in Sources */,
 				8C85A79F1F890B0000D185D0 /* BeaconTabBarController.swift in Sources */,

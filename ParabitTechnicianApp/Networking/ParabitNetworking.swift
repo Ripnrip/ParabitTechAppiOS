@@ -189,21 +189,22 @@ class ParabitNetworking: NSObject {
             else { return }
         
         url = "\(url)feedback"
-        print("the url for the POST problem is \(url)")
+        print("the url for the POST Report feedback is \(url)")
         let headers:[String : String] = ["x-api-key" : apiKey]
         let parameters:[String : Any] = ["username":username,"feedback":problem,"context":"","category":"problem"]
         
         Alamofire.request(url, method: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (dataResponse) in
             
             if dataResponse.error != nil || dataResponse.response?.statusCode != 200 {
-                print("there was an error getting the firmware unlock for revision \(dataResponse.error)")
+                print("there was an error \(dataResponse.error)")
                 completionHandler(false)
                 SwiftSpinner.hide()
                 return
             }
             guard let request = dataResponse.request, let response = dataResponse.response, let value = dataResponse.value, let dict = value as? [String:Any]
                 else { return }
-            print("the response from posting problem is \(response)")
+            print("the response from posting Report feedback is \(response)")
+            EventsLogger.sharedInstance.logEvent(event: "REPORT_SUCCESS" , info: ["username":self.user?.username ?? ""])
             completionHandler(true)
         }
         

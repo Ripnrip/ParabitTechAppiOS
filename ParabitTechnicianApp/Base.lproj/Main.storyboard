@@ -283,7 +283,7 @@
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="feedbackTapped:" destination="pJi-zV-voA" eventType="touchUpInside" id="8jr-bH-Tck"/>
+                                            <action selector="reportProblemTapped:" destination="pJi-zV-voA" eventType="touchUpInside" id="iHo-LL-LAR"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oji-Ya-eK3">
@@ -1807,6 +1807,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BXI-dE-Ryg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="557.60000000000002" y="-1247.2263868065968"/>
+        </scene>
+        <!--Report Problem View Controller-->
+        <scene sceneID="8ew-je-sJX">
+            <objects>
+                <viewController storyboardIdentifier="ReportProblemController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sG1-D0-JeI" customClass="ReportProblemViewController" customModule="ParabitTechnicianApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CDo-CU-nF7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Please enter any issues, shortcommings, comments or concerns in this text area" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7Pk-zw-Nb0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="294"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="294" id="kZW-al-dVg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7Pk-zw-Nb0" firstAttribute="trailing" secondItem="iuB-wO-H7R" secondAttribute="trailing" id="3u3-eU-8pS"/>
+                            <constraint firstItem="7Pk-zw-Nb0" firstAttribute="leading" secondItem="iuB-wO-H7R" secondAttribute="leading" id="DDt-De-jnk"/>
+                            <constraint firstItem="7Pk-zw-Nb0" firstAttribute="top" secondItem="CDo-CU-nF7" secondAttribute="top" id="IKk-yT-FML"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="iuB-wO-H7R"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w3J-qT-dX9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4330" y="133"/>
         </scene>
     </scenes>
     <resources>

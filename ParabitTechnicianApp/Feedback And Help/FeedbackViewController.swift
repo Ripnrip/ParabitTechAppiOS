@@ -30,6 +30,8 @@ class FeedbackViewController: UIViewController {
         
         self.navigationItem.setRightBarButton(item1, animated: true)
         
+        self.feedbackTextView.delegate = self
+        
         let pool = AWSCognitoIdentityUserPool(forKey:AWSCognitoUserPoolsSignInProviderKey)
         user = pool.currentUser()
         
@@ -56,7 +58,15 @@ class FeedbackViewController: UIViewController {
             }
         }
     }
-
     
-
 }
+
+extension FeedbackViewController : UITextViewDelegate {
+ 
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.text = nil
+        textView.textColor = UIColor.black
+    }
+    
+}
+

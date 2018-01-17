@@ -32,6 +32,8 @@ class ReportProblemViewController: UIViewController {
         
         self.navigationItem.setRightBarButton(item1, animated: true)
         
+        self.feedbackTextView.delegate = self
+        
         let pool = AWSCognitoIdentityUserPool(forKey:AWSCognitoUserPoolsSignInProviderKey)
         user = pool.currentUser()
         
@@ -54,12 +56,18 @@ class ReportProblemViewController: UIViewController {
                 print("error in sending feedback")
                 self.navigationController?.popViewController(animated: true)
                 CRNotifications.showNotification(type: .error, title: "Alert", message: "Error sending problem, please try again later.", dismissDelay: 2.5)
-        
 
             }
         }
-        //ParabitNetworking.sharedInstance.submitFeedback(feedback: feedbackTextView.text, context: "") { (success) in
     }
     
+}
 
+extension ReportProblemViewController : UITextViewDelegate {
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.text = nil
+        textView.textColor = UIColor.black
+    }
+    
 }

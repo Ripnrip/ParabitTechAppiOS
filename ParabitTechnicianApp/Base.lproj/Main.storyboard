@@ -243,7 +243,7 @@
                                             <action selector="homeTapped:" destination="pJi-zV-voA" eventType="touchUpInside" id="Tlx-Xb-cv2"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Fk-RY-rib">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Fk-RY-rib">
                                         <rect key="frame" x="75" y="298" width="139" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
@@ -312,7 +312,7 @@
                                         <color key="backgroundColor" red="0.95676314830780029" green="0.48612210154533386" blue="0.12539553642272949" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CAL-l3-B6p">
-                                        <rect key="frame" x="75" y="348" width="139" height="42"/>
+                                        <rect key="frame" x="75" y="298" width="139" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <state key="normal" title="Help">
@@ -323,7 +323,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fK-2f-E0M">
-                                        <rect key="frame" x="75" y="398" width="139" height="42"/>
+                                        <rect key="frame" x="75" y="348" width="139" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <state key="normal" title="Logout">
@@ -349,16 +349,16 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="userIcon" translatesAutoresizingMaskIntoConstraints="NO" id="lDJ-gQ-BAB">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="userIcon" translatesAutoresizingMaskIntoConstraints="NO" id="lDJ-gQ-BAB">
                                         <rect key="frame" x="19" y="307" width="24" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="infoIcon" translatesAutoresizingMaskIntoConstraints="NO" id="MDM-bQ-FBD">
-                                        <rect key="frame" x="19" y="357" width="24" height="24"/>
+                                        <rect key="frame" x="19" y="307" width="24" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logout" translatesAutoresizingMaskIntoConstraints="NO" id="vQv-gd-E95">
-                                        <rect key="frame" x="19" y="407" width="24" height="24"/>
+                                        <rect key="frame" x="19" y="357" width="24" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="feedbackIcon" translatesAutoresizingMaskIntoConstraints="NO" id="d7E-J7-cUM">

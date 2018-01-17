@@ -73,6 +73,7 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
             
             SwiftSpinner.show(duration: 5.1, title: "Connecting", animated: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 4.8, execute: {
+                if self.availableDoors.count == 0 {return}
                 let sensor = self.availableDoors[indexPath.row].sensorTag
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "BeaconTabBarController") as! BeaconTabBarController

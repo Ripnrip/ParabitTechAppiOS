@@ -61,23 +61,21 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         print("centralManager didDiscoverPeripheral - CBAdvertisementDataLocalNameKey is \"\(CBAdvertisementDataLocalNameKey) and UUID is \(peripheral.identifier.uuidString)\"")
         
         // Retrieve the peripheral name from the advertisement data using the "kCBAdvDataLocalName" key
-        if let peripheralName = advertisementData[CBAdvertisementDataLocalNameKey] as? String {
+            let peripheralName = advertisementData[CBAdvertisementDataLocalNameKey] as? String ?? "B"
             print("NEXT PERIPHERAL NAME: \(peripheralName)")
             print("NEXT PERIPHERAL UUID: \(peripheral.identifier.uuidString)")
             print("NEXT PERIPHERAL STATE: \(peripheral.state.rawValue)")
-
             
             if peripheralName == self.peripheralName  {
                 print("SENSOR TAG FOUND! ADDING NOW!!!")
                 // to save power, stop scanning for other devices
-                //keepScanning = false
                 //pauseScan()
                 
                 //read rssi
                 peripheral.readRSSI()
                 
                 //determine if beacon is connectablee
-                guard let isConnectable = advertisementData["kCBAdvDataIsConnectable"] as? Bool else { return }
+                let isConnectable = advertisementData["kCBAdvDataIsConnectable"] as? Bool ?? false
                 print("the Parabeacon's configuration state is \(isConnectable)")
                 
                 if Bool(isConnectable) {
@@ -89,7 +87,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                     currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: true, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, deviceName: nil, serialNumber: nil, modelNumber: nil, firmwareRevision: nil, hardware: nil, advertisingValue: nil, rssiValue: RSSI)
                     
                     guard let door = currentBeacon else { return }
-                    if availableDoors.contains(where: { $0.UUID == currentBeacon?.UUID }) {
+                    if availableDoors.contains(where: { $0.UUID == currentBeacon?.UUID })  {
                         // found
                         tableView.reloadData()
                         //SwiftSpinner.hide()
@@ -99,14 +97,13 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                         tableView.reloadData()
                         //SwiftSpinner.hide()
                     }
-
                 }else{
                 //add peripheral to available doors tableview, but don't add the sensor, and set nil for sensortag, and false for isConnectable
                     currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: false, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, deviceName: nil, serialNumber: nil, modelNumber: nil, firmwareRevision: nil, hardware: nil, advertisingValue: nil, rssiValue: RSSI)
 
                 guard let door = currentBeacon else { return }
                 
-                if availableDoors.contains(where: { $0.UUID == currentBeacon?.UUID }) {
+                if availableDoors.contains(where: { $0.UUID == currentBeacon?.UUID })  {
                     // found
                     tableView.reloadData()
                    // availableDoors.append(door)
@@ -119,7 +116,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 }
               }
           }
-      }
+      //}
     }
     
     //MARK: Did connect to peripheral

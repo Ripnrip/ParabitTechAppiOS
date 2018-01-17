@@ -137,6 +137,13 @@ class GlobalSettingsViewController: UIViewController {
         }
         updatesButton.isHidden = true
         updatesLabel.text = "Firmware is up-to-date"
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            print("Are we there yet?")
+            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popViewController(animated: true)
+
+        }
     }
     
     func saveTapped () {

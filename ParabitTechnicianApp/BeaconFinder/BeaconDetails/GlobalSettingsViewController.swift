@@ -48,6 +48,9 @@ class GlobalSettingsViewController: UIViewController {
     var advInterval:UInt16 = 1000
     var advIntervalHex = "03E8"
     
+    var advIntervalChanged = false
+    var txPowerChanged = false
+    
     var user:AWSCognitoIdentityUser?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -162,6 +165,14 @@ class GlobalSettingsViewController: UIViewController {
             let adData = self.advIntervalHex.hexadecimal()
             self.currentBeacon?.sensorTag?.writeValue(adData!, for: (self.currentBeacon?.advertisingIntervalCharacteristic!)!, type: CBCharacteristicWriteType.withResponse)
             
+            if self.advIntervalChanged {
+                EventsLogger.sharedInstance.logEvent(event: "ADV_CHANGED", info: ["username":self.user?.username ?? "","value": self.advLabel.text ?? ""])
+            }
+            
+            if self.txPowerChanged {
+                EventsLogger.sharedInstance.logEvent(event: "TX_CHANGED", info: ["username":self.user?.username ?? "","value": self.txPowerLabel.text ?? ""])
+            }
+            
             //TXPower Save
             let txData = self.txPowerHex.hexadecimal()
             self.currentBeacon?.sensorTag?.writeValue(txData!, for: (self.currentBeacon?.radioTxPowerCharacteristic!)!, type: CBCharacteristicWriteType.withResponse)
@@ -187,8 +198,7 @@ class GlobalSettingsViewController: UIViewController {
         slider.value = Float(currentValue)
         advLabel.text = "\(currentValue)"
         
-        guard let user = self.user else { return }
-        EventsLogger.sharedInstance.logEvent(event: "ADV_CHANGED", info: ["username":user.username ?? "","value":currentValue.description])
+        advIntervalChanged = true
         
         switch currentValue {
         case 1000:
@@ -221,8 +231,7 @@ class GlobalSettingsViewController: UIViewController {
         guard let slider = sender as? UISlider else { return }
         let currentValue =   Int(slider.value)
         
-        guard let user = self.user else { return }
-        EventsLogger.sharedInstance.logEvent(event: "TX_CHANGED", info: ["username":user.username ?? "","value":currentValue.description])
+        txPowerChanged = true
 
         switch currentValue {
         case 0:

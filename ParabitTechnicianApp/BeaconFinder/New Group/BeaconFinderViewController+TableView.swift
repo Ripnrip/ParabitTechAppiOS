@@ -43,7 +43,7 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 65
+        return 85
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -102,15 +102,15 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         cell.disconnectButton.addTarget(self, action: #selector(BeaconFinderViewController.disconnectTapped(_:)), for: .touchUpInside)
 
         if indexPath.section == 0 {
-            cell.configurableStatusLabel.isHidden = false
+            //cell.configurableStatusLabel.isHidden = false
             //cell.disconnectButton.isHidden = true
-            cell.connectButton.isHidden = false
+            //cell.connectButton.isHidden = false
             cell.statusBubbleImageView.backgroundColor = UIColor.green
             
         } else if indexPath.section == 1 {
-            cell.configurableStatusLabel.isHidden = true
-            cell.disconnectButton.isHidden = true
-            cell.connectButton.isHidden = true
+//            cell.configurableStatusLabel.isHidden = true
+//            cell.disconnectButton.isHidden = true
+//            cell.connectButton.isHidden = true
             cell.statusBubbleImageView.backgroundColor = UIColor.red
         }
         

@@ -70,7 +70,6 @@ class BeaconFinderViewController: UIViewController {
         emailLabel.text = thisUser.username
         
         if thisUser.isSignedIn && !isMenuShown { refresh(self) }
-        
     }
     
     override func viewDidLoad() {
@@ -80,7 +79,6 @@ class BeaconFinderViewController: UIViewController {
         nc.addObserver(forName:Notification.Name(rawValue:"userSignedIn"),
                        object:nil, queue:nil,
                        using:catchNotification)
-        
 
         let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
         user = pool.currentUser()
@@ -107,7 +105,6 @@ class BeaconFinderViewController: UIViewController {
         //temp hack to get user attributes
         shouldShowSignIn()
         
-        
     }
     
     func showMenu() {
@@ -116,7 +113,7 @@ class BeaconFinderViewController: UIViewController {
                 self.menuView.frame = CGRect(x: -265, y: self.menuView.frame.origin.y, width: 265, height: self.menuView.frame.height)
                     self.isMenuShown = false
             }
-        }else{
+        } else {
             UIView.animate(withDuration: 0.5) {
                 self.menuView.frame = CGRect(x: 0, y: self.menuView.frame.origin.y, width: 265, height: self.menuView.frame.height)
                     self.isMenuShown = true
@@ -133,7 +130,7 @@ class BeaconFinderViewController: UIViewController {
     @IBAction func helpTapped(_ sender: Any) {
     
         guard let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String else { return }
-        let date = "01-12-2018"
+        let date = "01-18-2018"
         let message = "Parabit Technician App \n Version: \(versionNumber) \n Date: \(date)"
         let alert = UIAlertController(title: "About", message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
@@ -164,13 +161,8 @@ class BeaconFinderViewController: UIViewController {
 
             self.user?.signOut()
             self.user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
-                DispatchQueue.main.async(execute: {
-                    //guard let signupController = self.storyboard?.instantiateViewController(withIdentifier: "signInViewController") as? SignInViewController else { return }
-                   // self.present(signupController, animated: true, completion: nil)
-                })
                 return nil
             }
-
         }
         
         let DestructiveAction = UIAlertAction(title: "No", style: UIAlertActionStyle.destructive) {
@@ -182,8 +174,6 @@ class BeaconFinderViewController: UIViewController {
         alertController.addAction(DestructiveAction)
         
         self.present(alertController, animated: true, completion: nil)
-
-    
     }
     
     @IBAction func feedbackTapped(_ sender: Any) {
@@ -193,7 +183,6 @@ class BeaconFinderViewController: UIViewController {
         
         guard let user = self.user else { return }
         EventsLogger.sharedInstance.logEvent(event: "MENU_FEEDBACK", info: ["username":user.username ?? ""])
-
     }
     
     @IBAction func reportProblemTapped(_ sender: Any) {
@@ -205,7 +194,6 @@ class BeaconFinderViewController: UIViewController {
         EventsLogger.sharedInstance.logEvent(event: "MENU_REPORT_PROBLEM", info: ["username":user.username ?? ""])
         
     }
-    
 
     @IBAction func refresh(_ sender: Any) {
         //temp hack to get user attributes
@@ -214,14 +202,12 @@ class BeaconFinderViewController: UIViewController {
         self.resetBluetooth()
         guard let user = self.user else { return }
         EventsLogger.sharedInstance.logEvent(event: "BEACON_SCAN", info: ["username":user.username ?? ""])
-
-  }
+    }
     
     func resetBluetooth () {
         
         if centralManager == nil {
             centralManager = CBCentralManager(delegate: self,queue: nil)
-            
         }
         
         SwiftSpinner.show(duration: 3, title: "Scanning")

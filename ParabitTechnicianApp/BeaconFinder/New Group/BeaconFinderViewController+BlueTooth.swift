@@ -40,13 +40,13 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             CRNotifications.showNotification(type: .info, title: "Error!", message: "Bluetooth is resetting; a state update is pending.", dismissDelay: 2.5)
         case .unsupported:
             print("Bluetooth is unsupported")
-            //CRNotifications.showNotification(type: .error, title: "Error!", message: "Bluetooth is unsupported.", dismissDelay: 2.5)
+            CRNotifications.showNotification(type: .error, title: "Error!", message: "Bluetooth is unsupported.", dismissDelay: 2.0)
             let alert = UIAlertController(title: "Alert", message: "Bluetooth is unsupported.", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         case .unauthorized:
             print("Bluetooth is unauthorized")
-            //CRNotifications.showNotification(type: .info, title: "Error!", message: "Bluetooth is unauthorized", dismissDelay: 2.5)
+            CRNotifications.showNotification(type: .info, title: "Error!", message: "Bluetooth is unauthorized", dismissDelay: 2.0)
             let alert = UIAlertController(title: "Alert", message: "Bluetooth is unauthorized", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -61,7 +61,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         print("centralManager didDiscoverPeripheral - CBAdvertisementDataLocalNameKey is \"\(CBAdvertisementDataLocalNameKey) and UUID is \(peripheral.identifier.uuidString)\"")
         
         // Retrieve the peripheral name from the advertisement data using the "kCBAdvDataLocalName" key
-            let peripheralName = advertisementData[CBAdvertisementDataLocalNameKey] as? String ?? "B"
+            let peripheralName = advertisementData[CBAdvertisementDataLocalNameKey] as? String ?? "Nameless Device"
             print("NEXT PERIPHERAL NAME: \(peripheralName)")
             print("NEXT PERIPHERAL UUID: \(peripheral.identifier.uuidString)")
             print("NEXT PERIPHERAL STATE: \(peripheral.state.rawValue)")

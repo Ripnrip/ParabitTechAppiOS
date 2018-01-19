@@ -46,7 +46,8 @@ class ConfirmForgotPasswordViewController: UIViewController {
             self.present(alertController, animated: true, completion:  nil)
             return
         }
-        
+        EventsLogger.sharedInstance.logEvent(event: "PWD_RESET_SET", info: [:])
+
         //confirm forgot password with input from ui.
         self.user?.confirmForgotPassword(confirmationCodeValue, password: self.proposedPassword.text!).continueWith {[weak self] (task: AWSTask) -> AnyObject? in
             guard let strongSelf = self else { return nil }
@@ -57,7 +58,8 @@ class ConfirmForgotPasswordViewController: UIViewController {
                                                             preferredStyle: .alert)
                     let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
                     alertController.addAction(okAction)
-                    
+                    EventsLogger.sharedInstance.logEvent(event: "PWD_RESET_FAILED", info: ["username":strongSelf.user?.username ?? ""])
+
                     self?.present(alertController, animated: true, completion:  nil)
                 } else {
                     //TODO: Show alert saying password has been set

@@ -73,6 +73,7 @@ class ForgotPasswordViewController: UIViewController {
                     
                     self?.present(alertController, animated: true, completion:  nil)
                 } else {
+                    EventsLogger.sharedInstance.logEvent(event: "PWD_RESET_CODE", info: ["username":strongSelf.username.text])
                     strongSelf.performSegue(withIdentifier: "confirmForgotPasswordSegue", sender: sender)
                 }
             })

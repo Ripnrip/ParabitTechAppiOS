@@ -51,7 +51,7 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         if indexPath.section == 1 {
             //if non-connectable, alert user
             guard let user = self.user else { return }
-            EventsLogger.sharedInstance.logEvent(event: "NONCONNECTABLE_BEACON_TAP", info: ["username":user.username ?? ""])
+            EventsLogger.sharedInstance.logEvent(event: "BEACON_TAP", info: ["username":user.username ?? ""])
             CRNotifications.showNotification(type: .error, title: "Alert", message: "This beacon is not connectable", dismissDelay: 3.5)
             
             tableView.deselectRow(at: indexPath, animated: true)

@@ -140,7 +140,8 @@ extension SignInViewController: AWSCognitoIdentityNewPasswordRequired {
     
     func didCompleteNewPasswordStepWithError(_ error: Error?) {
         print("the error is \(error)")
-        
+        EventsLogger.sharedInstance.logEvent(event: "SET_PWD_FAILURE", info: ["username": self.user?.username ?? ""])
+
     }
     
     
@@ -178,7 +179,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
                                                         preferredStyle: .alert)
                 let retryAction = UIAlertAction(title: "Retry", style: .default, handler: nil)
                 alertController.addAction(retryAction)
-                
+                EventsLogger.sharedInstance.logEvent(event: "LOGIN_ERROR", info: ["username":self.username.text!])
                 self.present(alertController, animated: true, completion:  nil)
             } else {
                 _ = ParabitNetworking.sharedInstance

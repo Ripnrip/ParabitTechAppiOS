@@ -98,6 +98,8 @@ class ParabitNetworking: NSObject {
             
             if dataResponse.error != nil || dataResponse.response?.statusCode != 200 {
                 print("there was an error getting the firmware info for revision \(dataResponse.error)")
+                EventsLogger.sharedInstance.logEvent(event: "FIRMWARE_NOT_FOUND" , info: ["currentFirmware":revision])
+
                 completionHandler(nil)
                 return
             }
@@ -142,11 +144,16 @@ class ParabitNetworking: NSObject {
             if dataResponse.error != nil || dataResponse.response?.statusCode != 200 {
                 print("there was an error getting the firmware unlock for revision \(dataResponse.error)")
                 completionHandler(nil)
+                EventsLogger.sharedInstance.logEvent(event: "UNLOCK_CLOUD_RESPONSE_FAILURE" , info: ["currentFirmware":currentFirmwareRevision])
                 //SwiftSpinner.hide()
                 return
             }
             guard let request = dataResponse.request, let response = dataResponse.response, let value = dataResponse.value, let dict = value as? [String:Any], let unlockResponse = dict["unlock_response"] as? String
-                else {return}
+                else {
+                    EventsLogger.sharedInstance.logEvent(event: "UNLOCK_CODE_NOT_FOUND" , info: ["currentFirmware":currentFirmwareRevision])
+                    completionHandler(nil)
+                    return
+            }
             completionHandler(unlockResponse)
                 }
     }
@@ -170,6 +177,8 @@ class ParabitNetworking: NSObject {
             if dataResponse.error != nil || dataResponse.response?.statusCode != 200 {
                 print("there was an error getting the firmware unlock for revision \(dataResponse.error)")
                 completionHandler(false)
+                EventsLogger.sharedInstance.logEvent(event: "FEEDBACK_FAILED" , info: ["username":self.user?.username ?? ""])
+
                 SwiftSpinner.hide()
                 return
             }
@@ -199,6 +208,8 @@ class ParabitNetworking: NSObject {
             if dataResponse.error != nil || dataResponse.response?.statusCode != 200 {
                 print("there was an error \(dataResponse.error)")
                 completionHandler(false)
+                EventsLogger.sharedInstance.logEvent(event: "REPORT_PROBLEM_FAILED" , info: ["username":self.user?.username ?? ""])
+
                 SwiftSpinner.hide()
                 return
             }

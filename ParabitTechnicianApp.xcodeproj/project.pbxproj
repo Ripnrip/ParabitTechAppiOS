@@ -24,19 +24,13 @@
 		8C85A79B1F88FB7C00D185D0 /* Parabeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A79A1F88FB7C00D185D0 /* Parabeacon.swift */; };
 		8C85A79F1F890B0000D185D0 /* BeaconTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A79E1F890B0000D185D0 /* BeaconTabBarController.swift */; };
 		8C85A7A11F891F3300D185D0 /* GlobalSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7A01F891F3300D185D0 /* GlobalSettingsViewController.swift */; };
-		8C85A7A31F891F6D00D185D0 /* UIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7A21F891F6D00D185D0 /* UIDViewController.swift */; };
 		8C85A7A51F891F7500D185D0 /* DFUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7A41F891F7500D185D0 /* DFUViewController.swift */; };
-		8C85A7A71F891F7D00D185D0 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7A61F891F7D00D185D0 /* RegistrationViewController.swift */; };
-		8C85A7AB1F892AE400D185D0 /* UIDViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AA1F892AE400D185D0 /* UIDViewController+TableView.swift */; };
-		8C85A7AD1F892C8A00D185D0 /* UIDViewController+PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AC1F892C8A00D185D0 /* UIDViewController+PickerView.swift */; };
-		8C85A7AF1F89315400D185D0 /* RegistrationViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85A7AE1F89315400D185D0 /* RegistrationViewController+TableView.swift */; };
 		8C9959851FEAB05F00B405EF /* ParabitEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9959841FEAB05F00B405EF /* ParabitEvents.swift */; };
 		8CB4D79A1F8D394200B26563 /* Peripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D7991F8D394200B26563 /* Peripheral.swift */; };
 		8CB4D79C1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D79B1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift */; };
 		8CB4D79F1F8D4F8000B26563 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D79E1F8D4F8000B26563 /* Constants.swift */; };
 		8CB4D7A11F8D51FC00B26563 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D7A01F8D51FC00B26563 /* StringUtils.swift */; };
 		8CE5DD7C1F9036E900B6A2DA /* BeaconHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5DD7B1F9036E900B6A2DA /* BeaconHelper.swift */; };
-		8CE5DD7E1F91009500B6A2DA /* BeaconTabBarController+BlueTooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5DD7D1F91009500B6A2DA /* BeaconTabBarController+BlueTooth.swift */; };
 		8CE5DD801F9112DC00B6A2DA /* GATTOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5DD7F1F9112DC00B6A2DA /* GATTOperations.swift */; };
 		8CE5DD821F91141B00B6A2DA /* BeaconScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5DD811F91141B00B6A2DA /* BeaconScanner.swift */; };
 		8CE5DD841F91149100B6A2DA /* BeaconInvestigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5DD831F91149100B6A2DA /* BeaconInvestigation.swift */; };
@@ -81,12 +75,7 @@
 		8C85A79A1F88FB7C00D185D0 /* Parabeacon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parabeacon.swift; sourceTree = "<group>"; };
 		8C85A79E1F890B0000D185D0 /* BeaconTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconTabBarController.swift; sourceTree = "<group>"; };
 		8C85A7A01F891F3300D185D0 /* GlobalSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSettingsViewController.swift; sourceTree = "<group>"; };
-		8C85A7A21F891F6D00D185D0 /* UIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDViewController.swift; sourceTree = "<group>"; };
 		8C85A7A41F891F7500D185D0 /* DFUViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFUViewController.swift; sourceTree = "<group>"; };
-		8C85A7A61F891F7D00D185D0 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
-		8C85A7AA1F892AE400D185D0 /* UIDViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDViewController+TableView.swift"; sourceTree = "<group>"; };
-		8C85A7AC1F892C8A00D185D0 /* UIDViewController+PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDViewController+PickerView.swift"; sourceTree = "<group>"; };
-		8C85A7AE1F89315400D185D0 /* RegistrationViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RegistrationViewController+TableView.swift"; sourceTree = "<group>"; };
 		8C9959841FEAB05F00B405EF /* ParabitEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParabitEvents.swift; sourceTree = "<group>"; };
 		8CB4D7991F8D394200B26563 /* Peripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Peripheral.swift; sourceTree = "<group>"; };
 		8CB4D79B1F8D41FE00B26563 /* BeaconFinderViewController+BlueTooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeaconFinderViewController+BlueTooth.swift"; sourceTree = "<group>"; };
@@ -94,7 +83,6 @@
 		8CB4D7A01F8D51FC00B26563 /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
 		8CB4D7A21F8D533300B26563 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		8CE5DD7B1F9036E900B6A2DA /* BeaconHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconHelper.swift; sourceTree = "<group>"; };
-		8CE5DD7D1F91009500B6A2DA /* BeaconTabBarController+BlueTooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeaconTabBarController+BlueTooth.swift"; sourceTree = "<group>"; };
 		8CE5DD7F1F9112DC00B6A2DA /* GATTOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GATTOperations.swift; sourceTree = "<group>"; };
 		8CE5DD811F91141B00B6A2DA /* BeaconScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconScanner.swift; sourceTree = "<group>"; };
 		8CE5DD831F91149100B6A2DA /* BeaconInvestigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconInvestigation.swift; sourceTree = "<group>"; };
@@ -248,13 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				8C85A79E1F890B0000D185D0 /* BeaconTabBarController.swift */,
-				8CE5DD7D1F91009500B6A2DA /* BeaconTabBarController+BlueTooth.swift */,
 				8C85A7A01F891F3300D185D0 /* GlobalSettingsViewController.swift */,
-				8C85A7A21F891F6D00D185D0 /* UIDViewController.swift */,
-				8C85A7AA1F892AE400D185D0 /* UIDViewController+TableView.swift */,
-				8C85A7AC1F892C8A00D185D0 /* UIDViewController+PickerView.swift */,
-				8C85A7A61F891F7D00D185D0 /* RegistrationViewController.swift */,
-				8C85A7AE1F89315400D185D0 /* RegistrationViewController+TableView.swift */,
 			);
 			path = BeaconDetails;
 			sourceTree = "<group>";
@@ -525,13 +507,10 @@
 				8C5E0C8D1F86CDEC00F09225 /* ParaBeaconTableViewCell.swift in Sources */,
 				8C4C084C1FD6F75800AC0DEF /* FirstTimeLoginViewController.swift in Sources */,
 				8C85A79B1F88FB7C00D185D0 /* Parabeacon.swift in Sources */,
-				8C85A7A31F891F6D00D185D0 /* UIDViewController.swift in Sources */,
 				8CF3A4FD1FB3B49F009A4ACE /* ForgotPasswordViewController.swift in Sources */,
 				8CB4D7A11F8D51FC00B26563 /* StringUtils.swift in Sources */,
 				8CF3A4F91FB3B49F009A4ACE /* UserDetailTableViewController.swift in Sources */,
 				8CE5DD881F9115D600B6A2DA /* BeaconItem.swift in Sources */,
-				8C85A7A71F891F7D00D185D0 /* RegistrationViewController.swift in Sources */,
-				8C85A7AD1F892C8A00D185D0 /* UIDViewController+PickerView.swift in Sources */,
 				8C5E0C8A1F86CC3400F09225 /* BeaconFinderViewController+TableView.swift in Sources */,
 				8C85A7A11F891F3300D185D0 /* GlobalSettingsViewController.swift in Sources */,
 				8C5E0C701F86681D00F09225 /* AppDelegate.swift in Sources */,
@@ -540,17 +519,14 @@
 				8CB4D79A1F8D394200B26563 /* Peripheral.swift in Sources */,
 				8CF3A4EF1FB3B375009A4ACE /* AWSConstants.swift in Sources */,
 				8CE5DD821F91141B00B6A2DA /* BeaconScanner.swift in Sources */,
-				8C85A7AF1F89315400D185D0 /* RegistrationViewController+TableView.swift in Sources */,
 				8C483158200E3D5600080BBA /* ReportProblemViewController.swift in Sources */,
 				8CE5DD7C1F9036E900B6A2DA /* BeaconHelper.swift in Sources */,
 				8CF3A4F31FB3B405009A4ACE /* SignInViewController.swift in Sources */,
 				8C85A79F1F890B0000D185D0 /* BeaconTabBarController.swift in Sources */,
 				8CE5DD8C1F91163A00B6A2DA /* CustomViews.swift in Sources */,
-				8CE5DD7E1F91009500B6A2DA /* BeaconTabBarController+BlueTooth.swift in Sources */,
 				8CF441BA1FD0912E00486A66 /* Date.swift in Sources */,
 				8CFB012F1F98EC070044FB89 /* ParabitNetworking.swift in Sources */,
 				8CE5DD801F9112DC00B6A2DA /* GATTOperations.swift in Sources */,
-				8C85A7AB1F892AE400D185D0 /* UIDViewController+TableView.swift in Sources */,
 				8C9959851FEAB05F00B405EF /* ParabitEvents.swift in Sources */,
 				8CF3A4FA1FB3B49F009A4ACE /* DevicesDetailTableViewController.swift in Sources */,
 			);

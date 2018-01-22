@@ -149,7 +149,6 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
 //        centralManager.connect(sensor, options: nil)
         
        // SwiftSpinner.show("Connecting", animated: true)
-        
     }
     
     

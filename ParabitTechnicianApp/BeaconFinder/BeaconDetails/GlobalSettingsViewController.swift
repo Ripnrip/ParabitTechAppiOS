@@ -138,6 +138,7 @@ class GlobalSettingsViewController: UIViewController {
                 print("No userInfo found in notification")
                 return
         }
+        
         updatesButton.isHidden = true
         updatesLabel.text = "Firmware is up-to-date"
         
@@ -145,7 +146,6 @@ class GlobalSettingsViewController: UIViewController {
             print("Are we there yet?")
             self.navigationController?.popViewController(animated: true)
             self.navigationController?.popViewController(animated: true)
-
         }
     }
     
@@ -186,11 +186,8 @@ class GlobalSettingsViewController: UIViewController {
         alertController.addAction(DestructiveAction)
 
         self.present(alertController, animated: true, completion: nil)
-        
     }
 
-    
-    
     @IBAction func sliderValueChanged(_ sender: Any) {
         guard let slider = sender as? UISlider else { return }
         let currentValue =   Float(slider.value).roundToHundreds()

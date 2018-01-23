@@ -205,7 +205,7 @@ class BeaconFinderViewController: UIViewController {
     
     func resetBluetooth () {
         
-        if centralManager == nil {
+        if centralManager?.delegate == nil {
             centralManager = CBCentralManager(delegate: self,queue: nil)
         }
         
@@ -218,7 +218,8 @@ class BeaconFinderViewController: UIViewController {
             self.eddystoneService = nil
             self.deviceInformationService = nil
             self.availableDoors = []
-            self.centralManager.scanForPeripherals(withServices: nil, options: nil)
+            let cbuuid = CBUUID(string: "a3c87500-8ed3-4bdf-8a39-a01bebede295")
+            self.centralManager.scanForPeripherals(withServices: [cbuuid], options: nil)
             self.currentBeacon?.isUnlocked = false
             self.isBeaconUnlocked = false
             self.tableView.reloadData()

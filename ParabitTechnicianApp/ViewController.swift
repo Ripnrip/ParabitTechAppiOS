@@ -15,7 +15,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let beaconID = "Parabeacon"
 
     let uuidString = "4390e0ec-e218-80b1-f34f-13a3f6fcb819"
-    
+
     @IBOutlet weak var distanceLabel: UILabel!
     
     override func viewDidLoad() {

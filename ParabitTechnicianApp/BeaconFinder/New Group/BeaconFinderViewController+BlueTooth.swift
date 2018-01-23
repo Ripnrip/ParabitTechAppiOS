@@ -28,7 +28,9 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             // 2
            // _ = Timer(timeInterval: timerScanInterval, target: self, selector: #selector(pauseScan), userInfo: nil, repeats: false)
             // 3
-            centralManager.scanForPeripherals(withServices: nil, options: nil)
+            let cbuuid = CBUUID(string: "a3c87500-8ed3-4bdf-8a39-a01bebede295")
+            centralManager.scanForPeripherals(withServices: [cbuuid], options: nil)
+            //centralManager.scanForPeripherals(withServices: nil, options: nil)
             
             // 4
             SwiftSpinner.show(duration: 4, title: "Scanning")
@@ -61,12 +63,12 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         print("centralManager didDiscoverPeripheral - CBAdvertisementDataLocalNameKey is \"\(CBAdvertisementDataLocalNameKey) and UUID is \(peripheral.identifier.uuidString)\"")
         
         // Retrieve the peripheral name from the advertisement data using the "kCBAdvDataLocalName" key
+            print("The AdvertisementData is \(advertisementData)")
             let peripheralName = advertisementData[CBAdvertisementDataLocalNameKey] as? String ?? "Nameless Device"
             print("NEXT PERIPHERAL NAME: \(peripheralName)")
             print("NEXT PERIPHERAL UUID: \(peripheral.identifier.uuidString)")
             print("NEXT PERIPHERAL STATE: \(peripheral.state.rawValue)")
             
-            if peripheralName == self.peripheralName  {
                 print("SENSOR TAG FOUND! ADDING NOW!!!")
                 // to save power, stop scanning for other devices
                 //pauseScan()
@@ -115,8 +117,6 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                     //SwiftSpinner.hide()
                 }
               }
-          }
-      //}
     }
     
     //MARK: Did connect to peripheral
@@ -568,7 +568,8 @@ else { return }
             print("*** RESUMING SCAN!")
             
             _ = Timer(timeInterval: timerScanInterval, target: self, selector: #selector(pauseScan), userInfo: nil, repeats: false)
-            centralManager.scanForPeripherals(withServices: nil, options: nil)
+            let cbuuid = CBUUID(string: "a3c87500-8ed3-4bdf-8a39-a01bebede295")
+            self.centralManager.scanForPeripherals(withServices: [cbuuid], options: nil)
         } else {
             //allow user to disconnect with some UI
         }

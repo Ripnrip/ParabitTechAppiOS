@@ -71,7 +71,10 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
 
             centralManager.connect(sensor, options: nil)
             
-            SwiftSpinner.show(duration: 5.1, title: "Connecting", animated: true)
+            DispatchQueue.main.async {
+                SwiftSpinner.show(duration: 5.1, title: "Connecting", animated: true)
+            }
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 4.8, execute: {
                 if self.availableDoors.count == 0 { return }
                 let sensor = self.availableDoors[indexPath.row].sensorTag
@@ -83,8 +86,6 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
                 controller.selectedPeripheral = self.sensorTag
                 controller.selectedPeripheralIsSecure = true
                 
-                guard let user = self.user else { return }
-
                 self.navigationController?.pushViewController(controller, animated: true)
             })
         }
@@ -100,19 +101,6 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         
         cell.connectButton.addTarget(self, action: #selector(BeaconFinderViewController.connectTapped(_:)), for: .touchUpInside)
         cell.disconnectButton.addTarget(self, action: #selector(BeaconFinderViewController.disconnectTapped(_:)), for: .touchUpInside)
-
-        if indexPath.section == 0 {
-            //cell.configurableStatusLabel.isHidden = false
-            //cell.disconnectButton.isHidden = true
-            //cell.connectButton.isHidden = false
-            cell.statusBubbleImageView.backgroundColor = UIColor.green
-            
-        } else if indexPath.section == 1 {
-//            cell.configurableStatusLabel.isHidden = true
-//            cell.disconnectButton.isHidden = true
-//            cell.connectButton.isHidden = true
-            cell.statusBubbleImageView.backgroundColor = UIColor.red
-        }
         
         if currentBeacon.isUnlocked == true && indexPath.section != 1 {
             cell.disconnectButton.isHidden = false

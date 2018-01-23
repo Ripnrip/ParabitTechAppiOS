@@ -235,7 +235,7 @@ class ParabitNetworking: NSObject {
 
         Alamofire.request(url, method: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (dataResponse) in
             
-            print("the fire and forget for the track event launched \(dataResponse.response?.statusCode)")
+            print("the fire and forget for the track event launched with event \(event) \(dataResponse.response?.statusCode)")
 
             if dataResponse.response?.statusCode == 200 || dataResponse.response?.statusCode == 201 {
                 completionHandler(true)

@@ -13,7 +13,7 @@ import CoreBluetooth
 import AWSCognitoIdentityProvider
 import Crashlytics
 
-class BeaconFinderViewController: UIViewController {
+class BeaconFinderViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var emailLabel: UILabel!
@@ -63,6 +63,8 @@ class BeaconFinderViewController: UIViewController {
     
     var isMenuShown:Bool = false
     
+    var tap = UITapGestureRecognizer()
+    
     override func viewWillAppear(_ animated: Bool) {
         
         UIApplication.shared.statusBarStyle = .lightContent
@@ -98,6 +100,8 @@ class BeaconFinderViewController: UIViewController {
         
         self.tableView.separatorColor = UIColor.clear
         
+
+        
         guard let isSignedIn = user?.isSignedIn else { return }
         if !isSignedIn { return }
         centralManager = CBCentralManager(delegate: self,
@@ -107,13 +111,29 @@ class BeaconFinderViewController: UIViewController {
         
     }
     
+    func handleTap(sender: UITapGestureRecognizer? = nil) {
+        // handling code
+        UIView.animate(withDuration: 0.5) {
+            self.menuView.frame = CGRect(x: -265, y: self.menuView.frame.origin.y, width: 265, height: self.menuView.frame.height)
+            self.isMenuShown = false
+            self.view.removeGestureRecognizer(self.tap)
+        }
+    }
+    
     func showMenu() {
         if isMenuShown {
+            view.removeGestureRecognizer(tap)
+            
             UIView.animate(withDuration: 0.5) {
                 self.menuView.frame = CGRect(x: -265, y: self.menuView.frame.origin.y, width: 265, height: self.menuView.frame.height)
                     self.isMenuShown = false
             }
         } else {
+            //gesture recognizer for menu
+            tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(sender:)))
+            tap.delegate = self
+            view.addGestureRecognizer(tap)
+            
             UIView.animate(withDuration: 0.5) {
                 self.menuView.frame = CGRect(x: 0, y: self.menuView.frame.origin.y, width: 265, height: self.menuView.frame.height)
                     self.isMenuShown = true

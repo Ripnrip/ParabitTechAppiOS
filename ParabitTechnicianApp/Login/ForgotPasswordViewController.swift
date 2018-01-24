@@ -18,6 +18,7 @@
 import Foundation
 import AWSCognitoIdentityProvider
 import Crashlytics
+import CRNotifications
 
 class ForgotPasswordViewController: UIViewController {
     
@@ -62,7 +63,7 @@ class ForgotPasswordViewController: UIViewController {
         
         self.user = self.pool?.getUser(self.username.text!)
         self.user?.forgotPassword().continueWith{[weak self] (task: AWSTask) -> AnyObject? in
-            guard let strongSelf = self else {return nil}
+            guard let strongSelf = self else { return nil }
             DispatchQueue.main.async(execute: {
                 if let error = task.error as? NSError {
                     let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
@@ -73,6 +74,7 @@ class ForgotPasswordViewController: UIViewController {
                     
                     self?.present(alertController, animated: true, completion:  nil)
                 } else {
+                    CRNotifications.showNotification(type: .success , title: "Alert!", message: "The reset code has been sent to your email address", dismissDelay: 2.0)
                     EventsLogger.sharedInstance.logEvent(event: "PWD_RESET_CODE", info: ["username":strongSelf.username.text])
                     strongSelf.performSegue(withIdentifier: "confirmForgotPasswordSegue", sender: sender)
                 }

@@ -281,7 +281,6 @@ class ParabitNetworking: NSObject {
                         print("printing value for attribute \(attribute)")
                     }
                 })
-
             })
             return nil
         }
@@ -299,7 +298,6 @@ class ParabitNetworking: NSObject {
                 print("No userInfo found in notification")
                 return
         }
-
     }
     
     //Mark: Helper for session timer

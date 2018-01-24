@@ -58,7 +58,6 @@ class ForgotPasswordViewController: UIViewController {
             return
         }
         
-        //FAILS --> guard let user = self.user else { return }
         EventsLogger.sharedInstance.logEvent(event: "PWD_RESET_STARTED", info: ["username":self.username.text])
         
         self.user = self.pool?.getUser(self.username.text!)

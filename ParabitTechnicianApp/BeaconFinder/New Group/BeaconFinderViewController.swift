@@ -157,6 +157,7 @@ class BeaconFinderViewController: UIViewController {
         let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
             (result : UIAlertAction) -> Void in
             print("OK")
+            self.showMenu()
             EventsLogger.sharedInstance.logEvent(event: "LOGOUT", info: ["username":self.user?.username ?? ""])
 
             self.user?.signOut()

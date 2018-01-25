@@ -172,7 +172,6 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         
         if service == deviceInformationService {
             print("the device information service characteristics are \(characteristics)")
-            
         }
 
         characteristics.forEach { (characteristic) in

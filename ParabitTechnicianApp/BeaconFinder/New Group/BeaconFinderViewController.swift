@@ -150,7 +150,7 @@ class BeaconFinderViewController: UIViewController, UIGestureRecognizerDelegate 
     @IBAction func helpTapped(_ sender: Any) {
     
         guard let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String else { return }
-        let date = "01-19-2018"
+        let date = "01-25-2018"
         let message = "Parabit Technician App \n Version: \(versionNumber) \n Date: \(date)"
         let alert = UIAlertController(title: "About", message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))

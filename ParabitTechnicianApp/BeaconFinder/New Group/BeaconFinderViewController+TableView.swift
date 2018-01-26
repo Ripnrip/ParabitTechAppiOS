@@ -76,7 +76,7 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 4.8, execute: {
-                if self.availableDoors.count == 0 && currentBeacon.advSlotDataCharacteristic == nil { return }
+                if self.availableDoors.count == 0 && currentBeacon.advSlotDataCharacteristic == nil {             CRNotifications.showNotification(type: .error, title: "Alert", message: "This beacon is not connectable, try resessting it", dismissDelay: 3.5) ; return }
                 let sensor = self.availableDoors[indexPath.row].sensorTag
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "BeaconTabBarController") as! BeaconTabBarController

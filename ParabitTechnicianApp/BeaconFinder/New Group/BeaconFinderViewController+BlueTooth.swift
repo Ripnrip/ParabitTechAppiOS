@@ -79,7 +79,11 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 //determine if beacon is connectablee
                 let isConnectable = advertisementData["kCBAdvDataIsConnectable"] as? Bool ?? false
                 print("the Parabeacon's configuration state is \(isConnectable)")
-                
+        
+                //get serial number
+                let serialNumber = advertisementData["kCBAdvDataServiceData"]
+                print("The serial number for the beacon is \(serialNumber)")
+        
                 if Bool(isConnectable) {
                 // save a reference to the sensor tag
                 sensorTag = peripheral
@@ -336,7 +340,6 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         //didUpdateInvestigationState(investigationState: InvestigationState.DidReadAdvertisingInterval)
     }
     
-    
     // MARK: - Unlocking Beacon
 
     func parseLockStateValue() {
@@ -415,17 +418,12 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
             sensorTag.readValue(for: characteristic)
         }
     }
-    
-    //OLD
-    
-    
-    
-    //NEW
+
     func unlockBeacon() {
         guard let characteristic = findCharacteristicByID(characteristicID: CharacteristicID.unlock.UUID),
         let unlockChallenge = characteristic.value,
         let revision = currentBeacon?.firmwareRevision
-else { return }
+        else { return }
         
         let string = unlockChallenge.hexadecimal()
         
@@ -541,7 +539,7 @@ else { return }
         EventsLogger.sharedInstance.logEvent(event: "BEACON_DISCONNECTED", info: ["username":user.username ?? ""])
         
         sensorTag = nil
-        availableDoors = availableDoors.filter {$0.sensorTag != sensorTag}
+        availableDoors = availableDoors.filter { $0.sensorTag != sensorTag }
         currentBeacon?.sensorTag = nil
         currentBeacon?.isConnectable = false
         tableView.reloadData()

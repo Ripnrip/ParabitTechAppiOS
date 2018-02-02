@@ -81,15 +81,11 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 print("the Parabeacon's configuration state is \(isConnectable)")
         
                 //get serial number
-                let serialNumber = advertisementData["kCBAdvDataManufacturerData"]
-                print("The serial number for the beacon is \(serialNumber)")
+                let serialNumber = advertisementData["kCBAdvDataManufacturerData"] as? Data ?? nil
+                let s = self.getInt(fromData: serialNumber, start: 2) ?? nil
+                let sn = s?.description ?? "N/A"
+                print("the serial number is \(s)")
         
-                if let manufacturerData = advertisementData["kCBAdvDataManufacturerData"] as? Data {
-                    
-                    let s = self.getInt(fromData: manufacturerData, start: 2)
-                    print("the serial number is \(s)")
-                    
-                }
         
                 if Bool(isConnectable) {
                 // save a reference to the sensor tag
@@ -97,7 +93,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 sensorTag.delegate = self
                 
                 //add peripheral to available doors tableview
-                    currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: true, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, deviceName: nil, serialNumber: nil, modelNumber: nil, firmwareRevision: nil, hardware: nil, advertisingValue: nil, rssiValue: RSSI)
+                    currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: true, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, deviceName: nil, serialNumber: sn, modelNumber: nil, firmwareRevision: nil, hardware: nil, advertisingValue: nil, rssiValue: RSSI)
                     
                     guard let door = currentBeacon else { return }
                     if availableDoors.contains(where: { $0.UUID == currentBeacon?.UUID })  {
@@ -112,7 +108,8 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                     }
                 }else{
                 //add peripheral to available doors tableview, but don't add the sensor, and set nil for sensortag, and false for isConnectable
-                    currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: false, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, deviceName: nil, serialNumber: nil, modelNumber: nil, firmwareRevision: nil, hardware: nil, advertisingValue: nil, rssiValue: RSSI)
+                    
+                    currentBeacon = Peripheral(name: peripheralName, UUID: peripheral.identifier.uuidString, isConnectable: false, sensorTag: sensorTag, isUnlocked: nil, deviceInformationCharacteristic: nil, advertisingIntervalCharacteristic: nil, radioTxPowerCharacteristic: nil, advSlotDataCharacteristic: nil, deviceName: nil, serialNumber: "N/A", modelNumber: nil, firmwareRevision: nil, hardware: nil, advertisingValue: nil, rssiValue: RSSI)
 
                 guard let door = currentBeacon else { return }
                 
@@ -524,8 +521,9 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
     }
 
     //MARK: - Get Int for Manufacturers Data = Serial Number
-    func getInt(fromData data: Data, start: Int) -> Int32 {
-        let intBits = data.withUnsafeBytes({(bytePointer: UnsafePointer<UInt8>) -> Int32 in
+    func getInt(fromData data: Data?, start: Int) -> Int32? {
+        guard let d = data else { return nil }
+        let intBits = d.withUnsafeBytes({(bytePointer: UnsafePointer<UInt8>) -> Int32 in
             bytePointer.advanced(by: start).withMemoryRebound(to: Int32.self, capacity: 4) { pointer in
                 return pointer.pointee
             }
@@ -533,7 +531,7 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         return Int32(littleEndian: intBits)
     }
     
-    // Mark: - Read RSSI Value
+    //MARK: - Read RSSI Value
     func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
         if error != nil {
             

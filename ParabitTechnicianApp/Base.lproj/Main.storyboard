@@ -179,12 +179,24 @@
                                                         <color key="titleColor" red="0.99602621793746948" green="0.0" blue="0.034961890429258347" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJv-cO-EDX">
+                                                    <rect key="frame" x="232" y="58" width="128" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16" id="Gy7-IK-j6e"/>
+                                                        <constraint firstAttribute="width" constant="128" id="IoK-SZ-Ugf"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="bJv-cO-EDX" secondAttribute="bottom" constant="10.5" id="IMp-mf-7NX"/>
                                                 <constraint firstAttribute="trailing" secondItem="ssW-Ya-jTZ" secondAttribute="trailing" constant="15" id="JjA-lS-as7"/>
                                                 <constraint firstAttribute="trailing" secondItem="Fkt-zs-m7G" secondAttribute="trailing" id="NfA-X0-HCB"/>
                                                 <constraint firstItem="tcf-jm-6sp" firstAttribute="top" secondItem="BTS-Sf-GIp" secondAttribute="top" id="Nny-TU-81W"/>
                                                 <constraint firstAttribute="trailing" secondItem="tcf-jm-6sp" secondAttribute="trailing" id="Nwc-Vl-EnB"/>
+                                                <constraint firstAttribute="trailing" secondItem="bJv-cO-EDX" secondAttribute="trailing" constant="15" id="SI3-em-VrC"/>
                                                 <constraint firstItem="ssW-Ya-jTZ" firstAttribute="top" secondItem="BTS-Sf-GIp" secondAttribute="top" constant="21" id="fF9-pG-rxg"/>
                                                 <constraint firstItem="Fkt-zs-m7G" firstAttribute="top" secondItem="BTS-Sf-GIp" secondAttribute="top" id="jDY-4l-jRx"/>
                                             </constraints>
@@ -196,6 +208,7 @@
                                             <outlet property="connectButton" destination="tcf-jm-6sp" id="YKz-i6-zju"/>
                                             <outlet property="disconnectButton" destination="Fkt-zs-m7G" id="8vE-Q4-Il8"/>
                                             <outlet property="rssiLabel" destination="ssW-Ya-jTZ" id="ecr-EM-qJd"/>
+                                            <outlet property="serialNumberLabel" destination="bJv-cO-EDX" id="zKo-dP-gke"/>
                                             <outlet property="statusBubbleImageView" destination="j0s-3W-gR5" id="fQl-Iv-YRg"/>
                                         </connections>
                                     </tableViewCell>

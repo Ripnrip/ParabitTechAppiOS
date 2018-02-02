@@ -16,6 +16,7 @@ class ParaBeaconTableViewCell: UITableViewCell {
     @IBOutlet weak var nameSpaceLabel: UILabel!
     @IBOutlet weak var instanceLabel: UILabel!
     @IBOutlet weak var rssiLabel: UILabel!
+    @IBOutlet weak var serialNumberLabel: UILabel!
     
     @IBOutlet weak var configurableStatusLabel: UILabel!
     @IBOutlet weak var registeredLabel: UILabel!

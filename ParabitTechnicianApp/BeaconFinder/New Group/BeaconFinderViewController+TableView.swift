@@ -102,17 +102,24 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
         cell.connectButton.addTarget(self, action: #selector(BeaconFinderViewController.connectTapped(_:)), for: .touchUpInside)
         cell.disconnectButton.addTarget(self, action: #selector(BeaconFinderViewController.disconnectTapped(_:)), for: .touchUpInside)
         
-        if currentBeacon.isUnlocked == true && indexPath.section != 1 {
-            cell.disconnectButton.isHidden = false
-            cell.connectButton.isHidden = true
+        if  indexPath.section != 1 {
+            //cell.disconnectButton.isHidden = false
+            //cell.connectButton.isHidden = true
+            let serialNumber = currentBeacon.serialNumber
+            cell.serialNumberLabel.text = "S/N: \(serialNumber ?? "N/A")"
+            
         } else {
-            cell.disconnectButton.isHidden = true
+            //cell.disconnectButton.isHidden = true
+            let serialNumber = currentBeacon.serialNumber
+            cell.serialNumberLabel.text = "S/N: N/A"
         }
         
         cell.statusBubbleImageView.layer.cornerRadius = cell.statusBubbleImageView.frame.height/2
         cell.statusBubbleImageView.clipsToBounds = true
         
-        guard let rssiValue = currentBeacon.rssiValue else { return UITableViewCell() }
+
+        
+        guard let rssiValue = currentBeacon.rssiValue else { return cell }
         cell.rssiLabel.text = "RSSI: \(rssiValue)"
         
         return cell

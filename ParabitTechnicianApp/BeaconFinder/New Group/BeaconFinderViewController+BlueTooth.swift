@@ -81,8 +81,15 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
                 print("the Parabeacon's configuration state is \(isConnectable)")
         
                 //get serial number
-                let serialNumber = advertisementData["kCBAdvDataServiceData"]
+                let serialNumber = advertisementData["kCBAdvDataManufacturerData"]
                 print("The serial number for the beacon is \(serialNumber)")
+        
+                if let manufacturerData = advertisementData["kCBAdvDataManufacturerData"] as? Data {
+                    
+                    let s = self.getInt(fromData: manufacturerData, start: 2)
+                    print("the serial number is \(s)")
+                    
+                }
         
                 if Bool(isConnectable) {
                 // save a reference to the sensor tag
@@ -516,6 +523,16 @@ extension BeaconFinderViewController: CBCentralManagerDelegate, CBPeripheralDele
         }
     }
 
+    //MARK: - Get Int for Manufacturers Data = Serial Number
+    func getInt(fromData data: Data, start: Int) -> Int32 {
+        let intBits = data.withUnsafeBytes({(bytePointer: UnsafePointer<UInt8>) -> Int32 in
+            bytePointer.advanced(by: start).withMemoryRebound(to: Int32.self, capacity: 4) { pointer in
+                return pointer.pointee
+            }
+        })
+        return Int32(littleEndian: intBits)
+    }
+    
     // Mark: - Read RSSI Value
     func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
         if error != nil {

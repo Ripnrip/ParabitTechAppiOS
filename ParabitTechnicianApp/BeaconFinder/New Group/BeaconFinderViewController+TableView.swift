@@ -16,6 +16,7 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
     
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
         switch section {
         case 0:
             return "Connectable"
@@ -62,7 +63,6 @@ extension BeaconFinderViewController: UITableViewDelegate, UITableViewDataSource
 
         if currentBeacon.isConnectable == true && currentBeacon.name == peripheralName   {
             //set isUnlocked to true
-            //self.availableDoors[indexPath.row].isUnlocked = true
             
             //connect
             //connectTapped(self)

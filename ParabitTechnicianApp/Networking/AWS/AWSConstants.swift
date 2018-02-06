@@ -31,3 +31,4 @@ import AWSCognitoIdentityProvider
 #endif
 
 let AWSCognitoUserPoolsSignInProviderKey = "UserPool"
+

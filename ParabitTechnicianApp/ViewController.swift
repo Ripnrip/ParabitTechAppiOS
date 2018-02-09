@@ -65,7 +65,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
         if beacons.count > 0 {
-            print("Beacon count is greater than 0 with proximity \(beacons[0].proximity.rawValue)")
+            print("Beacon count is \(beacons.count) with proximity \(beacons[0].proximity.rawValue) and the major is \(beacons[0].major) and the minor is \(beacons[0].minor) and the UUID is \(beacons[0].proximityUUID)")
             updateDistance(beacons[0].proximity)
         } else {
             print("Beacon count is empty")

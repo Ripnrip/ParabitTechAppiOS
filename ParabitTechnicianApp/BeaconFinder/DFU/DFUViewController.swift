@@ -65,9 +65,9 @@ class DFUViewController: UIViewController, CBCentralManagerDelegate, CBPeriphera
         super.viewDidAppear(animated)
         
         if selectedFileURL != nil {
-           // let url = Bundle.main.url(forResource: "pb_secure_dfu_package", withExtension: "zip")!
-            //selectedFirmware = DFUFirmware(urlToZipFile: url)
-            selectedFirmware = DFUFirmware(urlToZipFile: selectedFileURL!)
+            let url = Bundle.main.url(forResource: "pb_secure_dfu_package", withExtension: "zip")!
+            selectedFirmware = DFUFirmware(urlToZipFile: url)
+            //selectedFirmware = DFUFirmware(urlToZipFile: selectedFileURL!)
             startDFUProcess()
         } else {
             centralManager!.delegate = self

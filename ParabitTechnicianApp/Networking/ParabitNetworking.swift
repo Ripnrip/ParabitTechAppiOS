@@ -94,7 +94,7 @@ class ParabitNetworking: NSObject {
 
         
         let headers:[String : String] = ["x-api-key" : apiKey]
-        Alamofire.request(url, method: HTTPMethod.get, parameters: ["revision":revision], encoding: URLEncoding.default, headers: headers).responseJSON { (dataResponse) in
+        Alamofire.request(url, method: HTTPMethod.get, parameters: ["revision":"10-25-2017"], encoding: URLEncoding.default, headers: headers).responseJSON { (dataResponse) in
             
             if dataResponse.error != nil || dataResponse.response?.statusCode != 200 {
                 print("there was an error getting the firmware info for revision \(dataResponse.error)")

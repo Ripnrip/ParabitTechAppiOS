@@ -63,9 +63,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         pool.delegate = self
         
         //We want the technician to log in everytime
-        pool.currentUser()?.signOut()
+        //pool.currentUser()?.signOut()
         //_ = ParabitNetworking.sharedInstance
-        ParabitNetworking.sharedInstance.getAuthenticationKeys()
+        //ParabitNetworking.sharedInstance.getAuthenticationKeys()
 
         return true
     }
